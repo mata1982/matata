@@ -493,7 +493,8 @@
       var btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'scene__demo';
-      btn.setAttribute('data-demo', String(i));
+      // 必须和全局委托用的选择器一致（之前写成 data-demo，导致点了没反应）
+      btn.setAttribute('data-demo-open', String(i));
       btn.setAttribute('aria-label', '演示：' + SCENES[i].title);
       btn.innerHTML =
         '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>' +
