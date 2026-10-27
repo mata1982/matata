@@ -29,10 +29,16 @@ window.MATATA_CONFIG = {
 
   /* ---------- 表单接收 ---------- */
   form: {
-    // 填了就走 fetch POST；留空则回退到邮件+复制
+    // 填了就走 fetch POST；留空则回退到"复制内容 / 邮件 / 电话"
     endpoint: '',
-    // 接口要求 JSON 时保持 'json'；金数据等表单服务通常也是 json
-    method: 'POST'
+
+    method: 'POST',
+
+    // 提交格式，两种：
+    //   'json' —— 发 JSON，适合 Formspree / Getform / 自建接口（推荐，能拿到成功/失败）
+    //   'form' —— 发表单编码（application/x-www-form-urlencoded），
+    //             适合金数据这类第三方表单服务（跨域无 CORS 头，只能按"已提交"处理）
+    format: 'json'
   },
 
   /* ---------- 统计 ---------- */

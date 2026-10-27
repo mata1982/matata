@@ -779,3 +779,53 @@ html,body{overflow-x:clip;}
 @media (max-width:640px){
   .case-proc{padding:22px 20px 20px;}
 }
+/* ============================================================
+   22. 首屏演示入口 + 鼠标视差
+   ------------------------------------------------------------
+   演示入口比第二个按钮更弱一档：它是"看看它怎么用"，
+   不是"马上联系"，视觉上不能和主 CTA 抢。
+   鼠标视力只作用在背景层，文字不动。
+   ============================================================ */
+.hero__demo{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  margin-top:20px;
+  padding:6px 2px;
+  border:0;
+  background:transparent;
+  font-family:inherit;
+  font-size:14px;
+  color:var(--ink-secondary);
+  cursor:pointer;
+  transition:color .2s;
+}
+.hero__demo-ico{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:24px;height:24px;flex:none;
+  border:1px solid var(--hairline-input);
+  border-radius:50%;
+  transition:border-color .2s, background .2s, transform .2s;
+}
+.hero__demo-ico svg{
+  width:9px;height:9px;margin-left:1.5px;
+  fill:var(--primary);
+}
+.hero__demo:hover{color:var(--primary);}
+.hero__demo:hover .hero__demo-ico{
+  border-color:var(--primary);
+  background:rgba(18,70,200,.06);
+  transform:scale(1.06);
+}
+.hero__demo:focus-visible{
+  outline:2px solid var(--primary);outline-offset:4px;border-radius:6px;
+}
+
+/* 视差：只动背景层，位移由 JS 写入 --px / --py */
+@media (hover:hover) and (pointer:fine){
+  .shader{transform:translate3d(calc(var(--px,0px) * .55), calc(var(--py,0px) * .55), 0);}
+  .shader__geo{transform:translate3d(var(--px,0px), var(--py,0px), 0);will-change:transform;}
+}
+@media (prefers-reduced-motion:reduce){
+  .shader,.shader__geo{transform:none !important;}
+}

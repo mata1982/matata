@@ -474,6 +474,17 @@
   }
 
   /* ---------------- 注入按钮 ---------------- */
+  // 对外接口：页面上任何 [data-demo-open="索引"] 元素都能唤起演示
+  // （首页首屏的「看它怎么答」就是用它，不必跳到解决方案页）
+  window.MATATA_DEMO = { open: function (i) { open(Number(i) || 0); } };
+
+  document.addEventListener('click', function (e) {
+    var t = e.target && e.target.closest ? e.target.closest('[data-demo-open]') : null;
+    if (!t) return;
+    e.preventDefault();
+    open(Number(t.getAttribute('data-demo-open')) || 0);
+  });
+
   function inject() {
     var cards = document.querySelectorAll('#scenes .scene');
     if (!cards.length) return;
@@ -489,12 +500,7 @@
         '<span>演示</span>';
       cards[i].appendChild(btn);
     }
-    document.addEventListener('click', function (e) {
-      var b = e.target.closest ? e.target.closest('.scene__demo') : null;
-      if (!b) return;
-      e.preventDefault();
-      open(Number(b.getAttribute('data-demo')));
-    });
+
   }
 
   if (document.readyState === 'loading') {

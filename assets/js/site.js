@@ -125,9 +125,37 @@
     } catch (e) { return false; }
   }
 
+  /**
+   * 提交到表单服务。两种格式：
+   *   json —— 带 CORS 的接口（Formspree / Getform / 自建），能判断成功失败
+   *   form —— 表单编码 + no-cors（金数据等），只能按"已发出"处理
+   *
+   * 为什么要分开：第三方表单服务多数不返回 CORS 头，
+   * 用 json 会直接被浏览器拦掉；用 no-cors + 表单编码属于"简单请求"，
+   * 不触发预检，能正常送达。
+   */
   function submitToEndpoint(url, data) {
+    var method = cfg('form.method', 'POST');
+    var format = (cfg('form.format', 'json') || 'json').toLowerCase();
+
+    if (format === 'form') {
+      var body = new URLSearchParams();
+      Object.keys(data).forEach(function (k) {
+        if (data[k] !== undefined && data[k] !== null) body.append(k, data[k]);
+      });
+      return fetch(url, {
+        method: method,
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+        body: body.toString()
+      }).then(function () {
+        // no-cors 读不到响应，只要没抛错就认为已送达
+        return true;
+      });
+    }
+
     return fetch(url, {
-      method: cfg('form.method', 'POST'),
+      method: method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     }).then(function (res) {
