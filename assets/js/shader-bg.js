@@ -1,24 +1,21 @@
 /* ============================================================
-   玛塔塔 MATATA · WebGL 着色器背景 v6
+   玛塔塔 MATATA · WebGL 着色器背景 v7
    ============================================================
-   设计主张：精密仪器 / Sealed Instrument
-   —— 不是"AI 紫雾"，而是一张缓慢流动的等高线场（加工面 / 地形图）。
-   理由：品牌承诺是"把 AI 装进你自己的机器、数据不出门"。
-   等高线传达的是"被测量、被约束、被密封的场"，比蒸汽状噪声更贴切，
-   也更有工程质感；同时锐利的细线在深底上对比度高，不糊。
+   当前版本：**有机流体**——三级域扭曲 + 旋转八度噪声 + 宽光带。
 
-   实现要点：
-   1. 域扭曲 fBm 求出标量场，再对场取模抽等值线（两层不同密度）。
-   2. 线体本身用窄 smoothstep 求锐利边缘，外面套一层宽 smoothstep 作光晕，
-      形成"发光线"而不是"发光雾"。
-   3. 中心加一层椭圆光晕，把标题区域托起来。
-   4. 边缘暗角 + 上下渐隐，让首屏与下一区块自然衔接。
+   沿革：v6 是"等高线场"（仪器感，线条偏硬）。参照 threeui 的
+   kage 落地页后，改成本版的 fbm 有机流动：更像墨/光在缓动，
+   同时保持极浅，不抢标题。旧版已移除，如需回退见 git 历史。
 
-   工程约束（与原版一致，全部保留）：
-   · 渐进增强：WebGL 不可用 / 编译失败 / prefers-reduced-motion → 不初始化，
-     回落到 CSS 渐变底，内容不受影响。
-   · 分辨率上限 1.5x，移动端 1x；页面隐藏时暂停。
-   · canvas 纯装饰：aria-hidden，pointer-events:none。
+   噪声改进了三点：
+   1. 用 quintic 插值（f³(f(6f−15)+10)），比 smoothstep 更顺
+   2. 每个八度旋转坐标系，消除横平竖直的轴向纹理
+   3. 三级域扭曲（q → r → f），出现卷曲的丝带形态
+
+   工程约束全部沿用：
+   · WebGL 不可用 / 编译失败 / prefers-reduced-motion → 不初始化，回落 CSS
+   · DPR 上限 1.5（移动端 1）；页面隐藏时暂停
+   · canvas 纯装饰：aria-hidden、pointer-events:none
    ============================================================ */
 (function () {
   'use strict';
@@ -28,7 +25,7 @@
     'void main(){ gl_Position = vec4(aPos, 0.0, 1.0); }'
   ].join('\n');
 
-  var FRAG = [
+  var HEAD = [
     '#ifdef GL_FRAGMENT_PRECISION_HIGH',
     'precision highp float;',
     '#else',
@@ -38,28 +35,38 @@
     'uniform float uTime;',
     'uniform vec2  uPointer;',
     'uniform float uIntensity;',
-    '',
-    'float hash(vec2 p){',
-    '  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);',
+    ''
+  ].join('\n');
+
+  /* ---------------- 新版：有机流体 ---------------- */
+  var FRAG_FLOW = HEAD + [
+    '// 哈希：不用 sin，避免大坐标下的条纹伪影',
+    'float hash21(vec2 p){',
+    '  p = fract(p * vec2(123.34, 456.21));',
+    '  p += dot(p, p + 45.32);',
+    '  return fract(p.x * p.y);',
     '}',
     '',
     'float noise(vec2 p){',
     '  vec2 i = floor(p);',
     '  vec2 f = fract(p);',
-    '  vec2 u = f * f * (3.0 - 2.0 * f);',
-    '  float a = hash(i);',
-    '  float b = hash(i + vec2(1.0, 0.0));',
-    '  float c = hash(i + vec2(0.0, 1.0));',
-    '  float d = hash(i + vec2(1.0, 1.0));',
+    '  // quintic 插值：比 smoothstep 更平滑，过渡更"流体"',
+    '  vec2 u = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);',
+    '  float a = hash21(i);',
+    '  float b = hash21(i + vec2(1.0, 0.0));',
+    '  float c = hash21(i + vec2(0.0, 1.0));',
+    '  float d = hash21(i + vec2(1.0, 1.0));',
     '  return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);',
     '}',
     '',
+    '// 八度旋转：去掉水平/垂直方向的规则纹理',
     'float fbm(vec2 p){',
     '  float v = 0.0;',
     '  float amp = 0.5;',
+    '  mat2 rot = mat2(0.80, 0.60, -0.60, 0.80);',
     '  for (int i = 0; i < 5; i++) {',
     '    v += amp * noise(p);',
-    '    p = p * 2.02 + vec2(17.3, 9.1);',
+    '    p = rot * p * 2.03 + 11.7;',
     '    amp *= 0.5;',
     '  }',
     '  return v;',
@@ -69,57 +76,65 @@
     '  vec2 uv = gl_FragCoord.xy / uRes.xy;',
     '  vec2 p  = (gl_FragCoord.xy - 0.5 * uRes.xy) / min(uRes.x, uRes.y);',
     '',
-    '  float t = uTime * 0.018;',
-    '  vec2 drift = uPointer * 0.045;',
+    '  float t = uTime * 0.016;',
+    '  vec2 drift = uPointer * 0.05;',
     '',
-    '  // ---- 1. 标量场：两级域扭曲，但幅度收敛，让线更像地形图而不是液体 ----',
-    '  vec2 q = vec2(fbm(p * 1.25 + t * 0.7 + drift),',
-    '                fbm(p * 1.25 + vec2(5.2, 1.3) - t * 0.55));',
-    '  float f = fbm(p * 1.05 + 1.05 * q + drift * 0.35);',
+    '  // 纵向拉伸：让形态偏向横向的"光带"而不是圆斑',
+    '  vec2 pp = p * vec2(1.0, 1.28);',
     '',
-    '  // ---- 2. 分区遮罩：只在部分区域显等高线，其余留黑 ----',
-    '  // 这是"精致"与"嘈杂"的分界：满屏等值线会糊成一团，局部才有仪器感',
-    '  float region = smoothstep(0.34, 0.76, fbm(p * 0.52 + vec2(11.0, 3.0)));',
-    '  // 中心再让出一块，避免线条从标题背后穿过',
-    '  float clearCore = smoothstep(0.16, 0.62, length(p * vec2(1.05, 0.82)));',
-    '  float vis = region * mix(0.22, 1.0, clearCore);',
+    '  // ---- 三级域扭曲：这一层是"卷曲"的来源 ----',
+    '  vec2 q = vec2(fbm(pp * 1.05 + t * 0.34 + drift),',
+    '                fbm(pp * 1.05 + vec2(4.7, 2.3) - t * 0.27));',
+    '  vec2 r = vec2(fbm(pp * 1.45 + 2.1 * q + t * 0.21),',
+    '                fbm(pp * 1.45 + 2.1 * q + vec2(9.2, 3.1) - t * 0.17));',
+    '  float f = fbm(pp * 0.88 + 2.5 * r);',
     '',
-    '  // ---- 3. 主等值线：线体很细，靠低透明度发亮 ----',
-    '  float a1 = abs(fract(f * 9.0 + t * 0.5) - 0.5);',
-    '  float line1 = 1.0 - smoothstep(0.0, 0.024, a1);',
-    '  float glow1 = 1.0 - smoothstep(0.0, 0.110, a1);',
+    '  // ---- 宽光带：正弦叠加后做很宽的 smoothstep，形成柔和流动 ----',
+    '  float band = sin((f * 5.2 + q.x * 1.6 - t * 0.6) * 3.14159);',
+    '  band = smoothstep(-0.25, 1.0, band);',
     '',
-    '  // ---- 4. 次等值线：更密更淡，制造纵深 ----',
-    '  float f2 = fbm(p * 2.1 + 1.6 * q);',
-    '  float a2 = abs(fract(f2 * 17.0 - t * 0.34) - 0.5);',
-    '  float line2 = 1.0 - smoothstep(0.0, 0.038, a2);',
+    '  // 第二层更细的光带，增加纵深（透明度很低，只做质感）',
+    '  float band2 = sin((f * 11.0 - r.y * 2.2 - t * 0.42) * 3.14159);',
+    '  band2 = smoothstep(0.55, 1.0, band2);',
     '',
-    '  vec3 base = vec3(0.984, 0.984, 0.992);   // #FBFBFD 亮底',
-    '  vec3 cBlue = vec3(0.700, 0.820, 0.975);',
-    '  vec3 cLav  = vec3(0.840, 0.820, 0.970);',
-    '  vec3 cPink = vec3(0.985, 0.890, 0.900);',
+    '  // ---- 留白：中心区域（标题背后）必须干净 ----',
+    '  float clearCore = smoothstep(0.12, 0.66, length(p * vec2(1.02, 0.86)));',
+    '  float vis = mix(0.18, 1.0, clearCore) * smoothstep(0.10, 0.62, f);',
     '',
-    '  // ---- 5. 亮底极光：Apple 式柔和色晕，不是深色线 ----',
+    '  vec3 base = vec3(0.985, 0.986, 0.994);   // #FBFCFE',
+    '  vec3 cBlue = vec3(0.640, 0.790, 0.980);',
+    '  vec3 cLav  = vec3(0.800, 0.780, 0.985);',
+    '  vec3 cCyan = vec3(0.700, 0.900, 0.960);',
+    '  vec3 cPink = vec3(0.990, 0.870, 0.910);',
+    '',
+    '  // ---- 上色：都是极浅的混合，保证文字对比度 ----',
     '  vec3 col = base;',
-    '  col = mix(col, cBlue, smoothstep(0.30, 0.95, f) * 0.62);',
-    '  col = mix(col, cLav,  smoothstep(0.52, 1.05, f) * 0.38);',
-    '  col = mix(col, cPink, smoothstep(0.70, 1.15, f) * 0.26);',
+  '  // 大尺度方向色：让画面有"从左上来光"的方向感',
+  '  float dir = clamp(uv.x * 0.55 + (1.0 - uv.y) * 0.45, 0.0, 1.0);',
+  '  col = mix(col, vec3(0.945, 0.938, 0.995), smoothstep(0.55, 1.0, 1.0 - dir) * 0.55);',
+  '  col = mix(col, vec3(0.915, 0.945, 0.995), smoothstep(0.50, 1.0, dir) * 0.50);',
+    '  col = mix(col, cBlue, smoothstep(0.18, 0.86, f) * 0.78);',
+    '  col = mix(col, cLav,  smoothstep(0.38, 0.98, f) * 0.52);',
+    '  col = mix(col, cCyan, band * 0.30 * vis);',
+    '  col = mix(col, cPink, smoothstep(0.58, 1.06, f) * 0.32);',
     '',
-    '  // ---- 6. 极淡等值线：只作质感，不抢主体 ----',
-    '  col = mix(col, vec3(0.55, 0.68, 0.92), line1 * 0.10 * vis);',
-    '  col = mix(col, vec3(0.62, 0.74, 0.94), glow1 * 0.05 * vis);',
+    '  // ---- 光带提亮：用白色而不是彩色，避免发灰 ----',
+    '  col = mix(col, vec3(1.0), band * 0.16 * vis);',
+    '  col = mix(col, vec3(1.0), band2 * 0.08 * vis);',
     '',
-    '  // ---- 7. 四周向白收拢，标题区保持极干净 ----',
-    '  float vig = smoothstep(1.30, 0.05, length(p * vec2(0.72, 0.96)));',
-    '  col = mix(vec3(0.992, 0.992, 0.996), col, 0.30 + 0.70 * vig);',
-    '  col = mix(col, vec3(1.0), (1.0 - uv.y) * 0.10);',
+    '  // ---- 收边：四周向白靠，与下一屏衔接 ----',
+    '  float vig = smoothstep(1.34, 0.06, length(p * vec2(0.74, 0.98)));',
+    '  col = mix(vec3(0.996, 0.996, 0.999), col, 0.18 + 0.82 * vig);',
+    '  col = mix(col, vec3(1.0), (1.0 - uv.y) * 0.08);',
     '',
-    '  // ---- 8. 极轻颗粒，消除色带 ----',
-    '  col += (hash(gl_FragCoord.xy + uTime) - 0.5) * 0.006;',
+    '  // ---- 颗粒：消除渐变色带 ----',
+    '  col += (hash21(gl_FragCoord.xy + uTime) - 0.5) * 0.006;',
     '',
     '  gl_FragColor = vec4(col * uIntensity, 1.0);',
     '}'
   ].join('\n');
+
+  var FRAG = FRAG_FLOW;
 
   function compile(gl, type, src) {
     var s = gl.createShader(type);
@@ -137,7 +152,6 @@
     var canvas = document.querySelector('[data-shader]');
     if (!canvas) return;
 
-    // 偏好减少动态效果：不启动着色器，保留 CSS 底色
     try {
       if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     } catch (e) { /* 忽略 */ }
@@ -147,7 +161,7 @@
       gl = canvas.getContext('webgl', { alpha: false, antialias: false, depth: false, powerPreference: 'low-power' })
         || canvas.getContext('experimental-webgl');
     } catch (e) { gl = null; }
-    if (!gl) return;   // 不支持 WebGL：回落 CSS
+    if (!gl) return;
 
     var vs = compile(gl, gl.VERTEX_SHADER, VERT);
     var fs = compile(gl, gl.FRAGMENT_SHADER, FRAG);
@@ -173,16 +187,17 @@
     var uIntensity = gl.getUniformLocation(prog, 'uIntensity');
 
     var isMobile = window.matchMedia && window.matchMedia('(max-width: 720px)').matches;
-    var maxDpr = isMobile ? 1 : 1.5;
+    // 渲染缓冲缩放：这是**背景**，本身是柔和渐变，缩小缓冲再放大看不出差别，
+    // 但填充率直接降一半以上——低端机和软件渲染下差别很大。
+    var renderScale = isMobile ? 0.55 : 0.72;
     var pointer = { x: 0, y: 0, tx: 0, ty: 0 };
     var start = performance.now();
     var running = true;
     var rafId = 0;
 
     function resize() {
-      var dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
-      var w = Math.max(1, Math.floor(canvas.clientWidth * dpr));
-      var h = Math.max(1, Math.floor(canvas.clientHeight * dpr));
+      var w = Math.max(1, Math.floor(canvas.clientWidth * renderScale));
+      var h = Math.max(1, Math.floor(canvas.clientHeight * renderScale));
       if (canvas.width !== w || canvas.height !== h) {
         canvas.width = w;
         canvas.height = h;
@@ -195,7 +210,6 @@
       if (!running) return;
       rafId = window.requestAnimationFrame(frame);
       resize();
-      // 指针缓动：让流动方向跟随鼠标，但不生硬
       pointer.x += (pointer.tx - pointer.x) * 0.045;
       pointer.y += (pointer.ty - pointer.y) * 0.045;
       gl.uniform1f(uTime, (now - start) / 1000);
@@ -213,7 +227,6 @@
 
     window.addEventListener('resize', resize, { passive: true });
 
-    // 页面不可见时暂停，省电
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) {
         running = false;
