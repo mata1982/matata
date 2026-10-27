@@ -27,11 +27,11 @@
         100deg,
         /* 色阶最亮的点控制在 #3E8FF0（白底对比度 ≈3.4），
            不再使用 #7FB7F7 —— 那个亮度只有 ≈2.1，扫过大字会短暂发虚 */
-        #0071E3 0%,
+        var(--primary) 0%,
         #2F80E8 24%,
         #3E8FF0 44%,
         #2F80E8 62%,
-        #0071E3 82%,
+        var(--primary) 82%,
         #1B4FC2 100%
       );
       background-size: 280% 100%;
@@ -178,7 +178,7 @@
 @media (prefers-reduced-motion: reduce) {
   .hero h1 em {
     background: none !important;
-    color: #0071E3 !important;
+    color: var(--primary) !important;
     -webkit-background-clip: border-box !important;
     background-clip: border-box !important;
     filter: none !important;

@@ -23,10 +23,10 @@
 .principle__no{
   display:block;
   font-family:var(--font-num);font-size:12px;letter-spacing:.1em;
-  color:#0071E3;margin-bottom:14px;
+  color:var(--primary);margin-bottom:14px;
 }
 .principle b{display:block;font-size:19px;color:#1D1D1F;font-weight:600;margin-bottom:8px;}
-.principle p{font-size:14.5px;line-height:1.65;color:#6E6E73;margin:0;}
+.principle p{font-size:14.5px;line-height:1.65;color:var(--ink-mute);margin:0;}
 
 /* ============================================================
    2. 产品卡
@@ -58,7 +58,7 @@
   border-color:rgba(0,113,227,.55);
   box-shadow:0 14px 44px -28px rgba(0,113,227,.55);
 }
-.prod--main:hover{border-color:#0071E3;}
+.prod--main:hover{border-color:var(--primary);}
 
 .prod__head{margin-bottom:18px;min-height:112px;}
 .prod__head .badge{margin-bottom:12px;}
@@ -66,7 +66,7 @@
   font-size:20px;font-weight:600;color:#1D1D1F;
   letter-spacing:-.01em;margin:0 0 6px;
 }
-.prod__for{font-size:13.5px;color:#86868B;margin:0;line-height:1.5;}
+.prod__for{font-size:13.5px;color:var(--ink-mute);margin:0;line-height:1.5;}
 
 .prod__price{
   display:flex;align-items:baseline;gap:8px;
@@ -78,7 +78,7 @@
   letter-spacing:-.02em;line-height:1;
   font-variant-numeric:tabular-nums;
 }
-.prod__price span{font-size:13px;color:#86868B;white-space:nowrap;}
+.prod__price span{font-size:13px;color:var(--ink-mute);white-space:nowrap;}
 
 .prod__price-row{
   display:flex;gap:28px;flex-wrap:wrap;
@@ -89,7 +89,7 @@
   display:block;font-size:26px;font-weight:600;color:#1D1D1F;
   letter-spacing:-.02em;font-variant-numeric:tabular-nums;
 }
-.prod__price-row span{font-size:12.5px;color:#86868B;white-space:nowrap;}
+.prod__price-row span{font-size:12.5px;color:var(--ink-mute);white-space:nowrap;}
 
 .prod__list{
   list-style:none;padding:0;margin:0 0 20px;
@@ -101,8 +101,8 @@
 .prod__list li::before{
   content:"";position:absolute;left:2px;top:6px;
   width:9px;height:5px;
-  border-left:1.6px solid #0071E3;
-  border-bottom:1.6px solid #0071E3;
+  border-left:1.6px solid var(--primary);
+  border-bottom:1.6px solid var(--primary);
   transform:rotate(-45deg);
 }
 
@@ -113,7 +113,7 @@
   margin-top:auto;
 }
 .prod__meta > div{display:grid;grid-template-columns:3.4em 1fr;gap:10px;align-items:baseline;}
-.prod__meta dt{font-size:12.5px;color:#86868B;}
+.prod__meta dt{font-size:12.5px;color:var(--ink-mute);}
 .prod__meta dd{margin:0;font-size:13.5px;color:#424245;}
 .prod .btn{width:100%;justify-content:center;}
 
@@ -156,20 +156,20 @@
 .opt__body b{font-size:14.5px;font-weight:600;color:#1D1D1F;}
 .opt__body em{
   font-style:normal;font-size:15px;font-weight:600;
-  color:#0071E3;font-variant-numeric:tabular-nums;
+  color:var(--primary);font-variant-numeric:tabular-nums;
 }
-.opt__body small{font-size:12px;color:#86868B;line-height:1.4;}
+.opt__body small{font-size:12px;color:var(--ink-mute);line-height:1.4;}
 
 .opt:hover .opt__body{border-color:rgba(0,0,0,.22);}
 /* 选中态 */
 .opt input:checked + .opt__body{
-  border-color:#0071E3;
+  border-color:var(--primary);
   background:rgba(0,113,227,.05);
   box-shadow:0 0 0 1px rgba(0,113,227,.35);
 }
 /* 键盘可达 */
 .opt input:focus-visible + .opt__body{
-  outline:2px solid #0071E3;
+  outline:2px solid var(--primary);
   outline-offset:3px;
 }
 
@@ -183,7 +183,7 @@
   box-shadow:0 18px 50px -34px rgba(0,0,0,.35);
 }
 .config__sumLabel{
-  display:block;font-size:13px;color:#86868B;margin-bottom:8px;
+  display:block;font-size:13px;color:var(--ink-mute);margin-bottom:8px;
 }
 .config__total{
   display:block;
@@ -192,13 +192,13 @@
   font-variant-numeric:tabular-nums;
   transition:transform .18s var(--ease-out-quart),color .18s var(--ease-out-quart);
 }
-.config__total.is-bump{transform:scale(1.045);color:#0071E3;}
+.config__total.is-bump{transform:scale(1.045);color:var(--primary);}
 .config__sumNote{
-  margin:14px 0 18px;font-size:13px;line-height:1.6;color:#6E6E73;
+  margin:14px 0 18px;font-size:13px;line-height:1.6;color:var(--ink-mute);
   min-height:2.6em;
 }
 .config__small{
-  margin:14px 0 0;font-size:12px;line-height:1.6;color:#86868B;
+  margin:14px 0 0;font-size:12px;line-height:1.6;color:var(--ink-mute);
 }
 
 /* ============================================================
@@ -217,7 +217,7 @@
 .term:nth-child(n+4){border-bottom:0;}
 .term:not(:nth-child(3n+1)){padding-left:var(--sp-6);}
 .term b{display:block;font-size:16px;color:#1D1D1F;font-weight:600;margin-bottom:8px;}
-.term p{font-size:14px;line-height:1.7;color:#6E6E73;margin:0;}
+.term p{font-size:14px;line-height:1.7;color:var(--ink-mute);margin:0;}
 
 /* ============================================================
    5. 深色区里的按钮回退（.invert 里主按钮保持蓝色）
@@ -276,7 +276,7 @@
 .fit__col b{
   display:block;font-size:17px;font-weight:600;margin-bottom:14px;color:#1D1D1F;
 }
-.fit__col--no b{color:#6E6E73;}
+.fit__col--no b{color:var(--ink-mute);}
 .fit__col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
 .fit__col li{
   position:relative;padding-left:22px;
@@ -289,7 +289,7 @@
   border-bottom:1.6px solid #1D9D5B;
   transform:rotate(-45deg);
 }
-.fit__col--no li{color:#6E6E73;}
+.fit__col--no li{color:var(--ink-mute);}
 .fit__col--no li::before{
   width:9px;height:9px;top:6px;border:0;
   background:

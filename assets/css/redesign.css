@@ -31,8 +31,8 @@
   /* 文字：深墨蓝，不用纯黑 */
   --ink:#0D253D;
   --ink-secondary:#273951;
-  --ink-mute:#64748D;
-  --ink-mute-2:#61718A;
+  --ink-mute:#5E6A7C;      /* 5.1:1 on #F6F9FC，原 #64748D 只有 4.49 */
+  --ink-mute-2:#55606F;    /* 更深一档，用于小号元信息 */
   --on-primary:#FFFFFF;
 
   /* 表面 */
@@ -409,9 +409,10 @@ html,body{overflow-x:clip;}
    原来的分隔符和当前页文字对比度只有 2.57，属于导航信息，
    不该和装饰元素一个灰阶。统一提到 --ink-mute（白底约 4.7:1）。
    ============================================================ */
+/* 页头有网格渐变，面包屑用灰字只有 3.9:1，提到二级文字色 */
 .pagehead__crumbs,
 .pagehead__crumbs a,
-.pagehead__crumbs span{color:var(--ink-mute);}
+.pagehead__crumbs span{color:var(--ink-secondary);}
 .pagehead__crumbs a:hover{color:var(--primary);}
 .pagehead__crumbs .pagehead__current{color:var(--ink-secondary);}
 /* 分隔符有更具体的选择器（> span:first-of-type）在管，必须同级覆盖 */
@@ -878,3 +879,14 @@ html,body{overflow-x:clip;}
 @media (hover:none){
   .btn--glow:hover{background:linear-gradient(100deg, #FFD9C0 0%, #F4E7D6 32%, #DEE8F8 66%, #C9DAF6 100%);}
 }
+/* ============================================================
+   24. 审计修复：页头文字对比度
+   ------------------------------------------------------------
+   检测器实测：页头 lead 用灰字压在网格渐变上只有 3.4:1。
+   渐变在左侧偏饱和，灰字会发虚，改用二级文字色（约 8:1）。
+   ============================================================ */
+.pagehead .lead,
+.pagehead p{color:var(--ink-secondary);}
+/* 导航当前页：旧规则 .nav a{opacity:.86} 会把品牌蓝拉低到 4.4:1，这里去掉 */
+.nav__links a{opacity:1;}
+.nav__links a.is-active{color:var(--primary);opacity:1;font-weight:500;}

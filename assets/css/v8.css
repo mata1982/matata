@@ -129,7 +129,7 @@
   content:"" !important;
   width:5px;height:5px;
   border-radius:50%;
-  background:#0071E3;
+  background:var(--primary);
   margin:0;
   flex:none;
 }

@@ -27,11 +27,11 @@
   margin-bottom:18px;
 }
 .paincard__ico svg{
-  width:22px;height:22px;fill:none;stroke:#0071E3;stroke-width:1.5;
+  width:22px;height:22px;fill:none;stroke:var(--primary);stroke-width:1.5;
   stroke-linecap:round;stroke-linejoin:round;
 }
 .paincard h3{font-size:17px;font-weight:600;color:#1D1D1F;margin:0 0 8px;letter-spacing:-.01em;}
-.paincard p{font-size:14.5px;line-height:1.7;color:#6E6E73;margin:0;}
+.paincard p{font-size:14.5px;line-height:1.7;color:var(--ink-mute);margin:0;}
 
 /* ---------- 场景卡 ---------- */
 .scenes{
@@ -51,7 +51,7 @@
 .scene2__head{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap;}
 .scene2__no{
   font-family:var(--font-num);font-size:11px;letter-spacing:.1em;
-  color:#0071E3;
+  color:var(--primary);
 }
 .scene2__head h3{
   font-size:18px;font-weight:600;color:#1D1D1F;margin:0;
@@ -62,13 +62,13 @@
   display:grid;grid-template-columns:4.2em 1fr;gap:12px;align-items:baseline;
 }
 .scene2__rows dt{
-  font-size:12.5px;color:#86868B;white-space:nowrap;
+  font-size:12.5px;color:var(--ink-mute);white-space:nowrap;
 }
 .scene2__rows dd{
   margin:0;font-size:14.5px;line-height:1.65;color:#424245;
 }
 .scene2__rows dd strong{color:#1D1D1F;}
-.scene2__rows > div:first-child dd{color:#6E6E73;}
+.scene2__rows > div:first-child dd{color:var(--ink-mute);}
 
 /* ---------- 为什么本地（三栏，浅灰底） ---------- */
 .why-local{
@@ -82,7 +82,7 @@
 .why-local__item:last-child{border-right:0;}
 .why-local__item:not(:first-child){padding-left:26px;}
 .why-local__item b{display:block;font-size:17px;color:#1D1D1F;font-weight:600;margin-bottom:8px;}
-.why-local__item p{font-size:14.5px;line-height:1.7;color:#6E6E73;margin:0;}
+.why-local__item p{font-size:14.5px;line-height:1.7;color:var(--ink-mute);margin:0;}
 
 /* ---------- 响应式 ---------- */
 @media (max-width:1024px){

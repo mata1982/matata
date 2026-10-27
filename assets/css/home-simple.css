@@ -47,7 +47,7 @@
 }
 .what3__ico svg{
   width:26px;height:26px;
-  fill:none;stroke:#0071E3;stroke-width:1.5;
+  fill:none;stroke:var(--primary);stroke-width:1.5;
   stroke-linecap:round;stroke-linejoin:round;
 }
 .what3__item h3{
@@ -55,7 +55,7 @@
   letter-spacing:-.01em;margin:0 0 10px;
 }
 .what3__item p{
-  font-size:15px;line-height:1.7;color:#6E6E73;margin:0;
+  font-size:15px;line-height:1.7;color:var(--ink-mute);margin:0;
 }
 
 /* ============================================================
@@ -76,7 +76,7 @@
 .start3__no{
   display:block;
   font-family:var(--font-num);
-  font-size:12px;letter-spacing:.12em;color:#0071E3;
+  font-size:12px;letter-spacing:.12em;color:var(--primary);
   margin-bottom:16px;
 }
 .start3__item b{
@@ -85,7 +85,7 @@
   letter-spacing:-.01em;margin-bottom:10px;
 }
 .start3__item p{
-  font-size:15px;line-height:1.7;color:#6E6E73;margin:0 0 16px;
+  font-size:15px;line-height:1.7;color:var(--ink-mute);margin:0 0 16px;
   min-height:3.4em;
 }
 .start3__price{
@@ -150,10 +150,10 @@
   transform:translateY(-2px);
 }
 .more4__item b{font-size:16px;font-weight:600;color:#1D1D1F;}
-.more4__item span{font-size:13.5px;line-height:1.6;color:#86868B;}
+.more4__item span{font-size:13.5px;line-height:1.6;color:var(--ink-mute);}
 .more4__item i{
   margin-top:10px;
-  font-style:normal;font-size:15px;color:#0071E3;
+  font-style:normal;font-size:15px;color:var(--primary);
   transition:transform .26s var(--ease-out-quart);
 }
 .more4__item:hover i{transform:translateX(4px);}
@@ -173,7 +173,7 @@
   color:#1D1D1F;margin:0 0 16px;
 }
 .final-cta p{
-  font-size:17px;color:#6E6E73;margin:0;
+  font-size:17px;color:var(--ink-mute);margin:0;
 }
 
 /* ============================================================
