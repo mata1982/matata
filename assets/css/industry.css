@@ -1,0 +1,101 @@
+/* ============================================================
+   玛塔塔 MATATA · 行业落地页
+   ============================================================
+   用于 industry-manufacturing / industry-trade / industry-law 三页。
+   复用全站已有组件（.prod / .faq / .invert / .btn），
+   这里只补两个本页专用组件：.paincards（痛点）与 .scene2（场景卡）。
+
+   行业页的目的不是"介绍我们"，是接长尾搜索：
+   客户搜"制造业 AI 本地部署怎么做"，落地后要立刻看到
+   "我这行的具体场景 + 多少钱 + 怎么开始"。
+   ============================================================ */
+
+/* ---------- 痛点 ---------- */
+.paincards{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+}
+.paincard{
+  background:#FFFFFF;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:18px;
+  padding:26px 24px;
+}
+.paincard__ico{
+  display:flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:12px;
+  background:rgba(0,113,227,.08);
+  margin-bottom:18px;
+}
+.paincard__ico svg{
+  width:22px;height:22px;fill:none;stroke:#0071E3;stroke-width:1.5;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.paincard h3{font-size:17px;font-weight:600;color:#1D1D1F;margin:0 0 8px;letter-spacing:-.01em;}
+.paincard p{font-size:14.5px;line-height:1.7;color:#6E6E73;margin:0;}
+
+/* ---------- 场景卡 ---------- */
+.scenes{
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;
+}
+.scene2{
+  background:#FFFFFF;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:18px;
+  padding:26px 24px;
+  transition:border-color .28s var(--ease-out-quart),box-shadow .28s var(--ease-out-quart);
+}
+.scene2:hover{
+  border-color:rgba(0,0,0,.16);
+  box-shadow:0 18px 44px -30px rgba(0,0,0,.32);
+}
+.scene2__head{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap;}
+.scene2__no{
+  font-family:var(--font-num);font-size:11px;letter-spacing:.1em;
+  color:#0071E3;
+}
+.scene2__head h3{
+  font-size:18px;font-weight:600;color:#1D1D1F;margin:0;
+  letter-spacing:-.01em;
+}
+.scene2__rows{display:grid;gap:12px;margin:0;}
+.scene2__rows > div{
+  display:grid;grid-template-columns:4.2em 1fr;gap:12px;align-items:baseline;
+}
+.scene2__rows dt{
+  font-size:12.5px;color:#86868B;white-space:nowrap;
+}
+.scene2__rows dd{
+  margin:0;font-size:14.5px;line-height:1.65;color:#424245;
+}
+.scene2__rows dd strong{color:#1D1D1F;}
+.scene2__rows > div:first-child dd{color:#6E6E73;}
+
+/* ---------- 为什么本地（三栏，浅灰底） ---------- */
+.why-local{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border-top:1px solid rgba(0,0,0,.1);
+}
+.why-local__item{
+  padding:26px 26px 26px 0;
+  border-right:1px solid rgba(0,0,0,.07);
+}
+.why-local__item:last-child{border-right:0;}
+.why-local__item:not(:first-child){padding-left:26px;}
+.why-local__item b{display:block;font-size:17px;color:#1D1D1F;font-weight:600;margin-bottom:8px;}
+.why-local__item p{font-size:14.5px;line-height:1.7;color:#6E6E73;margin:0;}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:1024px){
+  .paincards{grid-template-columns:1fr;}
+  .scenes{grid-template-columns:1fr;}
+  .why-local{grid-template-columns:1fr;}
+  .why-local__item{
+    border-right:0;border-bottom:1px solid rgba(0,0,0,.07);
+    padding:22px 0 !important;
+  }
+  .why-local__item:last-child{border-bottom:0;}
+}
+@media (max-width:720px){
+  .paincard,.scene2{padding:22px 20px;}
+  .scene2__rows > div{grid-template-columns:1fr;gap:4px;}
+}

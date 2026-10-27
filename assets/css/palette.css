@@ -1,0 +1,151 @@
+/* ============================================================
+   玛塔塔 MATATA · 配色 v9：暖纸质
+   ============================================================
+   为什么改：
+   原来的「纯白 + 冷灰 + 苹果蓝」是当下最常见的 SaaS 配色，
+   干净但缺乏辨识度，也很难说"大气"。
+
+   这一版换成：
+   · 页面底 = 暖白纸（#FAF9F6），分区底 = 暖灰（#F1EFE9）
+   · 文字 = 暖近黑（#1B1A18），比纯黑柔和，纸感更统一
+   · 卡片仍是白（#FFFEFB），形成"白纸贴在米色桌面"的层次
+   · 品牌蓝不变（#0071E3 / 新 LOGO #1246C8），保证按钮与链接的识别度
+
+   只改令牌与几处硬编码底色，不动组件结构。
+   加载顺序：最后（site-entry 末尾 + 首页）。
+   ============================================================ */
+
+:root{
+  /* 底色：暖白纸 → 暖灰 */
+  --void:#FAF9F6;
+  --panel:#F1EFE9;
+  --raise:#FFFEFB;
+  --paper:#FAF9F6;
+
+  /* 文字：暖近黑 */
+  --t-1:#1B1A18;
+  --t-2:#45423C;
+  --t-3:#6C6861;
+  --t-4:#8B867D;
+  --ink:#1B1A18;
+
+  /* 分隔线：暖调透明黑 */
+  --line:rgba(27, 26, 24, .12);
+  --line-soft:rgba(27, 26, 24, .065);
+  --line-strong:rgba(27, 26, 24, .20);
+
+  /* 卡片用的暖白 */
+  --card:#FFFEFB;
+}
+
+/* ---------- 基础面 ---------- */
+body{background:var(--void);}
+
+.section{background:var(--void);}
+.section--alt,
+.section--deep{background:var(--panel);}
+
+.facts,
+.footer,
+.notice,
+.badge,
+.tag,
+.final-cta,
+.cta-panel,
+.promise__item,
+.pledge{background:var(--panel);}
+
+/* 面板类里的文字要压深一档，否则暖灰底上偏淡 */
+.notice{color:var(--t-2);}
+
+/* ---------- 导航与锚点条 ---------- */
+.nav{background:rgba(252, 251, 248, .84);}
+.anchors{background:rgba(252, 251, 248, .92);}
+
+/* ---------- 首屏与页头：暖色渐变 ---------- */
+.hero{
+  background:linear-gradient(180deg, #FDFCF9 0%, #F8F6F1 100%);
+}
+.shader{
+  background:
+    radial-gradient(60% 55% at 50% 18%, rgba(0, 113, 227, .085), transparent 70%),
+    radial-gradient(46% 46% at 84% 8%, rgba(120, 90, 255, .055), transparent 72%),
+    linear-gradient(180deg, #FDFCF9 0%, #F7F5EF 100%);
+}
+.shader__veil{
+  background:
+    radial-gradient(50% 46% at 50% 46%, rgba(253, 252, 249, .74), rgba(253, 252, 249, 0) 76%),
+    linear-gradient(180deg, rgba(253, 252, 249, .36) 0%, rgba(253, 252, 249, 0) 42%, rgba(250, 249, 246, .9) 100%);
+}
+
+.pagehead{
+  background:
+    radial-gradient(54% 120% at 50% -10%, rgba(0, 113, 227, .06), transparent 68%),
+    linear-gradient(180deg, #FDFCF9 0%, #FAF9F6 100%);
+}
+
+/* ---------- 图示与卡片：变暖白 ---------- */
+.viz{
+  background:
+    radial-gradient(72% 120% at 50% 0%, rgba(0, 113, 227, .05), transparent 68%),
+    var(--panel);
+  border-color:var(--line-soft);
+}
+
+.card,
+.bento__cell,
+.tier-card,
+.trade,
+.case,
+.svc,
+.scene,
+.qa,
+.quote,
+.form,
+.table-wrap,
+.faq,
+.prod,
+.scene2,
+.what3__item,
+.paincard,
+.more4__item,
+.deliv__item{
+  background:var(--card);
+}
+
+/* v8 的双包边渐变也要跟着暖 */
+.prod,
+.scene2,
+.what3__item,
+.paincard,
+.more4__item,
+.deliv__item{
+  background:linear-gradient(180deg, #FFFEFB 0%, #FCFAF6 100%);
+}
+
+/* ---------- 输入框 ---------- */
+.input,
+.select,
+.textarea{
+  background:#FFFDFA;
+  border-color:var(--line-strong);
+}
+.input:focus,
+.select:focus,
+.textarea:focus{background:#FFFFFF;}
+
+/* ---------- 深色区保持不变，只把文字调暖一点 ---------- */
+.invert{background:#191816;}
+.invert h2,.invert h3,.invert .h2{color:#FAF9F6;}
+
+/* ---------- 微调：暖底上的阴影偏暖，不要用纯黑 ---------- */
+.prod,
+.scene2,
+.what3__item,
+.paincard,
+.more4__item,
+.deliv__item{
+  box-shadow:
+    0 1px 2px rgba(60, 50, 35, .05),
+    inset 0 1px 0 rgba(255, 255, 255, .95);
+}

@@ -1,0 +1,295 @@
+/* ============================================================
+   玛塔塔 MATATA · 视觉化板块（图文一体化）
+   ============================================================
+   设计目标（对应反馈："下面的文字太多，最好是图文结合，能一体化"）：
+   1. 每个板块先给一张"看一眼就懂"的视觉，文字只做注解
+   2. 视觉与首屏同源：深色底 + 细线 + 品牌蓝辉光，不用贴图感
+   3. 全部纯 CSS + 内联 SVG 绘制：零请求、可缩放、可换色
+
+   结构约定：
+   .viz        板块级视觉容器
+   .viz__cap   图下的注解（一句话，不是段落）
+   ============================================================ */
+
+/* ---------- 通用视觉容器 ---------- */
+.viz{
+  position:relative;
+  border:1px solid var(--line);
+  border-radius:var(--r-3);
+  background:
+    radial-gradient(72% 120% at 50% 0%, rgba(76,111,255,.10), transparent 68%),
+    linear-gradient(180deg, rgba(14,16,21,.92), rgba(8,9,12,.72));
+  padding:var(--sp-8);
+  overflow:hidden;
+}
+.viz::after{              /* 极轻的网格底纹，和首屏呼应 */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size:44px 44px;
+  mask-image:radial-gradient(70% 70% at 50% 40%, #000, transparent 78%);
+  -webkit-mask-image:radial-gradient(70% 70% at 50% 40%, #000, transparent 78%);
+}
+.viz__cap{
+  position:relative;z-index:1;
+  margin-top:var(--sp-6);
+  text-align:center;
+  font-size:var(--fs-sm);color:var(--t-3);
+}
+.viz svg{position:relative;z-index:1;display:block;width:100%;height:auto;}
+
+/* ---------- 1b. 侧视机架图（图文左右对照，清晰优先） ---------- */
+.riso{max-width:100%;display:block;}
+.rk__head{fill:rgba(255,255,255,.92);font-size:13px;font-weight:600;}
+.rk__head2{fill:rgba(255,255,255,.28);font-size:10px;font-family:var(--font-num);letter-spacing:.14em;}
+.rk__t{fill:rgba(255,255,255,.9);font-size:13px;font-weight:600;}
+.rk__d{fill:rgba(255,255,255,.42);font-size:11px;}
+.rk__n{fill:rgba(255,255,255,.26);font-size:11px;font-family:var(--font-num);letter-spacing:.08em;}
+.rk__lamp{fill:rgba(61,214,140,.95);}
+.rk__lamp--d{fill:rgba(110,139,255,.85);}
+.rk__lt{fill:rgba(255,255,255,.88);font-size:14px;font-weight:600;}
+.rk__ld{fill:rgba(255,255,255,.40);font-size:11.5px;}
+.rk__rule{stroke:rgba(255,255,255,.07);stroke-width:1;}
+.rk__link{
+  stroke:rgba(110,139,255,.34);stroke-width:1;
+  stroke-dasharray:4 5;animation:rkFlow 5s linear infinite;
+}
+@keyframes rkFlow{to{stroke-dashoffset:-36;}}
+
+/* ---------- 1. 等距机器塔（保留备用） ---------- */
+.iso{max-width:720px;margin:0 auto;display:block;}
+.iso__floor{
+  fill:none;stroke:rgba(255,255,255,.10);stroke-width:1;
+}
+.iso__slab{
+  fill:rgba(255,255,255,.035);
+  stroke:rgba(255,255,255,.14);stroke-width:1;
+  transition:fill .3s var(--ease-out-quart),stroke .3s var(--ease-out-quart);
+}
+.iso__slab--brand{
+  fill:rgba(76,111,255,.14);
+  stroke:rgba(110,139,255,.42);
+}
+.iso__edge{stroke:rgba(255,255,255,.07);stroke-width:1;fill:none;}
+.iso__label{fill:rgba(255,255,255,.88);font-size:13px;font-weight:600;}
+.iso__sub{fill:rgba(255,255,255,.42);font-size:11px;}
+.iso__idx{fill:rgba(255,255,255,.30);font-size:10px;font-family:var(--font-num);letter-spacing:.08em;}
+.iso__beam{
+  fill:none;stroke:url(#beamGrad);stroke-width:1.4;
+  stroke-dasharray:5 6;
+  animation:beamFlow 6s linear infinite;
+}
+@keyframes beamFlow{to{stroke-dashoffset:-88;}}
+.iso__lock{fill:none;stroke:rgba(61,214,140,.75);stroke-width:1.4;}
+.iso__lockdot{fill:rgba(61,214,140,.9);}
+
+/* ---------- 2. 转变流程（痛点 → 做法） ---------- */
+.flow{display:grid;gap:var(--sp-4);}
+.flow__row{
+  display:grid;grid-template-columns:96px 1fr 34px 1.15fr;gap:var(--sp-4);align-items:center;
+  padding:var(--sp-4) var(--sp-5);
+  border:1px solid var(--line-soft);border-radius:var(--r-2);
+  background:rgba(255,255,255,.015);
+  transition:border-color .3s var(--ease-out-quart),background .3s var(--ease-out-quart);
+}
+.flow__row:hover{border-color:var(--line-strong);background:rgba(255,255,255,.035);}
+.flow__icon{
+  width:56px;height:56px;border-radius:var(--r-2);
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.04);border:1px solid var(--line);
+}
+.flow__icon svg{width:26px;height:26px;stroke:var(--t-3);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;}
+.flow__before{font-size:14px;color:var(--t-3);}
+.flow__arrow{display:flex;align-items:center;justify-content:center;}
+.flow__arrow svg{width:16px;height:16px;stroke:var(--accent-hi);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.flow__after{font-size:15px;color:var(--t-1);font-weight:500;}
+
+/* ---------- 3. 视觉阶梯（服务层级） ---------- */
+.ladder-viz{
+  display:grid;grid-template-columns:1.05fr 1fr;gap:var(--sp-9);align-items:center;
+}
+.ladder-steps{list-style:none;padding:0;margin:0;border-top:1px solid var(--line);}
+.ladder-steps li{
+  display:grid;grid-template-columns:auto 1fr auto;gap:var(--sp-5);align-items:baseline;
+  padding:var(--sp-5) 0;border-bottom:1px solid var(--line-soft);
+}
+.ladder-steps b{font-size:16px;color:var(--t-1);font-weight:600;}
+.ladder-steps span{font-size:14px;color:var(--t-2);}
+.ladder-steps i{font-family:var(--font-num);font-size:var(--fs-xs);color:var(--t-4);font-style:normal;white-space:nowrap;}
+.ladder-steps li.is-main b{color:var(--accent-hi);}
+
+/* 阶梯图形：六级台阶，越高越亮 */
+.stairs{display:flex;align-items:flex-end;justify-content:center;gap:8px;min-height:220px;}
+.stairs__col{display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;}
+.stairs__bar{
+  width:100%;border-radius:6px 6px 2px 2px;
+  background:linear-gradient(180deg, rgba(110,139,255,.55), rgba(76,111,255,.14));
+  border:1px solid rgba(110,139,255,.28);
+  transition:filter .3s var(--ease-out-quart);
+}
+.stairs__col:hover .stairs__bar{filter:brightness(1.35);}
+.stairs__col:nth-child(1) .stairs__bar{height:34px;opacity:.45;}
+.stairs__col:nth-child(2) .stairs__bar{height:58px;opacity:.55;}
+.stairs__col:nth-child(3) .stairs__bar{height:92px;opacity:.72;}
+.stairs__col:nth-child(4) .stairs__bar{height:126px;opacity:.82;}
+.stairs__col:nth-child(5) .stairs__bar{height:160px;opacity:.9;}
+.stairs__col:nth-child(6) .stairs__bar{height:196px;}
+.stairs__col--main .stairs__bar{
+  background:linear-gradient(180deg, rgba(140,165,255,.95), rgba(76,111,255,.5));
+  border-color:rgba(160,185,255,.6);
+  box-shadow:0 0 26px rgba(76,111,255,.35);
+}
+.stairs__lb{font-size:11px;color:var(--t-4);font-family:var(--font-num);letter-spacing:.06em;}
+
+/* ---------- 4. 七步流水线 ---------- */
+.pipe{position:relative;}
+.pipe__track{
+  position:absolute;left:0;right:0;top:22px;height:1px;
+  background:linear-gradient(90deg, transparent, rgba(110,139,255,.45) 12%, rgba(110,139,255,.45) 88%, transparent);
+}
+.pipe__nodes{position:relative;display:grid;grid-template-columns:repeat(7,1fr);gap:var(--sp-4);}
+.pipe__node{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;}
+.pipe__dot{
+  width:44px;height:44px;border-radius:50%;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--void);border:1px solid rgba(110,139,255,.4);
+  font-family:var(--font-num);font-size:11px;color:var(--accent-hi);
+  box-shadow:0 0 0 6px rgba(8,9,12,1), 0 0 22px rgba(76,111,255,.22);
+}
+.pipe__node b{font-size:14px;color:var(--t-1);}
+.pipe__node span{font-size:12px;color:var(--t-3);line-height:1.5;}
+.pipe__out{font-size:11px;color:var(--accent-hi);font-family:var(--font-num);}
+
+/* ---------- 5. 对比：重量条 ---------- */
+.weigh{display:grid;gap:var(--sp-5);}
+.weigh__row{display:grid;grid-template-columns:150px 1fr;gap:var(--sp-5);align-items:center;}
+.weigh__name{font-size:13px;color:var(--t-3);}
+.weigh__bars{display:flex;flex-direction:column;gap:6px;}
+.weigh__bar{display:flex;align-items:center;gap:10px;}
+.weigh__bar i{
+  display:block;height:8px;border-radius:4px;flex:none;
+  background:rgba(255,255,255,.16);
+}
+.weigh__bar--us i{background:linear-gradient(90deg, var(--accent), var(--accent-hi));box-shadow:0 0 14px rgba(76,111,255,.4);}
+.weigh__bar span{font-size:12px;color:var(--t-4);}
+
+/* 浅色反相区内的重量条：换成深色文字，保证可读 */
+.invert .weigh__name{color:#6B7280;}
+.invert .weigh__bar span{color:#4B5563;}
+.invert .weigh__bar i{background:rgba(12,14,18,.20);}
+
+/* 浅色反相区：修正对比表的可读性
+   问题：.compare__col--us li 在深色主题下是白色文字，进了 .invert 就看不见。
+   这里用后代选择器提高优先级，把整块改成深色文字。 */
+.invert .compare__label{color:var(--ink);}
+.invert .compare__col--other .compare__label{color:#6B7280;}
+.invert .compare__col--other li{color:#6B7280;}
+.invert .compare__col--us li{color:var(--ink);}
+.invert .compare__col--us li::before{background:var(--accent);}
+.invert .compare__col--us{border-top-color:var(--ink);}
+.invert .compare__col{border-top-color:rgba(12,14,18,.14);}
+/* 承诺区同样处理 */
+.invert .pledges div{border-top-color:rgba(12,14,18,.14);}
+.invert .pledges b{color:var(--ink);}
+.invert .pledges span{color:#6B7280;}
+.invert .viz__cap{color:#6B7280;}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:1024px){
+  .ladder-viz{grid-template-columns:1fr;gap:var(--sp-8);}
+  .pipe__nodes{grid-template-columns:repeat(4,1fr);}
+  .pipe__track{display:none;}
+  .bento{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:720px){
+  .viz{padding:var(--sp-5);}
+  .flow__row{grid-template-columns:64px 1fr;grid-template-rows:auto auto;gap:10px;}
+  .flow__icon{width:44px;height:44px;grid-row:1 / span 2;}
+  .flow__arrow{display:none;}
+  .flow__before{grid-column:2;}
+  .flow__after{grid-column:2;font-size:14px;}
+  .pipe__nodes{grid-template-columns:repeat(2,1fr);gap:var(--sp-5);}
+  .weigh__row{grid-template-columns:1fr;gap:8px;}
+  .stairs{min-height:150px;gap:5px;}
+  .bento{grid-template-columns:1fr;}
+  .bento__cell--hero{grid-row:auto;grid-column:auto;}
+}
+
+/* ---------- 6. 四件事：带大图标的 Bento ---------- */
+.bento__ico{
+  width:52px;height:52px;border-radius:var(--r-2);flex:none;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(76,111,255,.10);border:1px solid rgba(110,139,255,.26);
+}
+.bento__ico svg{width:26px;height:26px;stroke:var(--accent-hi);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+/* 主格子：内容居中，避免上方留出大片空白 */
+.bento__cell--hero{justify-content:center;gap:var(--sp-5);}
+.bento__cell--hero .bento__ico{
+  width:60px;height:60px;
+  background:rgba(76,111,255,.18);border-color:rgba(140,165,255,.45);
+  box-shadow:0 0 30px rgba(76,111,255,.28);
+}
+.bento__cell--hero .bento__ico svg{width:30px;height:30px;}
+
+/* ---------- 7. 行业卡片墙（图标 + 名称 + 起步场景） ---------- */
+.trades{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--sp-4);}
+.trade{
+  display:flex;flex-direction:column;gap:var(--sp-4);
+  padding:var(--sp-5);border:1px solid var(--line-soft);border-radius:var(--r-3);
+  background:linear-gradient(180deg, rgba(255,255,255,.028), rgba(255,255,255,.008));
+  transition:border-color .3s var(--ease-out-quart),transform .3s var(--ease-out-quart),background .3s var(--ease-out-quart);
+}
+.trade:hover{
+  border-color:rgba(110,139,255,.34);transform:translateY(-3px);
+  background:linear-gradient(180deg, rgba(76,111,255,.10), rgba(255,255,255,.01));
+}
+.trade__ico{
+  width:40px;height:40px;border-radius:var(--r-2);flex:none;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.045);border:1px solid var(--line);
+}
+.trade__ico svg{width:20px;height:20px;stroke:var(--accent-hi);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.trade b{font-size:15px;color:var(--t-1);font-weight:600;}
+.trade span:last-child{font-size:13px;color:var(--t-3);line-height:1.65;}
+.trade--more{border-style:dashed;border-color:rgba(110,139,255,.30);background:rgba(76,111,255,.05);}
+
+/* ---------- 8. 案例：问题 → 做法 纵向流程 + 结果 ---------- */
+.cases{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-8);}
+.case{
+  border:1px solid var(--line-soft);border-radius:var(--r-3);
+  background:linear-gradient(180deg, rgba(255,255,255,.028), rgba(255,255,255,.006));
+  padding:var(--sp-6);display:flex;flex-direction:column;gap:var(--sp-5);
+}
+.case__head{display:flex;align-items:center;gap:var(--sp-4);}
+.case__ico{
+  width:44px;height:44px;border-radius:var(--r-2);flex:none;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(76,111,255,.12);border:1px solid rgba(110,139,255,.28);
+}
+.case__ico svg{width:22px;height:22px;stroke:var(--accent-hi);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.case__head h3{font-size:19px;letter-spacing:-.01em;margin:0;}
+.case__meta{font-size:var(--fs-xs);color:var(--t-4);margin:4px 0 0;}
+.case__flow{display:flex;flex-direction:column;gap:var(--sp-3);}
+.case__step{border:1px solid var(--line-soft);border-radius:var(--r-2);padding:var(--sp-4);background:rgba(255,255,255,.015);}
+.case__step--done{border-color:rgba(110,139,255,.30);background:linear-gradient(180deg, rgba(76,111,255,.10), rgba(255,255,255,.01));}
+.case__step p{margin-top:8px;font-size:14px;color:var(--t-2);line-height:1.7;}
+.case__tag{display:inline-block;font-size:11px;letter-spacing:.1em;color:var(--t-4);font-family:var(--font-num);}
+.case__tag--us{color:var(--accent-hi);}
+.case__arrow{display:flex;justify-content:center;}
+.case__arrow svg{width:16px;height:16px;stroke:var(--accent-hi);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+.case__result{margin-top:auto;padding-top:var(--sp-4);border-top:1px solid var(--line-soft);font-size:14px;color:var(--t-2);}
+.case__result b{display:inline-block;min-width:3.2em;font-size:var(--fs-xs);color:var(--t-1);}
+
+/* ---------- 7+8 窄屏 ---------- */
+@media (max-width:1280px){
+  .trades{grid-template-columns:repeat(4,1fr);}
+}
+@media (max-width:1024px){
+  .trades{grid-template-columns:repeat(3,1fr);}
+}
+@media (max-width:720px){
+  .trades{grid-template-columns:1fr 1fr;gap:var(--sp-3);}
+  .trade{padding:var(--sp-4);}
+  .cases{grid-template-columns:1fr;}
+}

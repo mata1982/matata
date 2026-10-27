@@ -1,0 +1,173 @@
+/* ============================================================
+   玛塔塔 MATATA · 观点文章与承诺页
+   ============================================================
+   阅读型页面的排版原则：
+   · 正文宽度控制在 68–76 字符，中文约 34–38 字一行
+   · 行高 1.85，段间距 16px，阅读不累
+   · 小标题用 400 字重（不是 600），避免在长文里太吵
+   · 表格与清单带边框，方便打印
+   ============================================================ */
+
+.art{padding:56px 0 88px;}
+.art__inner{max-width:720px;margin:0 auto;}
+.art__meta{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--ink-mute-2);
+  margin-bottom:20px;
+}
+.art__meta span{display:inline-flex;align-items:center;gap:6px;}
+.art__meta i{font-style:normal;}
+
+.art h1{
+  font-size:clamp(26px,3.2vw,38px);
+  font-weight:300;
+  letter-spacing:-.02em;
+  line-height:1.22;
+  margin:0 0 18px;
+}
+.art__lead{
+  font-size:17px;
+  line-height:1.8;
+  color:var(--ink-secondary);
+  margin:0 0 34px;
+  padding-bottom:28px;
+  border-bottom:1px solid var(--hairline);
+}
+
+.art h2{
+  font-size:22px;
+  font-weight:400;
+  letter-spacing:-.012em;
+  line-height:1.4;
+  margin:44px 0 14px;
+}
+.art h3{
+  font-size:16.5px;
+  font-weight:500;
+  margin:26px 0 10px;
+}
+.art p{
+  font-size:15.5px;
+  line-height:1.85;
+  color:var(--ink-secondary);
+  margin:0 0 16px;
+}
+.art p strong,.art li strong{color:var(--ink);font-weight:500;}
+.art ul,.art ol{margin:0 0 18px;padding-left:22px;}
+.art li{
+  font-size:15.5px;line-height:1.85;color:var(--ink-secondary);
+  margin-bottom:8px;
+}
+.art a{color:var(--primary);text-decoration:none;}
+.art a:hover{text-decoration:underline;}
+
+.art blockquote{
+  margin:24px 0;
+  padding:4px 0 4px 20px;
+  border-left:2px solid var(--primary);
+  font-size:15.5px;line-height:1.8;color:var(--ink);
+}
+
+/* 表格：可打印 */
+.art table{
+  width:100%;border-collapse:collapse;
+  font-size:14px;margin:8px 0 22px;
+}
+.art th,.art td{
+  text-align:left;padding:10px 12px;
+  border-bottom:1px solid var(--hairline);
+  vertical-align:top;
+}
+.art th{
+  font-weight:500;font-size:12px;letter-spacing:.05em;
+  color:var(--ink-mute-2);background:var(--canvas-soft);
+}
+.art td{color:var(--ink-secondary);}
+.art td:first-child{color:var(--ink);}
+
+/* 关键结论块 */
+.keybox{
+  margin:22px 0;
+  padding:18px 20px;
+  border:1px solid var(--hairline);
+  border-radius:var(--r-3);
+  background:var(--canvas-soft);
+}
+.keybox b{display:block;font-size:12px;letter-spacing:.08em;color:var(--ink-mute-2);margin-bottom:8px;}
+.keybox p{margin:0 0 8px;font-size:15px;color:var(--ink);}
+.keybox p:last-child{margin-bottom:0;}
+
+/* 清单：编号 + 勾选框样式，便于打印逐条确认 */
+.checklist{list-style:none;padding-left:0;margin:14px 0 22px;counter-reset:ck;}
+.checklist li{
+  position:relative;
+  padding:9px 0 9px 34px;
+  border-bottom:1px solid var(--hairline);
+  font-size:15px;line-height:1.7;
+}
+.checklist li::before{
+  counter-increment:ck;
+  content:counter(ck, decimal-leading-zero);
+  position:absolute;left:0;top:11px;
+  font-size:11px;color:var(--ink-mute-2);
+  font-variant-numeric:tabular-nums;
+}
+.checklist li::after{
+  content:"";
+  position:absolute;right:0;top:13px;
+  width:15px;height:15px;
+  border:1px solid var(--hairline-input);
+  border-radius:3px;
+}
+
+/* 文末 CTA */
+.art__cta{
+  margin-top:48px;
+  padding:28px 30px;
+  border:1px solid var(--hairline);
+  border-radius:var(--r-3);
+  background:var(--canvas-soft);
+  display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
+.art__cta b{display:block;font-size:16px;font-weight:500;margin-bottom:6px;}
+.art__cta p{margin:0;font-size:14px;color:var(--ink-mute);}
+
+/* 相关文章 */
+.related{margin-top:52px;padding-top:28px;border-top:1px solid var(--hairline);}
+.related h3{font-size:12px;letter-spacing:.1em;color:var(--ink-mute-2);font-weight:500;margin:0 0 16px;}
+.related__list{display:grid;gap:10px;}
+.related__list a{
+  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  padding:12px 0;
+  border-bottom:1px solid var(--hairline);
+  font-size:14.5px;color:var(--ink);text-decoration:none;
+}
+.related__list a:hover{color:var(--primary);}
+.related__list span{font-size:12px;color:var(--ink-mute-2);flex:none;}
+
+/* 文章列表页 */
+.posts{display:grid;gap:14px;margin-top:8px;}
+.post{
+  display:block;
+  padding:26px 28px;
+  border:1px solid var(--hairline);
+  border-radius:var(--r-3);
+  background:var(--canvas);
+  text-decoration:none;
+  transition:border-color .22s, box-shadow .22s, transform .22s;
+}
+.post:hover{
+  border-color:var(--hairline-input);
+  box-shadow:0 10px 28px -20px rgba(13,37,61,.35);
+  transform:translateY(-2px);
+}
+.post__meta{display:flex;gap:12px;font-size:12px;color:var(--ink-mute-2);margin-bottom:10px;}
+.post h2{font-size:19px;font-weight:500;letter-spacing:-.01em;margin:0 0 8px;color:var(--ink);}
+.post p{margin:0;font-size:14.5px;line-height:1.7;color:var(--ink-mute);}
+.post__go{display:inline-block;margin-top:14px;font-size:13px;color:var(--primary);}
+
+@media (max-width:720px){
+  .art{padding:36px 0 64px;}
+  .art__cta{flex-direction:column;align-items:flex-start;}
+  .post{padding:20px 20px;}
+}

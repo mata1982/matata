@@ -1,0 +1,185 @@
+/* ============================================================
+   玛塔塔 MATATA · 质感提升 v8（设计技能落地层）
+   ============================================================
+   依据安装的 high-end-visual-design 技能，挑出**能适配本站**的四条：
+
+   1. Double-Bezel（双包边）
+      卡片不是平铺在底色上，而是"嵌在托盘里的玻璃板"：
+      外层留 5px 壳 + 一圈极淡描边，内层再收一圈细线。
+      不靠投影，靠层次。这是最显"贵"的一招。
+
+   2. Button-in-Button（按钮内嵌图标）
+      箭头不裸放在文字旁边，而是装进自己的圆形容器，
+      悬停时轻微位移 + 放大，产生机械张力。
+
+   3. Eyebrow 药丸
+      小节标题前的小标签改成细边药丸，缩小、加字距，像仪表刻度。
+
+   4. 极轻噪点
+      固定层叠一层 2% 的噪点，模拟纸张/磨砂质感。
+      必须 fixed + pointer-events:none，不能挂在滚动容器上（性能红线）。
+
+   技能里被**有意舍弃**的部分（与本站冲突）：
+   · 深色 OLED 底 + 霓虹光晕 —— 本站是苹果式亮色，不需要
+   · Web 字体（Geist / Clash Display）—— 本站零外部资源，中文走系统字体
+   · 2rem 大圆角 —— 本站圆角 18px 已成体系，过大会失稳
+   · 浮空药丸导航 —— 苹果式导航本就是通栏，改动风险大于收益
+   ============================================================ */
+
+/* ============================================================
+   1. 双包边：给主要卡片加"内嵌托盘"层次
+   ============================================================ */
+.prod,
+.scene2,
+.what3__item,
+.paincard,
+.more4__item,
+.deliv__item,
+.tier-card,
+.trade,
+.case,
+.pledge,
+.promise__item,
+.fit__col{
+  position:relative;
+  background:linear-gradient(180deg, #FFFFFF 0%, #FDFDFE 100%);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, .035),
+    inset 0 1px 0 rgba(255, 255, 255, .9);
+}
+/* 内层细框：与外框形成 5px 的"托盘边" */
+.prod::before,
+.scene2::before,
+.what3__item::before,
+.paincard::before,
+.more4__item::before,
+.deliv__item::before,
+.promise__item::before{
+  content:"";
+  position:absolute;
+  inset:5px;
+  border-radius:calc(var(--r-3) - 5px);
+  border:1px solid rgba(12, 14, 18, .035);
+  pointer-events:none;
+  transition:border-color .3s var(--ease-out-quart);
+}
+.prod:hover::before,
+.scene2:hover::before,
+.what3__item:hover::before,
+.paincard:hover::before,
+.more4__item:hover::before,
+.deliv__item:hover::before{
+  border-color:rgba(0, 113, 227, .12);
+}
+
+/* 价格与场景卡的内边距要跟着内框加一点，避免贴边 */
+.prod{padding:30px 26px 26px;}
+.scene2{padding:30px 26px 26px;}
+.deliv__item{padding:26px 22px;}
+
+/* ============================================================
+   2. 按钮内嵌图标（Button-in-Button）
+   ============================================================ */
+.btn--arrow{
+  padding-right:8px;
+  gap:14px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.btn--arrow .btn__ico{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:30px;height:30px;flex:none;
+  border-radius:999px;
+  background:rgba(255, 255, 255, .18);
+  transition:transform .28s var(--ease-out-quart),
+             background .28s var(--ease-out-quart);
+}
+.btn--arrow .btn__ico svg{
+  width:14px;height:14px;
+  fill:none;stroke:currentColor;stroke-width:1.9;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.btn--arrow:hover .btn__ico{
+  transform:translate(2px, -1px) scale(1.05);
+  background:rgba(255, 255, 255, .28);
+}
+/* 描边按钮里的图标圆要换成淡蓝底 */
+.btn--arrow.btn--ghost .btn__ico{background:rgba(0, 113, 227, .10);}
+.btn--arrow.btn--ghost:hover .btn__ico{background:rgba(0, 113, 227, .18);}
+
+/* ============================================================
+   3. Eyebrow 药丸
+   ============================================================ */
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:5px 12px;
+  border:1px solid rgba(0, 0, 0, .09);
+  border-radius:999px;
+  background:rgba(255, 255, 255, .7);
+  font-size:11px;
+  letter-spacing:.1em;
+  margin-bottom:var(--sp-5);
+}
+.eyebrow::before{
+  content:"" !important;
+  width:5px;height:5px;
+  border-radius:50%;
+  background:#0071E3;
+  margin:0;
+  flex:none;
+}
+/* 深色区里的药丸 */
+.invert .eyebrow{
+  border-color:rgba(255, 255, 255, .18);
+  background:rgba(255, 255, 255, .06);
+  color:rgba(255, 255, 255, .74);
+}
+.invert .eyebrow::before{background:#4CA3F5;}
+
+/* ============================================================
+   4. 极轻噪点（固定层，不影响滚动性能）
+   ============================================================ */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:35;
+  pointer-events:none;
+  opacity:.02;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:140px 140px;
+}
+
+/* ============================================================
+   5. 微调：更"机械"的悬停
+   ============================================================ */
+@media (hover:hover) and (pointer:fine){
+  .prod:hover,
+  .scene2:hover,
+  .what3__item:hover,
+  .paincard:hover,
+  .deliv__item:hover{
+    transform:translateY(-3px);
+    box-shadow:
+      0 18px 40px -30px rgba(12, 14, 18, .45),
+      inset 0 1px 0 rgba(255, 255, 255, .95);
+  }
+  /* 数字与价格：悬停时略微收紧，像仪表回零 */
+  .prod:hover .prod__price b{letter-spacing:-.03em;}
+  .prod__price b{transition:letter-spacing .3s var(--ease-out-quart);}
+}
+
+/* ============================================================
+   6. 减少动态效果 / 低对比偏好
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  .prod, .scene2, .what3__item, .paincard, .deliv__item,
+  .btn--arrow .btn__ico, .prod__price b{transition:none;}
+  .prod:hover, .scene2:hover, .what3__item:hover,
+  .paincard:hover, .deliv__item:hover{transform:none;}
+}

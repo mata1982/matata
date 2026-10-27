@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>常见问题｜本地AI部署多少钱_要不要显卡_数据安全吗 - 玛塔塔 MATATA</title>
+<meta name="description" content="关于本地AI部署的常见疑问：费用构成、硬件配置、数据安全、培训时长、系统对接与后续维护。">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<!-- 社交分享与规范化 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="玛塔塔 MATATA">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="常见问题｜本地AI部署多少钱_要不要显卡_数据安全吗 - 玛塔塔 MATATA">
+<meta property="og:description" content="关于本地AI部署的常见疑问：费用构成、硬件配置、数据安全、培训时长、系统对接与后续维护。">
+<meta property="og:image" content="https://www.matata.cn/assets/img/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://www.matata.cn/faq.html">
+<link rel="canonical" href="https://www.matata.cn/faq.html">
+<link rel="stylesheet" href="assets/css/site-entry.css">
+
+<!-- FAQPage 结构化数据：问答内容与页面可见内容一致 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "大概要花多少钱？钱都花在哪几块？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "费用通常由三部分组成：一次性实施费（调研、部署、知识库建设、培训）+ 硬件（如需）+ 可选的年度服务费。我们会给逐项报价，方案里写清楚做什么、交付什么、多少钱、多久完成，不做打包报价。目前已公开起步价：免费诊断 0 元、单机试点 9,800 元起、企业标准部署 68,000 元起、一体机 39,800 元起，详见「产品与报价」页。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "跟直接买 AI 会员、用公有云工具比，多花的钱值吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "如果您的资料完全公开、只做通用写作，公有云工具更便宜，我们会建议您直接用，不劝您上本地。如果涉及客户资料、报价单、图纸、合同等敏感信息，或者需要它懂您的行业和内部制度，本地方案的价值才出来。该省的钱我们帮您省。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "万一算下来不划算呢？你们会不会硬推？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不会。诊断不收费，《AI 落地机会清单》里会明确写出哪些场景不建议做。如果您的业务目前用 AI 不划算，我们会直接告诉您，并建议先把这笔钱花在别处。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "能不能先小范围试？最小从多大开始？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "可以。最小可以只从一台机器、一个场景开始：单机试点包包含本地模型部署 + 1 个场景跑通 + 2 小时实操培训，周期 3–7 天，适合个人、工作室和 10 人以下小团队。想让一个部门先试，就走试点验证：先用小成本跑通一个场景，用效果对照决定要不要铺开。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "数据放在本地，真的安全吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "部署完成后，模型和数据都在您自己的电脑或服务器上，可以完全断网运行。访问权限可以按人分级，敏感资料可以单独隔离；操作有日志可查，数据可以定期备份。部署文档、网络与端口说明、验收材料都会交付，方便贵单位的信息化与保密流程核对。我们不替客户做合规承诺，只把我们做了什么写清楚。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "你们会拿走我们的数据吗？会拿去训练吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不会。数据存在您自己的硬盘里，我们不带走，也不用于训练。上门或远程排障时如何访问您的设备，会按贵单位的保密流程约定。（待确认：远程访问约定）"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "数据备份和机器故障怎么办？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "交付时会把备份与恢复建议、故障响应机制一起给到：模型、知识库与配置文件按约定备份到您指定的位置；出现故障时远程或上门排查，并保留离线升级方案。（待确认：故障响应时间）"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "员工离职了，知识库和资料还在吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "在。知识库、文档和配置都放在您自己的机器里，是贵公司的资产——不在某个员工的账号里，也不会跟着人走。人可以流动，资料和常见问答留在公司；新同事接手时，我们再做一次交接培训。建议指定一位内部负责人管知识库的更新，这一点会在方案阶段写清楚。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "要不要换电脑？要买显卡吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "看场景。做文字类的本地知识库问答，普通办公电脑加一块合适的中端显卡常常就能起步；要做图像、语音或多人并发使用，我们会给出具体配置建议——包括这笔钱该不该花的实话。您也可以先拿现有设备试点，不用一开始就买机器；不想折腾，还可以选软硬件一体交付：配置、报价、交付清单公开透明，硬件您自采、我们负责装好调好。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "多久能见效？从开始到用上要多久？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "第一个场景通常在 30 天内跑通；单机试点包 3–7 天；多个部门、多个场景一起上的企业标准部署，周期 3–6 周。诊断这一步是 1 次 60 分钟沟通 + 3 个工作日给出《AI 落地机会清单》。见效要看场景是否选对——这也是我们坚持先诊断、而不是先卖方案的原因。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "能跟我们现有的系统连起来吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "常见的企业微信、钉钉、飞书、OA、ERP、网站、客服系统，我们都有对接经验。能不能连、连到什么程度，会在方案阶段明确写清楚：能做的写进方案，不能做的也说清楚，不做含糊承诺。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "你们是不是就把开源模型装一下？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "装模型只是第一步。真正花时间的是：选对场景、把资料整理成它读得懂的知识（本地知识库）、把权限和流程设计好、把您的人培训到会用、后续持续维护。我们交付的是用起来的结果，不是装好的软件。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "我们员工不懂技术，学得会吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "培训按人分层：管理层听能干什么、值不值得；业务骨干学怎么用、怎么改；一线员工只学每天点两下。多数员工在一次 2 小时的实操后就能上手。交付里含操作手册与培训记录，验收标准包含您的员工能独立操作。学不会是我们的培训没做到位，不额外收费重训。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "部署完你们就不管了吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "可以选择不管：一次性交付，部署文档、操作手册、维护手册齐全，您自己的团队可以维护。也可以选择年度陪跑：季度复盘报告、知识库更新维护、新员工培训、故障响应（远程 / 上门）、模型与工具升级跟进。我们建议至少留一年的轻量陪跑——AI 用起来之后，需求一定会变。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "公司没有 IT，日常谁来维护？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "日常使用不需要技术团队：员工按手册操作，常见问题有一份维护手册可查，也可以随时问我们。需要定期做的事——知识库更新、模型升级、巡检——可以放进年度陪跑由我们承担；您自己有 IT 同事的话，我们会在验收时把部署文档和维护手册交接给他。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "你们只在北京服务吗？外地后续有人管吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "（待确认：服务半径）示例口径：北京及周边可上门，全国以远程实施为主、必要时出差。后续维护按同样的方式安排：季度复盘、知识库更新与人员培训以远程为主，需要到场的再上门。"
+      }
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="assets/css/redesign.css">
+</head>
+<body>
+
+<!-- ============================ 顶部导航 ============================ -->
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="logo" href="index.html" aria-label="玛塔塔科技 MATATA 首页">
+      <span class="logo__mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="100%" height="100%"><rect width="64" height="64" rx="15" fill="#1246C8"/><path d="M32 12 L53 23 L32 34 L11 23 Z" fill="#fff"/>
+            <path d="M11 31 L32 42 L53 31" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".82"/>
+            <path d="M11 40.5 L32 51.5 L53 40.5" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".52"/></svg>
+      </span>
+      <span class="logo__text">
+        <span class="logo__cn">玛塔塔科技</span>
+        <span class="logo__en">MATATA</span>
+      </span>
+    </a>
+    <nav class="nav__links" aria-label="主导航">
+        <a href="pricing.html">产品与报价</a>
+      <a href="services.html">服务流程</a>
+      <a href="solutions.html">解决方案</a>
+      <a href="cases.html">客户案例</a>
+      <a href="about.html">关于我们</a>
+      <a href="faq.html" class="is-active" aria-current="page">常见问题</a>
+          <a href="login.html" class="nav__login">会员登录</a>
+    </nav>
+    <a class="btn btn--cta btn--sm nav__cta" href="contact.html">预约免费诊断</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================ 页面头部 ============================ -->
+<section class="pagehead">
+  <div class="wrap">
+    <nav class="pagehead__crumbs" aria-label="面包屑">
+      <a href="index.html">首页</a><span aria-hidden="true">/</span><span class="pagehead__current">常见问题</span>
+    </nav>
+    <h1>本地 AI 部署的钱、数据、周期和人，一次说清</h1>
+    <p class="lead">16 个问题分成四组：钱与投入、数据与安全、实施与周期、使用与维护。答案都用具体的做法和数字回答，能做的说能做，不能做的也写出来。</p>
+  </div>
+</section>
+
+<!-- ============================ 分组锚点导航 ============================ -->
+<nav class="anchors" aria-label="常见问题分组">
+  <div class="wrap anchors__inner">
+    <a href="#money">钱与投入</a>
+    <a href="#security">数据与安全</a>
+    <a href="#delivery">实施与周期</a>
+    <a href="#usage">使用与维护</a>
+    <a href="#more">还是没找到？</a>
+  </div>
+</nav>
+
+<!-- ============================ 第 1 组：钱与投入 ============================ -->
+<section class="section" id="money">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">第 1 组 · 钱与投入</span>
+      <h2 class="h2">要花多少钱，这笔钱值不值</h2>
+      <p class="lead">费用怎么组成、跟公有云工具比贵在哪、万一算不过来怎么办——先把这三件事说清楚，再谈方案。</p>
+    </div>
+
+    <div class="faq">
+      <details open>
+        <summary>大概要花多少钱？钱都花在哪几块？</summary>
+        <div class="faq__body">
+          费用通常由三部分组成：一次性实施费（调研、部署、知识库建设、培训）+ 硬件（如需）+ 可选的年度服务费。我们会给逐项报价，方案里写清楚做什么、交付什么、多少钱、多久完成，不做打包报价。
+          目前已公开起步价：免费诊断 0 元、单机试点 9,800 元起、企业标准部署 68,000 元起、一体机 39,800 元起，详见「产品与报价」页。
+        </div>
+      </details>
+      <details>
+        <summary>跟直接买 AI 会员、用公有云工具比，多花的钱值吗？</summary>
+        <div class="faq__body">
+          如果您的资料完全公开、只做通用写作，公有云工具更便宜，我们会建议您直接用，不劝您上本地。如果涉及客户资料、报价单、图纸、合同等敏感信息，或者需要它懂您的行业和内部制度，本地方案的价值才出来。该省的钱我们帮您省。
+        </div>
+      </details>
+      <details>
+        <summary>万一算下来不划算呢？你们会不会硬推？</summary>
+        <div class="faq__body">
+          不会。诊断不收费，《AI 落地机会清单》里会明确写出哪些场景不建议做。如果您的业务目前用 AI 不划算，我们会直接告诉您，并建议先把这笔钱花在别处。
+        </div>
+      </details>
+      <details>
+        <summary>能不能先小范围试？最小从多大开始？</summary>
+        <div class="faq__body">
+          可以。最小可以只从一台机器、一个场景开始：单机试点包包含本地模型部署 + 1 个场景跑通 + 2 小时实操培训，周期 3–7 天，适合个人、工作室和 10 人以下小团队。想让一个部门先试，就走试点验证：先用小成本跑通一个场景，用效果对照决定要不要铺开。
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 第 2 组：数据与安全 ============================ -->
+<section class="section section--alt" id="security">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">第 2 组 · 数据与安全</span>
+      <h2 class="h2">数据放在哪，谁能看，出事怎么办</h2>
+      <p class="lead">这一组是客户问得最多的。我们只写我们做了什么，不替客户做合规承诺。</p>
+    </div>
+
+    <div class="faq">
+      <details>
+        <summary>数据放在本地，真的安全吗？</summary>
+        <div class="faq__body">
+          部署完成后，模型和数据都在您自己的电脑或服务器上，可以完全断网运行。访问权限可以按人分级，敏感资料可以单独隔离；操作有日志可查，数据可以定期备份。部署文档、网络与端口说明、验收材料都会交付，方便贵单位的信息化与保密流程核对。我们不替客户做合规承诺，只把我们做了什么写清楚。
+        </div>
+      </details>
+      <details>
+        <summary>你们会拿走我们的数据吗？会拿去训练吗？</summary>
+        <div class="faq__body">
+          不会。数据存在您自己的硬盘里，我们不带走，也不用于训练。上门或远程排障时如何访问您的设备，会按贵单位的保密流程约定。
+          <span class="tbd">待确认：远程访问约定</span>
+        </div>
+      </details>
+      <details>
+        <summary>数据备份和机器故障怎么办？</summary>
+        <div class="faq__body">
+          交付时会把备份与恢复建议、故障响应机制一起给到：模型、知识库与配置文件按约定备份到您指定的位置；出现故障时远程或上门排查，并保留离线升级方案。
+          <span class="tbd">待确认：故障响应时间</span>
+        </div>
+      </details>
+      <details>
+        <summary>员工离职了，知识库和资料还在吗？</summary>
+        <div class="faq__body">
+          在。知识库、文档和配置都放在您自己的机器里，是贵公司的资产——不在某个员工的账号里，也不会跟着人走。人可以流动，资料和常见问答留在公司；新同事接手时，我们再做一次交接培训。建议指定一位内部负责人管知识库的更新，这一点会在方案阶段写清楚。
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 第 3 组：实施与周期 ============================ -->
+<section class="section" id="delivery">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">第 3 组 · 实施与周期</span>
+      <h2 class="h2">要不要买机器，多久能用上</h2>
+      <p class="lead">从一台机器到一个部门，时间、周期和交付物都写在明处；对接不了的系统，我们也会当场说清楚。</p>
+    </div>
+
+    <div class="faq">
+      <details>
+        <summary>要不要换电脑？要买显卡吗？</summary>
+        <div class="faq__body">
+          看场景。做文字类的本地知识库问答，普通办公电脑加一块合适的中端显卡常常就能起步；要做图像、语音或多人并发使用，我们会给出具体配置建议——包括这笔钱该不该花的实话。您也可以先拿现有设备试点，不用一开始就买机器；不想折腾，还可以选软硬件一体交付：配置、报价、交付清单公开透明，硬件您自采、我们负责装好调好。
+        </div>
+      </details>
+      <details>
+        <summary>多久能见效？从开始到用上要多久？</summary>
+        <div class="faq__body">
+          第一个场景通常在 30 天内跑通；单机试点包 3–7 天；多个部门、多个场景一起上的企业标准部署，周期 3–6 周。诊断这一步是 1 次 60 分钟沟通 + 3 个工作日给出《AI 落地机会清单》。见效要看场景是否选对——这也是我们坚持先诊断、而不是先卖方案的原因。
+        </div>
+      </details>
+      <details>
+        <summary>能跟我们现有的系统连起来吗？</summary>
+        <div class="faq__body">
+          常见的企业微信、钉钉、飞书、OA、ERP、网站、客服系统，我们都有对接经验。能不能连、连到什么程度，会在方案阶段明确写清楚：能做的写进方案，不能做的也说清楚，不做含糊承诺。
+        </div>
+      </details>
+      <details>
+        <summary>你们是不是就把开源模型装一下？</summary>
+        <div class="faq__body">
+          装模型只是第一步。真正花时间的是：选对场景、把资料整理成它读得懂的知识（本地知识库）、把权限和流程设计好、把您的人培训到会用、后续持续维护。我们交付的是用起来的结果，不是装好的软件。
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 第 4 组：使用与维护 ============================ -->
+<section class="section section--alt" id="usage">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">第 4 组 · 使用与维护</span>
+      <h2 class="h2">人学不学得会，上线之后谁管</h2>
+      <p class="lead">工具只有被用起来才算数——所以我们把培训、手册和后续维护一起算进交付里。</p>
+    </div>
+
+    <div class="faq">
+      <details>
+        <summary>我们员工不懂技术，学得会吗？</summary>
+        <div class="faq__body">
+          培训按人分层：管理层听能干什么、值不值得；业务骨干学怎么用、怎么改；一线员工只学每天点两下。多数员工在一次 2 小时的实操后就能上手。交付里含操作手册与培训记录，验收标准包含您的员工能独立操作。学不会是我们的培训没做到位，不额外收费重训。
+        </div>
+      </details>
+      <details>
+        <summary>部署完你们就不管了吗？</summary>
+        <div class="faq__body">
+          可以选择不管：一次性交付，部署文档、操作手册、维护手册齐全，您自己的团队可以维护。也可以选择年度陪跑：季度复盘报告、知识库更新维护、新员工培训、故障响应（远程 / 上门）、模型与工具升级跟进。我们建议至少留一年的轻量陪跑——AI 用起来之后，需求一定会变。
+        </div>
+      </details>
+      <details>
+        <summary>公司没有 IT，日常谁来维护？</summary>
+        <div class="faq__body">
+          日常使用不需要技术团队：员工按手册操作，常见问题有一份维护手册可查，也可以随时问我们。需要定期做的事——知识库更新、模型升级、巡检——可以放进年度陪跑由我们承担；您自己有 IT 同事的话，我们会在验收时把部署文档和维护手册交接给他。
+        </div>
+      </details>
+      <details>
+        <summary>你们只在北京服务吗？外地后续有人管吗？</summary>
+        <div class="faq__body">
+          <span class="tbd">待确认：服务半径</span>
+          示例口径：北京及周边可上门，全国以远程实施为主、必要时出差。后续维护按同样的方式安排：季度复盘、知识库更新与人员培训以远程为主，需要到场的再上门。
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 没找到？ → 底部 CTA ============================ -->
+<section class="section" id="more">
+  <div class="wrap">
+    <div class="cta-panel">
+      <span class="eyebrow eyebrow--light">没找到您的问题？</span>
+      <h2>直接问我们，比翻十页说明快</h2>
+      <p style="margin-top:var(--sp-5);">
+        把您现在最头疼的那件事写给我们。一次 60 分钟的免费诊断，我们会给您一份《AI 落地机会清单》：哪些场景值得做、大概要投入多少、能省下什么。
+        不合适，我们会直接告诉您。<strong>不收费，也不推销。</strong>
+      </p>
+      <ul style="margin-top:var(--sp-6);font-size:var(--fs-sm);line-height:2.1;padding-left:1.1em;">
+        <li>不接触您的敏感数据，也能先把可行性说清楚</li>
+        <li>清单您可以拿去比价，我们不怕比</li>
+        <li>1 个工作日内有人联系您，先约时间</li>
+      </ul>
+      <div class="btn-row" style="margin-top:var(--sp-7);">
+        <a class="btn btn--cta" href="contact.html#form">预约免费诊断 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ 页脚 ============================ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <span class="logo__mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" width="100%" height="100%"><rect width="64" height="64" rx="15" fill="#1246C8"/><path d="M32 12 L53 23 L32 34 L11 23 Z" fill="#fff"/>
+            <path d="M11 31 L32 42 L53 31" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".82"/>
+            <path d="M11 40.5 L32 51.5 L53 40.5" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".52"/></svg>
+          </span>
+          <span class="logo__text"><span class="logo__cn">玛塔塔科技</span><span class="logo__en">MATATA</span></span>
+        </div>
+        <p style="line-height:1.9;max-width:30ch;">北京玛塔塔科技有限公司<br>本地 AI 接入与落地服务<br>让 AI 真正在您自己的电脑上跑起来</p>
+      </div>
+      <div>
+        <h4>产品与报价</h4>
+        <ul>
+          <li><a href="pricing.html">报价总览</a></li>
+          <li><a href="pricing.html#services">免费现状诊断</a></li>
+          <li><a href="pricing.html#services">单机试点包</a></li>
+          <li><a href="pricing.html#services">企业标准部署</a></li>
+          <li><a href="pricing.html#care">定制开发</a></li>
+          <li><a href="pricing.html#care">年度托管</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>解决方案</h4>
+        <ul>
+          <li><a href="solutions.html#scenes">按场景看</a></li>
+          <li><a href="solutions.html#industries">按行业看</a></li>
+          <li><a href="industry-manufacturing.html">制造业</a></li>
+          <li><a href="industry-trade.html">外贸与跨境</a></li>
+          <li><a href="industry-law.html">律师事务所</a></li>          <li><a href="industry-finance.html">财务与代账</a></li>
+          <li><a href="industry-logistics.html">物流与仓储</a></li>
+          <li><a href="industry-education.html">教育与培训</a></li>
+          <li><a href="commitment.html">服务承诺</a></li>
+          <li><a href="insights.html">行业观点</a></li>
+          <li><a href="solutions.html#ind-logistics">物流仓储</a></li>
+          <li><a href="solutions.html#ind-legal">专业服务</a></li>
+          <li><a href="enterprise.html">政企内网方案</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>联系我们</h4>
+        <ul>
+          <li>电话：<span class="tbd" data-contact="phone">待确认</span></li>
+          <li>商务微信：<span class="tbd" data-contact="wechat">待确认</span></li>
+          <li>邮箱：<span class="tbd" data-contact="email">待确认</span></li>
+          <li>地址：<span class="tbd" data-contact="address">待确认</span></li>
+          <li>服务时间：<span data-contact="hours">周一至周五 9:00–18:00</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 北京玛塔塔科技有限公司 保留所有权利</span>
+      <span><span data-contact="icp"></span><span class="sep-icp">　｜　</span><a href="privacy.html">隐私政策</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/motion-site.js"></script>
+</body>
+</html>

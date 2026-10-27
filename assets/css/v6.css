@@ -1,0 +1,356 @@
+/* ============================================================
+   玛塔塔 MATATA · 设计升级 v6（"精密仪器 / Sealed Instrument"）
+   ============================================================
+   加载顺序：必须在 home.css / site-v4.css 之后（本文件最后声明即覆盖）。
+     · 首页：index.html 在 home.css 之后单独 <link> 本文件
+     · 内页：site-v4.css 末尾 @import 本文件
+
+   这一版解决五个具体问题（都对得上实际观察，不是空泛的"美化"）：
+   1. 首屏像一团紫雾，没有结构      → 换成等高线场（见 shader-bg.js v6）
+   2. 中文大字用了 -.045em 负字距    → 中文不该照搬拉丁文排版习惯，改为 -.01em
+   3. 首屏中部空、层级松             → 加状态徽章 + 信任条，收紧节奏
+   4. 按钮是扁平圆角块               → 加内高光、渐变与分层阴影
+   5. 首屏入场动画实际是死代码       → 改用纯 CSS keyframes，不依赖 JS 类
+   ============================================================ */
+
+/* ============================================================
+   1. 排版：中文友好的字号与字距
+   ============================================================ */
+:root{
+  /* 状态色（此前只在组件里引用过，令牌缺失） */
+  --ok:#3DD68C;
+  --warn:#E8B04B;
+
+  /* 流体字号：小屏不再压成一行挤不下，大屏保留气势 */
+  --fs-hero:clamp(34px, 5.0vw, 74px);
+  --fs-display:clamp(30px, 3.5vw, 54px);
+  --fs-h2:clamp(26px, 2.55vw, 40px);
+
+  /* 中文正文与标题几乎不需要负字距；拉丁文才需要。
+     -.045em 会让汉字互相挤压，是这次要修的核心排版问题。 */
+  --ls-hero:-.01em;
+  --ls-display:-.012em;
+  --ls-h2:-.015em;
+
+  /* 中文行高比拉丁文要紧一点，但不能到 1.06（汉字有完整字面） */
+  --lh-hero:1.16;
+  --lh-title:1.3;
+}
+
+/* 首屏标题：明确指定，避免被上游 --lh-tight 影响 */
+.hero h1{
+  font-size:var(--fs-hero);
+  line-height:var(--lh-hero);
+  letter-spacing:var(--ls-hero);
+  font-weight:700;              /* 800 在 Windows 上会被合成加粗，边缘发虚 */
+  text-wrap:balance;
+  margin:0;
+}
+.hero h1 em{
+  font-style:normal;
+  color:var(--accent-hi);
+  /* 极轻的外发光：像仪器的背光刻度，而不是廉价霓虹 */
+  text-shadow:0 0 32px rgba(110,139,255,.26);
+}
+
+/* 内页大标题同步收紧字距 */
+.pagehead h1{letter-spacing:var(--ls-display);line-height:1.16;}
+.h2,.section-head h2{letter-spacing:var(--ls-h2);}
+
+/* ============================================================
+   2. 首屏：状态徽章 / 副标 / 信任条
+   ============================================================ */
+.hero__inner{text-align:center;}
+
+.hero__status{
+  display:inline-flex;align-items:center;gap:9px;
+  margin:0 0 var(--sp-6);
+  padding:7px 16px 7px 13px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  background:rgba(255,255,255,.045);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+  font-size:var(--fs-xs);
+  letter-spacing:.14em;
+  color:rgba(255,255,255,.72);
+}
+/* 呼吸小灯：与站内"本地运行中"的语义一致 */
+.hero__pulse{
+  width:6px;height:6px;border-radius:50%;flex:none;
+  background:var(--ok);
+  animation:pulseRing 2.8s cubic-bezier(.16,1,.3,1) infinite;
+}
+@keyframes pulseRing{
+  0%  {box-shadow:0 0 0 0 rgba(61,214,140,.55);}
+  70% {box-shadow:0 0 0 7px rgba(61,214,140,0);}
+  100%{box-shadow:0 0 0 0 rgba(61,214,140,0);}
+}
+
+.hero__sub{
+  margin:var(--sp-6) auto 0;
+  max-width:30em;
+  font-size:clamp(15px,1.1vw,17.5px);
+  line-height:1.8;
+  color:rgba(255,255,255,.62);
+  text-wrap:balance;
+}
+.hero__sub span{display:block;}
+
+.hero__cta-row{
+  margin-top:var(--sp-8);
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:center;
+}
+
+/* 信任条：三条最短承诺，替代原来的一长串副标 */
+.hero__proof{
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:10px 26px;
+  margin:var(--sp-7) 0 0;padding:0;list-style:none;
+}
+.hero__proof li{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:var(--fs-sm);
+  color:rgba(255,255,255,.5);
+}
+.hero__proof li::before{
+  content:"";flex:none;
+  width:5px;height:5px;border-radius:50%;
+  background:var(--ok);
+  box-shadow:0 0 10px rgba(61,214,140,.65);
+}
+
+/* ============================================================
+   3. 首屏背景层：叠一层极淡工程网格，强化"仪器"质感
+   ============================================================ */
+.shader{background:
+  radial-gradient(58% 52% at 50% 30%, rgba(76,111,255,.20), transparent 72%),
+  radial-gradient(40% 40% at 82% 10%, rgba(40,140,255,.10), transparent 74%),
+  linear-gradient(180deg,#0A0C14 0%,#08090C 74%);
+}
+
+.shader__grid{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px),
+    linear-gradient(0deg,  rgba(255,255,255,.055) 1px, transparent 1px);
+  background-size:76px 76px;
+  /* 只在中部可见，边缘化掉，避免整屏棋盘感 */
+  -webkit-mask-image:radial-gradient(56% 54% at 50% 44%, #000 0%, transparent 76%);
+  mask-image:radial-gradient(56% 54% at 50% 44%, #000 0%, transparent 76%);
+  opacity:.8;
+}
+
+/* 压暗层重做：中部给文字让出对比度，边缘保留等高线细节 */
+.shader__veil{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(48% 44% at 50% 46%, rgba(8,9,12,.66), rgba(8,9,12,0) 74%),
+    linear-gradient(180deg, rgba(8,9,12,.52) 0%, rgba(8,9,12,.14) 42%, rgba(8,9,12,.92) 100%);
+}
+
+/* ============================================================
+   4. 按钮工艺：内高光 + 渐变 + 分层阴影
+   ============================================================ */
+.btn--lg{
+  min-height:54px;
+  padding:0 30px;
+  font-size:16px;
+  border-radius:calc(var(--r-2) + 2px);
+}
+
+.btn--primary{
+  background:linear-gradient(180deg, #6E8BFF 0%, #4C6FFF 48%, #3D5AE0 100%);
+  border-color:rgba(255,255,255,.14);
+  color:#fff;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.26),
+    0 14px 36px -14px rgba(76,111,255,.85);
+}
+.btn--primary:hover{
+  background:linear-gradient(180deg, #7E99FF 0%, #5C7CFF 48%, #4A66F0 100%);
+  color:#fff;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.32),
+    0 18px 44px -14px rgba(76,111,255,.95);
+}
+
+/* 首屏玻璃质次按钮 */
+.hero .btn--ghost{
+  background:rgba(255,255,255,.055);
+  border-color:rgba(255,255,255,.20);
+  -webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
+}
+.hero .btn--ghost:hover{
+  background:rgba(255,255,255,.11);
+  border-color:rgba(255,255,255,.30);
+}
+
+/* ============================================================
+   5. 首屏入场：纯 CSS keyframes（修掉失效的 .js-motion 逻辑）
+   ------------------------------------------------------------
+   之前用 .js-motion 这个类做门控，但换动效引擎后已无脚本添加该类，
+   入场动画等于没有。改成 keyframes 后：不依赖任何 JS，
+   JS 失败也照样有动画；减少动态效果时整段不生效。
+   ============================================================ */
+@media (prefers-reduced-motion:no-preference){
+  .hero__inner > *{
+    animation:heroIn 920ms var(--ease-out-expo) both;
+  }
+  .hero__inner > *:nth-child(1){animation-delay:70ms;}
+  .hero__inner > *:nth-child(2){animation-delay:180ms;}
+  .hero__inner > *:nth-child(3){animation-delay:320ms;}
+  .hero__inner > *:nth-child(4){animation-delay:440ms;}
+  .hero__inner > *:nth-child(5){animation-delay:560ms;}
+
+  .hero__cue{animation:cueIn 760ms var(--ease-out-quart) 1000ms both;}
+}
+@keyframes heroIn{
+  from{opacity:0;transform:translateY(22px);filter:blur(9px);}
+  to  {opacity:1;transform:translateY(0);      filter:blur(0);}
+}
+@keyframes cueIn{
+  from{opacity:0;transform:translateY(-6px);}
+  to  {opacity:1;transform:translateY(0);}
+}
+
+/* 首屏向下指示：更轻，不要抢注意力 */
+.hero__cue-text{letter-spacing:.24em;color:rgba(255,255,255,.3);}
+
+/* ============================================================
+   6. 区块衔接：首屏下沿的一道细光，收住画面
+   ============================================================ */
+#machine{position:relative;}
+#machine::before{
+  content:"";position:absolute;top:0;left:50%;
+  transform:translateX(-50%);
+  width:min(680px,72%);height:1px;
+  background:linear-gradient(90deg, transparent, rgba(110,139,255,.45), transparent);
+}
+
+/* ============================================================
+   7. 导航细节
+   ============================================================ */
+.nav__inner{min-height:72px;}
+.nav a{transition:color var(--dur-hover,180ms) var(--ease-out-quart);}
+
+/* ============================================================
+   7.1 移动端导航（此前完全缺失：窄屏只有 LOGO 和 CTA，进不了内页）
+   ------------------------------------------------------------
+   按钮与面板由 assets/js/nav.js 运行时创建，只有脚本成功后
+   html 才获得 .has-nav-js，CSS 据此显示按钮 —— 无 JS 时不会出现
+   一个点了没反应的死汉堡。
+   ============================================================ */
+.nav__burger{
+  display:none;
+  width:44px;height:44px;flex:none;
+  align-items:center;justify-content:center;flex-direction:column;gap:5px;
+  padding:0;margin-left:auto;
+  background:transparent;
+  border:1px solid var(--line-strong);
+  border-radius:var(--r-2);
+  cursor:pointer;
+  transition:border-color var(--dur-hover) var(--ease-out-quart),background var(--dur-hover) var(--ease-out-quart);
+}
+.nav__burger:hover{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.05);}
+.nav__burger span{
+  display:block;width:18px;height:1.5px;border-radius:2px;
+  background:var(--t-1);
+  transition:transform 280ms var(--ease-out-quart),opacity 180ms linear;
+}
+.nav__burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav__burger[aria-expanded="true"] span:nth-child(2){opacity:0;}
+.nav__burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+.nav__panel{
+  position:absolute;left:0;right:0;top:100%;
+  background:#0A0C11;
+  border-bottom:1px solid var(--line);
+  padding:var(--sp-4);
+  z-index:59;
+  opacity:0;transform:translateY(-8px);
+  transition:opacity 220ms var(--ease-out-quart),transform 280ms var(--ease-out-quart);
+}
+.nav__panel.is-open{opacity:1;transform:none;}
+.nav__panel nav{display:flex;flex-direction:column;gap:2px;}
+.nav__panel nav a{
+  display:block;padding:14px 12px;
+  border-radius:var(--r-2);
+  color:var(--t-2);font-size:16px;text-decoration:none;
+}
+.nav__panel nav a:hover,
+.nav__panel nav a.is-active{color:var(--t-1);background:rgba(255,255,255,.05);}
+.nav__panel .nav__panel-cta{
+  margin-top:var(--sp-3);
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+}
+
+/* 遮罩：盖住菜单以下的页面内容，避免下方按钮与面板内容打架
+   注意：.nav 带 backdrop-filter，会成为 fixed 后代的包含块，
+   所以这里用 absolute + top:100% + 100vh，不能写 fixed。 */
+.nav__scrim{
+  position:absolute;left:0;right:0;top:100%;
+  height:100vh;height:100dvh;
+  background:rgba(6,7,10,.66);
+  z-index:58;
+  opacity:0;
+  transition:opacity 240ms var(--ease-out-quart);
+}
+.nav__scrim.is-open{opacity:1;}
+
+@media (max-width:900px){
+  .has-nav-js .nav__burger{display:flex;}
+  .has-nav-js .nav__links{display:none;}
+  .has-nav-js .nav__cta{display:none;}
+  html.nav-open{overflow:hidden;}
+}
+
+/* 键盘可达性：焦点环 */
+a:focus-visible,button:focus-visible,summary:focus-visible,
+input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:2px solid var(--accent-hi);
+  outline-offset:3px;
+  border-radius:4px;
+}
+
+/* ============================================================
+   7.2 内页 CTA 按钮与首页统一工艺（内页用的是 btn--cta）
+   ============================================================ */
+.btn--cta{
+  background:linear-gradient(180deg, #6E8BFF 0%, #4C6FFF 48%, #3D5AE0 100%);
+  border-color:rgba(255,255,255,.14);
+  color:#fff;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.26),
+    0 14px 36px -14px rgba(76,111,255,.85);
+}
+.btn--cta:hover{
+  background:linear-gradient(180deg, #7E99FF 0%, #5C7CFF 48%, #4A66F0 100%);
+  color:#fff;
+}
+
+/* ============================================================
+   8. 窄屏
+   ============================================================ */
+@media (max-width:720px){
+  .hero__status{font-size:11px;letter-spacing:.1em;padding:6px 13px 6px 11px;}
+  .hero__sub{max-width:22em;}
+  .hero__cta-row{margin-top:var(--sp-7);}
+  .hero__proof{gap:8px 18px;margin-top:var(--sp-6);}
+  .hero__proof li{font-size:var(--fs-xs);}
+  .btn--lg{min-height:50px;padding:0 22px;font-size:15px;width:100%;}
+  .hero__cta-row{width:100%;}
+  .shader__grid{background-size:52px 52px;}
+}
+
+/* ============================================================
+   9. 减少动态效果
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  .hero__inner > *,.hero__cue{animation:none !important;opacity:1 !important;transform:none !important;filter:none !important;}
+  .hero__pulse{animation:none;}
+  .hero__pulse{box-shadow:0 0 0 3px rgba(61,214,140,.18);}
+}

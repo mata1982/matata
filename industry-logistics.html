@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>物流仓储 AI 本地部署｜单据录入与调度问答，数据不出内网 - 玛塔塔 MATATA</title>
+<meta name="description" content="面向物流、快递、仓储企业的本地 AI：运单与回单录入、调度与异常处理问答、对账差异核对。模型装在调度室电脑，客户与报价数据不出内网。试点 9,800 元起。">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="玛塔塔 MATATA">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="物流仓储 AI 本地部署｜单据录入与调度问答">
+<meta property="og:description" content="运单回单录入、异常件处理问答、对账核对。客户与报价留在自己机器里。">
+<meta property="og:image" content="https://www.matata.cn/assets/img/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://www.matata.cn/industry-logistics.html">
+<link rel="canonical" href="https://www.matata.cn/industry-logistics.html">
+<link rel="stylesheet" href="assets/css/site-entry.css">
+<link rel="stylesheet" href="assets/css/pricing.css">
+<link rel="stylesheet" href="assets/css/industry.css">
+<link rel="stylesheet" href="assets/css/redesign.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="logo" href="index.html" aria-label="玛塔塔科技 MATATA 首页">
+      <span class="logo__mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="100%" height="100%"><rect width="64" height="64" rx="15" fill="#1246C8"/><path d="M32 12 L53 23 L32 34 L11 23 Z" fill="#fff"/>
+            <path d="M11 31 L32 42 L53 31" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".82"/>
+            <path d="M11 40.5 L32 51.5 L53 40.5" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".52"/></svg>
+      </span>
+      <span class="logo__text">
+        <span class="logo__cn">玛塔塔科技</span>
+        <span class="logo__en">MATATA</span>
+      </span>
+    </a>
+    <nav class="nav__links" aria-label="主导航">
+      <a href="pricing.html">产品与报价</a>
+      <a href="services.html">服务流程</a>
+      <a href="solutions.html" class="is-active">解决方案</a>
+      <a href="enterprise.html">政企内网</a>
+      <a href="cases.html">客户案例</a>
+      <a href="about.html">关于我们</a>
+          <a href="login.html" class="nav__login">会员登录</a>
+    </nav>
+    <a class="btn btn--primary btn--sm nav__cta" href="contact.html">预约免费诊断</a>
+  </div>
+</header>
+
+<main>
+
+<section class="pagehead">
+  <div class="wrap">
+    <div class="pagehead__crumbs">
+      <a href="index.html">首页</a><span>/</span><a href="solutions.html">解决方案</a><span>/</span><span class="pagehead__current">物流与仓储</span>
+    </div>
+    <h1>物流的 AI，装在调度室的电脑上</h1>
+    <p class="lead">运单、回单、客户与报价信息不出内网。单据录入省人，老调度的经验能查得到。</p>
+  </div>
+</section>
+
+<!-- 痛点 -->
+<section class="section section--tight">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">你们可能正在遇到</span>
+      <h2>三件事，物流与仓储最普遍</h2>
+    </div>
+    <div class="paincards">
+      <article class="paincard">
+        <span class="paincard__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg></span>
+        <h3>单据多、录入慢</h3>
+        <p>运单、回单、对账单量大且格式杂，一个人一天处理不了多少。</p>
+      </article>
+      <article class="paincard">
+        <span class="paincard__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <h3>调度靠老员工</h3>
+        <p>异常件怎么处理全靠经验，新人上手慢，一换人就掉链子。</p>
+      </article>
+      <article class="paincard">
+        <span class="paincard__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.2-2.9 7.4-7 9-4.1-1.6-7-4.8-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <h3>客户与价格敏感</h3>
+        <p>客户名单和报价体系是命脉，传出去就没底牌了。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 场景 -->
+<section class="section section--alt" id="scenes">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">能马上用的场景</span>
+      <h2>四个场景，按见效快慢排序</h2>
+      <p>不要一次全上。先做第一个，跑通了再扩展。投入是「我方实施工时」，不含贵方配合时间。</p>
+    </div>
+    <div class="scenes">
+      <article class="scene2">
+        <header class="scene2__head">
+          <span class="scene2__no">01</span>
+          <h3>运单与回单录入</h3>
+          <span class="badge badge--accent">见效最快</span>
+        </header>
+        <dl class="scene2__rows">
+          <div><dt>现在</dt><dd>手工敲单号、重量、地址、费用</dd></div>
+          <div><dt>AI 能做</dt><dd>从图片、PDF 提取关键字段，<b>人工复核</b>后导出</dd></div>
+          <div><dt>投入</dt><dd>4–6 人天</dd></div>
+          <div><dt>交付</dt><dd>提取模板 + 导出表格（可对接 TMS）</dd></div>
+        </dl>
+      </article>
+      <article class="scene2">
+        <header class="scene2__head">
+          <span class="scene2__no">02</span>
+          <h3>调度与异常处理问答</h3>
+        </header>
+        <dl class="scene2__rows">
+          <div><dt>现在</dt><dd>新人遇到异常件只能问老调度</dd></div>
+          <div><dt>AI 能做</dt><dd>异常类型与处理流程入库，按现象检索处理办法</dd></div>
+          <div><dt>投入</dt><dd>3 人天</dd></div>
+          <div><dt>交付</dt><dd>处理流程库 + 检索入口</dd></div>
+        </dl>
+      </article>
+      <article class="scene2">
+        <header class="scene2__head">
+          <span class="scene2__no">03</span>
+          <h3>对账与费用核对</h3>
+        </header>
+        <dl class="scene2__rows">
+          <div><dt>现在</dt><dd>两份对账单逐行比，差异靠肉眼找</dd></div>
+          <div><dt>AI 能做</dt><dd>提取双方数据，标出金额与单号差异项</dd></div>
+          <div><dt>投入</dt><dd>3–5 人天</dd></div>
+          <div><dt>交付</dt><dd>对账模板 + 差异报告</dd></div>
+        </dl>
+      </article>
+      <article class="scene2">
+        <header class="scene2__head">
+          <span class="scene2__no">04</span>
+          <h3>客户报价查询</h3>
+        </header>
+        <dl class="scene2__rows">
+          <div><dt>现在</dt><dd>翻历史报价单，凭记忆报价格</dd></div>
+          <div><dt>AI 能做</dt><dd>按客户、线路、重量区间检索历史报价，附出处</dd></div>
+          <div><dt>投入</dt><dd>3 人天</dd></div>
+          <div><dt>交付</dt><dd>报价库 + 查询入口</dd></div>
+        </dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 为什么本地 -->
+<section class="section">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">为什么必须本地</span>
+      <h2>三个硬约束</h2>
+    </div>
+    <div class="why-local">
+      <div class="why-local__item">
+        <b>客户与报价不能外流</b>
+        <p>客户名单、线路价格是最核心的资产。装在自己机器里，才谈得上有底牌。</p>
+      </div>
+      <div class="why-local__item">
+        <b>现场网络不稳定</b>
+        <p>仓库、分拨现场经常没有稳定外网，云端工具直接不可用；本地部署断网照跑。</p>
+      </div>
+      <div class="why-local__item">
+        <b>单据量大，成本敏感</b>
+        <p>按次调用公有云，量越大越贵；本地一次投入，处理多少单都不额外计费。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" id="start">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">怎么开始</span>
+      <h2>三步，每一步都能停下来</h2>
+    </div>
+    <div class="prods prods--3">
+      <article class="prod">
+        <header class="prod__head">
+          <span class="badge badge--ok">0 元 · 不推销</span>
+          <h3>免费现状诊断</h3>
+          <p class="prod__for">先定哪类案子做试点</p>
+        </header>
+        <div class="prod__price"><b>¥0</b></div>
+        <ul class="prod__list">
+          <li>60 分钟流程访谈</li>
+          <li>《AI 落地机会清单》</li>
+          <li>现有设备与网络条件评估</li>
+        </ul>
+        <a class="btn btn--ghost btn--block" href="contact.html?plan=免费诊断">预约诊断</a>
+      </article>
+      <article class="prod prod--main">
+        <header class="prod__head">
+          <span class="badge badge--accent">建议从这档开始</span>
+          <h3>单机试点包</h3>
+          <p class="prod__for">一类案卷、一个检索场景</p>
+        </header>
+        <div class="prod__price"><b>¥9,800</b><span>起 / 一次性</span></div>
+        <ul class="prod__list">
+          <li>案卷检索跑通</li>
+          <li>本地部署 + 案卷知识库</li>
+          <li>4 小时实操培训</li>
+          <li>升级标准部署时<strong>全额抵扣</strong></li>
+        </ul>
+        <a class="btn btn--primary btn--block" href="contact.html?plan=单机试点包">选这个</a>
+      </article>
+      <article class="prod">
+        <header class="prod__head">
+          <h3>企业标准部署</h3>
+          <p class="prod__for">全所使用，含权限与日志</p>
+        </header>
+        <div class="prod__price"><b>¥68,000</b><span>起 / 一次性</span></div>
+        <ul class="prod__list">
+          <li>3–5 个场景落地</li>
+          <li>按律师/助理分级权限</li>
+          <li>操作日志可导出（可审计）</li>
+          <li>对接 1 个系统（如文档管理）</li>
+        </ul>
+        <a class="btn btn--ghost btn--block" href="contact.html?plan=企业标准部署">选这个</a>
+      </article>
+    </div>
+    <p class="small muted mt-7"><a href="pricing.html">看完整报价与在线选配 →</a></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">常见问题</span>
+      <h2>上之前最常问的几件事</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>能对接我们的 TMS / WMS 吗？</summary>
+        <div class="faq__body">标准部署含 1 个系统对接。只要对方能导入导出 Excel 或提供接口就能接；完全不开放的，至少可以做到导出后人工导入。</div>
+      </details>
+      <details>
+        <summary>司机拍的照片很模糊，能识别吗？</summary>
+        <div class="faq__body">清晰度尚可的能提取关键字段；严重模糊或反光的建议重拍或人工录入。我们会在试点时用你们的真实单据测一批，能识别多少一目了然。</div>
+      </details>
+      <details>
+        <summary>需要在司机端装 App 吗？</summary>
+        <div class="faq__body">不需要。单据在电脑端批量处理，司机照现有方式回传照片即可，不改变一线习惯。</div>
+      </details>
+      <details>
+        <summary>断网能用吗？</summary>
+        <div class="faq__body">能。部署完成后不依赖外网，模型和资料都在本地硬盘，分拨现场断网期间照常使用。</div>
+      </details>
+      <details>
+        <summary>多久能看到效果？</summary>
+        <div class="faq__body">试点 3–7 天能出可演示环境。最先见效的通常是运单录入和对账核对，因为量大、规则明确。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section invert" id="cta">
+  <div class="wrap">
+    <div class="head" style="text-align:center;margin-left:auto;margin-right:auto;">
+      <h2>先算算你们每天<br>要录多少单</h2>
+      <p class="lead" style="margin-left:auto;margin-right:auto;">60 分钟，用你们的真实单据量估一下能省多少人时。</p>
+      <div class="btn-row" style="justify-content:center;margin-top:var(--sp-7);">
+        <a class="btn btn--primary btn--lg btn--arrow" href="contact.html?plan=免费诊断">预约免费诊断<span class="btn__ico"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 7l5 5-5 5"/></svg></span></a>
+        <a class="btn btn--ghost btn--lg" href="industry-education.html">看看另一个行业</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <span class="logo__mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" width="100%" height="100%"><rect width="64" height="64" rx="15" fill="#1246C8"/><path d="M32 12 L53 23 L32 34 L11 23 Z" fill="#fff"/>
+            <path d="M11 31 L32 42 L53 31" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".82"/>
+            <path d="M11 40.5 L32 51.5 L53 40.5" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".52"/></svg>
+          </span>
+          <span class="logo__text"><span class="logo__cn">玛塔塔科技</span><span class="logo__en">MATATA</span></span>
+        </div>
+        <p style="line-height:1.9;max-width:30ch;">北京玛塔塔科技有限公司<br>本地 AI 接入与落地服务<br>让 AI 真正在您自己的电脑上跑起来</p>
+      </div>
+      <div>
+        <h4>产品与报价</h4>
+        <ul>
+          <li><a href="pricing.html#services">免费现状诊断</a></li>
+          <li><a href="pricing.html#services">单机试点包</a></li>
+          <li><a href="pricing.html#services">企业标准部署</a></li>
+          <li><a href="pricing.html#appliance">软硬件一体机</a></li>
+          <li><a href="pricing.html#care">年度托管</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>行业方案</h4>
+        <ul>
+          <li><a href="industry-manufacturing.html">制造业</a></li>
+          <li><a href="industry-trade.html">外贸与跨境</a></li>
+          <li><a href="industry-law.html">律师事务所</a></li>          <li><a href="industry-finance.html">财务与代账</a></li>
+          <li><a href="industry-logistics.html">物流与仓储</a></li>
+          <li><a href="industry-education.html">教育与培训</a></li>
+          <li><a href="commitment.html">服务承诺</a></li>
+          <li><a href="insights.html">行业观点</a></li>
+          <li><a href="solutions.html">按场景看</a></li>
+          <li><a href="enterprise.html">政企内网方案</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>联系我们</h4>
+        <ul>
+          <li>电话：<span class="tbd" data-contact="phone">待确认</span></li>
+          <li>商务微信：<span class="tbd" data-contact="wechat">待确认</span></li>
+          <li>邮箱：<span class="tbd" data-contact="email">待确认</span></li>
+          <li>地址：<span class="tbd" data-contact="address">待确认</span></li>
+          <li>服务时间：<span data-contact="hours">周一至周五 9:00–18:00</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 北京玛塔塔科技有限公司 保留所有权利</span>
+      <span><span data-contact="icp"></span><span class="sep-icp">　｜　</span><a href="privacy.html">隐私政策</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/motion-site.js"></script>
+</body>
+</html>

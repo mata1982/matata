@@ -1,0 +1,183 @@
+/* ============================================================
+   玛塔塔 MATATA · 动效系统（全站共享）
+   ============================================================
+   设计依据：design-engineering 的 motion 集群
+   · 只动 transform / opacity / filter（不触发重排）
+   · 自定义缓动曲线，不用浏览器默认 ease
+   · 时长与元素重要性匹配（按钮 140ms，入场 560-900ms）
+
+   安全铁律（吃过一次全黑页面的亏）：
+   1. 内容和动效"默认可见"。隐藏只发生在 html.mo-on 下，
+      而这个类由 JS 添加 —— 无 JS / JS 报错时内容完整显示。
+   2. 每个观察器都有 4 秒兜底，超时强制显示，绝不留白。
+   3. 完整尊重 prefers-reduced-motion。
+   ============================================================ */
+
+/* ============================================================
+   1. 入场：滚动触发
+   ============================================================ */
+.mo-on [data-mo]{
+  opacity:0;
+  transform:translateY(18px);
+  transition:
+    opacity 720ms var(--ease-out-quart) var(--mo-d,0ms),
+    transform 820ms var(--ease-out-expo) var(--mo-d,0ms),
+    filter 720ms var(--ease-out-quart) var(--mo-d,0ms);
+  filter:blur(6px);
+}
+.mo-on [data-mo].mo-in{opacity:1;transform:none;filter:blur(0);}
+
+/* 变体：从左侧进入（用于左右对照的板块） */
+.mo-on [data-mo="left"]{transform:translateX(-22px);}
+.mo-on [data-mo="left"].mo-in{transform:none;}
+
+/* 变体：仅淡入（用于大型容器，避免整体位移显得晃） */
+.mo-on [data-mo="fade"]{transform:none;filter:none;}
+.mo-on [data-mo="fade"].mo-in{opacity:1;}
+
+/* 变体：缩放淡入（用于图表、图示） */
+.mo-on [data-mo="zoom"]{transform:scale(.965);filter:blur(4px);}
+.mo-on [data-mo="zoom"].mo-in{transform:none;filter:blur(0);}
+
+/* ============================================================
+   2. 错峰容器：子元素依次入场
+   ============================================================ */
+.mo-on [data-mo-group] > *{
+  opacity:0;transform:translateY(14px);
+  transition:
+    opacity 620ms var(--ease-out-quart) var(--mo-d,0ms),
+    transform 700ms var(--ease-out-expo) var(--mo-d,0ms);
+}
+.mo-on [data-mo-group].mo-in > *{opacity:1;transform:none;}
+
+/* ============================================================
+   3. 顶部滚动进度条
+   ============================================================ */
+.mo-progress{
+  position:fixed;top:0;left:0;right:0;height:2px;z-index:100;
+  background:linear-gradient(90deg, var(--accent), var(--accent-hi));
+  transform:scaleX(0);transform-origin:0 50%;
+  transition:transform 120ms linear;
+  pointer-events:none;
+}
+
+/* ============================================================
+   4. 滚动反馈：导航与吸顶元素
+   ============================================================ */
+.nav.mo-scrolled{
+  border-bottom-color:var(--line-strong);
+  box-shadow:0 10px 34px -22px rgba(0,0,0,.9);
+}
+
+/* ============================================================
+   5. 数字计数（结果、周期等关键数字）
+   ============================================================ */
+.mo-on [data-count]{font-variant-numeric:tabular-nums;}
+
+/* ============================================================
+   6. 微交互：只在支持悬停的设备上启用
+   ============================================================ */
+@media (hover:hover) and (pointer:fine){
+  /* 卡片：上浮 + 边框点亮 */
+  .card,.trade,.tier-card,.bento__cell,.case,.svc,.scene{
+    transition:
+      transform var(--dur-state) var(--ease-out-quart),
+      border-color var(--dur-state) var(--ease-out-quart),
+      background var(--dur-state) var(--ease-out-quart),
+      box-shadow var(--dur-state) var(--ease-out-quart);
+  }
+  .trade:hover,.tier-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 22px 60px -30px rgba(76,111,255,.5);
+  }
+  /* 图标：悬停时轻微上浮旋转 */
+  .trade:hover .trade__ico svg,
+  .bento__cell:hover .bento__ico svg,
+  .flow__row:hover .flow__icon svg{transform:translateY(-2px) scale(1.06);}
+  .trade__ico svg,.bento__ico svg,.flow__icon svg{
+    transition:transform var(--dur-state) var(--ease-out-quart);
+  }
+  /* 箭头：悬停时向右推一下 */
+  .flow__row:hover .flow__arrow svg{transform:translateX(4px);}
+  .flow__arrow svg{transition:transform var(--dur-state) var(--ease-out-quart);}
+  /* 阶梯柱：悬停提亮 */
+  .stairs__col:hover .stairs__bar{filter:brightness(1.4);}
+  .stairs__bar{transition:filter var(--dur-state) var(--ease-out-quart);}
+  /* 表格行：悬停高亮 */
+  .tbl tbody tr{transition:background var(--dur-base) var(--ease-out-quart);}
+  .tbl tbody tr:hover{background:rgba(255,255,255,.022);}
+  /* 按钮：按压反馈 + 悬停位移 */
+  .btn{transition:background var(--dur-hover) var(--ease-out-quart),border-color var(--dur-hover) var(--ease-out-quart),box-shadow var(--dur-hover) var(--ease-out-quart),transform var(--dur-press) var(--ease-out-expo);}
+  .btn:hover{transform:translateY(-1px);}
+  .btn:active{transform:translateY(0) scale(.985);}
+}
+
+/* ============================================================
+   7. 持续环境动效（常驻，但极轻）
+   ============================================================ */
+
+/* 7.1 机器指示灯呼吸 */
+@keyframes moPulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.rk__lamp,.rig__lamp{animation:moPulse 3.4s var(--ease-in-out) infinite;}
+
+/* 7.2 虚线流动（机器连接线、数据流） */
+@keyframes moDash{to{stroke-dashoffset:-40;}}
+.rk__link{animation:moDash 4.5s linear infinite;}
+.iso__beam,.rk__link{stroke-dasharray:5 6;}
+
+/* 7.3 阶梯柱：入场后各自轻微呼吸，强调"层级" */
+@keyframes moBar{0%,100%{transform:scaleY(1);}50%{transform:scaleY(1.03);}}
+.stairs__bar{transform-origin:50% 100%;}
+.mo-on .stairs.mo-in .stairs__bar{animation:moBar 5s var(--ease-in-out) infinite;}
+.mo-on .stairs.mo-in .stairs__col--main .stairs__bar{animation-duration:3.4s;}
+
+/* 7.4 竖向流程箭头：轻微上下浮动，暗示方向 */
+@keyframes moNudge{0%,100%{transform:translateY(0);opacity:.75;}50%{transform:translateY(4px);opacity:1;}}
+.mo-on .case__arrow svg{animation:moNudge 2.6s var(--ease-in-out) infinite;}
+
+/* 7.5 页头氛围光：极缓的位移，制造"活着"的感觉 */
+@keyframes moDrift{0%{transform:translate3d(0,0,0) scale(1);}50%{transform:translate3d(1.5%,-1%,0) scale(1.04);}100%{transform:translate3d(0,0,0) scale(1);}}
+.pagehead{position:relative;overflow:hidden;}
+.pagehead::before{
+  content:"";position:absolute;left:50%;top:-40%;width:120%;height:180%;
+  margin-left:-60%;pointer-events:none;z-index:0;
+  background:radial-gradient(40% 40% at 50% 50%, rgba(76,111,255,.16), transparent 70%);
+  animation:moDrift 18s var(--ease-in-out) infinite;
+}
+.pagehead > *{position:relative;z-index:1;}
+
+/* 7.6 数字/关键值：入场时轻微放大定格 */
+@keyframes moPop{0%{transform:scale(.94);opacity:.4;}100%{transform:scale(1);opacity:1;}}
+.mo-on .stairs.mo-in .stairs__lb,
+.mo-on .tier-card.mo-in .tier-card__lvl{animation:moPop 520ms var(--ease-spring, cubic-bezier(.34,1.56,.64,1)) both;}
+
+/* ============================================================
+   8. 内容区首次进入的"整块点亮"
+   ============================================================ */
+.mo-on .section>.wrap{transition:opacity 400ms var(--ease-out-quart);}
+
+/* 主格子：内部错峰（更强的层级感） */
+.mo-on .bento__cell--hero > *{
+  opacity:0;transform:translateY(12px);
+  transition:opacity 640ms var(--ease-out-quart),transform 720ms var(--ease-out-expo);
+}
+.mo-on .bento__cell--hero.mo-in > *{opacity:1;transform:none;}
+.mo-on .bento__cell--hero.mo-in > *:nth-child(1){transition-delay:60ms;}
+.mo-on .bento__cell--hero.mo-in > *:nth-child(2){transition-delay:160ms;}
+.mo-on .bento__cell--hero.mo-in > *:nth-child(3){transition-delay:260ms;}
+.mo-on .bento__cell--hero.mo-in > *:nth-child(4){transition-delay:360ms;}
+
+/* ============================================================
+   9. 可访问性：减少动态效果
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  .mo-on [data-mo],
+  .mo-on [data-mo-group] > *,
+  .mo-on .bento__cell--hero > *{
+    opacity:1 !important;transform:none !important;filter:none !important;
+  }
+  .rk__lamp,.rig__lamp,.rk__link,.stairs__bar,.case__arrow svg,.pagehead::before,
+  .mo-on .stairs.mo-in .stairs__lb,
+  .mo-on .tier-card.mo-in .tier-card__lvl{animation:none !important;}
+  .mo-progress{transition:none;}
+}

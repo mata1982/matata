@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>制造业 AI 本地部署｜图纸工艺不出厂，断网也能用 - 玛塔塔 MATATA</title>
+<meta name="description" content="面向五金、机械、模具、电子制造企业的本地 AI 方案：工艺图纸问答、报价单提取、设备维修知识库、质检标准查询。模型装在厂内服务器，图纸不出厂，断网可用。试点 9,800 元起。">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<!-- 社交分享与规范化 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="玛塔塔 MATATA">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="制造业 AI 本地部署｜图纸工艺不出厂，断网也能用">
+<meta property="og:description" content="工艺图纸问答、报价单提取、设备维修知识库。模型装在厂内服务器，图纸不出厂，断网可用。">
+<meta property="og:image" content="https://www.matata.cn/assets/img/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://www.matata.cn/industry-manufacturing.html">
+<link rel="canonical" href="https://www.matata.cn/industry-manufacturing.html">
+<link rel="stylesheet" href="assets/css/site-entry.css">
+<link rel="stylesheet" href="assets/css/pricing.css">
+<link rel="stylesheet" href="assets/css/industry.css">
+<link rel="stylesheet" href="assets/css/redesign.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="logo" href="index.html" aria-label="玛塔塔科技 MATATA 首页">
+      <span class="logo__mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="100%" height="100%"><rect width="64" height="64" rx="15" fill="#1246C8"/><path d="M32 12 L53 23 L32 34 L11 23 Z" fill="#fff"/>
+            <path d="M11 31 L32 42 L53 31" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".82"/>
+            <path d="M11 40.5 L32 51.5 L53 40.5" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".52"/></svg>
+      </span>
+      <span class="logo__text">
+        <span class="logo__cn">玛塔塔科技</span>
+        <span class="logo__en">MATATA</span>
+      </span>
+    </a>
+    <nav class="nav__links" aria-label="主导航">
+      <a href="pricing.html">产品与报价</a>
+      <a href="services.html">服务流程</a>
+      <a href="solutions.html" class="is-active">解决方案</a>
+      <a href="enterprise.html">政企内网</a>
+      <a href="cases.html">客户案例</a>
+      <a href="about.html">关于我们</a>
+          <a href="login.html" class="nav__login">会员登录</a>
+    </nav>
+    <a class="btn btn--primary btn--sm nav__cta" href="contact.html">预约免费诊断</a>
+  </div>
+</header>
+
+<main>
+
+<section class="pagehead">
+  <div class="wrap">
+    <div class="pagehead__crumbs">
+      <a href="index.html">首页</a><span>/</span><a href="solutions.html">解决方案</a><span>/</span><span class="pagehead__current">制造业</span>
+    </div>
+    <h1>制造业的 AI，装在厂里的服务器上</h1>
+    <p class="lead">图纸、工艺、报价单不出厂。断网也能查，老师傅的经验能沉淀下来，新人上手快一点。</p>
+  </div>
+</section>
+
+<!-- 痛点 -->
+<section class="section section--tight">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">你们可能正在遇到</span>
+      <h2>三件事，制造业最普遍</h2>
+    </div>
+    <div class="paincards">
+      <article class="paincard">
+        <span class="paincard__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/><path d="M15.5 5.5h5M18 3v5"/></svg></span>
+        <h3>经验在老师傅脑子里</h3>
+        <p>人一退休，三十年的工艺判断就带走了。新人接手，试错成本全算在良率上。</p>
+      </article>
+      <article class="paincard">
+        <span class="paincard__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3h9l5 5v13H5z"/><path d="M14 3v5h5"/><path d="M9 14h6M9 17h4"/></svg></span>
+        <h3>图纸和报价单不敢上传</h3>
+        <p>客户图纸、BOM、报价，传到别人的服务器上就是风险。所以很多 AI 工具在厂里推不动。</p>
+      </article>
+      <article class="paincard">
+        <span class="paincard__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 20h18"/><path d="M6 20V11M11 20V6M16 20V14M21 20V9"/></svg></span>
+        <h3>新人培训靠嘴传</h3>
+        <p>同一个问题一天被问二十遍。师傅烦，新人慢，培训记录还留不下来。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 场景 -->
+<section class="section section--alt" id="scenes">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">能马上用的场景</span>
+      <h2>四个场景，按见效快慢排序</h2>
+      <p>不要一次全上。先做第一个，跑通了再扩展。投入是「我方实施工时」，不含贵方配合时间。</p>
+    </div>
+
+    <div class="scenes">
+
+      <article class="scene2">
+        <header class="scene2__head">
+          <span class="scene2__no">01</span>
+          <h3>工艺与图纸问答</h3>
+          <span class="badge badge--accent">见效最快</span>
+        </header>
+        <dl class="scene2__rows">
+          <div><dt>现在</dt><dd>翻纸质工艺卡、问老师傅，答案还常不一致</dd></div>
+          <div><dt>AI 能做</dt><dd>工艺文件建成<b>本地知识库</b>，提问后给出答案并附原文出处，可核对</dd></div>
+          <div><dt>投入</dt><dd>2–3 人天</dd></div>
+          <div><dt>交付</dt><dd>可查询的知识库 + 2 小时实操培训</dd></div>
+        </dl>
+      </article>
+
+      <article class="scene2">
+        <header class="scene2__head">
+          <span class="scene2__no">02</span>
+          <h3>报价单与订单提取</h3>
+        </header>
+        <dl class="scene2__rows">
+          <div><dt>现在</dt><dd>对着 PDF、图片、扫描件手工录入，一单十几分钟</dd></div>
+          <div><dt>AI 能做</dt><dd>自动提取品名、规格、数量、单价，<b>人工复核</b>后入表</dd></div>
+          <div><dt>投入</dt><dd>3–5 人天</dd></div>
+          <div><dt>交付</dt><dd>提取模板 + 导出 Excel（可再对接 ERP）</dd></div>
+        </dl>
+      </article>
+
+      <article class="scene2">
+        <header class="scene2__head">
+          <span class="scene2__no">03</span>
+          <h3>设备维修经验库</h3>
+        </header>
+        <dl class="scene2__rows">
+          <div><dt>现在</dt><dd>维修记录在纸上或微信群里，下次故障还得从头找</dd></div>
+          <div><dt>AI 能做</dt><dd>按设备归档故障现象与处理办法，新人也能查历史处理方案</dd></div>
+          <div><dt>投入</dt><dd>3 人天</dd></div>
+          <div><dt>交付</dt><dd>记录规范 + 检索界面</dd></div>
+        </dl>
+      </article>
+
+      <article class="scene2">
+        <header class="scene2__head">
+          <span class="scene2__no">04</span>
+          <h3>质检标准查询</h3>
+        </header>
+        <dl class="scene2__rows">
+          <div><dt>现在</dt><dd>标准文件几百页，按工序查条款很慢</dd></div>
+          <div><dt>AI 能做</dt><dd>按工序或缺陷类型定位到具体条款，附标准原文</dd></div>
+          <div><dt>投入</dt><dd>2–3 人天</dd></div>
+          <div><dt>交付</dt><dd>标准库 + 查询入口</dd></div>
+        </dl>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- 为什么本地 -->
+<section class="section">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">为什么必须本地</span>
+      <h2>制造业的三个硬约束</h2>
+    </div>
+    <div class="why-local">
+      <div class="why-local__item">
+        <b>图纸不出厂</b>
+        <p>涉密图纸、客户 BOM 上传到公有云，本身就是风险。装在厂内，物理上就不出去。</p>
+      </div>
+      <div class="why-local__item">
+        <b>车间常常断网</b>
+        <p>内网环境、无外网的生产区，云端工具直接不可用。本地部署拔掉网线照样能问。</p>
+      </div>
+      <div class="why-local__item">
+        <b>经验要留得住</b>
+        <p>沉淀成厂里自己的知识库。人走了，问答还在，这是资产的差别。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 怎么开始 -->
+<section class="section section--alt" id="start">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">怎么开始</span>
+      <h2>三步，每一步都能停下来</h2>
+    </div>
+    <div class="prods prods--3">
+
+      <article class="prod">
+        <header class="prod__head">
+          <span class="badge badge--ok">0 元 · 不推销</span>
+          <h3>免费现状诊断</h3>
+          <p class="prod__for">先看清厂里哪些活值得让 AI 干</p>
+        </header>
+        <div class="prod__price"><b>¥0</b></div>
+        <ul class="prod__list">
+          <li>60 分钟车间/办公流程访谈</li>
+          <li>《AI 落地机会清单》：值得做的与不建议做的</li>
+          <li>现有电脑能否跑得动，当场判断</li>
+        </ul>
+        <a class="btn btn--ghost btn--block" href="contact.html?plan=免费诊断">预约诊断</a>
+      </article>
+
+      <article class="prod prod--main">
+        <header class="prod__head">
+          <span class="badge badge--accent">多数工厂从这档开始</span>
+          <h3>单机试点包</h3>
+          <p class="prod__for">一台机器、一个场景，先看效果</p>
+        </header>
+        <div class="prod__price"><b>¥9,800</b><span>起 / 一次性</span></div>
+        <ul class="prod__list">
+          <li>一个场景跑通（建议选工艺问答）</li>
+          <li>本地部署 + 基础知识库</li>
+          <li>4 小时实操培训</li>
+          <li>后续升级标准部署时，<strong>9,800 元全额抵扣</strong></li>
+        </ul>
+        <a class="btn btn--primary btn--block" href="contact.html?plan=单机试点包">选这个</a>
+      </article>
+
+      <article class="prod">
+        <header class="prod__head">
+          <h3>企业标准部署</h3>
+          <p class="prod__for">多车间、多部门一起用</p>
+        </header>
+        <div class="prod__price"><b>¥68,000</b><span>起 / 一次性</span></div>
+        <ul class="prod__list">
+          <li>3–5 个场景落地</li>
+          <li>私有知识库（≤ 5,000 份文档）</li>
+          <li>权限分级与操作日志</li>
+          <li>对接 1 个现有系统（ERP / 进销存）</li>
+          <li>分层培训，含部门管理员</li>
+        </ul>
+        <a class="btn btn--ghost btn--block" href="contact.html?plan=企业标准部署">选这个</a>
+      </article>
+
+    </div>
+    <p class="small muted mt-7"><a href="pricing.html">看完整报价与在线选配 →</a></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">制造业常见问题</span>
+      <h2>上之前最常问的五件事</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>车间那台电脑跑得动吗？</summary>
+        <div class="faq__body">带独立显卡的工控机或工作站，跑 7B–14B 参数模型没问题；如果只有办公本或核显，建议用一体机。诊断时我们会看实际配置再给结论，不硬推。</div>
+      </details>
+      <details>
+        <summary>断网能用吗？</summary>
+        <div class="faq__body">能。部署完成后不依赖外网，模型和资料都在本地硬盘。这也是本地部署和在线工具最大的差别——停电恢复后、断网期间都能用。</div>
+      </details>
+      <details>
+        <summary>图纸涉密怎么办？</summary>
+        <div class="faq__body">全程内网，不做外网连接。可以按账号控制谁看哪个目录，所有提问和查看留日志可导出。评估阶段我们不需要任何图纸原件。</div>
+      </details>
+      <details>
+        <summary>老师傅愿意配合吗？</summary>
+        <div class="faq__body">前期不需要他们写任何东西。我们跟着记录、录音整理，他们只做校对——"这条对不对"。通常比让他们写 SOP 容易得多。</div>
+      </details>
+      <details>
+        <summary>多久能看到效果？</summary>
+        <div class="faq__body">试点 3–7 天能出可演示的环境。最常见的第一效果是"查资料不用再问人"，第二是单据录入省一半时间。具体能省多少，诊断后按你们的实际单据量估。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section invert" id="cta">
+  <div class="wrap">
+    <div class="head" style="text-align:center;margin-left:auto;margin-right:auto;">
+      <h2>先看看厂里哪些活<br>值得让 AI 干</h2>
+      <p class="lead" style="margin-left:auto;margin-right:auto;">60 分钟，走一遍流程，出一份清单。不合适我们会直接说。</p>
+      <div class="btn-row" style="justify-content:center;margin-top:var(--sp-7);">
+        <a class="btn btn--primary btn--lg btn--arrow" href="contact.html?plan=免费诊断">预约免费诊断<span class="btn__ico"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 7l5 5-5 5"/></svg></span></a>
+        <a class="btn btn--ghost btn--lg" href="industry-trade.html">看看外贸行业</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <span class="logo__mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" width="100%" height="100%"><rect width="64" height="64" rx="15" fill="#1246C8"/><path d="M32 12 L53 23 L32 34 L11 23 Z" fill="#fff"/>
+            <path d="M11 31 L32 42 L53 31" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".82"/>
+            <path d="M11 40.5 L32 51.5 L53 40.5" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".52"/></svg>
+          </span>
+          <span class="logo__text"><span class="logo__cn">玛塔塔科技</span><span class="logo__en">MATATA</span></span>
+        </div>
+        <p style="line-height:1.9;max-width:30ch;">北京玛塔塔科技有限公司<br>本地 AI 接入与落地服务<br>让 AI 真正在您自己的电脑上跑起来</p>
+      </div>
+      <div>
+        <h4>产品与报价</h4>
+        <ul>
+          <li><a href="pricing.html#services">免费现状诊断</a></li>
+          <li><a href="pricing.html#services">单机试点包</a></li>
+          <li><a href="pricing.html#services">企业标准部署</a></li>
+          <li><a href="pricing.html#appliance">软硬件一体机</a></li>
+          <li><a href="pricing.html#care">年度托管</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>行业方案</h4>
+        <ul>
+          <li><a href="industry-manufacturing.html">制造业</a></li>
+          <li><a href="industry-trade.html">外贸与跨境</a></li>
+          <li><a href="industry-law.html">律师事务所</a></li>          <li><a href="industry-finance.html">财务与代账</a></li>
+          <li><a href="industry-logistics.html">物流与仓储</a></li>
+          <li><a href="industry-education.html">教育与培训</a></li>
+          <li><a href="commitment.html">服务承诺</a></li>
+          <li><a href="insights.html">行业观点</a></li>
+          <li><a href="solutions.html">按场景看</a></li>
+          <li><a href="enterprise.html">政企内网方案</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>联系我们</h4>
+        <ul>
+          <li>电话：<span class="tbd" data-contact="phone">待确认</span></li>
+          <li>商务微信：<span class="tbd" data-contact="wechat">待确认</span></li>
+          <li>邮箱：<span class="tbd" data-contact="email">待确认</span></li>
+          <li>地址：<span class="tbd" data-contact="address">待确认</span></li>
+          <li>服务时间：<span data-contact="hours">周一至周五 9:00–18:00</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 北京玛塔塔科技有限公司 保留所有权利</span>
+      <span><span data-contact="icp"></span><span class="sep-icp">　｜　</span><a href="privacy.html">隐私政策</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/motion-site.js"></script>
+</body>
+</html>

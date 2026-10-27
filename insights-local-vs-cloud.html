@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>本地部署 AI 和公有云，三年的账怎么算｜玛塔塔科技</title>
+<meta name="description" content="大多数情况下本地部署不会比公有云便宜。这篇文章把成本摊开算，说明本地部署真正买到的是什么。">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<!-- 社交分享与规范化 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="玛塔塔 MATATA">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="本地部署 AI 和公有云，三年的账怎么算｜玛塔塔科技">
+<meta property="og:description" content="大多数情况下本地部署不会比公有云便宜。这篇文章把成本摊开算，说明本地部署真正买到的是什么。">
+<meta property="og:image" content="https://www.matata.cn/assets/img/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://www.matata.cn/insights-local-vs-cloud.html">
+<link rel="canonical" href="https://www.matata.cn/insights-local-vs-cloud.html">
+<link rel="stylesheet" href="assets/css/site-entry.css">
+<link rel="stylesheet" href="assets/css/redesign.css">
+<link rel="stylesheet" href="assets/css/insights.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "本地部署 AI 和公有云，三年的账怎么算｜玛塔塔科技",
+  "description": "大多数情况下本地部署不会比公有云便宜。这篇文章把成本摊开算，说明本地部署真正买到的是什么。",
+  "author": {
+    "@type": "Organization",
+    "name": "玛塔塔科技 MATATA"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "北京玛塔塔科技有限公司"
+  },
+  "datePublished": "2026-10-27",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.matata.cn/insights-local-vs-cloud.html"
+  }
+}
+</script>
+</head>
+<body>
+
+<!-- ============================ 顶部导航（与 index.html 保持一致，仅改链接与当前页高亮） ============================ -->
+<body>
+
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="logo" href="index.html" aria-label="玛塔塔科技 MATATA 首页">
+      <span class="logo__mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="100%" height="100%"><rect width="64" height="64" rx="15" fill="#1246C8"/><path d="M32 12 L53 23 L32 34 L11 23 Z" fill="#fff"/>
+            <path d="M11 31 L32 42 L53 31" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".82"/>
+            <path d="M11 40.5 L32 51.5 L53 40.5" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".52"/></svg>
+      </span>
+      <span class="logo__text">
+        <span class="logo__cn">玛塔塔科技</span>
+        <span class="logo__en">MATATA</span>
+      </span>
+    </a>
+    <nav class="nav__links" aria-label="主导航">
+        <a href="pricing.html">产品与报价</a>
+      <a href="services.html">服务流程</a>
+      <a href="solutions.html">解决方案</a>
+      <a href="cases.html">客户案例</a>
+      <a href="about.html">关于我们</a>
+      <a href="faq.html">常见问题</a>
+          <a href="login.html" class="nav__login">会员登录</a>
+    </nav>
+    <a class="btn btn--cta btn--sm nav__cta" href="contact.html">预约免费诊断</a>
+  </div>
+</header>
+
+<main>
+<section class="art">
+  <div class="wrap">
+    <div class="art__inner">
+      <div class="art__meta">
+        <span><i>观点</i></span><span>·</span><span>成本测算</span><span>·</span><span>约 7 分钟</span>
+      </div>
+      <h1>本地部署 AI 和公有云，三年的账怎么算</h1>
+      <p class="art__lead">
+        很多客户第一句话是「本地部署是不是比公有云便宜」。先说结论：
+        <strong>大多数情况下，本地部署不会更便宜</strong>。它买的不是省钱，是另外三样东西。
+        这篇文章把账摊开算给您看。
+      </p>
+
+      <h2>一、先破除一个误解</h2>
+      <p>
+        公有云大模型按 token 计费，很多人以为企业用得越多账单越吓人。但实际算下来，
+        <strong>一个百人规模的企业做内部知识库问答，一年的 API 费用通常只有几百到几千元</strong>。
+      </p>
+      <p>
+        而一套本地部署（一体机 + 实施）通常是十万元量级。拿这两者比「便宜」，
+        本地部署几乎永远输。所以如果有人跟您说「本地部署能省 API 费」，
+        要么他没算过，要么他在回避真正的问题。
+      </p>
+
+      <h2>二、那本地部署买的是什么</h2>
+      <p>三件事，公有云给不了：</p>
+      <ul>
+        <li><strong>数据不出门。</strong>合同、图纸、客户名单、病历、案卷，这类资料在很多行业根本不允许上传到第三方。</li>
+        <li><strong>断网可用。</strong>车间、仓库、涉密机房、内网办公环境，很多时候根本没有稳定外网。</li>
+        <li><strong>长期可控。</strong>模型版本、可用性、价格都不掌握在自己手里，供应商调价或下线，业务就停摆。</li>
+      </ul>
+      <div class="keybox">
+        <b>一句话</b>
+        <p>本地部署不是「更便宜的 AI」，是「唯一能用的 AI」——当合规或网络条件不允许上公有云时，它不是选项之一，而是唯一选项。</p>
+      </div>
+
+      <h2>三、什么时候本地部署确实更划算</h2>
+      <p>有三种情况，账确实算得过来：</p>
+      <table>
+        <thead><tr><th style="width:30%;">情形</th><th>为什么划得来</th></tr></thead>
+        <tbody>
+          <tr><td>大批量文档处理</td><td>比如一年几十万张单据、上百万页资料的提取，按次调用公有云的成本会迅速累积；本地一次投入，处理量不再额外计费。</td></tr>
+          <tr><td>替代按人订阅的 SaaS</td><td>多个岗位长期订阅按人计费的 SaaS，三年累计往往超过一套本地系统。</td></tr>
+          <tr><td>持续高频使用</td><td>几百人每天高频使用，公有云的月度账单会稳定增长；本地成本在投入后基本固定。</td></tr>
+        </tbody>
+      </table>
+
+      <h2>四、容易被漏掉的三笔成本</h2>
+      <ul>
+        <li><strong>硬件折旧。</strong>一体机按 3–5 年折旧，不是一次性支出摊到一年。</li>
+        <li><strong>持续维护。</strong>知识库要更新、模型要升级、权限要复核，这部分是年度托管费，不是零。</li>
+        <li><strong>人的时间。</strong>资料整理、员工培训、流程改造，这些成本通常比软件还高——而且不管选哪种部署方式都躲不掉。</li>
+      </ul>
+
+      <h2>五、怎么判断自己该选哪种</h2>
+      <p>按顺序问自己三个问题，答案基本就出来了：</p>
+      <ol>
+        <li><strong>资料能不能上传到第三方？</strong>不能 → 必须本地。</li>
+        <li><strong>使用现场有没有稳定外网？</strong>没有 → 必须本地。</li>
+        <li><strong>如果前两条都允许，用量大不大？</strong>低频试水 → 公有云更划算；高频或大批量 → 本地更划算。</li>
+      </ol>
+      <p>
+        如果三个问题都答不上来，那说明还没到选型阶段，先做一次诊断更实际。
+      </p>
+
+<div class="art__cta">
+  <div>
+    <b>不确定要不要做？先做一次免费诊断</b>
+    <p>60 分钟，把您现在的流程走一遍，出一份《AI 落地机会清单》，不合适我们会直接说。</p>
+  </div>
+  <a class="btn btn--primary" href="contact.html?plan=免费诊断">预约免费诊断</a>
+</div>
+
+
+<div class="related">
+  <h3>相关阅读</h3>
+  <div class="related__list">
+    <a href="insights-when-not-to.html">什么企业其实不适合现在上 AI<span>选型判断 · 6 分钟</span></a>
+      <a href="insights-acceptance.html">AI 项目怎么验收：一份可以照着执行的清单<span>交付方法 · 8 分钟</span></a>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============================ 页脚（与 index.html 保持一致，仅改链接） ============================ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <span class="logo__mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" width="100%" height="100%"><rect width="64" height="64" rx="15" fill="#1246C8"/><path d="M32 12 L53 23 L32 34 L11 23 Z" fill="#fff"/>
+            <path d="M11 31 L32 42 L53 31" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".82"/>
+            <path d="M11 40.5 L32 51.5 L53 40.5" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".52"/></svg>
+          </span>
+          <span class="logo__text"><span class="logo__cn">玛塔塔科技</span><span class="logo__en">MATATA</span></span>
+        </div>
+        <p style="line-height:1.9;max-width:30ch;">北京玛塔塔科技有限公司<br>本地 AI 接入与落地服务<br>让 AI 真正在您自己的电脑上跑起来</p>
+      </div>
+      <div>
+        <h4>产品与报价</h4>
+        <ul>
+          <li><a href="pricing.html">报价总览</a></li>
+          <li><a href="pricing.html#services">免费现状诊断</a></li>
+          <li><a href="pricing.html#services">单机试点包</a></li>
+          <li><a href="pricing.html#services">企业标准部署</a></li>
+          <li><a href="pricing.html#care">定制开发</a></li>
+          <li><a href="pricing.html#care">年度托管</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>解决方案</h4>
+        <ul>
+          <li><a href="solutions.html#scenes">按场景看</a></li>
+          <li><a href="solutions.html#industries">按行业看</a></li>
+          <li><a href="industry-manufacturing.html">制造业</a></li>
+          <li><a href="industry-trade.html">外贸与跨境</a></li>
+          <li><a href="industry-law.html">律师事务所</a></li>          <li><a href="industry-finance.html">财务与代账</a></li>
+          <li><a href="industry-logistics.html">物流与仓储</a></li>
+          <li><a href="industry-education.html">教育与培训</a></li>
+          <li><a href="commitment.html">服务承诺</a></li>
+          <li><a href="insights.html">行业观点</a></li>
+          <li><a href="solutions.html#ind-logistics">物流仓储</a></li>
+          <li><a href="solutions.html#ind-legal">专业服务</a></li>
+          <li><a href="enterprise.html">政企内网方案</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>联系我们</h4>
+        <ul>
+          <li>电话：<span class="tbd" data-contact="phone">待确认</span></li>
+          <li>商务微信：<span class="tbd" data-contact="wechat">待确认</span></li>
+          <li>邮箱：<span class="tbd" data-contact="email">待确认</span></li>
+          <li>地址：<span class="tbd" data-contact="address">待确认</span></li>
+          <li>服务时间：<span data-contact="hours">周一至周五 9:00–18:00</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 北京玛塔塔科技有限公司 保留所有权利</span>
+      <span><span data-contact="icp"></span><span class="sep-icp">　｜　</span><a href="privacy.html">隐私政策</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/motion-site.js"></script>
+</body>
+</html>

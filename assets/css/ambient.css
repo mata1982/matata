@@ -1,0 +1,225 @@
+/* ============================================================
+   玛塔塔 MATATA · 环境动效层（ambient）
+   ============================================================
+   目的：页面不再"入场一次就死掉"，而是有极慢的呼吸感。
+
+   设计纪律（这决定了它高级还是廉价）：
+   1. **只做光影，不做位移**。元素位置不变，只有明暗和色彩在动。
+      位移会让人不自觉追视，久了头晕；光影是余光里的。
+   2. **周期要长**：14–30 秒一轮。低于 8 秒会显得急躁。
+   3. **幅度要小**：透明度变化 ≤ 0.12，缩放 ≤ 1.04。
+   4. **入场要慢**：920ms → 1200ms，让第一眼是"浮现"而不是"弹出"。
+   5. 全部包在 prefers-reduced-motion: no-preference 里。
+
+   加载顺序：必须最后（site-entry 的末尾 + 首页 v8 之后）。
+   ============================================================ */
+
+/* ============================================================
+   1. 首屏：蓝色主句的慢速流光
+   ------------------------------------------------------------
+   用 background-clip:text 做渐变文字，让渐变位置缓慢往复。
+   放在 @supports 里：不支持时会退回纯色，不会变成透明文字。
+   ============================================================ */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero h1 em {
+      background-image: linear-gradient(
+        100deg,
+        /* 色阶最亮的点控制在 #3E8FF0（白底对比度 ≈3.4），
+           不再使用 #7FB7F7 —— 那个亮度只有 ≈2.1，扫过大字会短暂发虚 */
+        #0071E3 0%,
+        #2F80E8 24%,
+        #3E8FF0 44%,
+        #2F80E8 62%,
+        #0071E3 82%,
+        #1B4FC2 100%
+      );
+      background-size: 280% 100%;
+      background-position: 0% 50%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: none;
+      animation: emFlow 16s cubic-bezier(.45,0,.55,1) infinite;
+      /* 文字变透明后，用 drop-shadow 代替 text-shadow 保住一点光晕 */
+      filter: drop-shadow(0 0 26px rgba(0, 113, 227, .16));
+    }
+  }
+}
+@keyframes emFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+/* ============================================================
+   2. 首屏：标题背后的慢呼吸光晕
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__inner::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 42%;
+    width: min(820px, 86vw);
+    height: min(420px, 46vh);
+    transform: translate(-50%, -50%);
+    background: radial-gradient(closest-side, rgba(0, 113, 227, .085), transparent 72%);
+    filter: blur(18px);
+    pointer-events: none;
+    z-index: -1;
+    animation: haloBreathe 18s cubic-bezier(.45,0,.55,1) infinite;
+  }
+}
+@keyframes haloBreathe {
+  0%, 100% { opacity: .55; transform: translate(-50%, -50%) scale(1); }
+  50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.04); }
+}
+
+/* ============================================================
+   3. 页头：两团缓慢漂移的光
+   ------------------------------------------------------------
+   原来 ::before 是 18s 漂移；这里把它放慢到 26s，
+   并加 ::after 作为第二团，方向相反，避免同步显假。
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+  .pagehead::before { animation-duration: 26s; }
+
+  .pagehead::after {
+    content: "";
+    position: absolute;
+    right: -8%;
+    top: -46%;
+    width: min(620px, 62vw);
+    height: min(620px, 62vw);
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(76, 111, 255, .085), transparent 70%);
+    pointer-events: none;
+    animation: orbFloat 30s cubic-bezier(.45,0,.55,1) infinite alternate;
+  }
+
+  /* 页头文字：即使无 JS 也有一次缓慢浮现 */
+  .pagehead__crumbs { animation: softFade 800ms cubic-bezier(.16,1,.3,1) both; }
+  .pagehead h1       { animation: softRise 1100ms cubic-bezier(.16,1,.3,1) 80ms both; }
+  .pagehead .lead    { animation: softRise 1100ms cubic-bezier(.16,1,.3,1) 220ms both; }
+}
+@keyframes orbFloat {
+  0%   { transform: translate3d(0, 0, 0) scale(1); opacity: .7; }
+  100% { transform: translate3d(-6%, 5%, 0) scale(1.12); opacity: 1; }
+}
+@keyframes softRise {
+  from { opacity: 0; transform: translateY(14px); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+@keyframes softFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ============================================================
+   4. 首屏入场放慢（920ms → 1200ms，位移也收小）
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__inner > * { animation-name: heroInSlow; animation-duration: 1200ms; }
+  .hero__inner > *:nth-child(1) { animation-delay: 90ms; }
+  .hero__inner > *:nth-child(2) { animation-delay: 200ms; }
+  .hero__inner > *:nth-child(3) { animation-delay: 340ms; }
+  .hero__inner > *:nth-child(4) { animation-delay: 470ms; }
+  .hero__inner > *:nth-child(5) { animation-delay: 600ms; }
+}
+@keyframes heroInSlow {
+  from { opacity: 0; transform: translateY(14px); filter: blur(8px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+
+/* ============================================================
+   5. 按钮：只在悬停时有一道光扫过
+   ------------------------------------------------------------
+   常驻扫光会显得廉价；悬停一次、900ms 扫完，反而有"金属反光"感。
+   ============================================================ */
+@media (hover: hover) and (pointer: fine) {
+  .btn--primary,
+  .btn--cta,
+  .btn--accent {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .btn--primary::after,
+  .btn--cta::after,
+  .btn--accent::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(105deg, transparent 34%, rgba(255, 255, 255, .28) 50%, transparent 66%);
+    transform: translateX(-130%);
+    transition: transform 900ms cubic-bezier(.22, 1, .36, 1);
+    pointer-events: none;
+  }
+  .btn--primary:hover::after,
+  .btn--cta:hover::after,
+  .btn--accent:hover::after { transform: translateX(130%); }
+}
+
+/* ============================================================
+   6. 服务页机架图：极缓的浮沉
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+  .pagehead__visual { animation: floatY 9s cubic-bezier(.45,0,.55,1) infinite; }
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+
+/* ============================================================
+   7. 减少动态效果：全部静止，但内容完整
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 em {
+    background: none !important;
+    color: #0071E3 !important;
+    -webkit-background-clip: border-box !important;
+    background-clip: border-box !important;
+    filter: none !important;
+    animation: none !important;
+  }
+  .hero__inner::before,
+  .pagehead::after,
+  .btn--primary::after,
+  .btn--cta::after,
+  .btn--accent::after { display: none !important; }
+  .pagehead__visual,
+  .pagehead h1,
+  .pagehead .lead,
+  .pagehead__crumbs { animation: none !important; }
+}
+
+/* ============================================================
+   8. 首屏「封闭场」视觉层
+   ------------------------------------------------------------
+   v7 曾把 .shader__geo 设为 display:none（当时是三维粒子，亮底上像噪声）。
+   现在换成"边界内的粒子场"，重新启用并铺满首屏。
+   放在着色器之上、压暗层之下。
+   ============================================================ */
+.shader__geo{
+  display:block !important;
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:1;
+  opacity:0;
+  transition:opacity 1200ms var(--ease-out-quart);
+  pointer-events:none;
+  mix-blend-mode:multiply;   /* 亮底上用正片叠底，线条是"印"上去的 */
+}
+.shader__geo.is-live{opacity:1;}
+
+/* 压暗层要排在粒子层之上，保证文字对比度不被线条干扰 */
+.shader__veil{z-index:2;}
+.shader__grid{z-index:0;}
+
+@media (prefers-reduced-motion:reduce){
+  .shader__geo{transition:none;}
+}

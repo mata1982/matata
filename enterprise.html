@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>政企与内网合规｜数据不出内网的本地 AI 方案｜玛塔塔 MATATA</title>
+<meta name="description" content="面向国企、事业单位与强合规团队的内网 AI 方案：本地模型、分级权限、操作日志、备份与离线升级建议，交付部署文档与验收材料，配合贵单位的信息化与保密流程。">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<!-- 社交分享与规范化 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="玛塔塔 MATATA">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="政企与内网合规｜数据不出内网的本地 AI 方案｜玛塔塔 MATATA">
+<meta property="og:description" content="面向国企、事业单位与强合规团队的内网 AI 方案：本地模型、分级权限、操作日志、备份与离线升级建议，交付部署文档与验收材料，配合贵单位的信息化与保密流程。">
+<meta property="og:image" content="https://www.matata.cn/assets/img/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://www.matata.cn/enterprise.html">
+<link rel="canonical" href="https://www.matata.cn/enterprise.html">
+<link rel="stylesheet" href="assets/css/site-entry.css">
+<link rel="stylesheet" href="assets/css/redesign.css">
+</head>
+<body>
+
+<!-- ============================ 顶部导航 ============================ -->
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="logo" href="index.html" aria-label="玛塔塔科技 MATATA 首页">
+      <span class="logo__mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="100%" height="100%"><rect width="64" height="64" rx="15" fill="#1246C8"/><path d="M32 12 L53 23 L32 34 L11 23 Z" fill="#fff"/>
+            <path d="M11 31 L32 42 L53 31" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".82"/>
+            <path d="M11 40.5 L32 51.5 L53 40.5" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".52"/></svg>
+      </span>
+      <span class="logo__text">
+        <span class="logo__cn">玛塔塔科技</span>
+        <span class="logo__en">MATATA</span>
+      </span>
+    </a>
+    <nav class="nav__links" aria-label="主导航">
+        <a href="pricing.html">产品与报价</a>
+      <a href="services.html">服务流程</a>
+      <a href="solutions.html" class="is-active">解决方案</a>
+      <a href="cases.html">客户案例</a>
+      <a href="about.html">关于我们</a>
+      <a href="faq.html">常见问题</a>
+          <a href="login.html" class="nav__login">会员登录</a>
+    </nav>
+    <a class="btn btn--cta btn--sm nav__cta" href="contact.html">预约免费诊断</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================ 页面头部 ============================ -->
+<section class="pagehead">
+  <div class="wrap">
+    <nav class="pagehead__crumbs" aria-label="面包屑">
+      <a href="index.html">首页</a><span aria-hidden="true">/</span><span>解决方案</span><span aria-hidden="true">/</span><span class="pagehead__current">政企与内网合规</span>
+    </nav>
+    <h1>私有化部署：数据不出内网，能力留在本单位</h1>
+    <p class="lead">
+      对很多单位来说，“能不能用 AI”不是技术问题，而是<strong>数据能不能出去</strong>的问题。
+      这一页写给需要走流程的单位：国企与事业单位、科研院所、设计院，以及医疗、金融等对数据要求严格的团队。
+    </p>
+  </div>
+</section>
+
+<!-- ============================ 开篇 ============================ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">先说清楚</span>
+      <h2 class="h2">先把数据放在哪里说清楚，再谈做什么</h2>
+      <p class="lead">
+        私有化部署，说人话就是：把整套 AI 装进贵单位自己的机房或内网，不依赖外部服务。
+        下面三件事，是我们和贵单位打交道时的自我约束。
+      </p>
+    </div>
+
+    <div class="quote">
+      我们把整套 AI 能力放进贵单位的内网：模型在本地、数据在本地、访问可控、过程可查。
+    </div>
+
+    <div class="grid grid--3 mt-8">
+      <div class="card card--flat">
+        <h3 class="card__title">先不碰数据</h3>
+        <p class="card__text">评估阶段只需要您讲清业务流程和资料类型，<strong>不需要提供任何敏感资料</strong>。要不要继续，您听完再定。</p>
+      </div>
+      <div class="card card--flat">
+        <h3 class="card__title">不替贵单位做合规判断</h3>
+        <p class="card__text">我们只把技术做法讲清楚：数据存在哪、谁能访问、过程怎么留痕。是否合规、要走哪些流程，由贵单位相关部门认定。</p>
+      </div>
+      <div class="card card--flat">
+        <h3 class="card__title">不催着立项</h3>
+        <p class="card__text">试点不通过，或者贵单位判断现在还不适合，我们如实说明，不做后续推销。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 六项保障 ============================ -->
+<section class="section section--alt" id="assurance">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">六项保障</span>
+      <h2 class="h2">六项保障，对应贵单位最关心的六个问题</h2>
+      <p class="lead">
+        下面六条都是我们能落地的做法，会逐条写进方案与合同附件。
+        写在纸面上的才算数，口头说的不算。
+      </p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th style="width:16%;">保障</th>
+            <th style="width:24%;">贵单位常问的</th>
+            <th>我们的具体做法</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>数据不出域</strong></td>
+            <td>资料会不会传到外面？</td>
+            <td>全流程内网运行，可断网使用；不依赖任何外部接口。</td>
+          </tr>
+          <tr>
+            <td><strong>权限可管</strong></td>
+            <td>谁能看到什么？</td>
+            <td>按部门、岗位分级授权；敏感资料单独隔离、单独授权；能不能导出，也逐项配置。</td>
+          </tr>
+          <tr>
+            <td><strong>过程可查</strong></td>
+            <td>出了问题能不能追溯？</td>
+            <td>操作日志留存：谁、什么时间、问了什么、用到哪些资料，可按需导出核查。</td>
+          </tr>
+          <tr>
+            <td><strong>稳定可用</strong></td>
+            <td>万一出故障怎么办？</td>
+            <td>提供备份与恢复建议、故障响应机制、离线升级方案；升级前先评估影响，不盲目升。</td>
+          </tr>
+          <tr>
+            <td><strong>部署规范</strong></td>
+            <td>能不能配合我们的技术审查？</td>
+            <td>输出部署文档、网络与端口说明、验收材料，配合贵单位的信息化与保密流程。</td>
+          </tr>
+          <tr>
+            <td><strong>长期维护</strong></td>
+            <td>后续谁维护？</td>
+            <td>可选年度服务：定期巡检、版本升级、知识库维护、人员培训与交接。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="notice mt-6">
+      <span class="notice__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <p>表格里每一行，在方案里都会落到具体配置和交付物上：装在哪台机器、端口怎么开、日志存多久、谁能导出，逐项确认后再施工。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 数据不出域（深色区块） ============================ -->
+<section class="section section--deep" id="offline">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow eyebrow--light">数据不出域</span>
+      <h2 class="h2">“数据不出域”，具体指什么</h2>
+      <p class="lead">
+        这是整套方案的前提。下面四条，是我们在每个项目里都会逐项确认、并写进部署文档的内容。
+      </p>
+    </div>
+
+    <div class="grid grid--4">
+      <div class="pledge">
+        <span class="pledge__no">01</span>
+        <h3>模型装在贵单位自己的机器上</h3>
+        <p>模型文件部署在贵单位的服务器或工作站，运行时用的是本机算力，不调用外部模型服务。</p>
+      </div>
+      <div class="pledge">
+        <span class="pledge__no">02</span>
+        <h3>资料与记录都留在本地</h3>
+        <p>文档、检索索引、问答记录、操作日志都存在贵单位自己的存储里。我们不带走，也不用于训练。</p>
+      </div>
+      <div class="pledge">
+        <span class="pledge__no">03</span>
+        <h3>可以完全断网运行</h3>
+        <p>部署完成后可离线使用。升级按贵单位的流程安排：支持离线升级，也可由贵单位内部人员按文档操作。</p>
+      </div>
+      <div class="pledge">
+        <span class="pledge__no">04</span>
+        <h3>访问边界由贵单位定</h3>
+        <p>谁能访问、能看哪些库、能不能导出，部署时逐项配置，并写进部署文档与验收材料。</p>
+      </div>
+    </div>
+
+    <div class="notice mt-8">
+      <span class="notice__icon" aria-hidden="true">!</span>
+      <p>
+        <strong>一句话说明边界：</strong>上面四条解决的是“数据放在哪里、谁能访问、过程是否留痕”。
+        是否需要通过某项检查、测评或等保要求，由贵单位相关部门依据现行规定判断——我们不替贵单位下结论，也不承诺任何检查或测评的结果。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 典型适配场景 ============================ -->
+<section class="section" id="fits">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">典型适配场景</span>
+      <h2 class="h2">这些场景，在内网里已经能跑起来</h2>
+      <p class="lead">
+        下面几类是我们见得比较多、也最适合先做的。
+        具体先做哪一个，要结合贵单位的资料情况和流程要求来定。
+      </p>
+    </div>
+
+    <div class="grid grid--3">
+      <div class="card card--hover">
+        <h3 class="card__title">单位内部制度与流程问答</h3>
+        <p class="card__text">制度文件入库，员工自己就能问，答案附原文出处；人事、办公室少回答重复问题，对外口径也统一。</p>
+      </div>
+      <div class="card card--hover">
+        <h3 class="card__title">政策文件与业务资料检索</h3>
+        <p class="card__text">用自然语言找到对应条款与段落，附出处便于复核；能查的范围可按部门限定。</p>
+      </div>
+      <div class="card card--hover">
+        <h3 class="card__title">公文与材料初稿辅助</h3>
+        <p class="card__text">按贵单位既有格式生成初稿，人做修改与定稿；不改变现有的审签流程。</p>
+      </div>
+      <div class="card card--hover">
+        <h3 class="card__title">内部培训与考核题库</h3>
+        <p class="card__text">把培训资料整理成问答与题库，新人自学、老员工复习，培训记录可以留档。</p>
+      </div>
+      <div class="card card--hover">
+        <h3 class="card__title">科研与设计资料整理</h3>
+        <p class="card__text">图纸、报告、标准文件分类与检索，按项目或课题建库，按人授权查看。</p>
+        <p class="tiny mt-4"><span class="tbd">待确认：是否具备相关资质与经验</span></p>
+      </div>
+    </div>
+
+    <div class="notice mt-6">
+      <span class="notice__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <p>以上场景都不需要先动敏感数据。真正入库哪些资料、放在哪个网络环境、由谁审批，全部由贵单位指定，我们按贵单位的要求执行。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 建议合作方式 ============================ -->
+<section class="section section--alt" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">建议合作方式</span>
+      <h2 class="h2">三步走：先评估、再试点、后立项</h2>
+      <p class="lead">
+        我们不建议一上来就走采购流程。先小范围验证，贵单位心里有数了再立项，风险最低。
+      </p>
+    </div>
+
+    <div class="grid grid--3">
+      <div class="card">
+        <div class="card__num">01</div>
+        <h3 class="card__title">不接触敏感数据的可行性评估</h3>
+        <p class="card__text">一次 60 分钟的沟通，我们了解业务流程与资料类型，给出可行场景、优先级与大致投入。全程不需要贵单位提供任何文件。</p>
+        <p class="tiny mt-4">您拿到：《AI 落地机会清单》（含建议场景与优先级）</p>
+      </div>
+      <div class="card">
+        <div class="card__num">02</div>
+        <h3 class="card__title">小范围、非密环境试点验证</h3>
+        <p class="card__text">在贵单位指定的非密环境里，用一台机器、一个场景做试点；跑通后由贵单位内部人员实际用一段时间，再决定要不要往下走。</p>
+        <p class="tiny mt-4">您拿到：试点环境 + 效果对照说明 + 部署文档</p>
+      </div>
+      <div class="card">
+        <div class="card__num">03</div>
+        <h3 class="card__title">按贵单位流程立项实施</h3>
+        <p class="card__text">试点通过后，按贵单位的采购与保密流程走立项、评审、招标等环节；需要哪些材料，我们配合准备。</p>
+        <p class="tiny mt-4">您拿到：书面方案 + 逐项报价 + 时间表</p>
+      </div>
+    </div>
+
+    <div class="notice mt-6">
+      <span class="notice__icon" aria-hidden="true">¥</span>
+      <p>
+        <strong>关于资质与材料：</strong><span class="tbd">待确认：可提供的资质文件清单</span>（例如涉密信息系统集成等相关资质）<br>
+        贵单位需要哪些材料，请在沟通时列出清单，我们按清单准备；清单里有而我们没有的，我们会直接说明，不绕弯子。
+      </p>
+    </div>
+
+    <div class="quote mt-8">
+      我们尊重贵单位的每一项流程。宁可多走一步手续，也不留下一个隐患。
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CTA ============================ -->
+<section class="section" id="diagnose">
+  <div class="wrap">
+    <div class="cta-panel cta-panel--split">
+      <div>
+        <span class="eyebrow eyebrow--light">免费诊断</span>
+        <h2>首次沟通，<br>不需要贵单位提供任何敏感资料</h2>
+        <p class="mt-5">
+          一次 60 分钟的沟通，我们会给您一份《AI 落地机会清单》：哪些场景在内网里能做、大概投入多少、先从哪一个开始。
+          暂不适合做的，我们会直接说明。
+        </p>
+        <p class="tiny mt-5">
+          北京玛塔塔科技有限公司　电话 <span class="tbd" data-contact="phone">待确认</span>　邮箱 <span class="tbd" data-contact="email">待确认</span>
+        </p>
+      </div>
+      <div>
+        <div class="card">
+          <h3 class="card__title">这一次沟通，只需要贵单位安排</h3>
+          <ul class="list-sm">
+            <li>一位熟悉业务的负责人（对接与判断）</li>
+            <li>60 分钟时间（复杂情况可以再约）</li>
+            <li>业务流程与资料类型的大致情况（不需要提供文件）</li>
+          </ul>
+        </div>
+        <div class="btn-row mt-5" style="flex-direction:column;align-items:stretch;">
+          <a class="btn btn--cta btn--block" href="contact.html">预约免费诊断</a>
+          <a class="btn btn--onDark btn--block" href="solutions.html">看通用场景与行业方案</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ 页脚 ============================ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <span class="logo__mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" width="100%" height="100%"><rect width="64" height="64" rx="15" fill="#1246C8"/><path d="M32 12 L53 23 L32 34 L11 23 Z" fill="#fff"/>
+            <path d="M11 31 L32 42 L53 31" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".82"/>
+            <path d="M11 40.5 L32 51.5 L53 40.5" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".52"/></svg>
+          </span>
+          <span class="logo__text"><span class="logo__cn">玛塔塔科技</span><span class="logo__en">MATATA</span></span>
+        </div>
+        <p style="line-height:1.9;max-width:30ch;">北京玛塔塔科技有限公司<br>本地 AI 接入与落地服务<br>让 AI 真正在您自己的电脑上跑起来</p>
+      </div>
+      <div>
+        <h4>产品与报价</h4>
+        <ul>
+          <li><a href="pricing.html">报价总览</a></li>
+          <li><a href="pricing.html#services">免费现状诊断</a></li>
+          <li><a href="pricing.html#services">单机试点包</a></li>
+          <li><a href="pricing.html#services">企业标准部署</a></li>
+          <li><a href="pricing.html#care">定制开发</a></li>
+          <li><a href="pricing.html#care">年度托管</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>解决方案</h4>
+        <ul>
+          <li><a href="solutions.html#scenes">按场景看</a></li>
+          <li><a href="solutions.html#industries">按行业看</a></li>
+          <li><a href="industry-manufacturing.html">制造业</a></li>
+          <li><a href="industry-trade.html">外贸与跨境</a></li>
+          <li><a href="industry-law.html">律师事务所</a></li>          <li><a href="industry-finance.html">财务与代账</a></li>
+          <li><a href="industry-logistics.html">物流与仓储</a></li>
+          <li><a href="industry-education.html">教育与培训</a></li>
+          <li><a href="commitment.html">服务承诺</a></li>
+          <li><a href="insights.html">行业观点</a></li>
+          <li><a href="solutions.html#ind-logistics">物流仓储</a></li>
+          <li><a href="solutions.html#ind-legal">专业服务</a></li>
+          <li><a href="enterprise.html">政企内网方案</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>联系我们</h4>
+        <ul>
+          <li>电话：<span class="tbd" data-contact="phone">待确认</span></li>
+          <li>商务微信：<span class="tbd" data-contact="wechat">待确认</span></li>
+          <li>邮箱：<span class="tbd" data-contact="email">待确认</span></li>
+          <li>地址：<span class="tbd" data-contact="address">待确认</span></li>
+          <li>服务时间：<span data-contact="hours">周一至周五 9:00–18:00</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 北京玛塔塔科技有限公司 保留所有权利</span>
+      <span><span data-contact="icp"></span><span class="sep-icp">　｜　</span><a href="privacy.html">隐私政策</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/motion-site.js"></script>
+</body>
+</html>

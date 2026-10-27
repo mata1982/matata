@@ -1,0 +1,327 @@
+/* ============================================================
+   玛塔塔 MATATA · 产品与报价页
+   ============================================================
+   只在 pricing.html 引用，叠加在 v7（Apple 亮色体系）之上。
+   组件：定价原则 / 产品卡 / 配置器 / 条款
+   ============================================================ */
+
+/* ============================================================
+   1. 定价原则
+   ============================================================ */
+.section--tight{padding:var(--sp-9) 0;}
+
+.principles{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;border-top:1px solid rgba(0,0,0,.1);
+}
+.principle{
+  padding:var(--sp-6) var(--sp-6) var(--sp-6) 0;
+  border-right:1px solid rgba(0,0,0,.07);
+}
+.principle:last-child{border-right:0;}
+.principle:not(:first-child){padding-left:var(--sp-6);}
+.principle__no{
+  display:block;
+  font-family:var(--font-num);font-size:12px;letter-spacing:.1em;
+  color:#0071E3;margin-bottom:14px;
+}
+.principle b{display:block;font-size:19px;color:#1D1D1F;font-weight:600;margin-bottom:8px;}
+.principle p{font-size:14.5px;line-height:1.65;color:#6E6E73;margin:0;}
+
+/* ============================================================
+   2. 产品卡
+   ============================================================ */
+.prods{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:20px;align-items:stretch;
+}
+.prods--3{grid-template-columns:repeat(3,1fr);}
+.prods--2{grid-template-columns:repeat(2,1fr);}
+
+.prod{
+  display:flex;flex-direction:column;
+  background:#FFFFFF;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:18px;
+  padding:26px 24px 24px;
+  transition:border-color .28s var(--ease-out-quart),
+             box-shadow .28s var(--ease-out-quart),
+             transform .28s var(--ease-out-quart);
+}
+.prod:hover{
+  border-color:rgba(0,0,0,.16);
+  box-shadow:0 18px 40px -26px rgba(0,0,0,.3);
+  transform:translateY(-2px);
+}
+/* 主推档：蓝色描边 + 轻阴影，不用发光 */
+.prod--main{
+  border-color:rgba(0,113,227,.55);
+  box-shadow:0 14px 44px -28px rgba(0,113,227,.55);
+}
+.prod--main:hover{border-color:#0071E3;}
+
+.prod__head{margin-bottom:18px;min-height:112px;}
+.prod__head .badge{margin-bottom:12px;}
+.prod__head h3{
+  font-size:20px;font-weight:600;color:#1D1D1F;
+  letter-spacing:-.01em;margin:0 0 6px;
+}
+.prod__for{font-size:13.5px;color:#86868B;margin:0;line-height:1.5;}
+
+.prod__price{
+  display:flex;align-items:baseline;gap:8px;
+  padding-bottom:18px;margin-bottom:18px;
+  border-bottom:1px solid rgba(0,0,0,.07);
+}
+.prod__price b{
+  font-size:32px;font-weight:600;color:#1D1D1F;
+  letter-spacing:-.02em;line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.prod__price span{font-size:13px;color:#86868B;white-space:nowrap;}
+
+.prod__price-row{
+  display:flex;gap:28px;flex-wrap:wrap;
+  padding-bottom:18px;margin-bottom:18px;
+  border-bottom:1px solid rgba(0,0,0,.07);
+}
+.prod__price-row b{
+  display:block;font-size:26px;font-weight:600;color:#1D1D1F;
+  letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+}
+.prod__price-row span{font-size:12.5px;color:#86868B;white-space:nowrap;}
+
+.prod__list{
+  list-style:none;padding:0;margin:0 0 20px;
+  font-size:14.5px;line-height:1.65;color:#424245;
+  display:flex;flex-direction:column;gap:10px;
+}
+.prod__list li{position:relative;padding-left:22px;}
+/* 用两条边画一个勾，不用图标字体、不用 emoji */
+.prod__list li::before{
+  content:"";position:absolute;left:2px;top:6px;
+  width:9px;height:5px;
+  border-left:1.6px solid #0071E3;
+  border-bottom:1.6px solid #0071E3;
+  transform:rotate(-45deg);
+}
+
+.prod__meta{
+  margin:0 0 20px;padding-top:16px;
+  border-top:1px solid rgba(0,0,0,.07);
+  display:grid;gap:8px;
+  margin-top:auto;
+}
+.prod__meta > div{display:grid;grid-template-columns:3.4em 1fr;gap:10px;align-items:baseline;}
+.prod__meta dt{font-size:12.5px;color:#86868B;}
+.prod__meta dd{margin:0;font-size:13.5px;color:#424245;}
+.prod .btn{width:100%;justify-content:center;}
+
+/* ============================================================
+   3. 配置器
+   ============================================================ */
+.config{
+  display:grid;grid-template-columns:1fr 340px;
+  gap:32px;align-items:start;
+}
+.config__group{
+  border:0;padding:0;margin:0 0 28px;
+}
+.config__group legend{
+  font-size:14px;font-weight:600;color:#1D1D1F;
+  letter-spacing:.02em;margin-bottom:14px;padding:0;
+}
+.config__opts{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+}
+.config__opts--4{grid-template-columns:repeat(4,1fr);}
+
+/* 选项卡：input 隐藏，label 作为可点区域 */
+.opt{display:block;cursor:pointer;position:relative;}
+.opt input{
+  position:absolute;opacity:0;width:1px;height:1px;
+  pointer-events:none;
+}
+.opt__body{
+  display:flex;flex-direction:column;gap:4px;
+  height:100%;
+  padding:14px 14px 13px;
+  border:1px solid rgba(0,0,0,.1);
+  border-radius:14px;
+  background:#FFFFFF;
+  transition:border-color .2s var(--ease-out-quart),
+             background .2s var(--ease-out-quart),
+             box-shadow .2s var(--ease-out-quart);
+}
+.opt__body b{font-size:14.5px;font-weight:600;color:#1D1D1F;}
+.opt__body em{
+  font-style:normal;font-size:15px;font-weight:600;
+  color:#0071E3;font-variant-numeric:tabular-nums;
+}
+.opt__body small{font-size:12px;color:#86868B;line-height:1.4;}
+
+.opt:hover .opt__body{border-color:rgba(0,0,0,.22);}
+/* 选中态 */
+.opt input:checked + .opt__body{
+  border-color:#0071E3;
+  background:rgba(0,113,227,.05);
+  box-shadow:0 0 0 1px rgba(0,113,227,.35);
+}
+/* 键盘可达 */
+.opt input:focus-visible + .opt__body{
+  outline:2px solid #0071E3;
+  outline-offset:3px;
+}
+
+/* 右侧合计 */
+.config__sum{
+  position:sticky;top:80px;
+  background:#FFFFFF;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:18px;
+  padding:24px;
+  box-shadow:0 18px 50px -34px rgba(0,0,0,.35);
+}
+.config__sumLabel{
+  display:block;font-size:13px;color:#86868B;margin-bottom:8px;
+}
+.config__total{
+  display:block;
+  font-size:40px;font-weight:600;color:#1D1D1F;
+  letter-spacing:-.025em;line-height:1;
+  font-variant-numeric:tabular-nums;
+  transition:transform .18s var(--ease-out-quart),color .18s var(--ease-out-quart);
+}
+.config__total.is-bump{transform:scale(1.045);color:#0071E3;}
+.config__sumNote{
+  margin:14px 0 18px;font-size:13px;line-height:1.6;color:#6E6E73;
+  min-height:2.6em;
+}
+.config__small{
+  margin:14px 0 0;font-size:12px;line-height:1.6;color:#86868B;
+}
+
+/* ============================================================
+   4. 条款
+   ============================================================ */
+.terms{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;border-top:1px solid rgba(0,0,0,.1);
+}
+.term{
+  padding:var(--sp-6) var(--sp-6) var(--sp-6) 0;
+  border-right:1px solid rgba(0,0,0,.07);
+  border-bottom:1px solid rgba(0,0,0,.07);
+}
+.term:nth-child(3n){border-right:0;}
+.term:nth-child(n+4){border-bottom:0;}
+.term:not(:nth-child(3n+1)){padding-left:var(--sp-6);}
+.term b{display:block;font-size:16px;color:#1D1D1F;font-weight:600;margin-bottom:8px;}
+.term p{font-size:14px;line-height:1.7;color:#6E6E73;margin:0;}
+
+/* ============================================================
+   5. 深色区里的按钮回退（.invert 里主按钮保持蓝色）
+   ============================================================ */
+.invert .btn--ghost{border-color:rgba(255,255,255,.45);color:#fff;}
+.invert .btn--ghost:hover{background:rgba(255,255,255,.1);color:#fff;}
+.invert .head .lead{color:rgba(255,255,255,.62);}
+
+/* ============================================================
+   6. 响应式
+   ============================================================ */
+@media (max-width:1200px){
+  .prods{grid-template-columns:repeat(2,1fr);}
+  .prods--3{grid-template-columns:repeat(3,1fr);}
+  .config{grid-template-columns:1fr 300px;}
+  .config__opts--4{grid-template-columns:repeat(2,1fr);}
+}
+@media (max-width:1024px){
+  .principles{grid-template-columns:1fr;}
+  .principle{border-right:0;border-bottom:1px solid rgba(0,0,0,.07);padding:var(--sp-5) 0 !important;}
+  .principle:last-child{border-bottom:0;}
+  .terms{grid-template-columns:repeat(2,1fr);}
+  .term{border-right:1px solid rgba(0,0,0,.07) !important;border-bottom:1px solid rgba(0,0,0,.07) !important;padding:var(--sp-5) !important;}
+  .term:nth-child(2n){border-right:0 !important;}
+  .prods--3{grid-template-columns:1fr 1fr;}
+  .config{grid-template-columns:1fr;}
+  .config__sum{position:static;order:-1;}
+}
+@media (max-width:720px){
+  .prod__head{min-height:0;}
+  .prods,.prods--2,.prods--3{grid-template-columns:1fr;}
+  .config__opts,.config__opts--4{grid-template-columns:1fr 1fr;}
+  .terms{grid-template-columns:1fr;}
+  .term{border-right:0 !important;}
+  .prod__price b{font-size:30px;}
+  .config__total{font-size:34px;}
+}
+
+/* 减少动态效果 */
+@media (prefers-reduced-motion:reduce){
+  .prod,.opt__body,.config__total{transition:none;}
+}
+
+/* ============================================================
+   7. 适合 / 不适合
+   ============================================================ */
+.fit{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.fit__col{
+  padding:26px 24px;
+  border-radius:18px;
+  border:1px solid rgba(0,0,0,.08);
+  background:#FFFFFF;
+}
+.fit__col--yes{border-color:rgba(29,157,91,.28);background:rgba(29,157,91,.04);}
+.fit__col--no{border-color:rgba(0,0,0,.1);background:#F5F5F7;}
+.fit__col b{
+  display:block;font-size:17px;font-weight:600;margin-bottom:14px;color:#1D1D1F;
+}
+.fit__col--no b{color:#6E6E73;}
+.fit__col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+.fit__col li{
+  position:relative;padding-left:22px;
+  font-size:14.5px;line-height:1.6;color:#424245;
+}
+.fit__col li::before{
+  content:"";position:absolute;left:2px;top:7px;
+  width:9px;height:5px;
+  border-left:1.6px solid #1D9D5B;
+  border-bottom:1.6px solid #1D9D5B;
+  transform:rotate(-45deg);
+}
+.fit__col--no li{color:#6E6E73;}
+.fit__col--no li::before{
+  width:9px;height:9px;top:6px;border:0;
+  background:
+    linear-gradient(45deg, transparent 44%, #C7C7CC 44%, #C7C7CC 56%, transparent 56%),
+    linear-gradient(-45deg, transparent 44%, #C7C7CC 44%, #C7C7CC 56%, transparent 56%);
+  transform:none;
+}
+
+/* 手机端：合计吸顶，滚动选项时始终能看到总价 */
+@media (max-width:1024px){
+  .config__sum{position:sticky;top:64px;z-index:6;}
+  .fit{grid-template-columns:1fr;}
+  .fit__col{padding:22px 20px;}
+}
+/* ============================================================
+   8. 三条承诺
+   ============================================================ */
+.promise{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+}
+.promise__item{
+  padding:22px 22px 24px;
+  border-radius:16px;
+  background:rgba(0,113,227,.05);
+  border:1px solid rgba(0,113,227,.18);
+}
+.promise__item b{
+  display:block;font-size:16px;font-weight:600;color:#1D1D1F;margin-bottom:8px;
+}
+.promise__item p{
+  margin:0;font-size:14px;line-height:1.65;color:#424245;
+}
+@media (max-width:1024px){
+  .promise{grid-template-columns:1fr;}
+}

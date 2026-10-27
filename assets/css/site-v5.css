@@ -1,0 +1,113 @@
+/* ============================================================
+   玛塔塔 MATATA · 站点样式 v5
+   ============================================================
+   在 v4（暗色电影感）基础上，把首屏换成 WebGL 着色器背景。
+   参考：threeui.com（MengTo，MIT）的 shader 组件方向。
+   实现：原生 WebGL + GLSL，无 npm 依赖、无外部资源。
+
+   继承关系：@import v4，然后追加 v5 首屏规则。
+   ============================================================ */
+@import url("site-v4.css");
+
+/* ============================================================
+   v5 · 首屏：全屏着色器画布
+   ============================================================ */
+
+.hero{
+  position:relative;
+  min-height:92vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:var(--sp-12) 0 var(--sp-10);
+  overflow:hidden;
+  isolation:isolate;
+}
+
+/* 着色器容器：自带 CSS 渐变兜底，WebGL 不可用时也不会塌 */
+.shader{position:absolute;inset:0;z-index:0;overflow:hidden;
+  background:
+    radial-gradient(58% 52% at 50% 28%, rgba(76,111,255,.34), transparent 72%),
+    radial-gradient(42% 40% at 18% 12%, rgba(110,80,255,.20), transparent 74%),
+    radial-gradient(40% 40% at 84% 8%, rgba(40,140,255,.16), transparent 74%),
+    linear-gradient(180deg,#0A0C14 0%,#08090C 72%);
+}
+.shader__canvas{
+  position:absolute;inset:0;
+  width:100%;height:100%;display:block;
+  opacity:0;                       /* 着色器编译成功并出第一帧后才淡入 */
+  transition:opacity 900ms cubic-bezier(.25,1,.5,1);
+  pointer-events:none;             /* 装饰层不拦截任何交互 */
+  user-select:none;
+}
+.shader__canvas.is-live{opacity:1;}
+
+/* 压暗层：把对比度让给文字，同时压掉边缘噪声 */
+.shader__veil{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg, rgba(8,9,12,.55) 0%, rgba(8,9,12,.26) 38%, rgba(8,9,12,.86) 100%);
+}
+
+/* 首屏内容压在着色器之上 */
+.hero__inner{position:relative;z-index:2;}
+.hero h1{
+  text-wrap:balance;
+  text-shadow:0 2px 30px rgba(8,9,12,.55);
+}
+.hero__sub{text-shadow:0 1px 18px rgba(8,9,12,.5);}
+.hero .eyebrow{color:rgba(255,255,255,.66);}
+.hero .eyebrow::before{background:rgba(255,255,255,.3);}
+
+/* 玻璃质 CTA：在着色器上更稳 */
+.hero .btn--ghost{
+  background:rgba(255,255,255,.07);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+  border-color:rgba(255,255,255,.22);
+}
+.hero .btn--ghost:hover{background:rgba(255,255,255,.13);}
+
+/* 向下指示：纯 CSS 细线，无 emoji */
+.hero__cue{
+  position:relative;z-index:2;
+  margin:var(--sp-10) auto 0;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.hero__cue-line{
+  width:1px;height:52px;
+  background:linear-gradient(180deg, rgba(255,255,255,.42), transparent);
+  animation:cueDrop 3.6s cubic-bezier(.65,0,.35,1) infinite;
+  transform-origin:top;
+}
+.hero__cue-text{font-size:var(--fs-xs);letter-spacing:.2em;color:rgba(255,255,255,.34);}
+@keyframes cueDrop{
+  0%{transform:scaleY(.35);opacity:0;}
+  35%{transform:scaleY(1);opacity:1;}
+  100%{transform:scaleY(1);opacity:0;}
+}
+
+/* 首屏入场：一次性，错峰 */
+.js-motion .hero__inner > *{opacity:0;transform:translateY(22px);}
+.js-motion .hero__inner.is-in > *{opacity:1;transform:none;}
+.js-motion .hero__inner.is-in > *:nth-child(1){transition:all 900ms var(--ease-out-expo) 80ms;}
+.js-motion .hero__inner.is-in > *:nth-child(2){transition:all 1000ms var(--ease-out-expo) 220ms;}
+.js-motion .hero__inner.is-in > *:nth-child(3){transition:all 1000ms var(--ease-out-expo) 380ms;}
+.js-motion .hero__inner.is-in > *:nth-child(4){transition:all 1000ms var(--ease-out-expo) 520ms;}
+.js-motion .hero__cue{opacity:0;transition:opacity 900ms var(--ease-out-quart) 900ms;}
+.js-motion .hero__inner.is-in ~ .hero__cue{opacity:1;}
+
+/* 机器分层区：紧贴首屏，不加额外上边距 */
+#machine{padding-top:var(--sp-10);}
+
+/* ---- v5 窄屏 ---- */
+@media (max-width:720px){
+  .hero{min-height:auto;padding:var(--sp-11) 0 var(--sp-10);}
+  .hero__cue{margin-top:var(--sp-8);}
+  .hero__cue-line{height:40px;}
+}
+
+/* ---- 减少动态效果：首屏立即可见，去掉指示线动画 ---- */
+@media (prefers-reduced-motion:reduce){
+  .js-motion .hero__inner > *{opacity:1 !important;transform:none !important;}
+  .js-motion .hero__cue{opacity:1 !important;}
+  .hero__cue-line{animation:none;opacity:.6;}
+  .shader__canvas{transition:none;}
+}

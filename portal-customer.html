@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>客户门户｜玛塔塔科技 MATATA</title>
+<meta name="description" content="客户门户：查看采购产品、交付进度与交付文档。">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<!-- 社交分享与规范化 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="玛塔塔 MATATA">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="关于玛塔塔｜北京玛塔塔科技有限公司">
+<meta property="og:description" content="北京玛塔塔科技有限公司，专注本地 AI 接入与落地服务：把大模型装进客户自己的机器，接进客户的业务流程，并教会客户的人使用。">
+<meta property="og:image" content="https://www.matata.cn/assets/img/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://www.matata.cn/portal-customer.html">
+<link rel="canonical" href="https://www.matata.cn/portal-customer.html">
+<link rel="stylesheet" href="assets/css/site-entry.css">
+<link rel="stylesheet" href="assets/css/redesign.css">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="assets/css/portal.css">
+</head>
+<body>
+
+<!-- ============================ 顶部导航（与 index.html 保持一致，仅改链接与当前页高亮） ============================ -->
+<body>
+
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="logo" href="index.html" aria-label="玛塔塔科技 MATATA 首页">
+      <span class="logo__mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="100%" height="100%"><rect width="64" height="64" rx="15" fill="#1246C8"/><path d="M32 12 L53 23 L32 34 L11 23 Z" fill="#fff"/>
+            <path d="M11 31 L32 42 L53 31" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".82"/>
+            <path d="M11 40.5 L32 51.5 L53 40.5" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".52"/></svg>
+      </span>
+      <span class="logo__text">
+        <span class="logo__cn">玛塔塔科技</span>
+        <span class="logo__en">MATATA</span>
+      </span>
+    </a>
+    <nav class="nav__links" aria-label="主导航">
+        <a href="pricing.html">产品与报价</a>
+      <a href="services.html">服务流程</a>
+      <a href="solutions.html">解决方案</a>
+      <a href="cases.html">客户案例</a>
+      <a href="about.html" class="is-active">关于我们</a>
+      <a href="faq.html">常见问题</a>
+    </nav>
+    <a class="btn btn--cta btn--sm nav__cta" href="contact.html">预约免费诊断</a>
+  </div>
+</header>
+
+<main>
+<div class="proto-banner">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+  <span><b>演示原型</b> · 本页为前端界面演示，<b>没有真实登录与数据</b>。账号密码不做校验，页面内容为示例数据；正式版需接入后端后再开放。</span>
+</div>
+
+<section class="portal">
+  <div class="wrap">
+    <div class="portal__grid">
+
+      <aside class="portal__side">
+        <div class="portal__who">
+          <b>北京某某科技有限公司</b>
+          <small>客户编号 C-2024-0186（示例）</small>
+        </div>
+        <nav class="portal__nav" aria-label="客户门户导航">
+          <a href="#products" class="is-on">我的产品</a>
+          <a href="#track">交付进度</a>
+          <a href="#docs">交付文档</a>
+          <a href="#contact">联系客户经理</a>
+        </nav>
+        <a class="btn btn--ghost" href="login.html">退出登录</a>
+      </aside>
+
+      <div class="portal__main">
+        <h1 class="portal__title">您好，张经理</h1>
+        <p class="portal__lead">这里是您与玛塔塔合作的全部记录：买了什么、做到哪一步、文档在哪。</p>
+
+        <div class="pstats">
+          <div class="pstat"><small>在服务项目</small><b>2</b><span>1 个进行中 · 1 个已完成</span></div>
+          <div class="pstat"><small>当前阶段</small><b>第 4 步</b><span>正式部署 · 预计 3 月底完成</span></div>
+          <div class="pstat"><small>交付文档</small><b>6</b><span>共 8 份，2 份待出具</span></div>
+        </div>
+
+        <h2 class="portal__title" style="font-size:19px;margin-bottom:14px;" id="products">我的产品</h2>
+        <article class="pprod">
+          <div class="pprod__head">
+            <h3>企业标准部署</h3>
+            <span class="pprod__state pprood__state--run">进行中</span>
+          </div>
+          <div class="pprod__meta">
+            <span>合同金额 <b>¥68,000</b></span>
+            <span>服务范围 <b>知识库问答 + 单据提取</b></span>
+            <span>交付周期 <b>3–6 周</b></span>
+            <span>启动日期 <b>2024-03-04</b></span>
+          </div>
+        </article>
+        <article class="pprod">
+          <div class="pprod__head">
+            <h3>一体机 · 专业（2 台）</h3>
+            <span class="pprod__state pprood__state--ok">已交付</span>
+          </div>
+          <div class="pprod__meta">
+            <span>金额 <b>¥139,600</b></span>
+            <span>到货 <b>2024-03-11</b></span>
+            <span>质保 <b>12 个月</b></span>
+          </div>
+        </article>
+        <article class="pprod">
+          <div class="pprod__head">
+            <h3>单机试点包</h3>
+            <span class="pprod__state pprood__state--ok">已完成</span>
+          </div>
+          <div class="pprod__meta">
+            <span>金额 <b>¥9,800</b>（已全额抵扣）</span>
+            <span>完成 <b>2024-02-26</b></span>
+          </div>
+        </article>
+
+        <h2 class="portal__title" style="font-size:19px;margin:30px 0 14px;" id="track">交付进度</h2>
+        <ol class="track">
+          <li class="is-done"><b>01 诊断</b><i>已完成 · 2024-02-20 · 交付《AI 落地机会清单》</i></li>
+          <li class="is-done"><b>02 方案与报价</b><i>已完成 · 2024-02-27 · 已签合同</i></li>
+          <li class="is-done"><b>03 试点验证</b><i>已完成 · 2024-03-01 · 问答场景跑通</i></li>
+          <li class="is-now"><b>04 正式部署</b><i>进行中 · 预计 2024-03-29 完成</i></li>
+          <li><b>05 培训与交接</b><i>未开始 · 计划 2 天</i></li>
+          <li><b>06 验收交付</b><i>未开始</i></li>
+          <li><b>07 陪跑迭代</b><i>验收后开始 · 每季度一次复盘</i></li>
+        </ol>
+
+        <h2 class="portal__title" style="font-size:19px;margin:30px 0 14px;" id="docs">交付文档</h2>
+        <div class="docs">
+          <a class="doc" href="#"><svg viewBox="0 0 24 24"><path d="M5 4h9l5 5v11H5z"/><path d="M14 4v5h5"/></svg><b>AI 落地机会清单</b><span>2024-02-20 · PDF</span></a>
+          <a class="doc" href="#"><svg viewBox="0 0 24 24"><path d="M5 4h9l5 5v11H5z"/><path d="M14 4v5h5"/></svg><b>项目方案书（已签）</b><span>2024-02-27 · PDF</span></a>
+          <a class="doc" href="#"><svg viewBox="0 0 24 24"><path d="M5 4h9l5 5v11H5z"/><path d="M14 4v5h5"/></svg><b>试点效果对照说明</b><span>2024-03-01 · PDF</span></a>
+          <a class="doc" href="#"><svg viewBox="0 0 24 24"><path d="M5 4h9l5 5v11H5z"/><path d="M14 4v5h5"/></svg><b>部署文档（待出具）</b><span>部署完成后提供</span></a>
+        </div>
+
+        <h2 class="portal__title" style="font-size:19px;margin:30px 0 14px;" id="contact">联系客户经理</h2>
+        <article class="pprod" style="margin-bottom:0;">
+          <div class="pprod__head"><h3>李工 · 项目经理</h3><span class="pprod__state">从诊断跟到验收</span></div>
+          <div class="pprod__meta">
+            <span>电话 <b>138 1062 5550</b></span>
+            <span>邮箱 <b>119274334@qq.com</b></span>
+            <span>响应 <b>工作日 2 小时内</b></span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============================ 页脚（与 index.html 保持一致，仅改链接） ============================ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <span class="logo__mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" width="100%" height="100%"><rect width="64" height="64" rx="15" fill="#1246C8"/><path d="M32 12 L53 23 L32 34 L11 23 Z" fill="#fff"/>
+            <path d="M11 31 L32 42 L53 31" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".82"/>
+            <path d="M11 40.5 L32 51.5 L53 40.5" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".52"/></svg>
+          </span>
+          <span class="logo__text"><span class="logo__cn">玛塔塔科技</span><span class="logo__en">MATATA</span></span>
+        </div>
+        <p style="line-height:1.9;max-width:30ch;">北京玛塔塔科技有限公司<br>本地 AI 接入与落地服务<br>让 AI 真正在您自己的电脑上跑起来</p>
+      </div>
+      <div>
+        <h4>产品与报价</h4>
+        <ul>
+          <li><a href="pricing.html">报价总览</a></li>
+          <li><a href="pricing.html#services">免费现状诊断</a></li>
+          <li><a href="pricing.html#services">单机试点包</a></li>
+          <li><a href="pricing.html#services">企业标准部署</a></li>
+          <li><a href="pricing.html#care">定制开发</a></li>
+          <li><a href="pricing.html#care">年度托管</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>解决方案</h4>
+        <ul>
+          <li><a href="solutions.html#scenes">按场景看</a></li>
+          <li><a href="solutions.html#industries">按行业看</a></li>
+          <li><a href="industry-manufacturing.html">制造业</a></li>
+          <li><a href="industry-trade.html">外贸与跨境</a></li>
+          <li><a href="industry-law.html">律师事务所</a></li>          <li><a href="industry-finance.html">财务与代账</a></li>
+          <li><a href="industry-logistics.html">物流与仓储</a></li>
+          <li><a href="industry-education.html">教育与培训</a></li>
+          <li><a href="commitment.html">服务承诺</a></li>
+          <li><a href="insights.html">行业观点</a></li>
+          <li><a href="solutions.html#ind-logistics">物流仓储</a></li>
+          <li><a href="solutions.html#ind-legal">专业服务</a></li>
+          <li><a href="enterprise.html">政企内网方案</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>联系我们</h4>
+        <ul>
+          <li>电话：<span class="tbd" data-contact="phone">待确认</span></li>
+          <li>商务微信：<span class="tbd" data-contact="wechat">待确认</span></li>
+          <li>邮箱：<span class="tbd" data-contact="email">待确认</span></li>
+          <li>地址：<span class="tbd" data-contact="address">待确认</span></li>
+          <li>服务时间：<span data-contact="hours">周一至周五 9:00–18:00</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 北京玛塔塔科技有限公司 保留所有权利</span>
+      <span><span data-contact="icp"></span><span class="sep-icp">　｜　</span><a href="privacy.html">隐私政策</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/motion-site.js"></script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+/* ============================================================
+   玛塔塔 MATATA · 首页（精简版）
+   ============================================================
+   目标：让客户 5 秒内看懂"这家公司是干什么的、大概多少钱、怎么开始"。
+
+   做法：把原来的 12 个板块砍到 7 个，一个板块只讲一件事。
+   原来首页要素太多（机器分层、痛点四行、五宫格、六层表、七步、
+   十行业、三块 FAQ），需要"读"才能懂；现在需要"扫"就能懂。
+
+   本文件只被 index.html 引用，叠加在 v7 之上。
+   ============================================================ */
+
+/* ---------- 通用 ---------- */
+.section--tight{padding:var(--sp-10) 0;}
+.head--center{
+  text-align:center;
+  margin-left:auto;margin-right:auto;
+}
+.head--center p{margin-left:auto;margin-right:auto;}
+
+/* ============================================================
+   1. 三件事（装进机器 / 接进业务 / 教会人）
+   ============================================================ */
+.what3{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.what3__item{
+  background:#FFFFFF;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:18px;
+  padding:32px 28px 30px;
+  transition:border-color .28s var(--ease-out-quart),
+             box-shadow .28s var(--ease-out-quart),
+             transform .28s var(--ease-out-quart);
+}
+.what3__item:hover{
+  border-color:rgba(0,0,0,.16);
+  box-shadow:0 18px 44px -30px rgba(0,0,0,.32);
+  transform:translateY(-3px);
+}
+.what3__ico{
+  display:flex;align-items:center;justify-content:center;
+  width:52px;height:52px;border-radius:14px;
+  background:rgba(0,113,227,.08);
+  margin-bottom:22px;
+}
+.what3__ico svg{
+  width:26px;height:26px;
+  fill:none;stroke:#0071E3;stroke-width:1.5;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.what3__item h3{
+  font-size:21px;font-weight:600;color:#1D1D1F;
+  letter-spacing:-.01em;margin:0 0 10px;
+}
+.what3__item p{
+  font-size:15px;line-height:1.7;color:#6E6E73;margin:0;
+}
+
+/* ============================================================
+   2. 三步开始（诊断 → 试点 → 部署）
+   ============================================================ */
+.start3{
+  list-style:none;padding:0;margin:0;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;
+  border-top:1px solid rgba(0,0,0,.1);
+}
+.start3__item{
+  padding:28px 28px 28px 0;
+  border-right:1px solid rgba(0,0,0,.07);
+}
+.start3__item:last-child{border-right:0;}
+.start3__item:not(:first-child){padding-left:28px;}
+.start3__no{
+  display:block;
+  font-family:var(--font-num);
+  font-size:12px;letter-spacing:.12em;color:#0071E3;
+  margin-bottom:16px;
+}
+.start3__item b{
+  display:block;
+  font-size:22px;font-weight:600;color:#1D1D1F;
+  letter-spacing:-.01em;margin-bottom:10px;
+}
+.start3__item p{
+  font-size:15px;line-height:1.7;color:#6E6E73;margin:0 0 16px;
+  min-height:3.4em;
+}
+.start3__price{
+  display:inline-block;
+  font-size:15px;font-weight:600;color:#1D1D1F;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ============================================================
+   3. 深色带：三条路对比
+   ============================================================ */
+.why3{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;
+  border-top:1px solid rgba(255,255,255,.14);
+}
+.why3__col{
+  padding:26px 26px 26px 0;
+  border-right:1px solid rgba(255,255,255,.1);
+}
+.why3__col:last-child{border-right:0;}
+.why3__col:not(:first-child){padding-left:26px;}
+.why3__col b{
+  display:block;font-size:17px;font-weight:600;
+  color:rgba(255,255,255,.62);margin-bottom:10px;
+}
+.why3__col p{
+  font-size:14.5px;line-height:1.75;
+  color:rgba(255,255,255,.5);margin:0;
+}
+/* 我们这一列：白字 + 蓝色标记 */
+.why3__col--us b{color:#FFFFFF;}
+.why3__col--us p{color:rgba(255,255,255,.78);}
+.why3__col--us{position:relative;}
+.why3__col--us::before{
+  content:"";position:absolute;left:0;right:26px;top:0;height:2px;
+  background:#4CA3F5;
+}
+
+/* ============================================================
+   4. 继续了解：四个入口
+   ============================================================ */
+.more4{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+.more4__item{
+  display:flex;flex-direction:column;gap:6px;
+  padding:24px 22px;
+  background:#FFFFFF;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:16px;
+  text-decoration:none;
+  transition:border-color .26s var(--ease-out-quart),
+             box-shadow .26s var(--ease-out-quart),
+             transform .26s var(--ease-out-quart);
+}
+.more4__item:hover{
+  border-color:rgba(0,113,227,.4);
+  box-shadow:0 16px 38px -28px rgba(0,113,227,.6);
+  transform:translateY(-2px);
+}
+.more4__item b{font-size:16px;font-weight:600;color:#1D1D1F;}
+.more4__item span{font-size:13.5px;line-height:1.6;color:#86868B;}
+.more4__item i{
+  margin-top:10px;
+  font-style:normal;font-size:15px;color:#0071E3;
+  transition:transform .26s var(--ease-out-quart);
+}
+.more4__item:hover i{transform:translateX(4px);}
+
+/* ============================================================
+   5. 最终 CTA
+   ============================================================ */
+.final-cta{
+  text-align:center;
+  background:#F5F5F7;
+  border-radius:24px;
+  padding:72px 32px;
+}
+.final-cta h2{
+  font-size:clamp(28px,3.4vw,46px);
+  line-height:1.14;letter-spacing:-.01em;
+  color:#1D1D1F;margin:0 0 16px;
+}
+.final-cta p{
+  font-size:17px;color:#6E6E73;margin:0;
+}
+
+/* ============================================================
+   6. 响应式
+   ============================================================ */
+@media (max-width:1024px){
+  .what3{grid-template-columns:1fr;}
+  .what3__item{padding:26px 22px;}
+  .start3{grid-template-columns:1fr;}
+  .start3__item{
+    border-right:0;border-bottom:1px solid rgba(0,0,0,.07);
+    padding:24px 0 !important;
+  }
+  .start3__item:last-child{border-bottom:0;}
+  .start3__item p{min-height:0;}
+  .why3{grid-template-columns:1fr;}
+  .why3__col{
+    border-right:0;border-bottom:1px solid rgba(255,255,255,.1);
+    padding:22px 0 !important;
+  }
+  .why3__col:last-child{border-bottom:0;}
+  .why3__col--us::before{right:0;}
+  .more4{
+  /* 三列变体：行业入口用 */
+}grid-template-columns:1fr 1fr;}
+  .final-cta{padding:52px 24px;border-radius:20px;}
+}
+
+@media (max-width:720px){
+  .more4{
+  /* 三列变体：行业入口用 */
+}grid-template-columns:1fr;}
+  .section--tight{padding:64px 0;}
+  .what3__item h3{font-size:19px;}
+  .start3__item b{font-size:19px;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .what3__item,.more4__item,.more4__item i{transition:none;}
+}
+
+/* 三列变体（行业入口 6 个） */
+.more4--3{grid-template-columns:repeat(3,1fr);}
+@media (max-width:1024px){.more4--3{grid-template-columns:1fr 1fr;}}
+@media (max-width:720px){.more4--3{grid-template-columns:1fr;}}

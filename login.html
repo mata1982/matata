@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>会员登录｜玛塔塔科技 MATATA</title>
+<meta name="description" content="登录进入您的客户门户或员工手册。">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<!-- 社交分享与规范化 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="玛塔塔 MATATA">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="关于玛塔塔｜北京玛塔塔科技有限公司">
+<meta property="og:description" content="北京玛塔塔科技有限公司，专注本地 AI 接入与落地服务：把大模型装进客户自己的机器，接进客户的业务流程，并教会客户的人使用。">
+<meta property="og:image" content="https://www.matata.cn/assets/img/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://www.matata.cn/login.html">
+<link rel="canonical" href="https://www.matata.cn/login.html">
+<link rel="stylesheet" href="assets/css/site-entry.css">
+<link rel="stylesheet" href="assets/css/redesign.css">
+<link rel="stylesheet" href="assets/css/portal.css">
+</head>
+<body>
+
+<!-- ============================ 顶部导航（与 index.html 保持一致，仅改链接与当前页高亮） ============================ -->
+<body>
+
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="logo" href="index.html" aria-label="玛塔塔科技 MATATA 首页">
+      <span class="logo__mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="100%" height="100%"><rect width="64" height="64" rx="15" fill="#1246C8"/><path d="M32 12 L53 23 L32 34 L11 23 Z" fill="#fff"/>
+            <path d="M11 31 L32 42 L53 31" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".82"/>
+            <path d="M11 40.5 L32 51.5 L53 40.5" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".52"/></svg>
+      </span>
+      <span class="logo__text">
+        <span class="logo__cn">玛塔塔科技</span>
+        <span class="logo__en">MATATA</span>
+      </span>
+    </a>
+    <nav class="nav__links" aria-label="主导航">
+        <a href="pricing.html">产品与报价</a>
+      <a href="services.html">服务流程</a>
+      <a href="solutions.html">解决方案</a>
+      <a href="cases.html">客户案例</a>
+      <a href="about.html" class="is-active">关于我们</a>
+      <a href="faq.html">常见问题</a>
+    </nav>
+    <a class="btn btn--cta btn--sm nav__cta" href="contact.html">预约免费诊断</a>
+  </div>
+</header>
+
+<main>
+<div class="proto-banner">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+  <span><b>演示原型</b> · 本页为前端界面演示，<b>没有真实登录与数据</b>。账号密码不做校验，页面内容为示例数据；正式版需接入后端后再开放。</span>
+</div>
+
+<section class="auth">
+  <div class="auth__card">
+    <div class="auth__brand">
+      <span class="logo__mark" aria-hidden="true"><svg viewBox="0 0 64 64" width="100%" height="100%"><rect width="64" height="64" rx="15" fill="#1246C8"/><path d="M32 12 L53 23 L32 34 L11 23 Z" fill="#fff"/><path d="M11 31 L32 42 L53 31" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".82"/><path d="M11 40.5 L32 51.5 L53 40.5" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".52"/></svg></span>
+      <span><b>玛塔塔科技</b><small>MATATA</small></span>
+    </div>
+
+    <div class="auth__tabs" role="tablist" aria-label="登录身份">
+      <button type="button" class="auth__tab is-on" data-role="customer" role="tab" aria-selected="true">客户登录</button>
+      <button type="button" class="auth__tab" data-role="staff" role="tab" aria-selected="false">员工登录</button>
+    </div>
+
+    <h1 id="authTitle">查看您的交付进度</h1>
+    <p class="auth__sub" id="authSub">登录后可查看采购产品、交付节点与交付文档。</p>
+
+    <form id="authForm" novalidate>
+      <div class="field">
+        <label for="acc">账号</label>
+        <input id="acc" name="acc" type="text" placeholder="手机号 / 邮箱" autocomplete="username">
+      </div>
+      <div class="field">
+        <label for="pwd">密码</label>
+        <input id="pwd" name="pwd" type="password" placeholder="请输入密码" autocomplete="current-password">
+      </div>
+      <div class="auth__row">
+        <label><input type="checkbox" checked> 记住我</label>
+        <a href="contact.html">忘记密码？</a>
+      </div>
+      <button class="auth__submit" type="submit">登录</button>
+    </form>
+
+    <div class="auth__foot">
+      还没有账号？交付启动时由客户经理为您开通<br>
+      遇到问题请致电 <a href="tel:13810625550">13810625550</a>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {{
+  var tabs = document.querySelectorAll('.auth__tab');
+  var title = document.getElementById('authTitle');
+  var sub = document.getElementById('authSub');
+  var form = document.getElementById('authForm');
+  var role = 'customer';
+
+  var COPY = {{
+    customer: ['查看您的交付进度', '登录后可查看采购产品、交付节点与交付文档。', 'portal-customer.html', '手机号 / 邮箱'],
+    staff: ['访问内部手册', '产品手册、服务流程与客户沟通要点，只对公司内部开放。', 'portal-staff.html', '公司邮箱']
+  }};
+
+  function setRole(r) {{
+    role = r;
+    for (var i = 0; i < tabs.length; i++) {{
+      var on = tabs[i].getAttribute('data-role') === r;
+      tabs[i].classList.toggle('is-on', on);
+      tabs[i].setAttribute('aria-selected', on ? 'true' : 'false');
+    }}
+    title.textContent = COPY[r][0];
+    sub.textContent = COPY[r][1];
+    document.getElementById('acc').placeholder = COPY[r][3];
+  }}
+
+  for (var i = 0; i < tabs.length; i++) {{
+    tabs[i].addEventListener('click', function () {{
+      setRole(this.getAttribute('data-role'));
+    }});
+  }}
+
+  form.addEventListener('submit', function (e) {{
+    e.preventDefault();
+    var btn = form.querySelector('.auth__submit');
+    btn.textContent = '登录中…';
+    btn.disabled = true;
+    window.setTimeout(function () {{
+      window.location.href = COPY[role][2];
+    }}, 420);
+  }});
+}})();
+</script>
+</main>
+
+<!-- ============================ 页脚（与 index.html 保持一致，仅改链接） ============================ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <span class="logo__mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" width="100%" height="100%"><rect width="64" height="64" rx="15" fill="#1246C8"/><path d="M32 12 L53 23 L32 34 L11 23 Z" fill="#fff"/>
+            <path d="M11 31 L32 42 L53 31" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".82"/>
+            <path d="M11 40.5 L32 51.5 L53 40.5" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity=".52"/></svg>
+          </span>
+          <span class="logo__text"><span class="logo__cn">玛塔塔科技</span><span class="logo__en">MATATA</span></span>
+        </div>
+        <p style="line-height:1.9;max-width:30ch;">北京玛塔塔科技有限公司<br>本地 AI 接入与落地服务<br>让 AI 真正在您自己的电脑上跑起来</p>
+      </div>
+      <div>
+        <h4>产品与报价</h4>
+        <ul>
+          <li><a href="pricing.html">报价总览</a></li>
+          <li><a href="pricing.html#services">免费现状诊断</a></li>
+          <li><a href="pricing.html#services">单机试点包</a></li>
+          <li><a href="pricing.html#services">企业标准部署</a></li>
+          <li><a href="pricing.html#care">定制开发</a></li>
+          <li><a href="pricing.html#care">年度托管</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>解决方案</h4>
+        <ul>
+          <li><a href="solutions.html#scenes">按场景看</a></li>
+          <li><a href="solutions.html#industries">按行业看</a></li>
+          <li><a href="industry-manufacturing.html">制造业</a></li>
+          <li><a href="industry-trade.html">外贸与跨境</a></li>
+          <li><a href="industry-law.html">律师事务所</a></li>          <li><a href="industry-finance.html">财务与代账</a></li>
+          <li><a href="industry-logistics.html">物流与仓储</a></li>
+          <li><a href="industry-education.html">教育与培训</a></li>
+          <li><a href="commitment.html">服务承诺</a></li>
+          <li><a href="insights.html">行业观点</a></li>
+          <li><a href="solutions.html#ind-logistics">物流仓储</a></li>
+          <li><a href="solutions.html#ind-legal">专业服务</a></li>
+          <li><a href="enterprise.html">政企内网方案</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>联系我们</h4>
+        <ul>
+          <li>电话：<span class="tbd" data-contact="phone">待确认</span></li>
+          <li>商务微信：<span class="tbd" data-contact="wechat">待确认</span></li>
+          <li>邮箱：<span class="tbd" data-contact="email">待确认</span></li>
+          <li>地址：<span class="tbd" data-contact="address">待确认</span></li>
+          <li>服务时间：<span data-contact="hours">周一至周五 9:00–18:00</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 北京玛塔塔科技有限公司 保留所有权利</span>
+      <span><span data-contact="icp"></span><span class="sep-icp">　｜　</span><a href="privacy.html">隐私政策</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/motion-site.js"></script>
+</body>
+</html>

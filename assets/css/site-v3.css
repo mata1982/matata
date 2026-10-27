@@ -1,0 +1,479 @@
+/* ============================================================
+   玛塔塔 MATATA · 站点样式 v3
+   ============================================================
+   本版按 taste-skill（design-taste-frontend）的方法论重建。
+   设计判读与旋钮见 docs/08-设计规范-v3.md。
+
+   工程约束（不可违反）：
+   1. 零外部资源：不联网字体、不 CDN、不 npm 依赖。
+   2. 主题锁定：全站单一浅色，禁止区块深浅翻转（规范 §4.11）。
+   3. 单一强调色：--accent 只用于真实交互与关键数字。
+   4. 形状锁定：一套圆角（8/10/12），禁止混用。
+   5. 零 emoji、零 em-dash（规范 §9.G）。
+   6. 动效只动 transform / opacity，且尊重 prefers-reduced-motion。
+
+   文件分区：
+   1 令牌   2 基础   3 布局   4 组件   5 通用页组件   6 响应式
+   7 动效   8 可访问性
+   ============================================================ */
+
+/* ============================================================
+   1. 设计令牌
+   ============================================================ */
+:root{
+  /* 底色：暖调纸感，避免纯白刺眼与 AI 紫蓝默认 */
+  --paper:#FAF9F7;
+  --surface:#FFFFFF;
+  --surface-2:#F4F3F0;
+
+  /* 墨色：非纯黑（规范 §9.A 禁 #000000） */
+  --ink:#12171F;
+  --ink-2:#3C4450;
+  --ink-3:#5C6672;
+  --ink-4:#8A929C;
+
+  /* 唯一点缀色：品牌蓝（已降饱和） */
+  --accent:#1B44B8;
+  --accent-strong:#12308A;
+  --accent-wash:#EDF1FC;
+
+  /* 细线 */
+  --line:#E6E4E0;
+  --line-soft:#EFEEEA;
+
+  /* 语义色（仅用于真实状态，不用于装饰） */
+  --ok:#1F7A4C;
+  --ok-wash:#EAF5EF;
+  --warn:#9A6412;
+  --warn-wash:#FBF3E2;
+
+  /* 字体：系统栈（零联网约束）；数字用等宽保证对齐 */
+  --font-sans:"PingFang SC","Microsoft YaHei UI","Microsoft YaHei","Source Han Sans SC","Noto Sans SC","Helvetica Neue",Arial,sans-serif;
+  --font-num:"SF Mono","Cascadia Mono",Consolas,"DejaVu Sans Mono",monospace;
+
+  /* 字号：层级靠字重与颜色，不靠夸张尺度（规范 §9.B） */
+  --fs-display:44px;
+  --fs-h2:28px;
+  --fs-h3:18px;
+  --fs-body:16px;
+  --fs-sm:14px;
+  --fs-xs:12.5px;
+
+  --lh-display:1.24;
+  --lh-title:1.4;
+  --lh-body:1.85;
+
+  --fw-regular:400;
+  --fw-medium:500;
+  --fw-semi:600;
+
+  /* 间距：8 的倍数 */
+  --sp-1:4px;  --sp-2:8px;  --sp-3:12px; --sp-4:16px;
+  --sp-5:24px; --sp-6:32px; --sp-7:40px; --sp-8:48px;
+  --sp-9:64px; --sp-10:80px; --sp-11:104px; --sp-12:128px;
+
+  /* 形状锁定：一套圆角 */
+  --r-1:6px; --r-2:8px; --r-3:12px;
+
+  /* 阴影：极低透明度、大扩散（规范 §9.A 禁重投影） */
+  --sh-1:0 1px 2px rgba(18,23,31,.04);
+  --sh-2:0 2px 12px rgba(18,23,31,.05);
+  --sh-3:0 12px 40px rgba(18,23,31,.07);
+
+  --wrap:1140px;
+  --pad:32px;
+  --nav-h:68px;
+
+  /* 动效令牌（MOTION_INTENSITY = 3） */
+  --dur-1:140ms;
+  --dur-2:260ms;
+  --dur-3:560ms;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+
+/* ============================================================
+   2. 基础
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+body{
+  margin:0;background:var(--paper);color:var(--ink-2);
+  font-family:var(--font-sans);font-size:var(--fs-body);line-height:var(--lh-body);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4,p,ul,ol,figure,blockquote{margin:0;}
+h1,h2,h3,h4{color:var(--ink);line-height:var(--lh-title);font-weight:var(--fw-semi);}
+ul,ol{padding-left:1.2em;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;text-underline-offset:3px;}
+img,svg{display:block;max-width:100%;}
+button{font:inherit;cursor:pointer;}
+strong,b{font-weight:var(--fw-semi);color:var(--ink);}
+::selection{background:var(--accent-wash);}
+
+/* 键盘焦点必须可见（规范 §6 强制） */
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:var(--r-1);}
+
+/* 屏幕阅读器专用 */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+
+/* ============================================================
+   3. 布局
+   ============================================================ */
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 var(--pad);}
+.section{padding:var(--sp-11) 0;}
+.section--tight{padding:var(--sp-10) 0;}
+.section--divide{border-top:1px solid var(--line);}
+
+/* 分节抬头：抬头 + 标题 + 一句正文，绝不加浮在右上角的小字（规范 §9.F） */
+.head{max-width:44em;margin-bottom:var(--sp-9);}
+.head__eyebrow{
+  display:block;font-size:var(--fs-xs);font-weight:var(--fw-medium);
+  letter-spacing:.14em;color:var(--ink-4);margin-bottom:var(--sp-4);
+}
+.head h2{font-size:var(--fs-h2);letter-spacing:-.01em;}
+.head p{margin-top:var(--sp-4);color:var(--ink-3);font-size:var(--fs-body);max-width:38em;}
+.head--center{max-width:38em;margin-left:auto;margin-right:auto;text-align:center;}
+
+.lead{font-size:17px;color:var(--ink-3);max-width:40em;}
+.muted{color:var(--ink-3);}
+.small{font-size:var(--fs-sm);}
+.tiny{font-size:var(--fs-xs);color:var(--ink-4);}
+.mt-4{margin-top:var(--sp-4);} .mt-5{margin-top:var(--sp-5);}
+.mt-6{margin-top:var(--sp-6);} .mt-7{margin-top:var(--sp-7);}
+.mt-8{margin-top:var(--sp-8);}
+
+/* ============================================================
+   4. 组件
+   ============================================================ */
+
+/* ---- 按钮：形状锁定为 --r-2，文字必须单行（规范 §4.5） ---- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:48px;padding:0 22px;border-radius:var(--r-2);
+  font-size:var(--fs-body);font-weight:var(--fw-medium);white-space:nowrap;
+  border:1px solid transparent;text-decoration:none;
+  transition:background var(--dur-1) var(--ease),border-color var(--dur-1) var(--ease),transform var(--dur-1) var(--ease);
+}
+.btn:hover{text-decoration:none;}
+.btn:active{transform:scale(.985);}
+.btn--primary{background:var(--ink);color:#fff;}
+.btn--primary:hover{background:#232A34;color:#fff;}
+.btn--accent{background:var(--accent);color:#fff;}
+.btn--accent:hover{background:var(--accent-strong);color:#fff;}
+.btn--ghost{background:var(--surface);color:var(--ink);border-color:var(--line);}
+.btn--ghost:hover{border-color:var(--ink-4);}
+.btn--quiet{background:transparent;color:var(--ink);padding:0;min-height:auto;border:0;border-bottom:1px solid var(--line);border-radius:0;}
+.btn--quiet:hover{border-color:var(--ink);}
+.btn--sm{min-height:40px;padding:0 16px;font-size:var(--fs-sm);}
+.btn-row{display:flex;flex-wrap:wrap;gap:var(--sp-3);align-items:center;}
+
+/* ---- 卡片：仅在有真实层级时使用；细线 + 极淡投影 ---- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-3);padding:var(--sp-6);}
+.card--quiet{background:transparent;border:0;border-radius:0;padding:0;}
+
+/* ---- 标签：少用，只在需要区分状态时 ---- */
+.tag{
+  display:inline-block;padding:2px 9px;border-radius:var(--r-1);
+  font-size:var(--fs-xs);font-weight:var(--fw-medium);
+  background:var(--surface-2);color:var(--ink-3);
+}
+.tag--accent{background:var(--accent-wash);color:var(--accent-strong);}
+.tag--ok{background:var(--ok-wash);color:var(--ok);}
+.tag--warn{background:var(--warn-wash);color:var(--warn);}
+
+/* ---- 待确认占位：上线前必须替换 ---- */
+.tbd{
+  background:var(--warn-wash);color:var(--warn);
+  border-bottom:1px dashed currentColor;padding:0 4px;border-radius:2px;
+  font-weight:var(--fw-medium);font-size:.94em;white-space:nowrap;
+}
+
+/* ============================================================
+   5. 通用页组件（导航 / 页脚 / 页头）
+   ============================================================ */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(250,249,247,.86);
+  -webkit-backdrop-filter:saturate(180%) blur(12px);
+  backdrop-filter:saturate(180%) blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav__inner{height:var(--nav-h);display:flex;align-items:center;gap:var(--sp-7);}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.brand:hover{text-decoration:none;}
+.brand__mark{width:30px;height:30px;border-radius:var(--r-1);background:var(--ink);display:flex;align-items:center;justify-content:center;flex:none;}
+.brand__cn{font-size:17px;font-weight:var(--fw-semi);color:var(--ink);letter-spacing:.01em;line-height:1;}
+.brand__en{font-size:9.5px;font-weight:var(--fw-medium);color:var(--ink-4);letter-spacing:.2em;line-height:1;margin-top:3px;}
+.brand__text{display:flex;flex-direction:column;}
+.nav__links{display:flex;gap:var(--sp-6);margin-left:auto;align-items:center;}
+.nav__links a{color:var(--ink-3);font-size:var(--fs-sm);font-weight:var(--fw-medium);}
+.nav__links a:hover{color:var(--ink);text-decoration:none;}
+.nav__links a[aria-current="page"]{color:var(--ink);}
+
+/* 页头（子页面） */
+.pagehead{padding:var(--sp-10) 0 var(--sp-8);border-bottom:1px solid var(--line);}
+.crumbs{display:flex;gap:8px;align-items:center;font-size:var(--fs-xs);color:var(--ink-4);margin-bottom:var(--sp-5);}
+.crumbs a{color:var(--ink-4);}
+.crumbs .sep{color:var(--line);}
+.crumbs .here{color:var(--ink-3);}
+.pagehead h1{font-size:var(--fs-display);line-height:var(--lh-display);letter-spacing:-.02em;max-width:24em;font-weight:var(--fw-semi);}
+.pagehead .lead{margin-top:var(--sp-5);}
+
+/* 页脚：单一浅色主题，不做深色反相（规范 §4.11） */
+.footer{border-top:1px solid var(--line);padding:var(--sp-9) 0 var(--sp-7);margin-top:var(--sp-11);}
+.footer__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:var(--sp-8);}
+.footer h4{font-size:var(--fs-sm);color:var(--ink);margin-bottom:var(--sp-4);font-weight:var(--fw-semi);}
+.footer ul{list-style:none;padding:0;margin:0;}
+.footer li{margin-bottom:10px;}
+.footer a,.footer li{font-size:var(--fs-sm);color:var(--ink-3);}
+.footer a:hover{color:var(--ink);}
+.footer__bottom{
+  margin-top:var(--sp-8);padding-top:var(--sp-5);border-top:1px solid var(--line-soft);
+  display:flex;justify-content:space-between;gap:var(--sp-5);flex-wrap:wrap;
+  font-size:var(--fs-xs);color:var(--ink-4);
+}
+
+/* 页内锚点条 */
+.anchors{position:sticky;top:var(--nav-h);z-index:40;background:rgba(250,249,247,.92);border-bottom:1px solid var(--line);}
+.anchors__inner{display:flex;gap:var(--sp-6);overflow-x:auto;padding:13px 0;font-size:var(--fs-sm);}
+.anchors a{color:var(--ink-3);white-space:nowrap;font-weight:var(--fw-medium);}
+.anchors a:hover{color:var(--ink);text-decoration:none;}
+.anchors a[aria-current="true"]{color:var(--ink);}
+
+/* ============================================================
+   6. 响应式
+   ============================================================ */
+@media (max-width:1024px){
+  :root{--fs-display:36px;--fs-h2:25px;--fs-h3:17px;--pad:24px;--sp-11:80px;--sp-10:64px;}
+  .footer__grid{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:720px){
+  :root{--fs-display:29px;--fs-h2:22px;--fs-body:15.5px;--pad:18px;--sp-11:60px;--sp-10:52px;}
+  .nav__links{display:none;}
+  .footer__grid{grid-template-columns:1fr;}
+  .btn{width:100%;}
+  .btn-row{gap:var(--sp-2);}
+  .nav__cta{width:auto;}
+}
+@media print{.no-print{display:none !important;}}
+
+/* ============================================================
+   7. 动效（MOTION_INTENSITY = 3：只做入场与状态反馈）
+   ============================================================
+   渐进增强：隐藏样式只挂在 html.js-motion 下，由 motion.js 添加。
+   无 JS 或"减少动态效果"时，内容必须完整可见。
+   ============================================================ */
+:root{--d:0ms;}
+.js-motion [data-rise],.js-motion .rise{opacity:0;transform:translateY(12px);}
+.js-motion [data-rise].is-in,.js-motion .rise.is-in{
+  opacity:1;transform:none;
+  transition:opacity var(--dur-3) var(--ease) var(--d),transform var(--dur-3) var(--ease) var(--d);
+}
+.js-motion .head{opacity:0;transform:translateY(12px);}
+.js-motion .head.is-in{
+  opacity:1;transform:none;
+  transition:opacity var(--dur-3) var(--ease),transform var(--dur-3) var(--ease);
+}
+.js-motion .pagehead .wrap,.js-motion .hero .wrap{opacity:0;transform:translateY(10px);}
+.js-motion .pagehead .wrap.is-in,.js-motion .hero .wrap.is-in{
+  opacity:1;transform:none;
+  transition:opacity .6s var(--ease),transform .6s var(--ease);
+}
+
+/* ============================================================
+   9. v3 首页专属组件
+   ============================================================ */
+
+/* ---- 首屏：非对称分栏（规范 §4.3：VARIANCE > 4 时避免居中主视觉） ---- */
+.hero{padding:var(--sp-10) 0 var(--sp-9);}
+.hero__grid{display:grid;grid-template-columns:1.08fr .92fr;gap:var(--sp-10);align-items:center;}
+.hero__eyebrow{
+  display:block;font-size:var(--fs-xs);font-weight:var(--fw-medium);
+  letter-spacing:.14em;color:var(--ink-4);margin-bottom:var(--sp-5);
+}
+.hero h1{font-size:var(--fs-display);line-height:var(--lh-display);letter-spacing:-.022em;}
+.hero__sub{margin-top:var(--sp-5);font-size:17px;color:var(--ink-3);max-width:26em;}
+.hero .btn-row{margin-top:var(--sp-7);}
+
+/* ---- 首屏图示：机器分层（几何构成，非模拟界面） ---- */
+.hero__visual{margin:0;}
+.machine{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-3);
+  padding:var(--sp-6);box-shadow:var(--sh-2);
+}
+.machine__caption{
+  display:block;font-size:var(--fs-xs);font-weight:var(--fw-medium);
+  letter-spacing:.1em;color:var(--ink-4);margin-bottom:var(--sp-4);
+}
+.machine__stack{display:flex;flex-direction:column;gap:8px;}
+.machine__slot{
+  display:grid;grid-template-columns:26px 1fr;grid-template-rows:auto auto;
+  column-gap:12px;align-items:center;
+  padding:11px 14px;border:1px solid var(--line);border-radius:var(--r-2);
+  background:var(--paper);
+}
+.machine__num{
+  grid-row:1 / span 2;width:24px;height:24px;border-radius:var(--r-1);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-num);font-size:11px;color:var(--ink-4);
+  border:1px solid var(--line);background:var(--surface);
+}
+.machine__slot b{font-size:var(--fs-sm);color:var(--ink);font-weight:var(--fw-semi);line-height:1.4;}
+.machine__slot i{font-style:normal;font-size:var(--fs-xs);color:var(--ink-4);line-height:1.5;}
+.machine__note{
+  margin-top:var(--sp-4);padding-top:var(--sp-4);border-top:1px solid var(--line-soft);
+  font-size:var(--fs-xs);color:var(--ink-3);
+}
+
+/* ---- 事实条（首屏之下的信任信息，不塞进首屏） ---- */
+.facts{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface);}
+.facts__inner{display:flex;flex-wrap:wrap;gap:var(--sp-7);padding:var(--sp-5) 0;}
+.facts span{font-size:var(--fs-sm);color:var(--ink-3);}
+
+/* ---- 处境问答：左引用右回应，只用一条软分隔 ---- */
+.pairs{border-top:1px solid var(--line);}
+.pair{
+  display:grid;grid-template-columns:minmax(260px,1fr) 1.15fr;gap:var(--sp-8);
+  padding:var(--sp-6) 0;border-bottom:1px solid var(--line-soft);
+}
+.pair:last-child{border-bottom:0;}
+.pair__q{margin:0;font-size:16px;color:var(--ink);font-weight:var(--fw-medium);line-height:1.7;}
+.pair__a{margin:0;font-size:var(--fs-sm);color:var(--ink-3);line-height:1.8;}
+
+/* ---- 四件事：不对称网格（宽 + 3 窄），破等宽卡片 ---- */
+.quad{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:var(--sp-6);}
+.quad__lead{
+  grid-row:span 2;display:flex;flex-direction:column;justify-content:center;
+  padding:var(--sp-7);border:1px solid var(--line);border-radius:var(--r-3);
+  background:var(--surface);
+}
+.quad__lead h3{font-size:var(--fs-h3);margin-bottom:var(--sp-4);}
+.quad__lead p{font-size:var(--fs-sm);color:var(--ink-3);line-height:1.85;}
+.quad__item{border-top:1px solid var(--line);padding-top:var(--sp-5);}
+.quad__item h3{font-size:var(--fs-h3);margin-bottom:var(--sp-3);}
+.quad__item p{font-size:var(--fs-sm);color:var(--ink-3);line-height:1.8;}
+
+/* ---- 两种客户：左右对照，不用卡片 ---- */
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-10);border-top:1px solid var(--line);}
+.paths__col{padding-top:var(--sp-6);}
+.paths__col h3{font-size:var(--fs-h3);margin-bottom:var(--sp-3);}
+.paths__who{font-size:var(--fs-xs);color:var(--ink-4);margin-bottom:var(--sp-5);}
+.paths__col p{margin-bottom:var(--sp-6);font-size:var(--fs-sm);color:var(--ink-3);}
+
+/* ---- 服务层级：编辑式目录，名称即锚点 ---- */
+.tiers{list-style:none;padding:0;margin:0;border-top:1px solid var(--line);}
+.tier{
+  display:grid;grid-template-columns:minmax(200px,1fr) 1.6fr auto;
+  gap:var(--sp-6);align-items:baseline;
+  padding:var(--sp-5) 0;border-bottom:1px solid var(--line-soft);
+}
+.tier__name{font-size:16px;font-weight:var(--fw-semi);color:var(--ink);}
+.tier__desc{font-size:var(--fs-sm);color:var(--ink-3);line-height:1.75;}
+.tier__meta{font-family:var(--font-num);font-size:var(--fs-xs);color:var(--ink-4);white-space:nowrap;}
+.tier--main{background:linear-gradient(90deg,var(--accent-wash),transparent 62%);}
+.tier--main .tier__name{color:var(--accent-strong);}
+
+/* ---- 七步：编号在此是真实序列，保留 ---- */
+.steps{list-style:none;padding:0;margin:0;counter-reset:s;border-top:1px solid var(--line);}
+.steps li{
+  counter-increment:s;display:grid;grid-template-columns:34px minmax(120px,1fr) 1.7fr auto;
+  gap:var(--sp-5);align-items:baseline;padding:15px 0;border-bottom:1px solid var(--line-soft);
+}
+.steps li::before{
+  content:counter(s,decimal-leading-zero);font-family:var(--font-num);
+  font-size:var(--fs-xs);color:var(--ink-4);
+}
+.steps b{font-size:var(--fs-sm);color:var(--ink);font-weight:var(--fw-semi);}
+.steps span{font-size:var(--fs-sm);color:var(--ink-3);}
+.steps i{font-style:normal;font-size:var(--fs-xs);color:var(--accent);white-space:nowrap;}
+
+/* ---- 行业：两栏分组列表 ---- */
+.trades{display:grid;grid-template-columns:1fr 1fr;column-gap:var(--sp-9);border-top:1px solid var(--line);}
+.trade{
+  display:grid;grid-template-columns:9em 1fr;gap:var(--sp-4);
+  padding:13px 0;border-bottom:1px solid var(--line-soft);
+}
+.trade b{font-size:var(--fs-sm);color:var(--ink);font-weight:var(--fw-semi);}
+.trade span{font-size:var(--fs-sm);color:var(--ink-3);}
+
+/* ---- 案例：两栏，不用等宽三卡 ---- */
+.cases{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-7);}
+.case{border-top:2px solid var(--ink);padding-top:var(--sp-5);}
+.case h3{font-size:var(--fs-h3);margin-bottom:6px;}
+.case__meta{font-size:var(--fs-xs);color:var(--ink-4);margin-bottom:var(--sp-5);}
+.case__row{font-size:var(--fs-sm);color:var(--ink-3);margin-bottom:10px;}
+.case__row b{display:inline-block;min-width:3.2em;color:var(--ink);font-size:var(--fs-xs);}
+
+/* ---- 对比：三段文字对照，替代规格大表 ---- */
+.compare{display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:var(--sp-7);}
+.compare__col{padding-top:var(--sp-5);border-top:1px solid var(--line);}
+.compare__col--us{border-top:2px solid var(--accent);}
+.compare__label{font-size:var(--fs-sm);font-weight:var(--fw-semi);color:var(--ink);margin-bottom:var(--sp-5);}
+.compare__col--other .compare__label{color:var(--ink-4);font-weight:var(--fw-medium);}
+.compare ul{list-style:none;padding:0;margin:0;}
+.compare li{font-size:var(--fs-sm);color:var(--ink-3);padding:9px 0;line-height:1.75;}
+.compare__col--us li{color:var(--ink-2);}
+.compare__col--us li::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);margin-right:9px;vertical-align:2px;}
+
+/* ---- 三条承诺 ---- */
+.pledges{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-7);margin-top:var(--sp-9);}
+.pledges div{border-top:1px solid var(--line);padding-top:var(--sp-5);}
+.pledges b{display:block;font-size:var(--fs-sm);color:var(--ink);margin-bottom:8px;}
+.pledges span{font-size:var(--fs-sm);color:var(--ink-3);}
+
+/* ---- 问答：只用分隔线，不套容器边框 ---- */
+.qa{border-top:1px solid var(--line);}
+.qa details{border-bottom:1px solid var(--line-soft);}
+.qa summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+  gap:var(--sp-5);padding:18px 0;font-size:16px;font-weight:var(--fw-medium);color:var(--ink);
+}
+.qa summary::-webkit-details-marker{display:none;}
+.qa summary::after{content:"+";font-size:18px;color:var(--ink-4);line-height:1;}
+.qa details[open] summary::after{content:"-";}
+.qa__body{padding:0 0 20px;font-size:var(--fs-sm);color:var(--ink-3);max-width:62ch;}
+
+/* ---- 转化面板：浅色，不做深色反相 ---- */
+.cta{
+  border:1px solid var(--line);border-radius:var(--r-3);background:var(--surface);
+  padding:var(--sp-9) var(--sp-8);max-width:52em;margin:0 auto;text-align:center;
+}
+.cta h2{font-size:var(--fs-h2);}
+.cta p{margin-top:var(--sp-5);color:var(--ink-3);max-width:38em;margin-left:auto;margin-right:auto;}
+.cta__actions{margin-top:var(--sp-7);justify-content:center;}
+
+/* ---- v3 窄屏 ---- */
+@media (max-width:1024px){
+  .hero__grid{grid-template-columns:1fr;gap:var(--sp-8);}
+  .quad{grid-template-columns:1fr 1fr;}
+  .quad__lead{grid-row:auto;grid-column:1 / -1;}
+  .paths{grid-template-columns:1fr;gap:var(--sp-7);}
+  .compare{grid-template-columns:1fr;}
+  .cases{grid-template-columns:1fr;}
+  .pledges{grid-template-columns:1fr;gap:var(--sp-5);}
+  .trades{grid-template-columns:1fr;}
+}
+@media (max-width:720px){
+  .quad{grid-template-columns:1fr;}
+  .pair{grid-template-columns:1fr;gap:var(--sp-3);}
+  .tier{grid-template-columns:1fr;gap:6px;}
+  .tier__meta{justify-self:start;}
+  .steps li{grid-template-columns:28px 1fr;gap:10px;}
+  .steps span,.steps i{grid-column:2;}
+  .trade{grid-template-columns:1fr;gap:4px;}
+  .facts__inner{gap:var(--sp-4);}
+  .cta{padding:var(--sp-8) var(--sp-5);}
+}
+
+/* ============================================================
+   10. 可访问性：减少动态效果（规范 §7 强制，必须放在最后）
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;scroll-behavior:auto !important;
+  }
+  .js-motion [data-rise],.js-motion .rise,.js-motion .head,
+  .js-motion .pagehead .wrap,.js-motion .hero .wrap{opacity:1 !important;transform:none !important;}
+}
