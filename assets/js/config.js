@@ -30,7 +30,7 @@ window.MATATA_CONFIG = {
   /* ---------- 表单接收 ---------- */
   form: {
     // 填了就走 fetch POST；留空则回退到"复制内容 / 邮件 / 电话"
-    endpoint: '',
+    endpoint: 'https://formsubmit.co/ajax/119274334@qq.com',
 
     method: 'POST',
 
@@ -38,7 +38,15 @@ window.MATATA_CONFIG = {
     //   'json' —— 发 JSON，适合 Formspree / Getform / 自建接口（推荐，能拿到成功/失败）
     //   'form' —— 发表单编码（application/x-www-form-urlencoded），
     //             适合金数据这类第三方表单服务（跨域无 CORS 头，只能按"已提交"处理）
-    format: 'json'
+    format: 'json',
+
+    // 表单服务的附加字段（FormSubmit 用）：
+    // _subject 邮件标题 / _captcha 关闭验证码 / _template 邮件排版
+    extra: {
+      _subject: '【玛塔塔官网】新的咨询线索',
+      _captcha: 'false',
+      _template: 'table'
+    }
   },
 
   /* ---------- 统计 ---------- */

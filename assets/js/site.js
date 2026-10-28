@@ -135,6 +135,14 @@
    * 不触发预检，能正常送达。
    */
   function submitToEndpoint(url, data) {
+    // 合并服务商要求的附加字段（FormSubmit 的 _subject / _captcha 等）
+    var extra = cfg('form.extra', null);
+    if (extra) {
+      Object.keys(extra).forEach(function (k) {
+        if (data[k] === undefined) data[k] = extra[k];
+      });
+    }
+
     var method = cfg('form.method', 'POST');
     var format = (cfg('form.format', 'json') || 'json').toLowerCase();
 
