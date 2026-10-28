@@ -341,3 +341,56 @@ summary .scene__demo{
   margin:0;
   align-self:start;
 }
+/* ============================================================
+   行业详情：五段式（硬约束 / 对接系统 / 带约束场景 / 失败原因 / 起步）
+   ------------------------------------------------------------
+   旧的四段（现状/场景/起步/顾虑）读完只知道"这个行业也能用 AI"。
+   新的五段回答的是"为什么这件事没那么简单、我们怎么避免翻车"。
+   ============================================================ */
+.ind-detail{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:clamp(20px,3vw,34px) clamp(24px,4vw,48px);
+  padding:clamp(16px,2vw,22px) 0 clamp(6px,1vw,10px);
+}
+.ind-block{min-width:0;}
+.ind-k{
+  display:block;
+  font-size:11.5px;letter-spacing:.1em;
+  color:var(--ink-mute-2);font-weight:500;
+  margin-bottom:9px;
+}
+.ind-v{margin:0;font-size:14px;line-height:1.7;color:var(--ink-secondary);}
+.ind-list,.ind-scenes,.ind-fails{
+  margin:0;display:grid;gap:7px;
+}
+.ind-list{list-style:none;padding:0;}
+.ind-list li{
+  position:relative;padding-left:14px;
+  font-size:14px;line-height:1.65;color:var(--ink-secondary);
+}
+.ind-list li::before{
+  content:"";position:absolute;left:0;top:.62em;
+  width:5px;height:5px;border-radius:50%;background:var(--primary);opacity:.5;
+}
+.ind-scenes{list-style:none;padding:0;}
+.ind-scenes li{
+  display:grid;gap:3px;
+  padding:9px 0;border-top:1px solid var(--hairline);
+}
+.ind-scenes li:first-child{border-top:0;padding-top:0;}
+.ind-scenes b{font-size:14px;font-weight:500;color:var(--ink);}
+.ind-scenes span{font-size:13px;line-height:1.6;color:var(--ink-mute);}
+.ind-fails{padding-left:17px;}
+.ind-fails li{font-size:14px;line-height:1.65;color:var(--ink-secondary);}
+.ind-fails li::marker{color:#C2453F;font-size:12px;}
+.ind-block--start{
+  grid-column:1 / -1;
+  padding-top:16px;border-top:1px solid var(--hairline);
+}
+.ind-block--start .ind-v{color:var(--ink);}
+
+@media (max-width:760px){
+  .ind-detail{grid-template-columns:1fr;gap:20px;}
+  .ind-block--start{grid-column:auto;}
+}

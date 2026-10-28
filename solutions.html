@@ -464,278 +464,246 @@
     <div class="section-head">
       <span class="eyebrow">按行业</span>
       <h2 class="h2">9 个行业，各自的起步场景</h2>
-      <p class="lead">
-        点开您的行业，能看到四件事：行业现状、三个典型场景、建议起步方案、常见顾虑。
-        行业情况是我们按过往沟通整理的通用样子，具体做什么，还是要看您的实际业务。
-      </p>
+      <p class="lead">点开您的行业，能看到五件事：行业硬约束、必须对接的系统、带约束的落地场景、三个常见失败原因、建议起步。行业情况是按公开流程与过往沟通整理的通用样子，具体做什么，仍要看您的实际业务。</p>
     </div>
 
     <div class="faq">
-
-      <!-- 01 制造业 -->
-      <details id="ind-manufacturing" open>
-        <summary><span>制造业（五金 / 机械 / 模具 / 电子）</span></summary>
-        <div class="faq__body">
-          <div class="ind-detail">
-            <div>
-              <span class="ind-detail__k">行业现状</span>
-              <p class="ind-detail__v">图纸、工艺卡、检验标准分散在共享盘、微信群和老师傅手里；新人问的问题高度重复；报价常要翻历史文件重新算一遍。</p>
-            </div>
-            <div>
-              <span class="ind-detail__k">三个典型场景</span>
-              <ul class="list-sm">
-                <li>图纸与工艺资料本地问答（答案附原文出处）</li>
-                <li>报价单与订单信息自动提取，人工只做复核</li>
-                <li>质检记录整理与异常初筛</li>
-              </ul>
-            </div>
-            <div>
-              <span class="ind-detail__k">建议起步方案</span>
-              <p class="ind-detail__v">先做「图纸与工艺资料本地问答」：一台工作站 + 整理 2–3 类最常被问的资料，<strong>1–2 周出首版</strong>，先给 2–5 名骨干用，用顺了再扩到车间。</p>
-            </div>
-            <div>
-              <span class="ind-detail__k">常见顾虑</span>
-              <p class="ind-detail__v">图纸是核心资产，会不会外泄？——模型和资料都放在厂内自己的机器里，可断网运行；权限按岗位分级，关键资料单独隔离，操作有日志可查。若贵厂资料有密级要求，按贵单位的保密流程走。</p>
-            </div>
-          </div>
+  <details id="ind-manufacturing" open>
+    <summary><span>制造业（五金 / 机械 / 模具 / 电子）</span></summary>
+    <div class="faq__body"><div class="ind-detail">
+        <div class="ind-block">
+          <span class="ind-k">行业硬约束</span>
+          <ul class="ind-list"><li>图纸、工艺、检验标准是核心资产，<b>不能出内网</b></li><li>车间经常断网或没有外网，系统必须能离线跑</li><li>质量记录要能追溯到批次、工序和操作人</li></ul>
         </div>
-      </details>
-
-      <!-- 02 外贸与跨境电商 -->
-      <details id="ind-trade">
-        <summary><span>外贸与跨境电商</span></summary>
-        <div class="faq__body">
-          <div class="ind-detail">
-            <div>
-              <span class="ind-detail__k">行业现状</span>
-              <p class="ind-detail__v">询盘和邮件一天几十封，客户在欧美，时差加语言让回复慢；产品资料更新一次要改好几个地方；新业务员上手全靠老带新。</p>
-            </div>
-            <div>
-              <span class="ind-detail__k">三个典型场景</span>
-              <ul class="list-sm">
-                <li>多语言客户邮件与询盘回复草稿</li>
-                <li>产品资料翻译与本地化，术语统一</li>
-                <li>平台规则与话术知识库</li>
-              </ul>
-            </div>
-            <div>
-              <span class="ind-detail__k">建议起步方案</span>
-              <p class="ind-detail__v">先做「询盘回复草稿 + 产品资料本地化」：业务员只做审核和发送，<strong>1–2 周</strong>跑通；客户名单、报价规则全部留在本地。</p>
-            </div>
-            <div>
-              <span class="ind-detail__k">常见顾虑</span>
-              <p class="ind-detail__v">客户名单和报价是命根子，会不会传到境外？——客户资料、邮件记录都在您自己的机器里，可断网使用；方案不依赖任何外部接口。</p>
-            </div>
-          </div>
+        <div class="ind-block">
+          <span class="ind-k">必须对接的系统</span>
+          <p class="ind-v">ERP（订单/BOM）、MES（工单/报工）、PLM 或图文档管理、质检记录</p>
         </div>
-      </details>
-
-      <!-- 03 批发零售与连锁门店 -->
-      <details id="ind-retail">
-        <summary><span>批发零售与连锁门店</span></summary>
-        <div class="faq__body">
-          <div class="ind-detail">
-            <div>
-              <span class="ind-detail__k">行业现状</span>
-              <p class="ind-detail__v">门店多、人员流动快，SOP 靠店长口传；客服话术一人一个样；销售数据靠 Excel 手工汇总，口径还不统一。</p>
-            </div>
-            <div>
-              <span class="ind-detail__k">三个典型场景</span>
-              <ul class="list-sm">
-                <li>门店 SOP 与培训问答</li>
-                <li>销售数据整理与周报</li>
-                <li>客服话术统一（常见问题标准答法）</li>
-              </ul>
-            </div>
-            <div>
-              <span class="ind-detail__k">建议起步方案</span>
-              <p class="ind-detail__v">先做「门店 SOP 问答 + 每周销售汇总」：总部放一台机器，店长在店内用电脑或手机问；先在 <strong>一个店</strong>试，跑顺再复制到其他门店。</p>
-            </div>
-            <div>
-              <span class="ind-detail__k">常见顾虑</span>
-              <p class="ind-detail__v">店员不太懂电脑，学得会吗？——一线员工只学「每天点两下」；我们从他们每天最烦的那件事入手，先把一个场景做顺，人自己就愿意用了。</p>
-            </div>
-          </div>
+        <div class="ind-block">
+          <span class="ind-k">带行业约束的落地场景</span>
+          <ul class="ind-scenes"><li><b>图纸与工艺问答</b><span>答案必须附图纸编号与版本号，作废版本不得被引用</span></li><li><b>订单与报价信息提取</b><span>金额字段要能和 ERP 对平，低置信度自动进人工队列</span></li><li><b>质检记录整理</b><span>按批次归档，异常项标红，原始记录保留不动</span></li></ul>
         </div>
-      </details>
-
-      <!-- 04 物流与仓储 -->
-      <details id="ind-logistics">
-        <summary><span>物流与仓储</span></summary>
-        <div class="faq__body">
-          <div class="ind-detail">
-            <div>
-              <span class="ind-detail__k">行业现状</span>
-              <p class="ind-detail__v">单据靠人工敲，忙起来就积压；异常件的沟通口径不一；调度规则在几个老员工脑子里，人一休假就卡住。</p>
-            </div>
-            <div>
-              <span class="ind-detail__k">三个典型场景</span>
-              <ul class="list-sm">
-                <li>单据识别与录入（送货单、运单、入库单）</li>
-                <li>异常件沟通话术与处理口径</li>
-                <li>调度与流程问答助手</li>
-              </ul>
-            </div>
-            <div>
-              <span class="ind-detail__k">建议起步方案</span>
-              <p class="ind-detail__v">先从最常出现的一种单据开始，做识别 + 人工复核，<strong>2–3 周</strong>；跑顺之后再增加单据种类，不要一次全上。</p>
-            </div>
-            <div>
-              <span class="ind-detail__k">常见顾虑</span>
-              <p class="ind-detail__v">识别不准反而添乱？——复核这一步不取消：AI 出草稿，人确认之后才进系统；拿不准的字段会单独标出来让人先看。</p>
-            </div>
-          </div>
+        <div class="ind-block">
+          <span class="ind-k">常见的三个失败原因</span>
+          <ol class="ind-fails"><li>图纸版本没管住，模型引用了已作废的版本</li><li>只做问答不做权限，车间所有人都能看全部图纸</li><li>没有评测集，上线后只会说“感觉不准”，但说不清哪不准</li></ol>
         </div>
-      </details>
-
-      <!-- 05 财务与代账 -->
-      <details id="ind-finance">
-        <summary><span>财务与代账</span></summary>
-        <div class="faq__body">
-          <div class="ind-detail">
-            <div>
-              <span class="ind-detail__k">行业现状</span>
-              <p class="ind-detail__v">票据、凭证录入占掉大量时间；财税政策更新快，全靠人记；对账有差异时要一笔一笔核。</p>
-            </div>
-            <div>
-              <span class="ind-detail__k">三个典型场景</span>
-              <ul class="list-sm">
-                <li>票据与凭证信息提取</li>
-                <li>财税政策本地知识库（附文件出处）</li>
-                <li>对账差异初筛，列出可疑项供人核对</li>
-              </ul>
-            </div>
-            <div>
-              <span class="ind-detail__k">建议起步方案</span>
-              <p class="ind-detail__v">先做「票据信息提取（人工复核）+ 内部政策问答」，<strong>2–3 周</strong>。涉及对外报送的口径，仍然由人拍板。</p>
-            </div>
-            <div>
-              <span class="ind-detail__k">常见顾虑</span>
-              <p class="ind-detail__v">财务数据太敏感？——全部本地运行，权限按岗位分级，日志可查；谁能看哪些科目、哪些凭证，在部署时由您逐项定。</p>
-            </div>
-          </div>
-        </div>
-      </details>
-
-      <!-- 06 律师事务所 -->
-      <details id="ind-legal">
-        <summary><span>律师事务所</span></summary>
-        <div class="faq__body">
-          <div class="ind-detail">
-            <div>
-              <span class="ind-detail__k">行业现状</span>
-              <p class="ind-detail__v">案卷、法规、判例检索耗时；合同比对靠人逐条看；文书初稿重复劳动多，忙起来只能靠加班补。</p>
-            </div>
-            <div>
-              <span class="ind-detail__k">三个典型场景</span>
-              <ul class="list-sm">
-                <li>案卷与法规本地检索（附原文出处）</li>
-                <li>合同条款比对与风险点提示</li>
-                <li>常用文书初稿生成</li>
-              </ul>
-            </div>
-            <div>
-              <span class="ind-detail__k">建议起步方案</span>
-              <p class="ind-detail__v">先做「案卷与法规本地检索 + 常用文书初稿」，<strong>2–3 周</strong>；出稿之后由律师判断和定稿，AI 不代替法律判断。</p>
-            </div>
-            <div>
-              <span class="ind-detail__k">常见顾虑</span>
-              <p class="ind-detail__v">AI 会不会胡说？——回答附原文出处，方便逐条核对；AI 只出草稿和线索，最终意见由律师给出。我们不提供法律意见，也不替律师担责。</p>
-            </div>
-          </div>
-        </div>
-      </details>
-
-      <!-- 07 医疗健康服务 -->
-      <details id="ind-medical">
-        <summary><span>医疗健康服务</span></summary>
-        <div class="faq__body">
-          <div class="ind-detail">
-            <div>
-              <span class="ind-detail__k">行业现状</span>
-              <p class="ind-detail__v">院内制度、流程、医保政策文件多，问一次要翻半天；随访与病历文本整理占人；新员工培训靠科室自己带。</p>
-            </div>
-            <div>
-              <span class="ind-detail__k">三个典型场景</span>
-              <ul class="list-sm">
-                <li>院内制度与流程问答</li>
-                <li>随访与病历文本整理（涉患者数据时严格遵守相关规定）</li>
-                <li>内部培训与考核题库</li>
-              </ul>
-            </div>
-            <div>
-              <span class="ind-detail__k">建议起步方案</span>
-              <p class="ind-detail__v">先做「院内制度与流程问答」，资料限定在非患者数据，内网部署，<strong>2 周左右</strong>。是否纳入其他数据，由贵单位信息与医务部门先定。</p>
-            </div>
-            <div>
-              <span class="ind-detail__k">常见顾虑</span>
-              <p class="ind-detail__v">患者信息绝对不能出内网？——涉及患者数据时严格遵守相关规定，且只在贵单位内网运行。我们不替贵单位做合规承诺，只把技术做法写清楚：数据不出内网、权限分级、日志可查。</p>
-            </div>
-          </div>
-        </div>
-      </details>
-
-      <!-- 08 教育培训 -->
-      <details id="ind-education">
-        <summary><span>教育培训</span></summary>
-        <div class="faq__body">
-          <div class="ind-detail">
-            <div>
-              <span class="ind-detail__k">行业现状</span>
-              <p class="ind-detail__v">课件、讲义、题库散在老师个人电脑里；学员答疑高度重复；招生咨询的话术一人一个说法。</p>
-            </div>
-            <div>
-              <span class="ind-detail__k">三个典型场景</span>
-              <ul class="list-sm">
-                <li>课件与讲义整理，统一版本</li>
-                <li>题库与答疑助手</li>
-                <li>学员服务与招生咨询问答</li>
-              </ul>
-            </div>
-            <div>
-              <span class="ind-detail__k">建议起步方案</span>
-              <p class="ind-detail__v">先做「课件整理 + 答疑助手」，资料限定在自有教材，<strong>2–3 周</strong>；先给一个教研组用，再推给其他组。</p>
-            </div>
-            <div>
-              <span class="ind-detail__k">常见顾虑</span>
-              <p class="ind-detail__v">教材和试题是自有资产，会不会外流？——资料只进本地库，可断网运行；权限按人分级，谁看过什么有日志。</p>
-            </div>
-          </div>
-        </div>
-      </details>
-
-      <!-- 09 装修与工程 -->
-      <details id="ind-construction">
-        <summary><span>装修与工程</span></summary>
-        <div class="faq__body">
-          <div class="ind-detail">
-            <div>
-              <span class="ind-detail__k">行业现状</span>
-              <p class="ind-detail__v">施工规范、图纸、变更单多，现场问、回办公室翻；材料清单与预算靠人算；工地沟通记录散在微信里，事后难查。</p>
-            </div>
-            <div>
-              <span class="ind-detail__k">三个典型场景</span>
-              <ul class="list-sm">
-                <li>施工规范与图纸问答</li>
-                <li>材料清单与预算整理</li>
-                <li>工地沟通与变更记录归档</li>
-              </ul>
-            </div>
-            <div>
-              <span class="ind-detail__k">建议起步方案</span>
-              <p class="ind-detail__v">先做「施工规范与图纸问答」，现场用手机连内网就能问，<strong>2–3 周</strong>；同时把变更记录归档起来，少扯皮。</p>
-            </div>
-            <div>
-              <span class="ind-detail__k">常见顾虑</span>
-              <p class="ind-detail__v">工地上没网络怎么办？——可以完全离线运行：局域网内就能用，不依赖互联网，手机通过内网访问即可。</p>
-            </div>
-          </div>
-        </div>
-      </details>
-
+        <div class="ind-block ind-block--start">
+          <span class="ind-k">建议起步</span>
+          <p class="ind-v">先做「图纸与工艺资料本地问答」：一台工作站 + 整理 2–3 类最常被问的资料，1–2 周出首版，先给 2–5 名骨干用。</p>
+        </div></div>
     </div>
+  </details>
 
-    <div class="notice notice--accent mt-6">
+  <details id="ind-trade">
+    <summary><span>外贸与跨境电商</span></summary>
+    <div class="faq__body"><div class="ind-detail">
+        <div class="ind-block">
+          <span class="ind-k">行业硬约束</span>
+          <ul class="ind-list"><li>客户名单与往来邮件属于商业机密，部分客户合同要求 NDA</li><li>时差导致回复慢，草稿要能随时生成</li><li>多语言专业术语必须统一，否则同一款产品三种叫法</li></ul>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">必须对接的系统</span>
+          <p class="ind-v">企业邮箱、独立站或平台后台、报价与合同模板、物流单号系统</p>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">带行业约束的落地场景</span>
+          <ul class="ind-scenes"><li><b>询盘回复草稿</b><span>按客户语言生成，术语受术语表强约束，业务员改完再发</span></li><li><b>报价与合同信息提取</b><span>币种、贸易术语（FOB/CIF）必须人工确认，不能自动定</span></li><li><b>客户资料问答</b><span>按客户分级授权，销售之间互相看不到对方客户</span></li></ul>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">常见的三个失败原因</span>
+          <ol class="ind-fails"><li>术语翻译不统一，客户对不上产品型号</li><li>让模型直接发邮件，出现超出授权范围的承诺</li><li>客户名单全公司可见，产生飞单风险</li></ol>
+        </div>
+        <div class="ind-block ind-block--start">
+          <span class="ind-k">建议起步</span>
+          <p class="ind-v">先从「询盘回复草稿」开始：整理 20 条高频询盘和标准话术，一周内就能让业务员每天省下 1 小时。</p>
+        </div></div>
+    </div>
+  </details>
+
+  <details id="ind-retail">
+    <summary><span>批发零售与连锁门店</span></summary>
+    <div class="faq__body"><div class="ind-detail">
+        <div class="ind-block">
+          <span class="ind-k">行业硬约束</span>
+          <ul class="ind-list"><li>门店网络不稳定，断网时仍要能查基本资料</li><li>收银与库存数据敏感，总部与门店权限必须分层</li><li>同一个指标在不同部门有不同口径</li></ul>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">必须对接的系统</span>
+          <p class="ind-v">POS／收银系统、进销存或 WMS、会员系统、巡店与整改记录</p>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">带行业约束的落地场景</span>
+          <ul class="ind-scenes"><li><b>门店经营问数</b><span>答案必须带口径说明（含税/不含税、含赠品/不含），避免三个部门三个数</span></li><li><b>巡店记录与整改单</b><span>拍照 + 文字，自动归类到门店、问题类型和整改期限</span></li><li><b>会员与促销话术</b><span>按门店与品类限定，禁止跨店、跨活动的承诺</span></li></ul>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">常见的三个失败原因</span>
+          <ol class="ind-fails"><li>口径没统一，“销售额”出现三个版本</li><li>权限没分层，店员能看到全部门店毛利</li><li>只给老板用，店长不用，数据断在总部</li></ol>
+        </div>
+        <div class="ind-block ind-block--start">
+          <span class="ind-k">建议起步</span>
+          <p class="ind-v">先选 1 个区域、3–5 家门店做试运行，把“问数”跑顺，再复制到其他区域。</p>
+        </div></div>
+    </div>
+  </details>
+
+  <details id="ind-logistics">
+    <summary><span>物流与仓储</span></summary>
+    <div class="faq__body"><div class="ind-detail">
+        <div class="ind-block">
+          <span class="ind-k">行业硬约束</span>
+          <ul class="ind-list"><li>在途信息要求实时，数据延迟会直接变成客诉</li><li>客户地址与电话属于个人信息，需按最小必要授权</li><li>仓库内、货车上常有信号盲区</li></ul>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">必须对接的系统</span>
+          <p class="ind-v">TMS／WMS、运单系统、在途轨迹（GPS）、客服工单</p>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">带行业约束的落地场景</span>
+          <ul class="ind-scenes"><li><b>异常件处理</b><span>延误或破损自动生成处理建议，并给出责任判定的依据</span></li><li><b>运单与回单提取</b><span>单号、重量、签收人字段结构化，低置信度进复核</span></li><li><b>客服问答</b><span>按客户合同条款回答赔付标准，不允许超条款承诺</span></li></ul>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">常见的三个失败原因</span>
+          <ol class="ind-fails"><li>基于过期轨迹回答，客户到店发现货没到</li><li>赔付标准没进知识库，每个客服说法不一样</li><li>没有降级方案，接口超时后整个客服系统卡住</li></ol>
+        </div>
+        <div class="ind-block ind-block--start">
+          <span class="ind-k">建议起步</span>
+          <p class="ind-v">先做「异常件处理」，它是客诉最集中的环节，也是最快能看到效果的地方。</p>
+        </div></div>
+    </div>
+  </details>
+
+  <details id="ind-finance">
+    <summary><span>财务与代账</span></summary>
+    <div class="faq__body"><div class="ind-detail">
+        <div class="ind-block">
+          <span class="ind-k">行业硬约束</span>
+          <ul class="ind-list"><li>财税数据合规要求高，账簿与凭证需可审计</li><li>不同客户的账必须严格隔离，不能串户</li><li>税收政策会变，引用必须能追溯文号与生效日期</li></ul>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">必须对接的系统</span>
+          <p class="ind-v">财务软件（用友／金蝶等）、电子发票、银行流水、报税系统</p>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">带行业约束的落地场景</span>
+          <ul class="ind-scenes"><li><b>凭证与发票信息提取</b><span>金额、税额、科目必须复核，错误项进人工队列并留痕</span></li><li><b>政策与口径问答</b><span>答案附文号与生效日期，过期政策自动标注警示</span></li><li><b>客户账务问答</b><span>按客户隔离，代账会计看不到其他客户资料</span></li></ul>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">常见的三个失败原因</span>
+          <ol class="ind-fails"><li>引用了已废止的税收政策</li><li>不同客户数据混在同一知识库，出现串户</li><li>只做提取不做复核，错票直接入账</li></ol>
+        </div>
+        <div class="ind-block ind-block--start">
+          <span class="ind-k">建议起步</span>
+          <p class="ind-v">先做「发票与凭证提取 + 人工复核」这一条链路，把错票率降下来，再考虑问答类场景。</p>
+        </div></div>
+    </div>
+  </details>
+
+  <details id="ind-legal">
+    <summary><span>律师事务所</span></summary>
+    <div class="faq__body"><div class="ind-detail">
+        <div class="ind-block">
+          <span class="ind-k">行业硬约束</span>
+          <ul class="ind-list"><li>对客户负有保密义务，案卷不能出内网</li><li>引用必须能核对到法条与案号，错一个引用就是风险</li><li>文书格式与所内规范必须统一</li></ul>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">必须对接的系统</span>
+          <p class="ind-v">案件管理系统、文档管理、OA／审批、合同与文书模板库</p>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">带行业约束的落地场景</span>
+          <ul class="ind-scenes"><li><b>法规与判例检索</b><span>答案必须给出处（法条 / 案号），可点开原文核对，不得凭空生成</span></li><li><b>合同审查初稿</b><span>标出风险条款并给修改建议，由律师终审，不直接对外</span></li><li><b>案卷整理与时间线</b><span>按时间轴归档，关键节点（开庭、举证期限）自动提示</span></li></ul>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">常见的三个失败原因</span>
+          <ol class="ind-fails"><li>生成不存在或案号错误的判例，风险极高</li><li>没做权限，实习生能看到合伙人客户</li><li>把模型输出当法律意见直接交付</li></ol>
+        </div>
+        <div class="ind-block ind-block--start">
+          <span class="ind-k">建议起步</span>
+          <p class="ind-v">先做「法规检索 + 出处核对」，这是风险最低、律师日常最耗时的环节。</p>
+        </div></div>
+    </div>
+  </details>
+
+  <details id="ind-medical">
+    <summary><span>医疗健康服务</span></summary>
+    <div class="faq__body"><div class="ind-detail">
+        <div class="ind-block">
+          <span class="ind-k">行业硬约束</span>
+          <ul class="ind-list"><li>患者信息依法保护，需最小必要与访问留痕</li><li>不能替代医生诊断，边界必须写死</li><li>病历与检验记录需可追溯</li></ul>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">必须对接的系统</span>
+          <p class="ind-v">HIS／电子病历、预约挂号、随访系统、检验报告</p>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">带行业约束的落地场景</span>
+          <ul class="ind-scenes"><li><b>预约与随访问答</b><span>只答流程与注意事项，涉及诊断一律转人工，不给建议</span></li><li><b>病历与报告整理</b><span>字段提取供录入，医生复核确认后才入库</span></li><li><b>科室制度问答</b><span>按科室权限，答案附制度出处与版本</span></li></ul>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">常见的三个失败原因</span>
+          <ol class="ind-fails"><li>越界给出诊断或用药建议</li><li>患者数据未脱敏就进知识库</li><li>没有人工复核环节，错误信息直接进病历</li></ol>
+        </div>
+        <div class="ind-block ind-block--start">
+          <span class="ind-k">建议起步</span>
+          <p class="ind-v">先做「科室制度与流程问答」，不碰诊疗数据，先把内网部署和权限跑通。</p>
+        </div></div>
+    </div>
+  </details>
+
+  <details id="ind-education">
+    <summary><span>教育培训</span></summary>
+    <div class="faq__body"><div class="ind-detail">
+        <div class="ind-block">
+          <span class="ind-k">行业硬约束</span>
+          <ul class="ind-list"><li>学员与家长信息受保护，招生数据尤其敏感</li><li>课程资料有版权，不能外传</li><li>对外口径需受监管约束，不得做升学或效果承诺</li></ul>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">必须对接的系统</span>
+          <p class="ind-v">教务系统、招生 CRM、题库与课程平台、家校沟通工具</p>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">带行业约束的落地场景</span>
+          <ul class="ind-scenes"><li><b>招生咨询草稿</b><span>按课程与班型限定内容，自动拦截“保过／包过”类表述</span></li><li><b>课程资料问答</b><span>按班级与年级授权，答案附讲义页码</span></li><li><b>学情整理</b><span>作业与测评数据汇总，教师复核后再给家长</span></li></ul>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">常见的三个失败原因</span>
+          <ol class="ind-fails"><li>生成“保过”“包上名校”等违规承诺</li><li>讲义与题库外泄</li><li>直接把模型生成内容发到家长群</li></ol>
+        </div>
+        <div class="ind-block ind-block--start">
+          <span class="ind-k">建议起步</span>
+          <p class="ind-v">先做「课程资料问答」，服务老师备课与答疑，避开招生宣传的合规风险。</p>
+        </div></div>
+    </div>
+  </details>
+
+  <details id="ind-construction">
+    <summary><span>装修与工程</span></summary>
+    <div class="faq__body"><div class="ind-detail">
+        <div class="ind-block">
+          <span class="ind-k">行业硬约束</span>
+          <ul class="ind-list"><li>图纸与报价是核心资产，变更与签证必须留痕</li><li>工地现场网络差，移动端要能离线记录</li><li>结算依赖过程记录，事后补记容易扯皮</li></ul>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">必须对接的系统</span>
+          <p class="ind-v">CAD／图纸管理、报价与合同、项目管理（进度/材料）、监理记录</p>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">带行业约束的落地场景</span>
+          <ul class="ind-scenes"><li><b>图纸与工艺问答</b><span>答案附图纸号与版本，变更后旧版自动失效</span></li><li><b>报价与变更单提取</b><span>变更项与合同对照，超出范围自动提示，避免结算扯皮</span></li><li><b>工地日志与整改</b><span>照片 + 文字归档到项目与工序，整改闭环可查</span></li></ul>
+        </div>
+        <div class="ind-block">
+          <span class="ind-k">常见的三个失败原因</span>
+          <ol class="ind-fails"><li>用了旧版图纸施工</li><li>变更只在微信里说过，结算时没有凭证</li><li>工地断网时系统不可用，数据只能第二天补录</li></ol>
+        </div>
+        <div class="ind-block ind-block--start">
+          <span class="ind-k">建议起步</span>
+          <p class="ind-v">先做「图纸问答 + 变更留痕」，这两件事直接对应返工与结算纠纷。</p>
+        </div></div>
+    </div>
+  </details>
+  </div>
+
+  <div class="notice notice--accent mt-6">
       <span class="notice__icon" aria-hidden="true">?</span>
       <p>没找到您的行业？<a href="contact.html">预约免费诊断</a>，我们按您的实际业务来谈——不是套模板。</p>
     </div>
