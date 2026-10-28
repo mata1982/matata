@@ -499,7 +499,9 @@
       btn.innerHTML =
         '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>' +
         '<span>演示</span>';
-      cards[i].appendChild(btn);
+      // 折叠行版本：按钮放进 summary；preventDefault 阻止点击时把行展开
+      btn.addEventListener('click', function (e) { e.preventDefault(); });
+      (cards[i].querySelector('summary') || cards[i]).appendChild(btn);
     }
 
   }

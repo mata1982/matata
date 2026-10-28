@@ -219,3 +219,125 @@
 .more4--3{grid-template-columns:repeat(3,1fr);}
 @media (max-width:1024px){.more4--3{grid-template-columns:1fr 1fr;}}
 @media (max-width:720px){.more4--3{grid-template-columns:1fr;}}
+/* ============================================================
+   场景卡：工程式四段（业务问题 / 难在哪 / 我们怎么做 / 验收）
+   ------------------------------------------------------------
+   原来的四行是产品介绍，客户看完只觉得"哦，问答"。
+   换成"难点 + 步骤 + 验收"，才看得出是工程而不是装个模型。
+   ============================================================ */
+.scene__steps{
+  margin:0;padding-left:18px;
+  display:grid;gap:6px;
+}
+.scene__steps li{
+  font-size:14px;line-height:1.65;color:var(--ink-secondary);
+  padding-left:2px;
+}
+.scene__steps li::marker{color:var(--ink-mute-2);font-size:12px;}
+.scene .scene__row--time .scene__v{color:var(--ink);}
+.scene .scene__row--time strong{color:var(--ink);font-weight:500;}
+.scene__time{
+  display:inline-block;margin-left:10px;
+  font-size:12.5px;color:var(--ink-mute);white-space:nowrap;
+}
+@media (max-width:720px){
+  .scene__steps li{font-size:13.5px;}
+  .scene__time{display:block;margin:6px 0 0;}
+}
+/* ============================================================
+   场景折叠行（替代原来的两列卡片）
+   ------------------------------------------------------------
+   卡片版每张一千多像素，8 张就是文字墙。
+   折成一行一个问题：扫读看标题+问题，想看细节再点开。
+   用原生 details：不依赖 JS，键盘可操作，打印自动全展开。
+   ============================================================ */
+.scene.scene-row{
+  background:none;border:0;border-radius:0;padding:0;
+  border-bottom:1px solid var(--hairline);
+}
+.scenes-list{border-top:1px solid var(--hairline);}
+
+.scene-row > summary{
+  display:grid;
+  grid-template-columns:52px minmax(0,1fr) auto auto;
+  gap:clamp(12px,2vw,22px);
+  align-items:start;
+  padding:22px 0;
+  cursor:pointer;
+  list-style:none;
+}
+.scene-row > summary::-webkit-details-marker{display:none;}
+.scene-row > summary:hover .scene-sum b{color:var(--primary);}
+.scene-row > summary:focus-visible{outline:2px solid var(--primary);outline-offset:4px;border-radius:6px;}
+
+.scene-no{
+  font-size:13px;letter-spacing:.08em;color:var(--ink-mute-2);
+  padding-top:3px;font-variant-numeric:tabular-nums;
+}
+.scene-sum b{
+  display:block;
+  font-size:clamp(17px,1.5vw,20px);
+  font-weight:500;color:var(--ink);letter-spacing:-.01em;
+  transition:color .16s;
+}
+.scene-sum span{
+  display:block;margin-top:6px;
+  font-size:14px;line-height:1.6;color:var(--ink-mute);
+}
+.scene-more{
+  font-size:12.5px;color:var(--ink-mute-2);white-space:nowrap;padding-top:4px;
+}
+.scene-more::before{content:"展开";}
+.scene-row[open] .scene-more::before{content:"收起";}
+.scene-row[open] .scene-more{color:var(--primary);}
+
+.scene-body{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(18px,3vw,34px) clamp(24px,4vw,48px);
+  padding:2px 0 30px calc(52px + clamp(12px,2vw,22px));
+}
+.scene-block h4{
+  margin:0 0 8px;
+  font-size:11.5px;letter-spacing:.1em;font-weight:500;
+  color:var(--ink-mute-2);
+}
+.scene-block p{margin:0;font-size:14px;line-height:1.7;color:var(--ink-secondary);}
+.scene-block p b{color:var(--ink);font-weight:500;}
+.scene-steps{margin:0;padding-left:18px;display:grid;gap:6px;}
+.scene-steps li{font-size:14px;line-height:1.65;color:var(--ink-secondary);}
+.scene-steps li::marker{color:var(--ink-mute-2);font-size:12px;}
+.scene-block--accept{
+  grid-column:1 / -1;
+  border-top:1px solid var(--hairline);
+  padding-top:16px;
+}
+.scene-block--accept strong{font-weight:500;color:var(--ink);}
+.scene-period{margin-top:7px !important;font-size:12.5px;color:var(--ink-mute);}
+
+@media (max-width:760px){
+  .scene-row > summary{grid-template-columns:34px minmax(0,1fr) auto;gap:10px;padding:18px 0;}
+  .scene-more,{display:none;}
+  .scene-more{display:none;}
+  .scene-body{grid-template-columns:1fr;padding-left:44px;}
+  .scene-sum span{font-size:13.5px;}
+}
+/* 折叠行里的"最常用"小标签：不能让它跟着 b 的块级宽度撑满一行 */
+.scene-sum b{display:inline-flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.scene-sum .badge{
+  display:inline-block;
+  flex:none;
+  font-size:11px;
+  font-weight:400;
+  letter-spacing:.02em;
+  padding:3px 9px;
+  border-radius:9999px;
+  background:var(--primary-subdued);
+  color:var(--primary-deep);
+}
+/* 旧卡片里的"演示"按钮是绝对定位，折叠行里必须回到文档流 */
+.summary .scene__demo,
+summary .scene__demo{
+  position:static;
+  margin:0;
+  align-self:start;
+}
