@@ -1,22 +1,28 @@
 /* ============================================================
-   玛塔塔 MATATA · 分节滚动（首页与二级页通用）
+   玛塔塔 MATATA · 分节导航 + 分节滚动
    ============================================================
-   实测各页区块高度差异极大（有的块 3.9 屏高，有的 0.3 屏），
-   所以不能"每块一个点、每块都吸"。
+   两件事必须分开看：
+
+   1) 圆点（章节导航）
+      只要有内容章节就显示，和屏幕高度无关。
+      否则在大屏上（视口高、区块相对矮）会一个点都不出。
+
+   2) 吸附（"一屏一块"的手感）
+      只有区块高度接近一屏时才有意义。
+      大屏上区块本来就矮于屏幕，强行吸附反而怪，所以自动不启用。
 
    规则：
-   · 吸附：只给高度在 0.85–1.6 屏之间的块（差不多一屏的）
-   · 圆点：高度 ≥ 0.8 屏的块才有资格，最多 6 个（多了取最高的几个）
-   · 页面若没有合格的块 → 整个功能不启用
-   · 触屏 / 窄屏 / 减少动效 → 不启用
+   · 圆点：首屏 + 含 h1/h2 的章节，高度 ≥ 260px，最多 6 个
+   · 吸附：高度在 0.75–1.6 屏之间的块
+   · 触屏 / 窄屏（<1025px）/ 减少动效 → 圆点隐藏、吸附关闭
    ============================================================ */
 (function () {
   'use strict';
 
-  var MIN_WIDTH = 1025;   // 与 CSS 断点一致
-  var SNAP_MIN = 0.85;    // 吸附：下限（屏）
+  var MIN_WIDTH = 1025;
+  var SNAP_MIN = 0.75;    // 吸附：下限（屏）
   var SNAP_MAX = 1.6;     // 吸附：上限
-  var DOT_MIN = 0.8;      // 圆点：下限
+  var DOT_MIN_PX = 260;   // 圆点：区块最小高度（像素）
   var DOT_MAX = 6;        // 圆点：最多几个
 
   function init() {
@@ -30,7 +36,6 @@
     var sections = Array.prototype.slice.call(main.querySelectorAll(':scope > section'));
     if (sections.length < 2) return;
 
-    /* 让位高度：固定导航 + 吸顶的分节锚点条 */
     function topOffset() {
       var navEl = document.querySelector('.nav');
       var off = navEl ? navEl.offsetHeight : 76;
@@ -47,7 +52,7 @@
     nav.setAttribute('aria-label', '页面分节导航');
     document.body.appendChild(nav);
 
-    var dots = [];      // {el, sec}
+    var dots = [];
     var current = -1;
 
     function labelOf(sec, i) {
@@ -61,17 +66,22 @@
       return '第 ' + (i + 1) + ' 节';
     }
 
-    /* 选出"够一屏"的块；超过上限时保留最高的几个 */
+    /* 章节筛选：首屏 + 有标题的块；超过上限时去掉最矮的 */
     function pickSections() {
       var vh = window.innerHeight;
       var list = [];
       sections.forEach(function (sec, i) {
-        var r = sec.getBoundingClientRect().height / vh;
-        if (r >= DOT_MIN) list.push({ sec: sec, i: i, r: r });
+        var h = sec.getBoundingClientRect().height;
+        var hasHead = !!sec.querySelector('h1, h2, .h2');
+        if ((i === 0 || hasHead) && h >= DOT_MIN_PX) {
+          list.push({ sec: sec, i: i, h: h, r: h / vh });
+        }
       });
       if (list.length > DOT_MAX) {
-        list = list.slice().sort(function (a, b) { return b.r - a.r; }).slice(0, DOT_MAX)
-          .sort(function (a, b) { return a.i - b.i; });
+        var keepFirst = list[0];
+        var rest = list.slice(1).sort(function (a, b) { return b.h - a.h; }).slice(0, DOT_MAX - 1);
+        rest.sort(function (a, b) { return a.i - b.i; });
+        list = [keepFirst].concat(rest);
       }
       return list;
     }
@@ -94,18 +104,17 @@
       });
     }
 
-    function markSnap(picked) {
+    /* 吸附只看"接近一屏"的块，与圆点是否显示无关 */
+    function markSnap() {
       var wide = window.innerWidth >= MIN_WIDTH;
+      var vh = window.innerHeight;
       var any = false;
-      sections.forEach(function (sec) { sec.classList.remove('snap-sec'); });
-      if (wide) {
-        picked.forEach(function (item) {
-          if (item.r >= SNAP_MIN && item.r <= SNAP_MAX) {
-            item.sec.classList.add('snap-sec');
-            any = true;
-          }
-        });
-      }
+      sections.forEach(function (sec) {
+        var r = sec.getBoundingClientRect().height / vh;
+        var on = wide && r >= SNAP_MIN && r <= SNAP_MAX;
+        sec.classList.toggle('snap-sec', on);
+        if (on) any = true;
+      });
       document.documentElement.classList.toggle('snap-on', any);
       document.documentElement.style.scrollPaddingTop = topOffset() + 'px';
     }
@@ -129,16 +138,15 @@
       nav.classList.toggle('is-dark', !!dark);
     }
 
-    var picked = [];
     function rebuild() {
-      picked = pickSections();
+      var picked = pickSections();
+      markSnap();
+
       if (!picked.length) {
         nav.classList.remove('is-ready');
-        document.documentElement.classList.remove('snap-on');
         return;
       }
       buildDots(picked);
-      markSnap(picked);
       current = -1;
       nav.classList.toggle('is-ready', window.innerWidth >= MIN_WIDTH);
       update();
