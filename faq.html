@@ -160,26 +160,7 @@
 </head>
 <body>
 
-<div class="topbar" id="topbar">
-  <div class="wrap topbar__in">
-    <span><b>不确定适不适合上 AI？</b>8 道题、1 分钟，答完直接给结论和预算区间。</span>
-    <a class="topbar__cta" href="assessment.html">去做自测 →</a>
-    <a class="topbar__cta topbar__cta--2" href="detect.html">或先测电脑 →</a>
-    <button class="topbar__close" type="button" aria-label="关闭公告" data-topbar-close>×</button>
-  </div>
-</div>
-<script>
-(function(){
-  var bar = document.getElementById('topbar');
-  if (!bar) return;
-  try { if (localStorage.getItem('matata-topbar') === 'off') { bar.hidden = true; return; } } catch (e) {}
-  var btn = bar.querySelector('[data-topbar-close]');
-  if (btn) btn.addEventListener('click', function () {
-    bar.hidden = true;
-    try { localStorage.setItem('matata-topbar', 'off'); } catch (e) {}
-  });
-})();
-</script>
+
 
 
 <!-- ============================ 顶部导航 ============================ -->
@@ -205,7 +186,26 @@
       <a href="faq.html" class="is-active" aria-current="page">常见问题</a>
           <a href="login.html" class="nav__login">会员登录</a>
     </nav>
-    <a class="btn btn--glow btn--sm nav__cta" href="contact.html">预约免费诊断</a>
+    <div class="navcta" data-navcta>
+      <a class="navcta__main" href="contact.html?plan=免费诊断">预约免费诊断</a>
+      <button class="navcta__toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navctaMenu" aria-label="更多：自测与检测" data-navcta-toggle>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg>
+      </button>
+      <div class="navcta__menu" id="navctaMenu" hidden data-navcta-menu>
+        <a class="navcta__item" href="contact.html?plan=免费诊断">
+          <span class="navcta__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h16v11H9l-5 4z"/></svg></span>
+          <span><b>预约免费诊断</b><small>60 分钟，不收费，不合适我们直接说</small></span>
+        </a>
+        <a class="navcta__item" href="assessment.html">
+          <span class="navcta__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5h14v14H5z"/><path d="M9 10h6M9 14h4"/></svg></span>
+          <span><b>AI 适配度自测</b><small>8 道题、1 分钟，直接给结论与预算</small></span>
+        </a>
+        <a class="navcta__item" href="detect.html">
+          <span class="navcta__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
+          <span><b>检测这台电脑</b><small>看它跑不跑得动，给评分和建议配置</small></span>
+        </a>
+      </div>
+    </div>
   </div>
 </header>
 

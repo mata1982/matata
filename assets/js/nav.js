@@ -63,13 +63,23 @@
     }
 
     // 主 CTA 也放进面板，移动端顶栏可以更干净
-    var cta = bar.querySelector('.nav__cta');
+    var cta = bar.querySelector('.navcta__main') || bar.querySelector('.nav__cta');
     if (cta) {
       var ctaClone = document.createElement('a');
       ctaClone.href = cta.getAttribute('href');
       ctaClone.textContent = cta.textContent;
       ctaClone.className = 'btn btn--primary nav__panel-cta';
       panelNav.appendChild(ctaClone);
+    }
+
+    // 自测与检测也放进面板：移动端顶栏空间紧，不单独占位
+    var tools = [['assessment.html', 'AI 适配度自测'], ['detect.html', '检测这台电脑']];
+    for (var t = 0; t < tools.length; t++) {
+      var ta = document.createElement('a');
+      ta.href = tools[t][0];
+      ta.textContent = tools[t][1];
+      ta.className = 'nav__panel-tool';
+      panelNav.appendChild(ta);
     }
 
     panel.appendChild(panelNav);

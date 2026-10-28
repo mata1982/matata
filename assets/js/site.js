@@ -336,3 +336,46 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
 })();
+
+/* ============================================================
+   导航主按钮的展开菜单（分离式：主体链接 + 箭头）
+   ============================================================ */
+(function () {
+  'use strict';
+  var root = document.querySelector('[data-navcta]');
+  if (!root) return;
+  var toggle = root.querySelector('[data-navcta-toggle]');
+  var menu = root.querySelector('[data-navcta-menu]');
+  if (!toggle || !menu) return;
+
+  function open() {
+    menu.hidden = false;
+    root.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+  }
+  function close() {
+    menu.hidden = true;
+    root.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+  function isOpen() { return !menu.hidden; }
+
+  toggle.addEventListener('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (isOpen()) close(); else open();
+  });
+
+  document.addEventListener('click', function (e) {
+    if (isOpen() && !root.contains(e.target)) close();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && isOpen()) { close(); toggle.focus(); }
+  });
+
+  // 菜单里点走之后收起（同页锚点场景也适用）
+  menu.addEventListener('click', function (e) {
+    if (e.target.closest && e.target.closest('.navcta__item')) close();
+  });
+})();
