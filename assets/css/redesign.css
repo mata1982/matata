@@ -890,3 +890,78 @@ html,body{overflow-x:clip;}
 /* 导航当前页：旧规则 .nav a{opacity:.86} 会把品牌蓝拉低到 4.4:1，这里去掉 */
 .nav__links a{opacity:1;}
 .nav__links a.is-active{color:var(--primary);opacity:1;font-weight:500;}
+/* ============================================================
+   25. 自测引导：顶部公告条 + 首屏文字链
+   ------------------------------------------------------------
+   自测页原来只挂在页脚，没人找得到。
+   用一条可关闭的细公告条（全站）+ 首页首屏一行文字链，
+   比悬浮按钮克制：不遮内容，手机上也不挡操作。
+   关闭状态记在 localStorage，关过就不再出现。
+   ============================================================ */
+.topbar{
+  background:var(--brand-dark);
+  color:rgba(255,255,255,.86);
+  font-size:13px;
+}
+.topbar[hidden]{display:none;}
+.topbar__in{
+  display:flex;align-items:center;gap:14px;
+  min-height:38px;padding-top:6px;padding-bottom:6px;
+}
+.topbar__in > span{
+  flex:1;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.topbar b{color:#fff;font-weight:500;}
+.topbar__cta{
+  flex:none;
+  color:#fff;text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.4);
+  padding-bottom:1px;
+}
+.topbar__cta:hover{border-bottom-color:#fff;}
+.topbar__close{
+  flex:none;
+  width:26px;height:26px;
+  display:flex;align-items:center;justify-content:center;
+  border:0;background:transparent;color:rgba(255,255,255,.55);
+  font-size:17px;line-height:1;cursor:pointer;border-radius:6px;
+}
+.topbar__close:hover{color:#fff;background:rgba(255,255,255,.1);}
+
+/* 首屏文字链 */
+.hero__quiz{
+  margin:18px 0 0;
+  font-size:14px;
+}
+.hero__quiz a{
+  color:var(--ink-secondary);
+  text-decoration:none;
+  border-bottom:1px solid var(--hairline-input);
+  padding-bottom:1px;
+}
+.hero__quiz a:hover{color:var(--primary);border-bottom-color:var(--primary);}
+
+@media (max-width:720px){
+  .topbar{font-size:12px;}
+  .topbar__in > span{white-space:normal;line-height:1.4;}
+  .hero__quiz{font-size:13.5px;}
+}
+/* 首屏两个次要入口合成一行，别让 CTA 下方堆成四行 */
+.hero__links{
+  display:flex;align-items:center;justify-content:center;
+  gap:12px;flex-wrap:wrap;
+  margin:18px 0 0;
+}
+.hero__links .hero__demo{margin-top:0;}
+.hero__links-sep{color:var(--hairline-input);}
+.hero__quiz-link{
+  font-size:14px;color:var(--ink-secondary);text-decoration:none;
+  border-bottom:1px solid var(--hairline-input);padding-bottom:1px;
+}
+.hero__quiz-link:hover{color:var(--primary);border-bottom-color:var(--primary);}
+@media (max-width:720px){
+  .hero__links{gap:10px;margin-top:14px;}
+  .hero__links-sep{display:none;}
+  .hero__quiz-link{font-size:13.5px;}
+}

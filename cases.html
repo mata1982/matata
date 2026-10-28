@@ -22,6 +22,27 @@
 </head>
 <body>
 
+<div class="topbar" id="topbar">
+  <div class="wrap topbar__in">
+    <span><b>不确定适不适合上 AI？</b>8 道题、1 分钟，答完直接给结论和预算区间。</span>
+    <a class="topbar__cta" href="assessment.html">去做自测 →</a>
+    <button class="topbar__close" type="button" aria-label="关闭公告" data-topbar-close>×</button>
+  </div>
+</div>
+<script>
+(function(){
+  var bar = document.getElementById('topbar');
+  if (!bar) return;
+  try { if (localStorage.getItem('matata-topbar') === 'off') { bar.hidden = true; return; } } catch (e) {}
+  var btn = bar.querySelector('[data-topbar-close]');
+  if (btn) btn.addEventListener('click', function () {
+    bar.hidden = true;
+    try { localStorage.setItem('matata-topbar', 'off'); } catch (e) {}
+  });
+})();
+</script>
+
+
 <!-- ============================ 顶部导航（与 index.html 保持一致，仅改链接与当前页高亮） ============================ -->
 <header class="nav">
   <div class="wrap nav__inner">
