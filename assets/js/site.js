@@ -363,8 +363,36 @@
   toggle.addEventListener('click', function (e) {
     e.preventDefault();
     e.stopPropagation();
+    cancelHover();
     if (isOpen()) close(); else open();
   });
+
+  /* 桌面端：鼠标移上去就展开（点击仍然保留，供键盘与触屏使用）。
+     两个延迟：展开 90ms 防止划过误触发，收起 180ms 留出移入菜单的时间。 */
+  var canHover = false;
+  try { canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches; } catch (err) {}
+  var openTimer = null, closeTimer = null;
+
+  function cancelHover() {
+    if (openTimer) { clearTimeout(openTimer); openTimer = null; }
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+  }
+
+  if (canHover) {
+    root.addEventListener('mouseenter', function () {
+      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+      if (isOpen()) return;
+      openTimer = setTimeout(function () { open(); openTimer = null; }, 90);
+    });
+    root.addEventListener('mouseleave', function () {
+      if (openTimer) { clearTimeout(openTimer); openTimer = null; }
+      closeTimer = setTimeout(function () { close(); closeTimer = null; }, 180);
+    });
+    // 键盘聚焦时也展开，方便 Tab 到箭头后直接看到内容
+    toggle.addEventListener('focus', function () {
+      if (!isOpen()) open();
+    });
+  }
 
   document.addEventListener('click', function (e) {
     if (isOpen() && !root.contains(e.target)) close();
