@@ -84,7 +84,7 @@
     <p class="lead">
       同一个 AI，装进不同的业务里，用法完全不一样。这一页给您两个入口：
       <strong>按场景</strong>看 8 个通用做法，<strong>按行业</strong>看 9 个行业通常从哪儿起步。
-      每个场景都按同一套四段式写清楚：原来的样子 → AI 之后的样子 → 需要您提供什么 → 大约多久。
+      每个场景都按同一套写清楚：<strong>业务问题 → 技术难点 → 我们怎么做 → 交付物与验收标准</strong>。
     </p>
   </div>
 </section>
@@ -93,7 +93,8 @@
 <nav class="anchors" aria-label="页内导航">
   <div class="wrap anchors__inner">
     <a href="#scenes">按场景</a>
-    <a href="#industries">按行业</a>
+    <a href="#proof">交付保障</a>
+      <a href="#industries">按行业</a>
   </div>
 </nav>
 
@@ -387,228 +388,20 @@
     </div>
 
       <!-- 场景 01 -->
-      <article class="card card--flat scene">
-        <div class="scene__head">
-          <span class="scene__no" aria-hidden="true">01</span>
-          <h3 class="scene__title">本地知识库问答 <span class="badge">最常用</span></h3>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">业务问题</span>
-          <p class="scene__v">制度、工艺、产品资料散在共享盘、微信群和老师傅脑子里。问一次要翻半天，新人上手全靠带。</p>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">难在哪</span>
-          <p class="scene__v">资料有八九种格式、互相还有矛盾的版本；直接丢给模型，它会<b>很自信地答错</b>。难点不在模型，在文档的清洗、切分与版本管理——切错一句，答案就错一半。</p>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">我们怎么做</span>
-          <ol class="scene__steps"><li>资料清点与分级：分清哪些能入库、哪些涉密要单放</li><li>按条款/工序/章节切分，保留页码与出处，便于核对</li><li>搭检索—引用链路：答案必须能点开原文对应段落</li><li>用 100 条真实问题建评测集，调到达标再交付</li><li>按岗位配权限，开启操作日志</li></ol>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">交付物</span>
-          <p class="scene__v">知识库、问答入口、权限配置表、评测报告、操作手册</p>
-        </div>
-        <div class="scene__row scene__row--time">
-          <span class="scene__k">验收标准</span>
-          <p class="scene__v"><strong>抽 100 条真实问题，答案正确率 ≥ 85%，且每条都能点开原文核对</strong>　<span class="scene__time">周期 资料齐备的情况下 3–5 周</span></p>
-        </div>
-      </article>
 
       <!-- 场景 02 -->
-      <article class="card card--flat scene">
-        <div class="scene__head">
-          <span class="scene__no" aria-hidden="true">02</span>
-          <h3 class="scene__title">单据与文档信息提取 </h3>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">业务问题</span>
-          <p class="scene__v">报价单、发票、送货单靠人一张张敲进系统，慢，而且容易错。</p>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">难在哪</span>
-          <p class="scene__v">模板不统一、扫描件倾斜或盖章遮挡、字段边界模糊（含税还是不含税）。<b>错一个数字就是账务问题</b>，所以要解决的不是「能不能识别」，而是「错的时候能不能被发现」。</p>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">我们怎么做</span>
-          <ol class="scene__steps"><li>抽样造字段字典：哪个字段、什么格式、容错规则</li><li>版式适配与模板管理，新模板可自行录入</li><li>提取时给置信度分级，低置信度自动进人工复核队列</li><li>与现有系统对接回写，不让人再敲一遍</li><li>抽 200 份真实单据实测，统计完整率与错误率</li></ol>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">交付物</span>
-          <p class="scene__v">字段字典、提取服务、复核队列、对接文档、评测报告</p>
-        </div>
-        <div class="scene__row scene__row--time">
-          <span class="scene__k">验收标准</span>
-          <p class="scene__v"><strong>抽 200 份真实单据，字段完整率 ≥ 95%；错误项可人工修正且留痕</strong>　<span class="scene__time">周期 按单据种类评估，通常 2–4 周</span></p>
-        </div>
-      </article>
 
       <!-- 场景 03 -->
-      <article class="card card--flat scene">
-        <div class="scene__head">
-          <span class="scene__no" aria-hidden="true">03</span>
-          <h3 class="scene__title">客户沟通与销售支持 </h3>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">业务问题</span>
-          <p class="scene__v">回复客户靠个人经验，话术不统一；外贸还要扛时差和多语言。</p>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">难在哪</span>
-          <p class="scene__v">既要符合公司口径，又不能像模板群发；专业术语翻译错一个，客户就跑了。<b>客户名单和聊天记录本身也不能出内网</b>。</p>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">我们怎么做</span>
-          <ol class="scene__steps"><li>梳理标准话术与禁区：哪些能承诺、哪些绝对不能</li><li>历史邮件与聊天记录入库，作为表达风格参考</li><li>只生成<b>草稿</b>，业务员改完再发，不自动发送</li><li>修改痕迹回流，持续优化话术库</li><li>建多语言专业术语表，统一译法</li></ol>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">交付物</span>
-          <p class="scene__v">话术库、草稿生成入口、术语表、使用规范</p>
-        </div>
-        <div class="scene__row scene__row--time">
-          <span class="scene__k">验收标准</span>
-          <p class="scene__v"><strong>对 20 条典型询盘生成可用草稿，业务员改动用时 < 3 分钟，且不含超范围承诺</strong>　<span class="scene__time">周期 2–3 周</span></p>
-        </div>
-      </article>
 
       <!-- 场景 04 -->
-      <article class="card card--flat scene">
-        <div class="scene__head">
-          <span class="scene__no" aria-hidden="true">04</span>
-          <h3 class="scene__title">报价与方案初稿 </h3>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">业务问题</span>
-          <p class="scene__v">每次报价都要翻历史、套模板、算成本，重复劳动，还容易套错版本。</p>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">难在哪</span>
-          <p class="scene__v">价格体系里有折扣、成本口径和范围边界。让模型「自由发挥」是灾难——<b>报价必须是规则的产物，不是生成的产物</b>。</p>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">我们怎么做</span>
-          <ol class="scene__steps"><li>把价格规则、成本口径、折扣权限结构化，不让模型记数字</li><li>历史报价入库，仅作为同类项目的参照</li><li>生成初稿时自动标出「范围外」事项，避免后续扯皮</li><li>人工审校后出正式报价单</li></ol>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">交付物</span>
-          <p class="scene__v">规则配置、报价初稿生成器、范围边界清单、审校流程</p>
-        </div>
-        <div class="scene__row scene__row--time">
-          <span class="scene__k">验收标准</span>
-          <p class="scene__v"><strong>给定 10 个真实需求，初稿经人工审校后可直接使用（改动 < 20%）</strong>　<span class="scene__time">周期 2–3 周（需先整理历史报价数据）</span></p>
-        </div>
-      </article>
 
       <!-- 场景 05 -->
-      <article class="card card--flat scene">
-        <div class="scene__head">
-          <span class="scene__no" aria-hidden="true">05</span>
-          <h3 class="scene__title">会议与文档整理 </h3>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">业务问题</span>
-          <p class="scene__v">会开完没人写纪要，周报月报靠凑，格式一人一个样。</p>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">难在哪</span>
-          <p class="scene__v">录音转写有错字、多人对话难分角色、待办要能落到具体人。<b>纪要的价值不在「写出来」，而在「有人认领」</b>。</p>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">我们怎么做</span>
-          <ol class="scene__steps"><li>转写 + 角色分离，先解决「谁说的」</li><li>结构化输出：决议 / 待办 / 风险 三块分开</li><li>待办必须带负责人与时间，可对接任务系统</li><li>模板与文件命名规范固化，归档不靠自觉</li></ol>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">交付物</span>
-          <p class="scene__v">纪要模板、整理流程、导出格式、归档规范</p>
-        </div>
-        <div class="scene__row scene__row--time">
-          <span class="scene__k">验收标准</span>
-          <p class="scene__v"><strong>40 分钟会议录音 → 10 分钟内出纪要；待办项 100% 带负责人与时间</strong>　<span class="scene__time">周期 1–2 周</span></p>
-        </div>
-      </article>
 
       <!-- 场景 06 -->
-      <article class="card card--flat scene">
-        <div class="scene__head">
-          <span class="scene__no" aria-hidden="true">06</span>
-          <h3 class="scene__title">内部培训与新人上手 </h3>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">业务问题</span>
-          <p class="scene__v">老员工反复被问同样的问题，新人上手周期长，培训靠口口相传。</p>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">难在哪</span>
-          <p class="scene__v">培训资料散、口径不一；新人问的问题，老员工自己也未必确定。<b>要先有「标准答案」，才谈得上问答</b>。</p>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">我们怎么做</span>
-          <ol class="scene__steps"><li>岗位能力拆解：每个岗位上岗要会哪几件事</li><li>把标准答法与例外情况入库，明确「不确定就问谁」</li><li>分层培训：管理层 / 骨干 / 一线，内容不同</li><li>配考核题与答疑入口，学完能验证</li></ol>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">交付物</span>
-          <p class="scene__v">岗位手册、培训讲义、考核题库、答疑入口</p>
-        </div>
-        <div class="scene__row scene__row--time">
-          <span class="scene__k">验收标准</span>
-          <p class="scene__v"><strong>新人按手册独立完成一套日常操作；考核通过率 ≥ 80%</strong>　<span class="scene__time">周期 2–4 周（含一轮培训与考核）</span></p>
-        </div>
-      </article>
 
       <!-- 场景 07 -->
-      <article class="card card--flat scene">
-        <div class="scene__head">
-          <span class="scene__no" aria-hidden="true">07</span>
-          <h3 class="scene__title">数据与报表整理 </h3>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">业务问题</span>
-          <p class="scene__v">多个 Excel 手工合并，口径不一，一份周报要花半天。</p>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">难在哪</span>
-          <p class="scene__v">字段名不统一、单位不一致、存在重复行。<b>错一行，整份结论就错</b>，而且往往没人看得出错在哪。</p>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">我们怎么做</span>
-          <ol class="scene__steps"><li>字段字典与口径统一：先把「叫什么」定下来</li><li>自动合并、去重、单位换算与校验</li><li>异常项单独列出，而不是静默丢弃</li><li>报表模板固化，口径变了先改模板</li></ol>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">交付物</span>
-          <p class="scene__v">字段字典、合并规则、异常清单、报表模板</p>
-        </div>
-        <div class="scene__row scene__row--time">
-          <span class="scene__k">验收标准</span>
-          <p class="scene__v"><strong>给 10 份真实表格，合并结果与人工核对一致；异常项全部列出</strong>　<span class="scene__time">周期 2–3 周（口径确认是前提）</span></p>
-        </div>
-      </article>
 
       <!-- 场景 08 -->
-      <article class="card card--flat scene">
-        <div class="scene__head">
-          <span class="scene__no" aria-hidden="true">08</span>
-          <h3 class="scene__title">产品与业务系统的 AI 能力嵌入 </h3>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">业务问题</span>
-          <p class="scene__v">自己的产品或系统想加 AI 能力，不知道从哪下手，成本也算不清。</p>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">难在哪</span>
-          <p class="scene__v">要嵌进现有系统：鉴权、限流、超时、降级一个都不能少。<b>最怕的是把「偶尔能用」当成产品卖点</b>，上线后被客户投诉。</p>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">我们怎么做</span>
-          <ol class="scene__steps"><li>能力边界评估：哪些场景适合内置，哪些不适合</li><li>接口设计：鉴权、限流、超时、失败降级</li><li>本地部署与灰度发布，先在内部账号验证</li><li>监控与效果回传，出问题能定位到具体环节</li></ol>
-        </div>
-        <div class="scene__row">
-          <span class="scene__k">交付物</span>
-          <p class="scene__v">接口文档、调用示例、灰度方案、监控看板</p>
-        </div>
-        <div class="scene__row scene__row--time">
-          <span class="scene__k">验收标准</span>
-          <p class="scene__v"><strong>测试环境完成 3 个典型调用；P95 响应 < 2s；失败时有明确降级提示</strong>　<span class="scene__time">周期 按项目评估，先出一份可行性说明</span></p>
-        </div>
-      </article>
 
     </div>
 
@@ -619,6 +412,48 @@
         我们通常建议先挑一个最痛、最容易算清账的场景跑通；
         起步场景做顺了，后面再复制到其他部门，资料整理和培训的成本都会低不少。
       </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 交付保障（两个工程演示） ============================ -->
+<section class="section section--tight" id="proof">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">怎么证明有效 · 怎么接进系统</span>
+      <h2 class="h2">两件事，决定这套东西到底能不能用</h2>
+      <p class="lead">
+        场景写得再清楚，也回答不了两个问题：它到底准不准？能不能接进我现在用的系统？
+        这两件事我们有明确做法，也都可以当场演示。
+      </p>
+    </div>
+
+    <div class="grid grid--2">
+      <article class="card card--flat scene">
+        <div class="scene__head">
+          <span class="scene__no" aria-hidden="true">A</span>
+          <h3 class="scene__title">效果评测与验收</h3>
+        </div>
+        <p class="scene__v">不靠「感觉还行」判断效果。先用 100 条真实问题建评测集，跑出正确率，对照事先约定的达标线，决定能不能验收。</p>
+        <ul class="list-sm scene__list">
+          <li>评测题目来自客户现场，不是我们自己编的</li>
+          <li>错误样例逐条列出，人工复核后修正</li>
+          <li>达标线写在合同里，达不到不收该阶段款</li>
+        </ul>
+      </article>
+
+      <article class="card card--flat scene">
+        <div class="scene__head">
+          <span class="scene__no" aria-hidden="true">B</span>
+          <h3 class="scene__title">系统对接与权限</h3>
+        </div>
+        <p class="scene__v">AI 不是在浏览器里单独用，而是被现有系统调用。每一次调用都要过鉴权、有限流、有超时、有降级，并且留得下日志。</p>
+        <ul class="list-sm scene__list">
+          <li>对接 ERP / CRM / OA，不改您现有系统</li>
+          <li>按人分级授权，谁问了什么可查</li>
+          <li>本地部署，调用不出内网</li>
+        </ul>
+      </article>
     </div>
   </div>
 </section>

@@ -114,8 +114,30 @@
       ],
       sumLabel: '全部在客户内网运行',
       sumValue: '不经过我们的服务器'
+    },
+    {
+      title: '效果评测与验收',
+      type: 'eval',
+      set: '评测集：100 条真实问题（试用期从客户现场收集）',
+      correct: 85,
+      partial: 9,
+      fails: [
+        ['保修期是多久？', '答成 24 个月', '应为 12 个月'],
+        ['延保怎么申请？', '漏掉「书面」要求', '需书面申请'],
+        ['发票丢了怎么办？', '未命中', '手册 6.3 条有规定']
+      ],
+      verdict: '正确率 85% ≥ 达标线 85% —— 可进入验收'
+    },
+    {
+      title: '系统对接与权限',
+      type: 'api',
+      flow: ['ERP 发起调用', '网关校验权限', '本地模型生成', '回写并记日志'],
+      req: '{\n  "user": "张三 / 销售部",\n  "q": "这批货什么时候到仓？"\n}',
+      res: '{\n  "answer": "预计 3 月 21 日到仓",\n  "cite": "订单系统 #A-2031",\n  "ms": 1180\n}',
+      log: '10:24:07  张三（销售部）查询订单 A-2031 · 成功 · 1180ms'
     }
   ];
+
 
   var reduce = false;
   try {
@@ -383,6 +405,133 @@
   var dialog = null;
   var current = 0;
 
+  /* ---------------- 工程型演示：效果评测 ---------------- */
+  RENDER.eval = function (s) {
+    function row(label, n, cls) {
+      return '<div class="ev-row ' + cls + '">' +
+        '<span class="ev-row__t">' + label + '</span>' +
+        '<span class="ev-row__n">' + n + '<small>%</small></span>' +
+        '<span class="ev-row__bar"><i style="width:' + n + '%"></i></span>' +
+        '</div>';
+    }
+
+    var fails = s.fails.map(function (f) {
+      return '<tr><td>' + f[0] + '</td><td class="ev-bad">' + f[1] + '</td><td>' + f[2] + '</td></tr>';
+    }).join('');
+
+    var wrap = el(
+      '<div class="mk-eval">' +
+        '<div class="mk-eval__head">' +
+          '<span class="mk-eval__set">' + s.set + '</span>' +
+          '<span class="mk-eval__pct" data-pct>0%</span>' +
+        '</div>' +
+        '<div class="mk-eval__track"><span data-fill></span></div>' +
+        '<div class="mk-eval__rows" data-rows>' +
+          row('正确', s.correct, 'ok') +
+          row('部分正确', s.partial, 'part') +
+          row('错误', 100 - s.correct - s.partial, 'bad') +
+        '</div>' +
+        '<div class="mk-eval__fails" data-fails>' +
+          '<h4>错误样例（人工复核后修正）</h4>' +
+          '<table class="mk__tbl"><thead><tr><th>问题</th><th>模型答成</th><th>正确应为</th></tr></thead>' +
+          '<tbody>' + fails + '</tbody></table>' +
+        '</div>' +
+        '<div class="mk-eval__verdict" data-verdict>' +
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>' +
+          '<span>' + s.verdict + '</span>' +
+        '</div>' +
+      '</div>'
+    );
+
+    var pct = wrap.querySelector('[data-pct]');
+    var fill = wrap.querySelector('[data-fill]');
+    var rows = wrap.querySelector('[data-rows]');
+    var failsEl = wrap.querySelector('[data-fails]');
+    var verdict = wrap.querySelector('[data-verdict]');
+
+    if (reduce) {
+      pct.textContent = s.correct + '%';
+      fill.style.width = s.correct + '%';
+      rows.classList.add('is-on');
+      failsEl.classList.add('is-on');
+      verdict.classList.add('is-on');
+      return { el: wrap, beats: 1 };
+    }
+
+    var cur = 0;
+    (function tick() {
+      cur += 3;
+      if (cur > s.correct) cur = s.correct;
+      pct.textContent = cur + '%';
+      fill.style.width = cur + '%';
+      if (cur < s.correct) wait(tick, 34);
+    })();
+
+    wait(function () { rows.classList.add('is-on'); }, 900);
+    wait(function () { failsEl.classList.add('is-on'); }, 1800);
+    wait(function () { verdict.classList.add('is-on'); }, 2600);
+
+    return { el: wrap, beats: 4 };
+  };
+
+  /* ---------------- 工程型演示：系统对接 ---------------- */
+  RENDER.api = function (s) {
+    var chips = s.flow.map(function (t, i) {
+      return '<span class="api-chip" data-chip="' + i + '">' + t + '</span>' +
+        (i < s.flow.length - 1
+          ? '<span class="api-arrow" data-arrow="' + i + '" aria-hidden="true">→</span>'
+          : '');
+    }).join('');
+
+    var wrap = el(
+      '<div class="mk-api">' +
+        '<div class="mk-api__flow">' + chips + '</div>' +
+        '<div class="mk-api__io">' +
+          '<div class="mk-api__box" data-req><h4>ERP 发出</h4><pre></pre></div>' +
+          '<div class="mk-api__box" data-res><h4>本地返回</h4><pre></pre></div>' +
+        '</div>' +
+        '<div class="mk-api__log" data-log>' +
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5z"/><path d="M9 9h6M9 13h6M9 17h3"/></svg>' +
+          '<span></span>' +
+        '</div>' +
+      '</div>'
+    );
+
+    // 用 textContent 写入 JSON，避免转义问题
+    wrap.querySelector('[data-req] pre').textContent = s.req;
+    wrap.querySelector('[data-res] pre').textContent = s.res;
+    wrap.querySelector('[data-log] span').textContent = s.log;
+
+    var chipEls = wrap.querySelectorAll('[data-chip]');
+    var arrowEls = wrap.querySelectorAll('[data-arrow]');
+    var reqBox = wrap.querySelector('[data-req]');
+    var resBox = wrap.querySelector('[data-res]');
+    var logBox = wrap.querySelector('[data-log]');
+
+    if (reduce) {
+      for (var i = 0; i < chipEls.length; i++) chipEls[i].classList.add('is-on');
+      for (var j = 0; j < arrowEls.length; j++) arrowEls[j].classList.add('is-on');
+      reqBox.classList.add('is-on');
+      resBox.classList.add('is-on');
+      logBox.classList.add('is-on');
+      return { el: wrap, beats: 1 };
+    }
+
+    for (var k = 0; k < chipEls.length; k++) {
+      (function (k) {
+        wait(function () {
+          chipEls[k].classList.add('is-on');
+          if (arrowEls[k]) arrowEls[k].classList.add('is-on');
+        }, 380 * k + 260);
+      })(k);
+    }
+    wait(function () { reqBox.classList.add('is-on'); }, 700);
+    wait(function () { resBox.classList.add('is-on'); }, 1500);
+    wait(function () { logBox.classList.add('is-on'); }, 2200);
+
+    return { el: wrap, beats: 4 };
+  };
+
   function buildDialog() {
     var d = document.createElement('dialog');
     d.className = 'demo';
@@ -449,7 +598,8 @@
     wait(function () { note.classList.add('is-on'); }, 300);
 
     // 节拍推进：按演示形态给每个点着色
-    var total = s.type === 'ask' ? 2700 : s.type === 'extract'
+    var total = s.type === 'eval' ? 3100 : s.type === 'api' ? 2900
+      : s.type === 'ask' ? 2700 : s.type === 'extract'
       ? 900 + s.fields.length * 300 + 400
       : s.type === 'draft' ? 2100 + s.tags.length * 260
       : 220 + s.rows.length * 240 + 300;
@@ -486,7 +636,7 @@
   });
 
   function inject() {
-    var cards = document.querySelectorAll('#scenes .scene');
+    var cards = document.querySelectorAll('#scenes .scene, #proof .scene');
     if (!cards.length) return;
     for (var i = 0; i < cards.length; i++) {
       if (i >= SCENES.length) break;

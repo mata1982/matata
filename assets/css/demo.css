@@ -449,3 +449,163 @@
 @media (prefers-reduced-motion:reduce){
   .mkcfg__total b.is-bump{animation:none;}
 }
+/* ============================================================
+   工程型演示：效果评测 / 系统对接
+   ------------------------------------------------------------
+   这两个演示回答客户真正会问的两个问题：
+   · 它到底准不准？  → 跑评测集，出准确率，对照达标线
+   · 能不能接进我系统？ → 调用链、鉴权、日志
+   所以视觉上不像"聊天"，而像"报告"和"调用链"。
+   ============================================================ */
+
+/* ---------- 效果评测 ---------- */
+.mk-eval{padding:4px 0 0;}
+.mk-eval__head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  margin-bottom:12px;
+}
+.mk-eval__set{font-size:12.5px;color:var(--ink-mute);line-height:1.5;}
+.mk-eval__pct{
+  font-size:26px;font-weight:300;letter-spacing:-.02em;
+  color:var(--ink);font-variant-numeric:tabular-nums;flex:none;
+}
+.mk-eval__track{
+  height:6px;border-radius:3px;background:var(--hairline);
+  overflow:hidden;margin-bottom:20px;
+}
+.mk-eval__track span{
+  display:block;height:100%;width:0;border-radius:3px;
+  background:var(--primary);
+  transition:width .12s linear;
+}
+
+.mk-eval__rows{display:grid;gap:10px;opacity:0;transition:opacity .4s;}
+.mk-eval__rows.is-on{opacity:1;}
+.ev-row{
+  display:grid;grid-template-columns:72px 54px 1fr;
+  align-items:center;gap:12px;
+}
+.ev-row__t{font-size:13px;color:var(--ink-mute);}
+.ev-row__n{font-size:14px;color:var(--ink);font-variant-numeric:tabular-nums;text-align:right;}
+.ev-row__n small{font-size:10px;color:var(--ink-mute-2);margin-left:1px;}
+.ev-row__bar{height:5px;border-radius:3px;background:var(--canvas-soft);overflow:hidden;}
+.ev-row__bar i{display:block;height:100%;border-radius:3px;}
+.ev-row.ok .ev-row__bar i{background:#2B7A4B;}
+.ev-row.part .ev-row__bar i{background:#C08A2E;}
+.ev-row.bad .ev-row__bar i{background:#C2453F;}
+
+.mk-eval__fails{
+  margin-top:20px;padding-top:16px;border-top:1px solid var(--hairline);
+  opacity:0;transform:translateY(6px);
+  transition:opacity .4s, transform .4s;
+}
+.mk-eval__fails.is-on{opacity:1;transform:none;}
+.mk-eval__fails h4{
+  margin:0 0 10px;font-size:11.5px;letter-spacing:.08em;
+  font-weight:500;color:var(--ink-mute-2);
+}
+.mk-eval__fails .mk__tbl{width:100%;border-collapse:collapse;font-size:12.5px;}
+.mk-eval__fails .mk__tbl th{
+  text-align:left;font-weight:500;color:var(--ink-mute-2);
+  padding:6px 10px;border-bottom:1px solid var(--hairline);
+  font-size:11px;letter-spacing:.04em;
+}
+.mk-eval__fails .mk__tbl td{
+  padding:7px 10px;border-bottom:1px solid var(--hairline);
+  color:var(--ink-secondary);vertical-align:top;
+}
+.mk-eval__fails .mk__tbl tr:last-child td{border-bottom:0;}
+/* 通用表格有逐行淡入的旧规则，评测表整表一次显示即可 */
+.mk-eval__fails .mk__tbl tbody tr{opacity:1;transform:none;transition:none;}
+.mk-eval__fails .ev-bad{color:#B04A44;}
+
+.mk-eval__verdict{
+  margin-top:18px;
+  display:flex;align-items:center;gap:9px;
+  padding:11px 14px;border-radius:9px;
+  background:#F3FAF5;border:1px solid rgba(43,122,75,.2);
+  font-size:13.5px;color:#1F6340;line-height:1.5;
+  opacity:0;transform:translateY(6px);
+  transition:opacity .4s, transform .4s;
+}
+.mk-eval__verdict.is-on{opacity:1;transform:none;}
+.mk-eval__verdict svg{
+  width:16px;height:16px;flex:none;
+  fill:none;stroke:#2B7A4B;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;
+}
+
+/* ---------- 系统对接 ---------- */
+.mk-api__flow{
+  display:flex;align-items:center;flex-wrap:wrap;gap:8px;
+  margin-bottom:20px;
+}
+.api-chip{
+  padding:7px 13px;border-radius:9999px;
+  border:1px solid var(--hairline-input);
+  background:#fff;
+  font-size:12.5px;color:var(--ink-mute);
+  opacity:0;transform:translateY(4px);
+  transition:opacity .3s, transform .3s, border-color .3s, color .3s, background .3s;
+}
+.api-chip.is-on{
+  opacity:1;transform:none;
+  border-color:rgba(18,70,200,.35);
+  color:var(--primary-deep);
+  background:rgba(18,70,200,.05);
+}
+.api-arrow{
+  font-size:12px;color:var(--hairline-input);
+  opacity:0;transition:opacity .3s;
+}
+.api-arrow.is-on{opacity:1;}
+
+.mk-api__io{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+}
+.mk-api__box{
+  border:1px solid var(--hairline);border-radius:9px;
+  background:var(--canvas-soft);
+  padding:12px 14px;
+  opacity:0;transform:translateY(6px);
+  transition:opacity .4s, transform .4s;
+}
+.mk-api__box.is-on{opacity:1;transform:none;}
+.mk-api__box h4{
+  margin:0 0 8px;font-size:11px;letter-spacing:.08em;
+  font-weight:500;color:var(--ink-mute-2);
+}
+.mk-api__box pre{
+  margin:0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:11.5px;line-height:1.65;color:var(--ink-secondary);
+  white-space:pre-wrap;word-break:break-word;
+}
+
+.mk-api__log{
+  margin-top:14px;
+  display:flex;align-items:center;gap:8px;
+  padding:9px 12px;border-radius:8px;
+  background:var(--canvas-soft);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:11.5px;color:var(--ink-mute);
+  opacity:0;transition:opacity .4s;
+}
+.mk-api__log.is-on{opacity:1;}
+.mk-api__log svg{
+  width:14px;height:14px;flex:none;
+  fill:none;stroke:currentColor;stroke-width:1.6;
+}
+
+/* ---------- 交付保障区的小列表 ---------- */
+.scene__list{margin-top:12px;display:grid;gap:7px;list-style:none;padding-left:0;}
+.scene__list li{font-size:13.5px;line-height:1.6;color:var(--ink-secondary);padding-left:14px;position:relative;}
+.scene__list li::before{
+  content:"";position:absolute;left:0;top:.62em;
+  width:5px;height:5px;border-radius:50%;background:var(--primary);
+  opacity:.55;
+}
+
+@media (max-width:640px){
+  .mk-api__io{grid-template-columns:1fr;}
+  .ev-row{grid-template-columns:64px 48px 1fr;gap:8px;}
+  .mk-eval__fails .mk__tbl{font-size:11.5px;}
+}
