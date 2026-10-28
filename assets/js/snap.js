@@ -1,20 +1,23 @@
 /* ============================================================
-   玛塔塔 MATATA · 分节滚动（首页专用）
+   玛塔塔 MATATA · 分节滚动（首页与二级页通用）
    ============================================================
-   只做两件事：
-   1. 给"接近一屏"的区块打标，让 CSS 轻微吸附（不强制）
-   2. 右侧渲染分节点导航，点击跳转、滚动高亮
+   实测各页区块高度差异极大（有的块 3.9 屏高，有的 0.3 屏），
+   所以不能"每块一个点、每块都吸"。
 
-   刻意不做：
-   · 不劫持滚轮（不 preventDefault，不改 scrollTop）
-   · 不强制一屏一块（内容长短不一，强制会卡住）
-   · 触屏 / 窄屏 / 减少动效 → 完全不启用
+   规则：
+   · 吸附：只给高度在 0.85–1.6 屏之间的块（差不多一屏的）
+   · 圆点：高度 ≥ 0.8 屏的块才有资格，最多 6 个（多了取最高的几个）
+   · 页面若没有合格的块 → 整个功能不启用
+   · 触屏 / 窄屏 / 减少动效 → 不启用
    ============================================================ */
 (function () {
   'use strict';
 
-  var RATIO = 0.68;     // 高度不到视口的 68% 就不吸附
-  var MIN_WIDTH = 1025; // 与 CSS 断点一致
+  var MIN_WIDTH = 1025;   // 与 CSS 断点一致
+  var SNAP_MIN = 0.85;    // 吸附：下限（屏）
+  var SNAP_MAX = 1.6;     // 吸附：上限
+  var DOT_MIN = 0.8;      // 圆点：下限
+  var DOT_MAX = 6;        // 圆点：最多几个
 
   function init() {
     var main = document.querySelector('main');
@@ -27,10 +30,10 @@
     var sections = Array.prototype.slice.call(main.querySelectorAll(':scope > section'));
     if (sections.length < 2) return;
 
-    /* 让位高度：固定导航 + 吸顶的分节锚点条（有的页面有 .anchors） */
+    /* 让位高度：固定导航 + 吸顶的分节锚点条 */
     function topOffset() {
-      var nav = document.querySelector('.nav');
-      var off = nav ? nav.offsetHeight : 76;
+      var navEl = document.querySelector('.nav');
+      var off = navEl ? navEl.offsetHeight : 76;
       var anchors = document.querySelector('.anchors');
       if (anchors) {
         var st = window.getComputedStyle(anchors);
@@ -38,80 +41,108 @@
       }
       return off + 8;
     }
-    function applyOffset() {
-      document.documentElement.style.scrollPaddingTop = topOffset() + 'px';
-    }
 
     var nav = document.createElement('nav');
     nav.className = 'snapnav';
     nav.setAttribute('aria-label', '页面分节导航');
+    document.body.appendChild(nav);
 
-    // 分节名称：优先 data-snap-label，其次 h1/h2 文本
+    var dots = [];      // {el, sec}
+    var current = -1;
+
     function labelOf(sec, i) {
       var custom = sec.getAttribute('data-snap-label');
       if (custom) return custom;
       var h = sec.querySelector('h1, h2, .h2');
       if (h) {
         var t = (h.textContent || '').replace(/\s+/g, ' ').trim();
-        if (t) return t.length > 16 ? t.slice(0, 16) + '…' : t;
+        if (t) return t.length > 12 ? t.slice(0, 12) + '…' : t;
       }
       return '第 ' + (i + 1) + ' 节';
     }
 
-    var dots = [];
-    sections.forEach(function (sec, i) {
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'snapnav__dot';
-      b.setAttribute('aria-label', '跳到：' + labelOf(sec, i));
-      b.innerHTML = '<span class="snapnav__label">' + labelOf(sec, i) + '</span>';
-      b.addEventListener('click', function () {
-        var top = sec.getBoundingClientRect().top + window.pageYOffset - topOffset();
-        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
-      });
-      nav.appendChild(b);
-      dots.push(b);
-    });
-
-    document.body.appendChild(nav);
-
-    /* ---- 高度够的区块才吸附 ---- */
-    function markSections() {
+    /* 选出"够一屏"的块；超过上限时保留最高的几个 */
+    function pickSections() {
       var vh = window.innerHeight;
-      var wide = window.innerWidth >= MIN_WIDTH;
-      var any = false;
-      sections.forEach(function (sec) {
-        var tall = sec.getBoundingClientRect().height >= vh * RATIO;
-        var on = wide && tall;
-        sec.classList.toggle('snap-sec', on);
-        if (on) any = true;
+      var list = [];
+      sections.forEach(function (sec, i) {
+        var r = sec.getBoundingClientRect().height / vh;
+        if (r >= DOT_MIN) list.push({ sec: sec, i: i, r: r });
       });
-      document.documentElement.classList.toggle('snap-on', any);
-      applyOffset();
-      nav.classList.toggle('is-ready', any);
+      if (list.length > DOT_MAX) {
+        list = list.slice().sort(function (a, b) { return b.r - a.r; }).slice(0, DOT_MAX)
+          .sort(function (a, b) { return a.i - b.i; });
+      }
+      return list;
     }
 
-    /* ---- 高亮当前区块 + 深色区块反色 ---- */
-    var current = 0;
+    function buildDots(picked) {
+      nav.innerHTML = '';
+      dots = [];
+      picked.forEach(function (item) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'snapnav__dot';
+        b.setAttribute('aria-label', '跳到：' + labelOf(item.sec, item.i));
+        b.innerHTML = '<span class="snapnav__label">' + labelOf(item.sec, item.i) + '</span>';
+        b.addEventListener('click', function () {
+          var top = item.sec.getBoundingClientRect().top + window.pageYOffset - topOffset();
+          window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+        });
+        nav.appendChild(b);
+        dots.push({ el: b, sec: item.sec });
+      });
+    }
+
+    function markSnap(picked) {
+      var wide = window.innerWidth >= MIN_WIDTH;
+      var any = false;
+      sections.forEach(function (sec) { sec.classList.remove('snap-sec'); });
+      if (wide) {
+        picked.forEach(function (item) {
+          if (item.r >= SNAP_MIN && item.r <= SNAP_MAX) {
+            item.sec.classList.add('snap-sec');
+            any = true;
+          }
+        });
+      }
+      document.documentElement.classList.toggle('snap-on', any);
+      document.documentElement.style.scrollPaddingTop = topOffset() + 'px';
+    }
+
     function update() {
+      if (!dots.length) return;
       var mid = window.scrollY + window.innerHeight * 0.45;
       var idx = 0;
-      sections.forEach(function (sec, i) {
-        if (sec.offsetTop <= mid) idx = i;
+      dots.forEach(function (d, i) {
+        if (d.sec.offsetTop <= mid) idx = i;
       });
       if (idx !== current) {
-        dots[current] && dots[current].classList.remove('is-on');
-        dots[idx].classList.add('is-on');
+        if (dots[current]) dots[current].el.classList.remove('is-on');
+        dots[idx].el.classList.add('is-on');
         current = idx;
       }
-      var sec = sections[idx];
-      var dark = sec && (sec.classList.contains('invert') ||
+      var sec = dots[idx].sec;
+      var dark = sec.classList.contains('invert') ||
         sec.classList.contains('section--deep') ||
-        sec.getAttribute('data-snap-dark') === 'true');
+        sec.getAttribute('data-snap-dark') === 'true';
       nav.classList.toggle('is-dark', !!dark);
     }
 
-    dots[0] && dots[0].classList.add('is-on');
+    var picked = [];
+    function rebuild() {
+      picked = pickSections();
+      if (!picked.length) {
+        nav.classList.remove('is-ready');
+        document.documentElement.classList.remove('snap-on');
+        return;
+      }
+      buildDots(picked);
+      markSnap(picked);
+      current = -1;
+      nav.classList.toggle('is-ready', window.innerWidth >= MIN_WIDTH);
+      update();
+    }
 
     var ticking = false;
     window.addEventListener('scroll', function () {
@@ -123,11 +154,10 @@
     var rt = null;
     window.addEventListener('resize', function () {
       clearTimeout(rt);
-      rt = setTimeout(function () { markSections(); update(); }, 180);
+      rt = setTimeout(rebuild, 200);
     });
 
-    markSections();
-    update();
+    rebuild();
   }
 
   if (document.readyState === 'loading') {
