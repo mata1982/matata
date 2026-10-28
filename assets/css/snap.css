@@ -1,0 +1,104 @@
+/* ============================================================
+   玛塔塔 MATATA · 分节滚动（首页专用）
+   ============================================================
+   为什么不做"强制一屏一块"：
+   首页 7 个区块高度在 388–1019px 之间，视口 900px。
+   强制吸附会导致：矮块留大片空白、高块内容被切且滚不动。
+
+   这里的做法：
+   · 只给"高度 ≥ 视口 68%"的区块开吸附（由 JS 打标）
+   · 用 proximity（接近才吸）而不是 mandatory（强制）
+   · scroll-snap-stop: always —— 一次滚轮手势最多翻一块
+   · 右侧加分节点导航，随时可以跳，也可以看当前在哪
+   · 触屏 / 窄屏 / 减少动效：全部关闭，回归原生滚动
+   ============================================================ */
+
+body.has-snap .snap-sec{
+  scroll-snap-align: start;
+  scroll-snap-stop: always;   /* 一次手势不跳过下一块 */
+}
+
+html.snap-on{
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 84px;   /* 让开固定导航 */
+}
+
+/* ---------- 右侧分节导航 ---------- */
+.snapnav{
+  position:fixed;
+  right:22px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:40;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  padding:14px 10px;
+  border-radius:9999px;
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(13,37,61,.08);
+  box-shadow:0 10px 30px -18px rgba(13,37,61,.35);
+  backdrop-filter:blur(10px);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .4s ease;
+}
+.snapnav.is-ready{opacity:1;pointer-events:auto;}
+
+.snapnav__dot{
+  position:relative;
+  width:9px;height:9px;
+  border:0;padding:0;
+  border-radius:50%;
+  background:rgba(13,37,61,.22);
+  cursor:pointer;
+  transition:background .2s, transform .2s;
+}
+.snapnav__dot:hover{background:rgba(13,37,61,.45);transform:scale(1.25);}
+.snapnav__dot.is-on{background:var(--primary);transform:scale(1.35);}
+.snapnav__dot:focus-visible{outline:2px solid var(--primary);outline-offset:3px;}
+
+/* 悬停显示标签 */
+.snapnav__label{
+  position:absolute;
+  right:calc(100% + 12px);
+  top:50%;
+  transform:translateY(-50%) translateX(4px);
+  white-space:nowrap;
+  font-size:12px;
+  color:var(--ink-secondary);
+  background:rgba(255,255,255,.94);
+  border:1px solid rgba(13,37,61,.08);
+  border-radius:7px;
+  padding:5px 10px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .18s, transform .18s;
+}
+.snapnav__dot:hover .snapnav__label,
+.snapnav__dot:focus-visible .snapnav__label{
+  opacity:1;
+  transform:translateY(-50%) translateX(0);
+}
+
+/* 深色区块上，导航自动反色 */
+.snapnav.is-dark{
+  background:rgba(20,14,28,.55);
+  border-color:rgba(255,255,255,.12);
+}
+.snapnav.is-dark .snapnav__dot{background:rgba(255,255,255,.28);}
+.snapnav.is-dark .snapnav__dot.is-on{background:#fff;}
+.snapnav.is-dark .snapnav__label{
+  background:rgba(20,14,28,.92);
+  border-color:rgba(255,255,255,.12);
+  color:rgba(255,255,255,.82);
+}
+
+/* 触屏、窄屏、减少动效：整体关闭 */
+@media (max-width:1024px){
+  .snapnav{display:none;}
+}
+@media (prefers-reduced-motion:reduce){
+  .snapnav{display:none;}
+  html.snap-on{scroll-snap-type:none;}
+}

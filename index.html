@@ -27,8 +27,9 @@
 <link rel="stylesheet" href="assets/css/home-simple.css">
 <link rel="stylesheet" href="assets/css/redesign.css">
 <link rel="stylesheet" href="assets/css/demo.css">
+<link rel="stylesheet" href="assets/css/snap.css">
 </head>
-<body>
+<body class="has-snap">
 
 
 
@@ -84,7 +85,7 @@
 <main>
 
 <!-- ============================ 1. 首屏 ============================ -->
-<section class="hero" id="top">
+<section class="hero" id="top" data-snap-label="首屏">
   <div class="shader" aria-hidden="true">
     <canvas class="shader__canvas" data-shader></canvas>
     <canvas class="shader__geo" data-particle3d></canvas>
@@ -130,7 +131,7 @@
 </section>
 
 <!-- ============================ 2. 我们做三件事 ============================ -->
-<section class="section section--tight" id="what">
+<section class="section section--tight" id="what" data-snap-label="三件事">
   <div class="wrap">
     <div class="head head--center">
       <span class="eyebrow">我们做什么</span>
@@ -169,7 +170,7 @@
 </section>
 
 <!-- ============================ 3. 怎么开始 ============================ -->
-<section class="section section--alt" id="start">
+<section class="section section--alt" id="start" data-snap-label="三种开始">
   <div class="wrap">
     <div class="head">
       <span class="eyebrow">怎么开始</span>
@@ -207,7 +208,7 @@
 </section>
 
 <!-- ============================ 4. 为什么是我们（深色带） ============================ -->
-<section class="section invert" id="why">
+<section class="section invert" id="why" data-snap-label="为什么本地" data-snap-dark="true">
   <div class="wrap">
     <div class="head">
       <span class="eyebrow">为什么选我们</span>
@@ -239,7 +240,7 @@
 </section>
 
 <!-- ============================ 5. 案例 ============================ -->
-<section class="section" id="cases">
+<section class="section" id="cases" data-snap-label="客户案例">
   <div class="wrap">
     <div class="head">
       <span class="eyebrow">客户案例</span>
@@ -301,7 +302,7 @@
 </section>
 
 <!-- ============================ 6. 继续了解 ============================ -->
-<section class="section section--alt" id="more">
+<section class="section section--alt" id="more" data-snap-label="更多">
   <div class="wrap">
     <div class="more4">
       <a class="more4__item" href="services.html">
@@ -329,7 +330,7 @@
 </section>
 
 <!-- ============================ 7. 最终 CTA ============================ -->
-<section class="section section--tight" id="diagnose">
+<section class="section section--tight" id="diagnose" data-snap-label="免费诊断">
   <div class="wrap">
     <div class="final-cta">
       <h2>不确定要不要做？<br>先花 60 分钟聊聊</h2>
@@ -413,5 +414,6 @@
 <script src="assets/js/hero-parallax.js"></script>
 <script src="assets/js/demo-scenes.js"></script>
 <script src="assets/js/motion-site.js"></script>
+<script src="assets/js/snap.js"></script>
 </body>
 </html>
