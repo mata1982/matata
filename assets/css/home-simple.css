@@ -394,3 +394,13 @@ summary .scene__demo{
   .ind-detail{grid-template-columns:1fr;gap:20px;}
   .ind-block--start{grid-column:auto;}
 }
+/* 居中的提示块：用于"补充说明"类文案，不要满屏贴左边 */
+.notice--center{
+  display:block;
+  max-width:820px;
+  margin:clamp(24px,4vh,40px) auto 0;
+  padding:20px 26px;
+  text-align:center;
+}
+.notice--center p{margin:0;line-height:1.75;}
+.notice--center strong{color:var(--ink);font-weight:500;}
