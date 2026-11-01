@@ -22,68 +22,7 @@
 
 /* ============================================================
    1. 令牌：把暗色语义整体翻转为亮色
-   ============================================================ */
-:root{
-  /* 画布 */
-  --void:#FFFFFF;
-  --panel:#F5F5F7;
-  --raise:#FFFFFF;
-
-  /* 文字层级 */
-  --t-1:#1D1D1F;
-  --t-2:#424245;
-  --t-3:var(--ink-mute);
-  --t-4:var(--ink-mute);
-
-  /* 分割线 */
-  --line:rgba(0,0,0,.10);
-  --line-soft:rgba(0,0,0,.06);
-  --line-strong:rgba(0,0,0,.18);
-
-  /* 强调色：苹果蓝 */
-  --accent:var(--primary);
-  --accent-hi:#0077ED;
-  --accent-deep:#0066CC;
-  --accent-glow:rgba(0,113,227,.22);
-
-  /* 状态色 */
-  --ok:#1D9D5B;
-  --warn:#B26A00;
-
-  /* 深色区（用于 .invert） */
-  --ink:#1D1D1F;
-
-  /* 字体：优先系统 SF，中文回落苹方 */
-  --font-sans:-apple-system,BlinkMacSystemFont,"SF Pro SC","SF Pro Text","SF Pro Display",
-              "PingFang SC","Helvetica Neue","Microsoft YaHei UI","Microsoft YaHei",sans-serif;
-  --font-num:"SF Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
-
-  /* 圆角：苹果式偏大 */
-  --r-1:8px; --r-2:12px; --r-3:18px; --r-4:28px;
-
-  /* 字号：更接近苹果的排版比例 */
-  --fs-hero:clamp(40px,6.2vw,88px);
-  --fs-display:clamp(32px,4.2vw,64px);
-  --fs-h2:clamp(28px,3.4vw,52px);
-  --fs-h3:19px;
-  --fs-body:17px;
-  --fs-sm:15px;
-  --fs-xs:12px;
-
-  /* 中文不需要负字距；轻微收紧即可 */
-  --ls-hero:-.014em;
-  --ls-display:-.012em;
-  --ls-h2:-.01em;
-
-  --lh-hero:1.08;
-  --lh-title:1.16;
-  --lh-body:1.5;
-
-  /* 间距：苹果式大留白 */
-  --sp-9:64px; --sp-10:96px; --sp-11:120px; --sp-12:140px;
-}
-
-/* ============================================================
+   ============================================================ *//* ============================================================
    2. 基础
    ============================================================ */
 html{background:#fff;}
@@ -664,15 +603,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{
    ctaBreathe 橙色呼吸光。
    注意：CSS 动画的优先级高于普通声明，所以光写 box-shadow:none
    压不住，必须把 animation 也停掉。
-   ============================================================ */
-:root{
-  /* 把旧的橙色令牌整体改指向苹果蓝，所有历史引用自动变蓝 */
-  --accent-500:var(--primary);
-  --accent-600:#0066CC;
-  --accent-100:rgba(0,113,227,.10);
-  --sh-cta:0 0 0 rgba(0,0,0,0);
-}
-.btn--cta,.btn--primary,.btn--accent,.nav__cta{
+   ============================================================ */.btn--cta,.btn--primary,.btn--accent,.nav__cta{
   animation:none !important;
   box-shadow:none !important;
 }
