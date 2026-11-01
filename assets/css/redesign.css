@@ -64,7 +64,6 @@
   --line-strong:var(--hairline-input);
   --accent:var(--primary);
   --accent-hi:var(--primary-soft);
-  --accent-deep:var(--primary-deep);
   --accent-glow:rgba(18,70,200,.20);
 
   /* 圆角：整体收紧，Stripe 式的精密感 */
@@ -90,7 +89,6 @@
   --fs-h4:clamp(17px, 1.3vw, 18px);          /* 小标题/FAQ 问，原 15 */
   --fs-app-title:clamp(24px, 2vw, 28px);     /* 应用页主标题，原 22 / 26 */
   --fs-app-h:clamp(18px, 1.45vw, 20px);      /* 应用页分区标题，原 15 / 17 / 28 */
-  --fs-app-label:13.5px;                     /* 应用页表单标签 */
 
 
   /* 字体：系统字体栈不变（中文走苹方/雅黑） */
@@ -1199,13 +1197,9 @@ label:has(> input[type="checkbox"]){display:inline-flex;align-items:center;min-h
   --ink-500:#5F6B7A;
   --ink-700:#1D2939;
   --ink-900:#101828;
-  --lh-tight:1.22;
-  --lift:#1D212A;
   --line-100:#F0F2F5;
   --line-200:#E4E7EC;
   --nav-h:72px;
-  --ok-100:#E6F6ED;
-  --ok-600:#0F8A44;
   --pad:32px;
   --r-lg:14px;
   --r-md:10px;
@@ -1215,7 +1209,6 @@ label:has(> input[type="checkbox"]){display:inline-flex;align-items:center;min-h
   --sh-1:0 1px 2px rgba(16,24,40,.05);
   --sh-2:0 6px 16px -8px rgba(16,24,40,.12);
   --sh-3:0 18px 48px -16px rgba(16,24,40,.18);
-  --sp-1:4px;
   --sp-2:8px;
   --sp-3:12px;
   --sp-4:16px;
@@ -1223,8 +1216,6 @@ label:has(> input[type="checkbox"]){display:inline-flex;align-items:center;min-h
   --sp-6:32px;
   --sp-7:40px;
   --sp-8:48px;
-  --warn-100:#FFF4E5;
-  --warn-600:#B54708;
   --wrap:1200px;
   --wrap-max:1180px;
   --wrap-pad:32px;
@@ -1259,16 +1250,18 @@ label:has(> input[type="checkbox"]){display:inline-flex;align-items:center;min-h
   --fs-sm:15px;
   --fs-xs:12px;
   --lh-body:1.5;
-  --lh-hero:1.08;
   --lh-title:1.16;
   --ls-display:-.012em;
   --ls-h2:-.01em;
-  --ls-hero:-.014em;
-  --ok:#1D9D5B;
-  --warn:#B26A00;
-  --sh-cta:0 0 0 rgba(0,0,0,0);
+  --ok:#0F8A44;
+  --ok-bg:#E6F6ED;
+  --warn:#B54708;
+  --warn-bg:#FFF4E5;
   --sp-9:64px;
   --sp-10:96px;
   --sp-11:120px;
   --sp-12:140px;
 }
+
+/* D4-4a：--on-primary 接进主按钮文字色（此前写死 #fff，值相同） */
+.btn--primary,.btn--cta{color:var(--on-primary);}
