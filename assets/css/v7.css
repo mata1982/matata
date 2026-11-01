@@ -416,7 +416,7 @@ table.tbl .col-hi{background:rgba(0,113,227,.05);}
 /* 待确认占位：浅黄 */
 .tbd{
   background:#FFF8E6;
-  color:#8A5A00;
+  color:var(--warn-strong);
   border-bottom-color:var(--warn);
 }
 

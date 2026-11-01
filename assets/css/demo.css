@@ -277,7 +277,7 @@
 .mk__field span{color:var(--ink-mute);font-size:12.5px;flex:none;}
 .mk__field b{font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums;}
 .mk__field--ok{border-color:rgba(19,112,60,.35);background:#F4FBF6;}
-.mk__field--ok b{color:#13703C;}
+.mk__field--ok b{color:var(--ok-strong);}
 
 /* ============================================================
    模拟界面：草稿生成

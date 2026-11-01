@@ -122,7 +122,7 @@
   display:grid;grid-template-columns:18px 1fr;gap:10px;
   font-size:14.5px;line-height:1.65;color:var(--ink-secondary);
 }
-.res__why svg{width:15px;height:15px;margin-top:3px;fill:none;stroke:#13703C;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
+.res__why svg{width:15px;height:15px;margin-top:3px;fill:none;stroke:var(--ok-strong);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
 .res__why li.warn svg{stroke:#B4720F;}
 .res__actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
 
@@ -142,7 +142,7 @@
 .lead__ok{
   margin-top:14px;padding:14px 16px;border-radius:10px;
   background:#F4FBF6;border:1px solid rgba(19,112,60,.22);
-  font-size:14px;color:#13703C;line-height:1.6;
+  font-size:14px;color:var(--ok-strong);line-height:1.6;
 }
 
 /* ---------- 窄屏 ---------- */

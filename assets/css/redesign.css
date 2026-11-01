@@ -341,7 +341,7 @@ h3,.card__title,.prod__head h3,.scene2__head h3,.what3__item h3,.paincard h3{
   font-size:11px;
   font-weight:500;
 }
-.badge--ok{background:#E4F5EA;color:#13703C;}
+.badge--ok{background:var(--ok-bg);color:var(--ok-strong);}
 .badge--grey{background:var(--canvas-soft);color:var(--ink-mute);}
 
 /* ============================================================
@@ -762,7 +762,7 @@ html,body{overflow-x:clip;}
 }
 .fear__do li svg{
   width:15px;height:15px;margin-top:3px;
-  fill:none;stroke:#13703C;stroke-width:2.2;
+  fill:none;stroke:var(--ok-strong);stroke-width:2.2;
   stroke-linecap:round;stroke-linejoin:round;
 }
 @media (max-width:720px){
@@ -1256,6 +1256,8 @@ label:has(> input[type="checkbox"]){display:inline-flex;align-items:center;min-h
   --ok-bg:#E6F6ED;
   --warn:#B54708;
   --warn-bg:#FFF4E5;
+  --ok-strong:#13703C;   /* 浅底上的成功色文字/描边（badge、勾选图标），白底 6.16:1 */
+  --warn-strong:#8A5A00; /* 浅底上的警告/占位文字（.tbd），琥珀 */
   --sp-9:64px;
   --sp-10:96px;
   --sp-11:120px;
@@ -1264,3 +1266,5 @@ label:has(> input[type="checkbox"]){display:inline-flex;align-items:center;min-h
 
 /* D4-4a：--on-primary 接进主按钮文字色（此前写死 #fff，值相同） */
 .btn--primary,.btn--cta{color:var(--on-primary);}
+/* D4-4c：warn 徽标被 .badge,.tag{color:var(--primary-deep)} 覆盖成主色蓝，按语义归位 */
+.badge--warn,.tag--warn{background:var(--warn-bg);color:var(--warn);}
