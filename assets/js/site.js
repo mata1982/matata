@@ -523,6 +523,9 @@
           var code = (err && err.code) || 'unknown';
           var saved = saveLocally(data);         // 没送出去才存，给用户复制用
           track('form_fail', code + '|' + (saved ? 'saved' : 'nosave'));
+          if (typeof window.MATATA_REPORT === 'function') {
+            window.MATATA_REPORT('form_fail', { message: '表单提交失败：' + code });
+          }
           if (window.console && console.warn) {
             console.warn('[form] 提交失败：' + code + (err && err.detail ? '（' + err.detail + '）' : ''));
           }
@@ -630,4 +633,281 @@
   menu.addEventListener('click', function (e) {
     if (e.target.closest && e.target.closest('.navcta__item')) close();
   });
+})();
+
+/* ============================================================
+   错误与致命故障自报（没有后端阶段的监控通道）
+   ============================================================
+   只做三件事：
+   1. 捕获致命错误：运行时异常、未处理的 Promise、关键资源（CSS/JS）加载失败
+   2. 去重 + 限流之后，经表单通道发一封【错误告警】邮件（通道可一行关掉）
+   3. 带 ?debug=1 打开页面时，把最近 20 条错误渲染成可复制文本（人工上报用）
+
+   隐私边界（硬约束，别在这里加字段）：
+   · 只上报：页面路径、错误类型、指纹、脱敏后的错误消息/堆栈、构建版本、浏览器大类、屏宽档
+   · 绝不上报：用户填写的任何内容、cookie、URL 查询串、完整 UA、任何可识别个人的标识
+
+   为什么不做成"全量日志"：没有后端，通道本身不可靠，报得多只会淹掉真正的告警。
+   宁可漏掉长尾，也要保证"表单挂了/脚本挂了"这类致命故障一定能到人。
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var CFG = window.MATATA_CONFIG || {};
+  var M = CFG.monitor || {};
+  if (M.enabled === false) return;          // 配置里一行关掉
+
+  var KEY_LOG = 'matata_err_log';
+  var KEY_SEEN = 'matata_err_seen';
+  var KEY_SESS = 'matata_err_session';
+  var LOG_MAX = 20;
+  var MAX_PER_SESSION = Number(M.maxPerSession || 3);
+  var DEDUPE_MS = Number(M.dedupeHours || 24) * 3600 * 1000;
+  var isLocal = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname || '');
+
+  function iso() { try { return new Date().toISOString(); } catch (e) { return ''; } }
+
+  /* ---------- 构建版本 ----------
+     发布脚本会把 tag 注入镜像的 config.js（window.MATATA_CONFIG.build）。
+     本地预览、-FromBuild 预览、以及注入前的镜像里它是 undefined——
+     读取处必须兜底，不能让告警/面板因为版本号缺失而自己出错。 */
+  function buildTag() {
+    try {
+      var v = (window.MATATA_CONFIG || {}).build;
+      if (v == null) return '';
+      var s = String(v).trim();
+      return /^[\w.\-]{1,64}$/.test(s) ? s : '';   // 不是正常 tag 就当没填，避免把脏值带进告警
+    } catch (e) { return ''; }
+  }
+  function buildLabel() { return buildTag() || '未发布'; }
+
+  function readJSON(k, dflt) {
+    try {
+      var v = JSON.parse(localStorage.getItem(k) || '');
+      return v == null ? dflt : v;
+    } catch (e) { return dflt; }
+  }
+  function writeJSON(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+
+  /* ---------- 脱敏：即使某天错误消息里混进了用户输入，也不能原样发出去 ---------- */
+  function scrub(s) {
+    return String(s == null ? '' : s)
+      .replace(/[\w.+-]+@[\w-]+\.[\w.-]{2,}/g, '[邮箱]')
+      .replace(/\+?\d[\d\s()-]{6,}\d/g, '[号码]')
+      .replace(/https?:\/\/[^\s"')]+/g, function (m) {
+        var q = m.indexOf('?');
+        return q > -1 ? m.slice(0, q) + '?…' : m;
+      })
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  /* ---------- 指纹：同一类错误在多台机器上要能归并成一条 ---------- */
+  function fpOf(parts) {
+    var s = parts.join('|');
+    var h = 0x811c9dc5;
+    for (var i = 0; i < s.length; i++) {
+      h ^= s.charCodeAt(i);
+      h = (h * 0x01000193) >>> 0;
+    }
+    return ('00000000' + h.toString(16)).slice(-8);
+  }
+
+  function uaClass() {
+    var ua = navigator.userAgent || '';
+    var b = /Edg\//.test(ua) ? 'Edge'
+      : /Chrome\//.test(ua) ? 'Chrome'
+      : /Firefox\//.test(ua) ? 'Firefox'
+      : /Safari\//.test(ua) ? 'Safari' : 'other';
+    return b + (/Mobi|Android|iPhone|iPad/.test(ua) ? '/mobile' : '/desktop');
+  }
+  function wBucket() {
+    var w = window.innerWidth || 0;
+    return w <= 390 ? '<=390' : w <= 768 ? '<=768' : w <= 1024 ? '<=1024' : '>1024';
+  }
+
+  function pushLog(rec) {
+    var log = readJSON(KEY_LOG, []);
+    if (!Array.isArray(log)) log = [];
+    log.push(rec);
+    writeJSON(KEY_LOG, log.slice(-LOG_MAX));
+  }
+
+  function endpoint() {
+    if (M.endpoint) return String(M.endpoint).trim();
+    try {
+      if (window.MATATA_FORM && window.MATATA_FORM.endpoint) return window.MATATA_FORM.endpoint();
+    } catch (e) {}
+    return '';
+  }
+
+  function send(rec) {
+    var url = endpoint();
+    if (!url || isLocal) return;
+    var payload = {
+      _subject: (M.subjectPrefix || '【错误告警】') + rec.fp,
+      _captcha: 'false',
+      _template: 'table',
+      页面: rec.page,
+      类型: rec.type,
+      指纹: rec.fp,
+      消息: rec.msg,
+      位置: rec.where,
+      构建: rec.build || '未发布',
+      浏览器: rec.ua,
+      屏宽: rec.wch,
+      时间: rec.at
+    };
+    try {
+      if (window.MATATA_FORM && typeof window.MATATA_FORM.submit === 'function') {
+        window.MATATA_FORM.submit(url, payload).catch(function () {});
+        return;
+      }
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).catch(function () {});
+    } catch (e) { /* 上报失败绝不能影响页面 */ }
+  }
+
+  /** 对外唯一入口：window.MATATA_REPORT(type, err|{message,stack}) */
+  function report(type, detail) {
+    try {
+      var page = String(location.pathname || '').split('?')[0];
+      var msg = scrub(detail && detail.message != null ? detail.message : detail || '');
+      var stackLines = detail && detail.stack ? String(detail.stack).split('\n').slice(1, 11) : [];
+      var where = scrub(stackLines.join(' '));
+
+      /* 指纹只认「文件名」，不认行号列号：
+         同一段代码重排一行不该算一条新错误；但换了个构建产物（指纹文件）就该重新提醒一次。 */
+      var srcFile = '';
+      for (var si = 0; si < stackLines.length; si++) {
+        var fm = /([\w.-]+\.js)(?::\d+:\d+)?/.exec(stackLines[si]);
+        if (fm) { srcFile = fm[1]; break; }
+      }
+
+      var rec = {
+        at: iso(),
+        page: page,
+        type: String(type || 'unknown'),
+        fp: fpOf([type, msg.slice(0, 120), page, srcFile]),
+        msg: msg.slice(0, 200),
+        where: where.slice(0, 400),
+        build: buildTag(),
+        ua: uaClass(),
+        wch: wBucket()
+      };
+      pushLog(rec);
+
+      /* 去重：同一指纹 24 小时内只发一次 */
+      var seen = readJSON(KEY_SEEN, {});
+      var t = Number(seen[rec.fp] || 0);
+      if (t && Date.now() - t < DEDUPE_MS) return rec;
+
+      /* 限流：每会话最多 3 封，防止一个循环错误把我们自己的邮箱打爆 */
+      var n = 0;
+      try {
+        n = (Number(sessionStorage.getItem(KEY_SESS) || '0') || 0);
+        if (n >= MAX_PER_SESSION) return rec;
+        sessionStorage.setItem(KEY_SESS, String(n + 1));
+      } catch (e) { /* 隐私模式下拿不到 sessionStorage，就按不限流处理 */ }
+
+      seen[rec.fp] = Date.now();
+      var cutoff = Date.now() - DEDUPE_MS * 2;
+      Object.keys(seen).forEach(function (k) { if (Number(seen[k]) < cutoff) delete seen[k]; });
+      writeJSON(KEY_SEEN, seen);
+
+      send(rec);
+      return rec;
+    } catch (e) { return null; }
+  }
+  window.MATATA_REPORT = report;
+
+  /* ---------- 捕获 ---------- */
+  window.addEventListener('error', function (ev) {
+    try {
+      var t = ev && ev.target;
+      if (t && t !== window && t.tagName) {
+        var tag = String(t.tagName).toUpperCase();
+        if (tag !== 'SCRIPT' && tag !== 'LINK') return;   // 只报 CSS/JS，图片挂了先不管
+        var src = t.getAttribute('src') || t.getAttribute('href') || '';
+        report('resource_' + tag.toLowerCase(), { message: '关键资源加载失败：' + String(src).split('?')[0] });
+        return;
+      }
+      report('runtime', (ev && ev.error) || { message: (ev && ev.message) || '' });
+    } catch (e) {}
+  }, true);
+
+  window.addEventListener('unhandledrejection', function (ev) {
+    try {
+      var r = ev && ev.reason;
+      report('promise', (r && r.message) ? r : { message: String(r) });
+    } catch (e) {}
+  });
+
+  /* ---------- ?debug=1 诊断面板：人工上报用，不依赖任何 CSS ---------- */
+  function debugOn() {
+    try { return /(?:^|[?&])debug=1(?:&|$)/.test(location.search); } catch (e) { return false; }
+  }
+
+  function renderDebug() {
+    if (!debugOn()) return;
+    try {
+      var log = readJSON(KEY_LOG, []);
+      var lines = [
+        '【玛塔塔 · 诊断信息】',
+        '页面：' + location.pathname,
+        '时间：' + iso(),
+        '构建：' + buildLabel(),
+        '浏览器：' + uaClass() + ' · 屏宽 ' + wBucket(),
+        '已记录错误：' + (log.length || 0) + ' 条',
+        ''
+      ];
+      (log || []).slice(-LOG_MAX).forEach(function (r, i) {
+        lines.push((i + 1) + '. [' + r.type + '] ' + r.at + ' · 指纹 ' + r.fp);
+        lines.push('   ' + r.msg + (r.where ? '\n   ' + r.where : ''));
+      });
+      var text = lines.join('\n');
+
+      var box = document.createElement('div');
+      box.setAttribute('role', 'region');
+      box.setAttribute('aria-label', '诊断信息');
+      box.style.cssText = 'position:fixed;left:12px;right:12px;bottom:12px;z-index:2147483000;max-height:46vh;overflow:auto;' +
+        'background:#111;color:#eee;font:12px/1.5 ui-monospace,Consolas,monospace;padding:12px;border-radius:10px;' +
+        'box-shadow:0 10px 30px rgba(0,0,0,.4)';
+
+      var pre = document.createElement('pre');
+      pre.style.cssText = 'margin:0 0 10px;white-space:pre-wrap;word-break:break-word';
+      pre.textContent = text;
+
+      var bar = document.createElement('div');
+      var copy = document.createElement('button');
+      copy.type = 'button';
+      copy.textContent = '复制诊断信息';
+      copy.style.cssText = 'margin-right:8px;padding:6px 10px;border-radius:6px;border:0;background:#fff;color:#111;cursor:pointer';
+      copy.addEventListener('click', function () {
+        try {
+          navigator.clipboard.writeText(text);
+          copy.textContent = '已复制';
+        } catch (e) { copy.textContent = '复制失败，请手动选择'; }
+      });
+
+      var close = document.createElement('button');
+      close.type = 'button';
+      close.textContent = '关闭';
+      close.style.cssText = 'padding:6px 10px;border-radius:6px;border:1px solid #666;background:transparent;color:#eee;cursor:pointer';
+      close.addEventListener('click', function () { box.remove(); });
+
+      bar.appendChild(copy);
+      bar.appendChild(close);
+      box.appendChild(pre);
+      box.appendChild(bar);
+      (document.body || document.documentElement).appendChild(box);
+    } catch (e) { /* 面板坏了也不影响页面 */ }
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderDebug);
+  else renderDebug();
 })();

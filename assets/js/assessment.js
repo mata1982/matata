@@ -412,6 +412,11 @@
         btn.disabled = false;
         btn.textContent = '发送失败，点这里重试';
         track('quiz_lead_fail', code);
+        try {
+          if (typeof window.MATATA_REPORT === 'function') {
+            window.MATATA_REPORT('form_fail', { message: '自测页留资失败：' + code });
+          }
+        } catch (e2) {}
         offerFallback(code);
       });
     });

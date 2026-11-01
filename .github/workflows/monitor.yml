@@ -1,0 +1,44 @@
+name: monitor
+
+# 官网可用性巡检（零成本：公开仓库的标准 runner 免费，不占 Actions 额度）
+# 常规每 15 分钟一次；每天 01:00 UTC 那次带「真发一封测试邮件」，用来确认表单通道没断。
+# 失败自动开 issue（label: monitor），恢复后自动关单；同一故障只追加评论，不刷屏。
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+    inputs:
+      deep:
+        description: '连表单测试投递一起做（会真发一封标注过的测试邮件）'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: monitor
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 巡检站点
+        env:
+          SITE_BASE: https://mata1982.github.io/matata/
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          DEEP: ${{ (github.event.schedule == '0 1 * * *' || inputs.deep) && '1' || '0' }}
+        run: node .github/scripts/monitor.mjs
