@@ -39,6 +39,6 @@
   background:rgba(226,152,42,.09);
   font-size:14px;
   line-height:1.75;
-  color:var(--ink-800,#3A3A3C);
+  color:var(--ink-secondary);
 }
 .noscript-notice a{color:var(--link,var(--brand-800,#1246C8));text-decoration:underline;text-underline-offset:2px;}

@@ -94,6 +94,13 @@
   /* 字体：系统字体栈不变（中文走苹方/雅黑） */
   --font-sans:-apple-system,BlinkMacSystemFont,"SF Pro SC","SF Pro Text",
               "PingFang SC","Helvetica Neue","Microsoft YaHei UI","Microsoft YaHei",sans-serif;
+
+  /* 运行时变量默认值：由 JS（hero-parallax.js / motion-site.js）在交互时覆盖。
+     这里是首帧兜底 —— 不补的话，JS 执行前 .shader 的 calc() 和 motion.css 的
+     transition-delay 会拿到空值（整条声明失效）。 */
+  --px:0px;
+  --py:0px;
+  --mo-d:0ms;
 }
 
 /* ============================================================
