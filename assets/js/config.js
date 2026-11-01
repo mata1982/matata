@@ -21,7 +21,7 @@ window.MATATA_CONFIG = {
     phone:   '13810625550',
     wechat:  '13810625550',
     email:   '119274334@qq.com',
-    site:    'https://www.matata.cn',   // 正式域名，用于生成分享链接
+    site:    'https://mata1982.github.io/matata',   // 正式域名，用于生成分享链接
   address: '北京市海淀区北蜂窝路22号',
     icp:     '',      // 例：'京ICP备2026xxxxxx号'
     hours:   '周一至周五 9:00–18:00'

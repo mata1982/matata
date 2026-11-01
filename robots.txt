@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # 结构简洁的静态站点，无后台目录需要屏蔽
-Sitemap: https://www.matata.cn/sitemap.xml
+Sitemap: https://mata1982.github.io/matata/sitemap.xml
