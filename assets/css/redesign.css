@@ -1085,3 +1085,17 @@ html,body{overflow-x:clip;}
   border-top:1px solid var(--hairline);
 }
 .nav__panel-tool:hover{color:var(--primary);}
+
+/* ============================================================
+   D2-refactor · 标题字号单一来源（.pagehead h1）
+   ------------------------------------------------------------
+   收拢前：base / home / site-v4 / inner / v6 五个文件各写一遍
+   （44px、var(--fs-display)、36px、30px 互相覆盖）。
+   现在只在这里定义，且用 :where() 保持零特异性 ——
+   页面级特例（services 的 .pagehead--split h1、文章页的 .art h1）
+   仍然按自己的规则优先，不会被这层压掉。
+   数值与改前逐档一致：>1024 走 4.2vw（上限 64），≤1024=36，≤720=30。
+   ============================================================ */
+:where(.pagehead h1){font-size:clamp(32px,4.2vw,64px);}
+@media (max-width:1024px){:where(.pagehead h1){font-size:36px;}}
+@media (max-width:720px){:where(.pagehead h1){font-size:30px;}}

@@ -164,14 +164,7 @@ h1,h2,h3,h4,.h2,.h3,.h4{color:var(--t-1);font-weight:600;}
   min-height:auto;
   padding:clamp(72px,10vh,128px) 0 clamp(56px,7vh,96px);
 }
-.hero h1{
-  color:#1D1D1F;
-  font-weight:600;
-  font-size:var(--fs-hero);
-  line-height:var(--lh-hero);
-  letter-spacing:var(--ls-hero);
-  text-shadow:none;
-}
+.hero h1{color:#1D1D1F;text-shadow:none;}
 .hero h1 em{
   color:var(--primary);
   text-shadow:none;
@@ -600,7 +593,6 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{
    ============================================================ */
 @media (max-width:720px){
   .hero{padding:56px 0 48px;}
-  .hero h1{line-height:1.12;}
   .section{padding:72px 0;}
   .nav__inner{min-height:52px;}
 }

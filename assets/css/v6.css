@@ -38,14 +38,7 @@
 }
 
 /* 首屏标题：明确指定，避免被上游 --lh-tight 影响 */
-.hero h1{
-  font-size:var(--fs-hero);
-  line-height:var(--lh-hero);
-  letter-spacing:var(--ls-hero);
-  font-weight:700;              /* 800 在 Windows 上会被合成加粗，边缘发虚 */
-  text-wrap:balance;
-  margin:0;
-}
+.hero h1{text-wrap:balance;margin:0;}
 .hero h1 em{
   font-style:normal;
   color:var(--accent-hi);
@@ -54,7 +47,7 @@
 }
 
 /* 内页大标题同步收紧字距 */
-.pagehead h1{letter-spacing:var(--ls-display);line-height:1.16;}
+
 .h2,.section-head h2{letter-spacing:var(--ls-h2);}
 
 /* ============================================================
