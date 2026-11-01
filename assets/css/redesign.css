@@ -1275,3 +1275,58 @@ label:has(> input[type="checkbox"]){display:inline-flex;align-items:center;min-h
 .btn--primary,.btn--cta{color:var(--on-primary);}
 /* D4-4c：warn 徽标被 .badge,.tag{color:var(--primary-deep)} 覆盖成主色蓝，按语义归位 */
 .badge--warn,.tag--warn{background:var(--warn-bg);color:var(--warn);}
+/* ============================================================
+   附：无障碍与降级样式（原 a11y.css，第 6 步并入）
+   ------------------------------------------------------------
+   迁移原因：令牌与无障碍样式应当同源，避免两处维护。
+   迁移前提（维护确认的三条）：
+     1) 仍排在 redesign.css 之后 —— 现为文件末尾，顺序不变；
+     2) --ink-800 兜底 —— 第 5 步已改用已定义的 --ink-secondary；
+     3) 保留独立注释块，便于回溯。
+   内含：.skip-link（跳过导航）、.noscript-notice（关闭 JS 提示）。
+   ============================================================ */
+
+/* ============================================================
+   无障碍与降级样式（HTML 结构批专用，独立文件避免与 CSS 重构冲突）
+   - .skip-link     键盘用户「跳到主要内容」
+   - .noscript-notice  关闭 JS 时的可读提示
+   若后续合并 CSS，本文件内容需等价并入。
+   ============================================================ */
+
+.skip-link{
+  position:absolute;
+  left:12px;
+  top:-56px;                 /* 默认移出视口，不占布局、不影响视觉 */
+  z-index:200;
+  padding:10px 18px;
+  border-radius:10px;
+  background:var(--brand-800,#1246C8);
+  color:#fff;
+  font-size:14px;
+  font-weight:600;
+  line-height:1.4;
+  text-decoration:none;
+  box-shadow:0 10px 24px -10px rgba(16,24,40,.45);
+  transition:top .18s ease;
+}
+.skip-link:focus{
+  top:10px;
+  outline:2px solid #fff;
+  outline-offset:-4px;
+}
+/* 不能用 :focus-visible 做唯一入口：老浏览器与 Windows 高对比度模式要兜住 */
+@media (prefers-reduced-motion:reduce){
+  .skip-link{transition:none;}
+}
+
+.noscript-notice{
+  margin:0 0 22px;
+  padding:14px 18px;
+  border:1px solid rgba(226,152,42,.45);
+  border-radius:12px;
+  background:rgba(226,152,42,.09);
+  font-size:14px;
+  line-height:1.75;
+  color:var(--ink-secondary);
+}
+.noscript-notice a{color:var(--link,var(--brand-800,#1246C8));text-decoration:underline;text-underline-offset:2px;}
