@@ -368,7 +368,7 @@ table.tbl .col-hi{background:var(--brand-50);}
   .anchors{position:static;} /* 窄屏导航会换行变高，锚点条改为不吸顶，避免被导航盖住 */
   .section[id],details[id]{scroll-margin-top:calc(var(--nav-h) + var(--sp-8));}
 }
-@media (max-width:560px){
+@media (max-width:480px){
   .nav__links{flex-wrap:nowrap;overflow-x:auto;width:100%;margin-left:0;padding-bottom:4px;}
 }
 
@@ -1246,7 +1246,7 @@ strong,b{color:var(--t-1);font-weight:600;}
 /* ============================================================
    7. 响应式
    ============================================================ */
-@media (max-width:1080px){
+@media (max-width:1024px){
   :root{
     --fs-hero:56px;--fs-display:44px;--fs-h2:32px;
     --sp-11:96px;--sp-12:120px;--pad:24px;

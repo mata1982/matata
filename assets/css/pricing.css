@@ -229,7 +229,7 @@
 /* ============================================================
    6. 响应式
    ============================================================ */
-@media (max-width:1200px){
+@media (max-width:1280px){
   .prods{grid-template-columns:repeat(2,1fr);}
   .prods--3{grid-template-columns:repeat(3,1fr);}
   .config{grid-template-columns:1fr 300px;}

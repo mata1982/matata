@@ -486,7 +486,7 @@ html,body{overflow-x:clip;}
 .footer .logo__cn{font-weight:600;}
 
 /* 中等宽度收一档，避免 5 个字把导航挤满 */
-@media (max-width:1180px){
+@media (max-width:1280px){
   .brand__cn{font-size:18px;}
   .brand__mark{width:32px;height:32px;}
 }
@@ -678,7 +678,7 @@ html,body{overflow-x:clip;}
   .compare{grid-template-columns:1fr;}
   .media-grid{grid-template-columns:1fr 1fr;}
 }
-@media (max-width:640px){
+@media (max-width:720px){
   .media-grid{grid-template-columns:1fr;}
   .compare__col{padding:24px 20px;}
   .belief{padding:24px 20px;}
@@ -703,7 +703,7 @@ html,body{overflow-x:clip;}
   color:var(--ink-mute-2);
   font-variant-numeric:tabular-nums;
 }
-@media (max-width:640px){
+@media (max-width:720px){
   .faq > details > summary{padding-left:46px;}
   .faq > details > summary::before{left:20px;}
 }
@@ -767,7 +767,7 @@ html,body{overflow-x:clip;}
   fill:none;stroke:#13703C;stroke-width:2.2;
   stroke-linecap:round;stroke-linejoin:round;
 }
-@media (max-width:640px){
+@media (max-width:720px){
   .fear{padding:24px 20px;}
   .fear h3{font-size:16.5px;}
 }
@@ -810,7 +810,7 @@ html,body{overflow-x:clip;}
   margin:auto 0 0;padding-top:18px;
   font-size:12px;color:var(--ink-mute-2);
 }
-@media (max-width:640px){
+@media (max-width:720px){
   .case-proc{padding:22px 20px 20px;}
 }
 /* ============================================================
@@ -1007,7 +1007,7 @@ html,body{overflow-x:clip;}
   font-size:12.5px;
 }
 .topbar__cta--2:hover{background:rgba(255,255,255,.2);}
-@media (max-width:820px){
+@media (max-width:900px){
   .topbar__cta--2{display:none;}
 }
 /* ============================================================
@@ -1091,7 +1091,7 @@ html,body{overflow-x:clip;}
 .navcta__item b{display:block;font-size:13.5px;font-weight:500;line-height:1.35;}
 .navcta__item small{display:block;font-size:12px;color:var(--ink-mute);line-height:1.45;margin-top:2px;}
 
-@media (max-width:820px){
+@media (max-width:900px){
   .navcta__main{padding-left:14px;font-size:12.5px;}
   .navcta__toggle{width:26px;}
   .navcta__menu{right:-6px;}
@@ -1124,3 +1124,33 @@ html,body{overflow-x:clip;}
 
 /* D2：隐私政策按「条文体长文档」归长文档档（H1 44） */
 .pagehead--long h1{font-size:var(--fs-h1-long);}
+
+/* ============================================================
+   D3 · 无障碍与移动端热区（纯样式，不改 HTML 结构）
+   ------------------------------------------------------------
+   1. 跳过导航链接：HTML 由结构批提供 <a class="skip-link" href="#main">，
+      默认移出视口，键盘聚焦时落到左上角。
+   2. aria-disabled：如导航里的「会员登录（暂未开放）」，视觉上要能看出不可用。
+   3. 表单控件：浏览器默认 13px 的 radio/checkbox 在触屏上太难点，放大到 18px，
+      并把包住控件的 label 抬到 32px 行高，点文字也能选中。
+   4. 移动端热区：页脚链接原来只有 17px 高，手机上一个拇指勾不中；
+      锚点条、主按钮同步抬到可点尺寸。
+   ============================================================ */
+
+
+a[aria-disabled="true"],
+.nav__links a[aria-disabled="true"]{opacity:.55;cursor:not-allowed;}
+[aria-disabled="true"]:hover{text-decoration:none;}
+a[aria-disabled="true"]{pointer-events:none;}
+
+input[type="checkbox"],
+input[type="radio"]{width:18px;height:18px;accent-color:var(--primary);vertical-align:-3px;}
+
+label:has(> input[type="radio"]),
+label:has(> input[type="checkbox"]){display:inline-flex;align-items:center;min-height:32px;}
+
+@media (max-width:720px){
+  .footer a{display:inline-flex;align-items:center;min-height:32px;}
+  .anchors__inner a{display:inline-flex;align-items:center;min-height:32px;}
+  .btn{min-height:44px;}
+}

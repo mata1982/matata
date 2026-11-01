@@ -310,7 +310,7 @@
 .scene-block--accept strong{font-weight:500;color:var(--ink);}
 .scene-period{margin-top:7px !important;font-size:12.5px;color:var(--ink-mute);}
 
-@media (max-width:760px){
+@media (max-width:720px){
   .scene-row > summary{grid-template-columns:34px minmax(0,1fr) auto;gap:10px;padding:18px 0;}
   .scene-more,{display:none;}
   .scene-more{display:none;}
@@ -386,7 +386,7 @@ summary .scene__demo{
 }
 .ind-block--start .ind-v{color:var(--ink);}
 
-@media (max-width:760px){
+@media (max-width:720px){
   .ind-detail{grid-template-columns:1fr;gap:20px;}
   .ind-block--start{grid-column:auto;}
 }

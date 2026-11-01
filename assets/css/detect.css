@@ -138,7 +138,7 @@
   white-space:pre-wrap;word-break:break-all;
 }
 
-@media (max-width:640px){
+@media (max-width:720px){
   .dt-opts{grid-template-columns:1fr;}
   .dt-bar{grid-template-columns:72px 1fr 46px;gap:8px;}
   .dt-config__grid{grid-template-columns:1fr 1fr;}
