@@ -54,6 +54,6 @@ powershell -File publish.ps1
 ## 部署到新环境
 
 1. **GitHub Pages**：仓库 Settings → Pages → Source 选 `main` / `/ (root)`
-2. **自定义域名**：仓库根目录建 `CNAME` 文件（内容如 `www.matata.cn`），
+2. **自定义域名**：仓库根目录建 `CNAME` 文件（内容为正式域名，**待备案与证书就绪后再填**；在此之前 canonical、sitemap、robots 统一用 `https://mata1982.github.io/matata/`），
    并在 DNS 添加 `CNAME` 记录指向 `用户名.github.io`
 3. **Nginx**：把本目录内容放到站点根目录，`try_files $uri $uri/ =404;`
