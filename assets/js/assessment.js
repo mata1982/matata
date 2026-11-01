@@ -87,6 +87,13 @@
 
   var state = { i: 0, ans: {} };
 
+  /* 埋点：site.js 里统一实现，没加载到也不能让页面挂掉 */
+  function track(action, label) {
+    try {
+      if (typeof window.MATATA_TRACK === 'function') window.MATATA_TRACK(action, label);
+    } catch (e) { /* 统计失败不影响自测 */ }
+  }
+
   var elQuiz, elQ, elBar, elNo, elBack, elRes;
 
   function score() {
@@ -181,6 +188,7 @@
 
   function renderResult() {
     var r = buildResult();
+    track('quiz_complete', r.tier + '|' + r.score.total);
     var whyHtml = r.why.map(function (w) {
       var tick = w.ok
         ? '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
@@ -230,13 +238,15 @@
     elRes.scrollIntoView({ block: 'start', behavior: 'smooth' });
 
     /* 复制报告 */
-    document.getElementById('resCopy').addEventListener('click', function () {
-      var text = '【玛塔塔 · AI 适配度自测】\n' + r.headline + '\n' +
+    function reportText() {
+      return '【玛塔塔 · AI 适配度自测】\n' + r.headline + '\n' +
         '推荐场景：' + r.scene.name + '\n' +
         '预算区间：' + r.budget + '\n' +
         '上线时间：' + r.timeText + '\n' +
         '部署方式：' + r.localText + '\n\n' + r.lead;
-      var btn = this;
+    }
+
+    function copyText(text) {
       var ok = false;
       try { navigator.clipboard.writeText(text); ok = true; } catch (e) {}
       if (!ok) {
@@ -245,7 +255,14 @@
         try { document.execCommand('copy'); ok = true; } catch (e2) {}
         document.body.removeChild(ta);
       }
+      return ok;
+    }
+
+    document.getElementById('resCopy').addEventListener('click', function () {
+      var btn = this;
+      var ok = copyText(reportText());
       btn.textContent = ok ? '已复制 ✓' : '复制失败';
+      track('quiz_copy', ok ? 'ok' : 'fail');
       setTimeout(function () { btn.textContent = '复制报告'; }, 2000);
     });
 
@@ -254,16 +271,99 @@
       elRes.hidden = true; elRes.innerHTML = '';
       elQuiz.hidden = false;
       renderQuestion();
+      track('quiz_again', 'click');
     });
 
-    /* 留资提交 */
+    /* ============================================================
+       留资提交
+       ------------------------------------------------------------
+       和联系页共用 site.js 里的超时与失败分流（MATATA_FORM.submit），
+       不在这里再写一套 fetch —— 两处各写一套，早晚会不一致。
+       ============================================================ */
     var form = document.getElementById('leadForm');
+    var okBox = document.getElementById('leadOk');
+    var btn = form.querySelector('button[type=submit]');
+    var btnText = btn.textContent;
+    var nameEl = form.querySelector('[name="name"]');
+    var contactEl = form.querySelector('[name="contact"]');
+    var V = window.MATATA_VALIDATE || null;
+    var submitter = (window.MATATA_FORM && window.MATATA_FORM.submit) || null;
+
+    function setBad(el, msg) {
+      if (!el) return;
+      el.setCustomValidity(msg);
+      el.setAttribute('aria-invalid', 'true');
+      el.reportValidity();
+    }
+    function clearBad(el) {
+      if (!el) return;
+      el.setCustomValidity('');
+      el.removeAttribute('aria-invalid');
+    }
+
+    if (contactEl) {
+      contactEl.addEventListener('blur', function () {
+        var res = V ? V.contact(contactEl.value) : { ok: true };
+        if (!res.ok && contactEl.value.trim()) setBad(contactEl, res.msg);
+        else clearBad(contactEl);
+      });
+    }
+
+    /** 发不出去时别让人干等：给出复制结论 + 电话两条路 */
+    function offerFallback(code) {
+      if (!okBox) return;
+      var pair = (window.MATATA_FORM && window.MATATA_FORM.failCopy(code)) ||
+                 ['这次没发出去', '请复制结论，或直接电话告诉我们。'];
+      okBox.hidden = false;
+      okBox.style.background = '#FFF8E8';
+      okBox.style.borderColor = 'rgba(180,114,15,.3)';
+      okBox.style.color = '#8A6A1F';
+      okBox.innerHTML = '';
+
+      var head = document.createElement('b');
+      head.textContent = pair[0] + '。';
+      var msg = document.createElement('div');
+      msg.textContent = pair[1];
+      okBox.appendChild(head);
+      okBox.appendChild(msg);
+
+      var row = document.createElement('div');
+      row.className = 'lead__row';
+      row.style.marginTop = '10px';
+
+      var copyBtn = document.createElement('button');
+      copyBtn.type = 'button';
+      copyBtn.className = 'btn btn--ghost';
+      copyBtn.textContent = '复制结论';
+      copyBtn.addEventListener('click', function () {
+        var ok = copyText(reportText());
+        copyBtn.textContent = ok ? '已复制 ✓' : '复制失败';
+        track('quiz_copy', 'fallback|' + (ok ? 'ok' : 'fail'));
+      });
+      row.appendChild(copyBtn);
+
+      var phone = ((window.MATATA_CONFIG || {}).contact || {}).phone;
+      if (phone) {
+        var tel = document.createElement('a');
+        tel.className = 'btn btn--ghost';
+        tel.href = 'tel:' + String(phone).replace(/[^\d+]/g, '');
+        tel.textContent = '打电话：' + phone;
+        tel.addEventListener('click', function () { track('quiz_tel', code); });
+        row.appendChild(tel);
+      }
+      okBox.appendChild(row);
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+
+      if (nameEl && !nameEl.value.trim()) { setBad(nameEl, '请告诉我们怎么称呼您。'); return; }
+      var check = V ? V.contact(contactEl ? contactEl.value : '') : { ok: true };
+      if (!check.ok) { setBad(contactEl, check.msg); return; }
+      clearBad(nameEl);
+      clearBad(contactEl);
+
       var fd = new FormData(form);
-      var cfg = window.MATATA_CONFIG || {};
-      var endpoint = (cfg.form && cfg.form.endpoint) || '';
-      var extra = (cfg.form && cfg.form.extra) || {};
       var data = {
         _subject: '【玛塔塔官网】AI 适配度自测报告',
         _captcha: 'false',
@@ -279,38 +379,40 @@
         公司: fd.get('company') || '',
         答题摘要: JSON.stringify(state.ans).slice(0, 900)
       };
-      Object.keys(extra).forEach(function (k) { if (data[k] === undefined) data[k] = extra[k]; });
 
-      var btn = form.querySelector('button[type=submit]');
-      btn.disabled = true; btn.textContent = '发送中…';
+      var cfg = window.MATATA_CONFIG || {};
+      var endpoint = ((window.MATATA_FORM && window.MATATA_FORM.endpoint()) ||
+                      (cfg.form && cfg.form.endpoint) || '').trim();
 
-      var ctrl = null;
-      try { ctrl = new AbortController(); } catch (e) {}
-      var timer = setTimeout(function () { try { ctrl && ctrl.abort(); } catch (e) {} }, 20000);
+      track('quiz_lead_submit', r.tier);
+      btn.disabled = true;
+      btn.textContent = '发送中…';
 
-      fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-        signal: ctrl ? ctrl.signal : undefined
-      }).then(function (res) {
-        clearTimeout(timer);
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        document.getElementById('leadOk').hidden = false;
+      // 没配接口时不能 fetch('')：直接走"复制/电话"，比报一个看不懂的错体面
+      if (!endpoint || !submitter) {
+        btn.disabled = false;
+        btn.textContent = btnText;
+        track('quiz_lead_fallback', 'noendpoint');
+        offerFallback('noendpoint');
+        return;
+      }
+
+      submitter(endpoint, data).then(function () {
+        if (okBox) {
+          okBox.hidden = false;
+          okBox.style.background = '';
+          okBox.style.borderColor = '';
+          okBox.style.color = '';
+          okBox.textContent = '已收到。我们会在 1 个工作日内联系您，把报告发过去。';
+        }
         btn.textContent = '已发送 ✓';
-      }).catch(function () {
-        clearTimeout(timer);
-        // 网络慢或服务未激活时不让人干等，直接给出替代路径
+        track('quiz_lead_ok', r.tier);
+      }).catch(function (err) {
+        var code = (err && err.code) || 'unknown';
         btn.disabled = false;
         btn.textContent = '发送失败，点这里重试';
-        var ok = document.getElementById('leadOk');
-        if (ok) {
-          ok.hidden = false;
-          ok.style.background = '#FFF8E8';
-          ok.style.borderColor = 'rgba(180,114,15,.3)';
-          ok.style.color = '#8A6A1F';
-          ok.innerHTML = '网络不太顺畅，没发出去。您也可以直接电话 <a href="tel:13810625550" style="color:#8A6A1F;text-decoration:underline">138 1062 5550</a> 或微信同号，把结论告诉我们就行。';
-        }
+        track('quiz_lead_fail', code);
+        offerFallback(code);
       });
     });
   }
@@ -331,6 +433,7 @@
     elQ.querySelectorAll('.quiz__opt').forEach(function (b) {
       b.addEventListener('click', function () {
         var o = q.opts[Number(b.getAttribute('data-idx'))];
+        if (Object.keys(state.ans).length === 0) track('quiz_start', 'q1');
         state.ans[o.k] = { s: o.s, t: o.t };
         if (state.i < n - 1) {
           state.i++;

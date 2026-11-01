@@ -15,6 +15,13 @@
 (function () {
   'use strict';
 
+  /* 埋点：site.js 里统一实现，没加载到也不能让配置器挂掉 */
+  function track(action, label) {
+    try {
+      if (typeof window.MATATA_TRACK === 'function') window.MATATA_TRACK(action, label);
+    } catch (e) { /* 统计失败不影响配置器 */ }
+  }
+
   var form = document.getElementById('configForm');
   if (!form) return;
 
@@ -96,6 +103,19 @@
     }
   }
 
-  form.addEventListener('change', update);
+  form.addEventListener('change', function () {
+    update();
+    var p = picked();
+    // 客户在配置器里改了什么、改到多少钱，是判断价格页有没有说服力的关键数据
+    track('config_change', (p.names.length ? p.names.join(' + ') : 'empty') + '|' + p.total);
+  });
+
+  if (submitEl) {
+    submitEl.addEventListener('click', function () {
+      var p = picked();
+      track('config_cta', (p.names.length ? p.names.join(' + ') : '免费诊断') + '|' + p.total);
+    });
+  }
+
   update();
 })();

@@ -21,6 +21,13 @@
 (function () {
   'use strict';
 
+  /* 埋点：site.js 里统一实现，没加载到也不能让检测页挂掉 */
+  function track(action, label) {
+    try {
+      if (typeof window.MATATA_TRACK === 'function') window.MATATA_TRACK(action, label);
+    } catch (e) { /* 统计失败不影响检测 */ }
+  }
+
   var SCENARIOS = [
     { id: 'kb', name: '内部知识库问答', desc: '资料检索、制度问答、新人答疑', need: 42,
       why: '主要吃显存和内存，7B–14B 量化模型即可跑起来。' },
@@ -356,6 +363,7 @@
   function runResult() {
     state.vram = vramSel.value;
     state.ram = ramSel.value;
+    track('detect_run', state.scene || 'default');
 
     var s = score(state.info);
     var sc = SCENARIOS.filter(function (x) { return x.id === state.scene; })[0] || SCENARIOS[4];
@@ -373,6 +381,7 @@
     }
 
     var enough = s.total >= sc.need;
+    track('detect_done', (state.scene || 'default') + '|' + s.name + '|' + s.total);
 
     var bars = s.parts.map(function (p) {
       return '<div class="dt-bar">' +
@@ -491,10 +500,12 @@
         document.body.removeChild(ta);
       }
       btn.textContent = ok ? '已复制 ✓' : '复制失败';
+      track('detect_copy', ok ? 'ok' : 'fail');
       setTimeout(function () { btn.textContent = '复制报告'; }, 2000);
     });
 
     resultBox.querySelector('#dtAgain').addEventListener('click', function () {
+      track('detect_again', 'click');
       state = { scene: null, info: {}, vram: '0', ram: '0' };
       resultBox.hidden = true; resultBox.innerHTML = '';
       sceneBox.querySelectorAll('.dt-opt').forEach(function (x) { x.classList.remove('is-on'); });
