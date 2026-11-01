@@ -28,7 +28,7 @@
 
 
 <!-- ============================ 顶部导航（与 index.html 保持一致，仅改链接与当前页高亮） ============================ -->
-<body>
+
 
 <header class="nav">
   <div class="wrap nav__inner">
@@ -95,7 +95,7 @@
     <h1 id="authTitle">查看您的交付进度</h1>
     <p class="auth__sub" id="authSub">登录后可查看采购产品、交付节点与交付文档。</p>
 
-    <form id="authForm" novalidate>
+    <form method="post" id="authForm" novalidate>
       <div class="field">
         <label for="acc">账号</label>
         <input id="acc" name="acc" type="text" placeholder="手机号 / 邮箱" autocomplete="username">
@@ -119,46 +119,46 @@
 </section>
 
 <script>
-(function () {{
+(function () {
   var tabs = document.querySelectorAll('.auth__tab');
   var title = document.getElementById('authTitle');
   var sub = document.getElementById('authSub');
   var form = document.getElementById('authForm');
   var role = 'customer';
 
-  var COPY = {{
+  var COPY = {
     customer: ['查看您的交付进度', '登录后可查看采购产品、交付节点与交付文档。', 'portal-customer.html', '手机号 / 邮箱'],
     staff: ['访问内部手册', '产品手册、服务流程与客户沟通要点，只对公司内部开放。', 'portal-staff.html', '公司邮箱']
-  }};
+  };
 
-  function setRole(r) {{
+  function setRole(r) {
     role = r;
-    for (var i = 0; i < tabs.length; i++) {{
+    for (var i = 0; i < tabs.length; i++) {
       var on = tabs[i].getAttribute('data-role') === r;
       tabs[i].classList.toggle('is-on', on);
       tabs[i].setAttribute('aria-selected', on ? 'true' : 'false');
-    }}
+    }
     title.textContent = COPY[r][0];
     sub.textContent = COPY[r][1];
     document.getElementById('acc').placeholder = COPY[r][3];
-  }}
+  }
 
-  for (var i = 0; i < tabs.length; i++) {{
-    tabs[i].addEventListener('click', function () {{
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].addEventListener('click', function () {
       setRole(this.getAttribute('data-role'));
-    }});
-  }}
+    });
+  }
 
-  form.addEventListener('submit', function (e) {{
+  form.addEventListener('submit', function (e) {
     e.preventDefault();
     var btn = form.querySelector('.auth__submit');
     btn.textContent = '登录中…';
     btn.disabled = true;
-    window.setTimeout(function () {{
+    window.setTimeout(function () {
       window.location.href = COPY[role][2];
-    }}, 420);
-  }});
-}})();
+    }, 420);
+  });
+})();
 </script>
 </main>
 
