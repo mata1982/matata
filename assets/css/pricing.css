@@ -285,8 +285,8 @@
 .fit__col li::before{
   content:"";position:absolute;left:2px;top:7px;
   width:9px;height:5px;
-  border-left:1.6px solid #1D9D5B;
-  border-bottom:1.6px solid #1D9D5B;
+  border-left:1.6px solid var(--ok);
+  border-bottom:1.6px solid var(--ok);
   transform:rotate(-45deg);
 }
 .fit__col--no li{color:var(--ink-mute);}
