@@ -35,6 +35,11 @@
   --ink-mute-2:#55606F;    /* 更深一档，用于小号元信息 */
   --on-primary:#FFFFFF;
 
+  /* 正文链接色：必须过 AA 4.5:1（白 7.68 / 冷白 7.26 / 奶油 6.39）。
+     原来走 --accent-hi #4A6FF0，白底只有 4.35、奶油底 3.63，故单列一个令牌，
+     方便以后暗色主题或其他底色单独换，不影响强调色 --accent-hi。 */
+  --link:var(--primary);
+
   /* 表面 */
   --canvas:#FFFFFF;
   --canvas-soft:#F6F9FC;
@@ -82,6 +87,10 @@ body{
   font-weight:400;
   -webkit-font-smoothing:antialiased;
 }
+
+/* 正文链接统一走 --link（本层晚于 base/site-v4/v7 加载，可覆盖它们的 a 颜色）。
+   只改链接色，不改 --accent-hi：强调标签、步骤编号、焦点环的观感保持不动。 */
+a{color:var(--link);}
 
 .hero h1{
   font-size:clamp(38px, 5.2vw, 74px);
