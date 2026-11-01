@@ -312,7 +312,6 @@
 
 @media (max-width:720px){
   .scene-row > summary{grid-template-columns:34px minmax(0,1fr) auto;gap:10px;padding:18px 0;}
-  .scene-more,{display:none;}
   .scene-more{display:none;}
   .scene-body{grid-template-columns:1fr;padding-left:44px;}
   .scene-sum span{font-size:13.5px;}
