@@ -15,7 +15,7 @@
 .viz{
   position:relative;
   border:1px solid var(--line);
-  border-radius:var(--r-3);
+  border-radius:var(--r-12);
   background:
     radial-gradient(72% 120% at 50% 0%, rgba(76,111,255,.10), transparent 68%),
     linear-gradient(180deg, rgba(14,16,21,.92), rgba(8,9,12,.72));
@@ -89,13 +89,13 @@
 .flow__row{
   display:grid;grid-template-columns:96px 1fr 34px 1.15fr;gap:var(--sp-4);align-items:center;
   padding:var(--sp-4) var(--sp-5);
-  border:1px solid var(--line-soft);border-radius:var(--r-2);
+  border:1px solid var(--line-soft);border-radius:var(--r-6);
   background:rgba(255,255,255,.015);
   transition:border-color .3s var(--ease-out-quart),background .3s var(--ease-out-quart);
 }
 .flow__row:hover{border-color:var(--line-strong);background:rgba(255,255,255,.035);}
 .flow__icon{
-  width:56px;height:56px;border-radius:var(--r-2);
+  width:56px;height:56px;border-radius:var(--r-6);
   display:flex;align-items:center;justify-content:center;
   background:rgba(255,255,255,.04);border:1px solid var(--line);
 }
@@ -218,7 +218,7 @@
 
 /* ---------- 6. 四件事：带大图标的 Bento ---------- */
 .bento__ico{
-  width:52px;height:52px;border-radius:var(--r-2);flex:none;
+  width:52px;height:52px;border-radius:var(--r-6);flex:none;
   display:flex;align-items:center;justify-content:center;
   background:rgba(76,111,255,.10);border:1px solid rgba(110,139,255,.26);
 }
@@ -236,7 +236,7 @@
 .trades{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--sp-4);}
 .trade{
   display:flex;flex-direction:column;gap:var(--sp-4);
-  padding:var(--sp-5);border:1px solid var(--line-soft);border-radius:var(--r-3);
+  padding:var(--sp-5);border:1px solid var(--line-soft);border-radius:var(--r-12);
   background:linear-gradient(180deg, rgba(255,255,255,.028), rgba(255,255,255,.008));
   transition:border-color .3s var(--ease-out-quart),transform .3s var(--ease-out-quart),background .3s var(--ease-out-quart);
 }
@@ -245,7 +245,7 @@
   background:linear-gradient(180deg, rgba(76,111,255,.10), rgba(255,255,255,.01));
 }
 .trade__ico{
-  width:40px;height:40px;border-radius:var(--r-2);flex:none;
+  width:40px;height:40px;border-radius:var(--r-6);flex:none;
   display:flex;align-items:center;justify-content:center;
   background:rgba(255,255,255,.045);border:1px solid var(--line);
 }
@@ -257,13 +257,13 @@
 /* ---------- 8. 案例：问题 → 做法 纵向流程 + 结果 ---------- */
 .cases{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-8);}
 .case{
-  border:1px solid var(--line-soft);border-radius:var(--r-3);
+  border:1px solid var(--line-soft);border-radius:var(--r-12);
   background:linear-gradient(180deg, rgba(255,255,255,.028), rgba(255,255,255,.006));
   padding:var(--sp-6);display:flex;flex-direction:column;gap:var(--sp-5);
 }
 .case__head{display:flex;align-items:center;gap:var(--sp-4);}
 .case__ico{
-  width:44px;height:44px;border-radius:var(--r-2);flex:none;
+  width:44px;height:44px;border-radius:var(--r-6);flex:none;
   display:flex;align-items:center;justify-content:center;
   background:rgba(76,111,255,.12);border:1px solid rgba(110,139,255,.28);
 }
@@ -271,7 +271,7 @@
 .case__head h3{font-size:19px;letter-spacing:-.01em;margin:0;}
 .case__meta{font-size:var(--fs-xs);color:var(--t-4);margin:4px 0 0;}
 .case__flow{display:flex;flex-direction:column;gap:var(--sp-3);}
-.case__step{border:1px solid var(--line-soft);border-radius:var(--r-2);padding:var(--sp-4);background:rgba(255,255,255,.015);}
+.case__step{border:1px solid var(--line-soft);border-radius:var(--r-6);padding:var(--sp-4);background:rgba(255,255,255,.015);}
 .case__step--done{border-color:rgba(110,139,255,.30);background:linear-gradient(180deg, rgba(76,111,255,.10), rgba(255,255,255,.01));}
 .case__step p{margin-top:8px;font-size:14px;color:var(--t-2);line-height:1.7;}
 .case__tag{display:inline-block;font-size:11px;letter-spacing:.1em;color:var(--t-4);font-family:var(--font-num);}

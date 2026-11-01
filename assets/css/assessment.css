@@ -47,7 +47,7 @@
   width:100%;
   padding:16px 20px;
   border:1px solid var(--hairline);
-  border-radius:var(--r-3);
+  border-radius:var(--r-12);
   background:var(--canvas);
   font-family:inherit;
   font-size:15px;
@@ -88,7 +88,7 @@
 .quiz__back[disabled]{opacity:.4;cursor:default;}
 
 /* ---------- 结论 ---------- */
-.res{border:1px solid var(--hairline);border-radius:var(--r-4);background:var(--canvas);overflow:hidden;}
+.res{border:1px solid var(--hairline);border-radius:var(--r-16);background:var(--canvas);overflow:hidden;}
 .res__head{padding:clamp(24px,4vw,38px);border-bottom:1px solid var(--hairline);background:var(--canvas-soft);}
 .res__tag{
   display:inline-flex;align-items:center;gap:8px;

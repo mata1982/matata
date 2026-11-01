@@ -58,7 +58,7 @@
   content:"";
   position:absolute;
   inset:5px;
-  border-radius:calc(var(--r-3) - 5px);
+  border-radius:calc(var(--r-12) - 5px);
   border:1px solid rgba(12, 14, 18, .035);
   pointer-events:none;
   transition:border-color .3s var(--ease-out-quart);

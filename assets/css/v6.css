@@ -127,7 +127,7 @@
   min-height:54px;
   padding:0 30px;
   font-size:16px;
-  border-radius:calc(var(--r-2) + 2px);
+  border-radius:calc(var(--r-6) + 2px);
 }
 
 .btn--primary{
@@ -221,7 +221,7 @@
   padding:0;margin-left:auto;
   background:transparent;
   border:1px solid var(--line-strong);
-  border-radius:var(--r-2);
+  border-radius:var(--r-6);
   cursor:pointer;
   transition:border-color var(--dur-hover) var(--ease-out-quart),background var(--dur-hover) var(--ease-out-quart);
 }
@@ -248,7 +248,7 @@
 .nav__panel nav{display:flex;flex-direction:column;gap:2px;}
 .nav__panel nav a{
   display:block;padding:14px 12px;
-  border-radius:var(--r-2);
+  border-radius:var(--r-6);
   color:var(--t-2);font-size:16px;text-decoration:none;
 }
 .nav__panel nav a:hover,

@@ -53,7 +53,7 @@ img,svg{display:block;max-width:100%;}
 button{font:inherit;cursor:pointer;}
 strong,b{color:var(--t-1);font-weight:600;}
 ::selection{background:var(--accent);color:#fff;}
-:focus-visible{outline:2px solid var(--accent-hi);outline-offset:3px;border-radius:var(--r-1);}
+:focus-visible{outline:2px solid var(--accent-hi);outline-offset:3px;border-radius:var(--r-4);}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
 
 /* ============================================================
@@ -87,7 +87,7 @@ strong,b{color:var(--t-1);font-weight:600;}
    ============================================================ */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  min-height:52px;padding:0 28px;border-radius:var(--r-2);
+  min-height:52px;padding:0 28px;border-radius:var(--r-6);
   font-size:15px;font-weight:500;white-space:nowrap;border:1px solid transparent;
   transition:background var(--dur-hover) var(--ease-out-quart),
              border-color var(--dur-hover) var(--ease-out-quart),
@@ -106,14 +106,14 @@ strong,b{color:var(--t-1);font-weight:600;}
 .btn-row{display:flex;flex-wrap:wrap;gap:var(--sp-3);align-items:center;}
 
 .card{
-  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-3);
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-12);
   padding:var(--sp-7);
   transition:border-color var(--dur-state) var(--ease-out-quart),background var(--dur-state) var(--ease-out-quart);
 }
 .card:hover{border-color:var(--line-strong);background:var(--raise);}
 
 .tag{
-  display:inline-block;padding:3px 10px;border-radius:var(--r-1);
+  display:inline-block;padding:3px 10px;border-radius:var(--r-4);
   font-size:var(--fs-xs);font-weight:500;
   background:rgba(255,255,255,.06);color:var(--t-3);
 }
@@ -140,7 +140,7 @@ strong,b{color:var(--t-1);font-weight:600;}
 .nav__inner{height:var(--nav-h);display:flex;align-items:center;gap:var(--sp-7);}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
 .brand:hover{text-decoration:none;}
-.brand__mark{width:32px;height:32px;border-radius:var(--r-1);background:var(--accent);display:flex;align-items:center;justify-content:center;flex:none;}
+.brand__mark{width:32px;height:32px;border-radius:var(--r-4);background:var(--accent);display:flex;align-items:center;justify-content:center;flex:none;}
 .brand__text{display:flex;flex-direction:column;}
 .brand__cn{font-size:17px;font-weight:600;color:var(--t-1);line-height:1;letter-spacing:.01em;}
 .brand__en{font-size:9.5px;font-weight:500;color:var(--t-4);letter-spacing:.22em;line-height:1;margin-top:4px;}
@@ -215,7 +215,7 @@ strong,b{color:var(--t-1);font-weight:600;}
 /* 首屏下方：机器分层台（CSS 构成，几何图示） */
 .rig{
   position:relative;z-index:1;margin:var(--sp-11) auto 0;max-width:880px;
-  border:1px solid var(--line);border-radius:var(--r-4);
+  border:1px solid var(--line);border-radius:var(--r-16);
   background:linear-gradient(180deg,var(--panel),rgba(14,16,21,.4));
   padding:var(--sp-7);box-shadow:0 40px 120px -40px rgba(76,111,255,.28);
 }
@@ -226,7 +226,7 @@ strong,b{color:var(--t-1);font-weight:600;}
 .rig__layers{display:grid;gap:10px;margin-top:var(--sp-5);}
 .rig__layer{
   display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:var(--sp-5);
-  padding:16px 18px;border:1px solid var(--line);border-radius:var(--r-2);
+  padding:16px 18px;border:1px solid var(--line);border-radius:var(--r-6);
   background:rgba(255,255,255,.02);
   transition:border-color var(--dur-state) var(--ease-out-quart),background var(--dur-state) var(--ease-out-quart);
 }
@@ -261,7 +261,7 @@ strong,b{color:var(--t-1);font-weight:600;}
   grid-auto-flow:dense;
 }
 .bento__cell{
-  border:1px solid var(--line);border-radius:var(--r-3);background:var(--panel);
+  border:1px solid var(--line);border-radius:var(--r-12);background:var(--panel);
   padding:var(--sp-7);display:flex;flex-direction:column;gap:var(--sp-4);
   transition:border-color var(--dur-state) var(--ease-out-quart),background var(--dur-state) var(--ease-out-quart);
 }

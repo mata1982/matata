@@ -67,10 +67,10 @@
   --accent-glow:rgba(18,70,200,.20);
 
   /* 圆角：整体收紧，Stripe 式的精密感 */
-  --r-1:4px;
-  --r-2:6px;
-  --r-3:12px;
-  --r-4:16px;
+  --r-4:4px;
+  --r-6:6px;
+  --r-12:12px;
+  --r-16:16px;
 
   /* ============================================================
      D2 标题层级令牌（2026-11-02 决议）
@@ -229,7 +229,7 @@ h3,.card__title,.prod__head h3,.scene2__head h3,.what3__item h3,.paincard h3{
 .cta-panel{
   background:var(--canvas-cream);
   border:1px solid rgba(155,104,41,.14);
-  border-radius:var(--r-3);
+  border-radius:var(--r-12);
 }
 
 /* 反相区：深墨蓝，而不是纯黑 */
@@ -285,7 +285,7 @@ h3,.card__title,.prod__head h3,.scene2__head h3,.what3__item h3,.paincard h3{
 .form,.table-wrap,.faq,.qa,.quote,.viz,.notice{
   background:var(--canvas);
   border:1px solid var(--hairline);
-  border-radius:var(--r-3);
+  border-radius:var(--r-12);
   box-shadow:0 1px 2px rgba(13,37,61,.04);
 }
 /* 取消上一版的双包边与暖色渐变 */
@@ -354,7 +354,7 @@ table.tbl tbody tr:hover{background:#FAFCFF;}
 .input,.select,.textarea{
   background:var(--canvas);
   border-color:var(--hairline-input);
-  border-radius:var(--r-2);
+  border-radius:var(--r-6);
   color:var(--ink);
 }
 .input:focus,.select:focus,.textarea:focus{
@@ -553,7 +553,7 @@ html,body{overflow-x:clip;}
 }
 .compare__col{
   border:1px solid var(--hairline);
-  border-radius:var(--r-3);
+  border-radius:var(--r-12);
   background:var(--canvas);
   padding:30px 28px;
 }
@@ -603,7 +603,7 @@ html,body{overflow-x:clip;}
 /* ---- 18.2 信念卡：图标 + 标题 + 正文 ---- */
 .belief{
   border:1px solid var(--hairline);
-  border-radius:var(--r-3);
+  border-radius:var(--r-12);
   background:var(--canvas);
   padding:30px 28px;
 }
@@ -655,7 +655,7 @@ html,body{overflow-x:clip;}
   position:relative;
   aspect-ratio:16/10;
   border:1px dashed var(--hairline-input);
-  border-radius:var(--r-3);
+  border-radius:var(--r-12);
   background:var(--canvas-soft);
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
@@ -713,7 +713,7 @@ html,body{overflow-x:clip;}
    ============================================================ */
 .fear{
   border:1px solid var(--hairline);
-  border-radius:var(--r-3);
+  border-radius:var(--r-12);
   background:var(--canvas);
   padding:30px 28px;
   display:flex;
@@ -777,7 +777,7 @@ html,body{overflow-x:clip;}
    ============================================================ */
 .case-proc{
   border:1px solid var(--hairline);
-  border-radius:var(--r-3);
+  border-radius:var(--r-12);
   background:var(--canvas);
   padding:26px 26px 22px;
   display:flex;flex-direction:column;
@@ -1201,11 +1201,10 @@ label:has(> input[type="checkbox"]){display:inline-flex;align-items:center;min-h
   --line-200:#E4E7EC;
   --nav-h:72px;
   --pad:32px;
-  --r-lg:14px;
-  --r-md:10px;
+  --r-14:14px;
+  --r-10:10px;
   --r-pill:999px;
-  --r-sm:6px;
-  --r-xl:20px;
+  --r-20:20px;
   --sh-1:0 1px 2px rgba(16,24,40,.05);
   --sh-2:0 6px 16px -8px rgba(16,24,40,.12);
   --sh-3:0 18px 48px -16px rgba(16,24,40,.18);
