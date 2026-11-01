@@ -39,8 +39,10 @@
 </script>
 <link rel="stylesheet" href="assets/css/redesign.css">
 <link rel="stylesheet" href="assets/css/snap.css">
+<link rel="stylesheet" href="assets/css/a11y.css">
 </head>
 <body class="has-snap">
+<a class="skip-link" href="#main">跳到主要内容</a>
 
 
 
@@ -90,7 +92,8 @@
   </div>
 </header>
 
-<main>
+<main id="main">
+<noscript><p class="noscript-notice">价格配置器需要 JavaScript 才能计算合计。您仍可阅读下方逐项说明，或<a href="contact.html?plan=免费诊断">预约免费诊断</a>获取书面报价。</p></noscript>
 
 <!-- ============================ 页头 ============================ -->
 <section class="pagehead">
@@ -384,7 +387,7 @@
       <p>下面选完会给出合计。这是起步价，最终以诊断后的书面方案为准——配置器的作用是让您先有个数，不用来回问。</p>
     </div>
 
-    <form class="config" id="configForm" novalidate>
+    <form method="post" class="config" id="configForm" novalidate>
       <div class="config__left">
 
         <fieldset class="config__group">

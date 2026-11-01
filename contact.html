@@ -20,8 +20,10 @@
 <link rel="stylesheet" href="assets/css/site-entry.css">
 <link rel="stylesheet" href="assets/css/redesign.css">
 <link rel="stylesheet" href="assets/css/snap.css">
+<link rel="stylesheet" href="assets/css/a11y.css">
 </head>
 <body class="has-snap">
+<a class="skip-link" href="#main">跳到主要内容</a>
 
 
 
@@ -72,7 +74,8 @@
   </div>
 </header>
 
-<main>
+<main id="main">
+<noscript><p class="noscript-notice">本页表单需要 JavaScript 才能提交。您也可以直接使用页脚的电话、微信或邮箱联系我们，同样在工作日 1 个工作日内回复。</p></noscript>
 
 <!-- ============================ 页面头部 ============================ -->
 <section class="pagehead">
@@ -133,7 +136,7 @@
 
       <!-- 右栏：留资表单 -->
       <div>
-        <form class="form" data-lead-form novalidate>
+        <form method="post" class="form" data-lead-form novalidate>
       <div class="chosen-plan" id="chosenPlan" hidden>
         <span class="chosen-plan__label">您选的方案</span>
         <b id="chosenPlanText"></b>
@@ -143,11 +146,11 @@
           <div class="form-fields">
             <div class="field">
               <label class="field__label" for="c-name">怎么称呼您？<span class="req">*</span></label>
-              <input class="input" id="c-name" name="name" placeholder="例如：王经理" required>
+              <input class="input" id="c-name" name="name" type="text" placeholder="例如：王经理" maxlength="30" autocomplete="name" required>
             </div>
             <div class="field">
               <label class="field__label" for="c-contact">联系方式（手机 / 微信 / 邮箱）<span class="req">*</span></label>
-              <input class="input" id="c-contact" name="contact" placeholder="方便联系的任意一种" required>
+              <input class="input" id="c-contact" name="contact" type="text" placeholder="方便联系的任意一种" maxlength="60" autocomplete="tel" inputmode="text" spellcheck="false" required>
             </div>
             <div class="field">
               <label class="field__label" for="c-industry">公司所属行业（选填）</label>
@@ -184,7 +187,7 @@
             </div>
             <div class="field">
               <label class="field__label" for="c-problem">您现在最想解决的一个问题<span class="req">*</span></label>
-              <textarea class="textarea" id="c-problem" name="problem" placeholder="例如：客户资料和报价单不敢传到网上；新人培训太慢；每天单据录入占两个人" required></textarea>
+              <textarea class="textarea" id="c-problem" name="problem" rows="6" minlength="4" maxlength="600" placeholder="例如：客户资料和报价单不敢传到网上；新人培训太慢；每天单据录入占两个人" required></textarea>
               <div class="field__hint">说得越具体，我们第一次沟通就越有价值。</div>
             </div>
             <button class="btn btn--cta btn--block" type="submit">提交，预约免费诊断</button>

@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!--
+  说明（维护批）：404 页会用「请求的路径」解析相对地址，深层路径（如 /matata/a/b/c）
+  下相对引用会全部失效。处理方式见 <head> 里的内联脚本：仅在检测到子路径深度时插入 <base>。
+  ⚠️ 若将来改为域名根目录部署，把脚本里的 root 常量同步改成 '/'。
+-->
 <html lang="zh-CN" translate="no">
 <head>
 <meta charset="UTF-8">
@@ -7,13 +12,41 @@
 <title>页面不存在｜玛塔塔 MATATA</title>
 <meta name="description" content="这个地址没有对应的页面。返回首页，或直接看产品与报价、预约免费诊断。">
 <meta name="robots" content="noindex">
+<script>
+/* 维护批：404 页会被任意深度的路径触发（例：/matata/a/b/c）。
+   浏览器按「请求路径」解析相对地址，这类情况下 CSS、图标与内链会整体 404。
+   这里只在检测到「子路径深度」时才插入 <base> 把基准钉回站点根；
+   根目录访问、file:// 直接打开、本地预览（preview.cmd 跑在根）一律不插，保持原生行为。
+   插入 base 后碎片链接会指向站点根，所以同时给「跳到主要内容」补上同页跳转。 */
+(function () {
+  var root = '/matata/';
+  var p = location.pathname;
+  if (p.indexOf(root) !== 0) { return; }
+  if (p.slice(root.length).indexOf('/') === -1) { return; }
+  document.write('<base href="' + root + '">');
+  window.addEventListener('DOMContentLoaded', function () {
+    var a = document.querySelector('.skip-link');
+    if (!a) { return; }
+    a.addEventListener('click', function (e) {
+      var m = document.getElementById('main');
+      if (!m) { return; }
+      e.preventDefault();
+      m.setAttribute('tabindex', '-1');
+      m.focus();
+      m.scrollIntoView();
+    });
+  });
+})();
+</script>
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/site-entry.css">
 <link rel="stylesheet" href="assets/css/pricing.css">
 <link rel="stylesheet" href="assets/css/home-simple.css">
 <link rel="stylesheet" href="assets/css/redesign.css">
+<link rel="stylesheet" href="assets/css/a11y.css">
 </head>
 <body>
+<a class="skip-link" href="#main">跳到主要内容</a>
 
 
 
@@ -63,7 +96,7 @@
   </div>
 </header>
 
-<main>
+<main id="main">
   <section class="section section--tight">
     <div class="wrap">
       <div class="final-cta" style="text-align:left;padding:64px 40px;">
