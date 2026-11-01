@@ -1241,3 +1241,34 @@ label:has(> input[type="checkbox"]){display:inline-flex;align-items:center;min-h
     --wrap-pad:18px;
   }
 }
+
+/* ============================================================
+   D4 · 令牌合并 第 2 步：v7 的 21 个令牌并入（只搬家，不改值）
+   ------------------------------------------------------------
+   这 21 个令牌此前由 v7.css 决定（正文字号、行高字距、强调色、状态色、
+   间距 9-12、mono 字体栈、CTA 阴影）。实测在 4 档宽度上取值恒定，
+   因此只需一条 :root，不带媒体阶梯。第 3 步再删 v7 的旧定义。
+   ============================================================ */
+:root{
+  --accent-100:rgba(0,113,227,.10);
+  --accent-500:var(--primary);
+  --accent-600:#0066CC;
+  --font-num:"SF Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+  --fs-body:17px;
+  --fs-display:clamp(32px,4.2vw,64px);
+  --fs-sm:15px;
+  --fs-xs:12px;
+  --lh-body:1.5;
+  --lh-hero:1.08;
+  --lh-title:1.16;
+  --ls-display:-.012em;
+  --ls-h2:-.01em;
+  --ls-hero:-.014em;
+  --ok:#1D9D5B;
+  --warn:#B26A00;
+  --sh-cta:0 0 0 rgba(0,0,0,0);
+  --sp-9:64px;
+  --sp-10:96px;
+  --sp-11:120px;
+  --sp-12:140px;
+}
