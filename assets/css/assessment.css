@@ -35,7 +35,7 @@
 /* ---------- 题目 ---------- */
 .quiz{min-height:330px;}
 .quiz__q{
-  font-size:clamp(20px,2.6vw,28px);
+  font-size:var(--fs-app-h);
   font-weight:400;
   letter-spacing:-.015em;
   line-height:1.4;

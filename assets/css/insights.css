@@ -19,7 +19,7 @@
 .art__meta i{font-style:normal;}
 
 .art h1{
-  font-size:clamp(26px,3.2vw,38px);
+  font-size:var(--fs-h1-long);
   font-weight:300;
   letter-spacing:-.02em;
   line-height:1.22;
@@ -35,14 +35,14 @@
 }
 
 .art h2{
-  font-size:22px;
-  font-weight:400;
+  font-size:var(--fs-h3);
+  font-weight:500;
   letter-spacing:-.012em;
   line-height:1.4;
   margin:44px 0 14px;
 }
 .art h3{
-  font-size:16.5px;
+  font-size:var(--fs-h4);
   font-weight:500;
   margin:26px 0 10px;
 }

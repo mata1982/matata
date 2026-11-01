@@ -24,7 +24,7 @@
 .pagehead--split .pagehead__main{min-width:0;}
 /* 两栏后标题变窄，字号要收，否则中文会断词（"一 / 个部门"） */
 .pagehead--split h1{
-  font-size:clamp(30px,3.4vw,46px);
+  font-size:var(--fs-h1);
   line-height:1.16;
   letter-spacing:-.012em;
   text-wrap:balance;

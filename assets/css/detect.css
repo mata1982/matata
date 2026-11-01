@@ -17,7 +17,7 @@
   font-size:11.5px;font-weight:500;margin-right:9px;
   vertical-align:1px;
 }
-.dt-step__h{font-size:15px;font-weight:500;color:var(--ink);margin:0 0 14px;}
+.dt-step__h{font-size:var(--fs-app-h);font-weight:500;color:var(--ink);margin:0 0 14px;}
 .dt-step__note{font-size:13px;color:var(--ink-mute);margin:10px 0 0;line-height:1.6;}
 
 .dt-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;}
