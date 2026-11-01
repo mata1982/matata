@@ -196,16 +196,12 @@
   }
   .why3__col:last-child{border-bottom:0;}
   .why3__col--us::before{right:0;}
-  .more4{
-  /* 三列变体：行业入口用 */
-}grid-template-columns:1fr 1fr;}
+  .more4{grid-template-columns:1fr 1fr;}
   .final-cta{padding:52px 24px;border-radius:20px;}
 }
 
 @media (max-width:720px){
-  .more4{
-  /* 三列变体：行业入口用 */
-}grid-template-columns:1fr;}
+  .more4{grid-template-columns:1fr;}
   .section--tight{padding:64px 0;}
   .what3__item h3{font-size:19px;}
   .start3__item b{font-size:19px;}
