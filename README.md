@@ -24,7 +24,7 @@ powershell -File publish.ps1
 
 ## 目录说明
 
-- `*.html` 页面（首页、6 个行业页、3 篇观点文章、服务承诺、2 个门户原型等）
+- `*.html` 页面（首页、9 个行业页、3 篇观点文章、服务承诺、2 个门户原型等）
 - `news.html` **行业资讯聚合页** —— 由 `tools/build_news.py` 生成，**不要手改**（下次生成会覆盖）
 - `assets/css` 样式。**层叠顺序很重要**，`redesign.css` 必须最后加载（它是设计系统的最终层）
 - `assets/js` 脚本
