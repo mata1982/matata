@@ -95,6 +95,21 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://mata1982.github.io/matata/industry-retail.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mata1982.github.io/matata/industry-health.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mata1982.github.io/matata/industry-renovation.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://mata1982.github.io/matata/commitment.html</loc>
     <lastmod>2026-10-27</lastmod>
     <changefreq>monthly</changefreq>

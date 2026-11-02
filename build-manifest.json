@@ -1,8 +1,8 @@
 ﻿{
-    "builtAt":  "2026-11-02 08:12:58 +08:00",
+    "builtAt":  "2026-11-02 22:27:39 +08:00",
     "esbuild":  "0.28.2",
     "site":  "D:\\桌面\\NEW  matata\\site",
-    "pages":  28,
+    "pages":  31,
     "bundles":  13,
     "pageDetail":  [
                        {
@@ -66,6 +66,11 @@
                            "Bundle":  "bundle-25d667c9be.css"
                        },
                        {
+                           "Page":  "industry-health.html",
+                           "CssFiles":  5,
+                           "Bundle":  "bundle-25d667c9be.css"
+                       },
+                       {
                            "Page":  "industry-law.html",
                            "CssFiles":  5,
                            "Bundle":  "bundle-25d667c9be.css"
@@ -77,6 +82,16 @@
                        },
                        {
                            "Page":  "industry-manufacturing.html",
+                           "CssFiles":  5,
+                           "Bundle":  "bundle-25d667c9be.css"
+                       },
+                       {
+                           "Page":  "industry-renovation.html",
+                           "CssFiles":  5,
+                           "Bundle":  "bundle-25d667c9be.css"
+                       },
+                       {
+                           "Page":  "industry-retail.html",
                            "CssFiles":  5,
                            "Bundle":  "bundle-25d667c9be.css"
                        },
