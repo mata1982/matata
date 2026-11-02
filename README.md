@@ -25,14 +25,34 @@ powershell -File publish.ps1
 ## 目录说明
 
 - `*.html` 页面（首页、6 个行业页、3 篇观点文章、服务承诺、2 个门户原型等）
+- `news.html` **行业资讯聚合页** —— 由 `tools/build_news.py` 生成，**不要手改**（下次生成会覆盖）
 - `assets/css` 样式。**层叠顺序很重要**，`redesign.css` 必须最后加载（它是设计系统的最终层）
 - `assets/js` 脚本
   - `config.js` 联系方式、备案号、表单地址、统计 ID 都集中在这里
   - `demo-scenes.js` 解决方案页的场景演示
   - `hero-field.js` 首屏的"封闭场"粒子
+  - `news.js` 资讯页的行业筛选（同步 `?cat=` 参数）
 - `assets/img` 图片与分享图
 - `downloads` 可下载的 PDF
 - `sitemap.xml` / `robots.txt` SEO
+
+## 行业资讯页（自动聚合）
+
+数据在 `tools/news.json`，页面由脚本生成：
+
+```powershell
+# 改完 news.json 后重新生成（同时自动同步首页「行业动态」区块 + 导航 / 页脚 / sitemap）
+python tools\build_news.py
+
+# 接 DeepSeek Search API 自动抓取（需要 key）
+$env:DEEPSEEK_API_KEY = "sk-xxxxxxxx"
+python tools\fetch_news.py        # 抓取 → 写 news.json → 自动重新生成页面
+```
+
+- 脚本是**幂等**的：已接入过的导航/页脚不会重复插入
+- 某方向抓不到结果时会**保留该方向旧数据**，不会把页面清空
+- Search 为只读请求，不会修改目标站点；计费 5 元 / 1000 次成功请求，失败不计费
+- 首页区块用 `<!-- news:start -->` / `<!-- news:end -->` 标记，**标记之间的内容会被脚本覆盖**
 
 ## 上线前还需要填的东西
 

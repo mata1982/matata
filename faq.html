@@ -20,147 +20,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:url" content="https://mata1982.github.io/matata/faq.html">
 <link rel="canonical" href="https://mata1982.github.io/matata/faq.html">
-<link rel="stylesheet" href="assets/css/site-entry.css">
-
-<!-- FAQPage 结构化数据：问答内容与页面可见内容一致 -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "大概要花多少钱？钱都花在哪几块？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "费用通常由三部分组成：一次性实施费（调研、部署、知识库建设、培训）+ 硬件（如需）+ 可选的年度服务费。我们会给逐项报价，方案里写清楚做什么、交付什么、多少钱、多久完成，不做打包报价。目前已公开起步价：免费诊断 0 元、单机试点 9,800 元起、企业标准部署 68,000 元起、一体机 39,800 元起，详见「产品与报价」页。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "跟直接买 AI 会员、用公有云工具比，多花的钱值吗？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "如果您的资料完全公开、只做通用写作，公有云工具更便宜，我们会建议您直接用，不劝您上本地。如果涉及客户资料、报价单、图纸、合同等敏感信息，或者需要它懂您的行业和内部制度，本地方案的价值才出来。该省的钱我们帮您省。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "万一算下来不划算呢？你们会不会硬推？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "不会。诊断不收费，《AI 落地机会清单》里会明确写出哪些场景不建议做。如果您的业务目前用 AI 不划算，我们会直接告诉您，并建议先把这笔钱花在别处。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "能不能先小范围试？最小从多大开始？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "可以。最小可以只从一台机器、一个场景开始：单机试点包包含本地模型部署 + 1 个场景跑通 + 2 小时实操培训，周期 3–7 天，适合个人、工作室和 10 人以下小团队。想让一个部门先试，就走试点验证：先用小成本跑通一个场景，用效果对照决定要不要铺开。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "数据放在本地，真的安全吗？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "部署完成后，模型和数据都在您自己的电脑或服务器上，可以完全断网运行。访问权限可以按人分级，敏感资料可以单独隔离；操作有日志可查，数据可以定期备份。部署文档、网络与端口说明、验收材料都会交付，方便贵单位的信息化与保密流程核对。我们不替客户做合规承诺，只把我们做了什么写清楚。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "你们会拿走我们的数据吗？会拿去训练吗？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "不会。数据存在您自己的硬盘里，我们不带走，也不用于训练。上门或远程排障时如何访问您的设备，会按贵单位的保密流程约定。（待确认：远程访问约定）"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "数据备份和机器故障怎么办？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "交付时会把备份与恢复建议、故障响应机制一起给到：模型、知识库与配置文件按约定备份到您指定的位置；出现故障时远程或上门排查，并保留离线升级方案。（待确认：故障响应时间）"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "员工离职了，知识库和资料还在吗？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "在。知识库、文档和配置都放在您自己的机器里，是贵公司的资产——不在某个员工的账号里，也不会跟着人走。人可以流动，资料和常见问答留在公司；新同事接手时，我们再做一次交接培训。建议指定一位内部负责人管知识库的更新，这一点会在方案阶段写清楚。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "要不要换电脑？要买显卡吗？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "看场景。做文字类的本地知识库问答，普通办公电脑加一块合适的中端显卡常常就能起步；要做图像、语音或多人并发使用，我们会给出具体配置建议——包括这笔钱该不该花的实话。您也可以先拿现有设备试点，不用一开始就买机器；不想折腾，还可以选软硬件一体交付：配置、报价、交付清单公开透明，硬件您自采、我们负责装好调好。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "多久能见效？从开始到用上要多久？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "第一个场景通常在 30 天内跑通；单机试点包 3–7 天；多个部门、多个场景一起上的企业标准部署，周期 3–6 周。诊断这一步是 1 次 60 分钟沟通 + 3 个工作日给出《AI 落地机会清单》。见效要看场景是否选对——这也是我们坚持先诊断、而不是先卖方案的原因。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "能跟我们现有的系统连起来吗？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "常见的企业微信、钉钉、飞书、OA、ERP、网站、客服系统，我们都有对接经验。能不能连、连到什么程度，会在方案阶段明确写清楚：能做的写进方案，不能做的也说清楚，不做含糊承诺。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "你们是不是就把开源模型装一下？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "装模型只是第一步。真正花时间的是：选对场景、把资料整理成它读得懂的知识（本地知识库）、把权限和流程设计好、把您的人培训到会用、后续持续维护。我们交付的是用起来的结果，不是装好的软件。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "我们员工不懂技术，学得会吗？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "培训按人分层：管理层听能干什么、值不值得；业务骨干学怎么用、怎么改；一线员工只学每天点两下。多数员工在一次 2 小时的实操后就能上手。交付里含操作手册与培训记录，验收标准包含您的员工能独立操作。学不会是我们的培训没做到位，不额外收费重训。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "部署完你们就不管了吗？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "可以选择不管：一次性交付，部署文档、操作手册、维护手册齐全，您自己的团队可以维护。也可以选择年度陪跑：季度复盘报告、知识库更新维护、新员工培训、故障响应（远程 / 上门）、模型与工具升级跟进。我们建议至少留一年的轻量陪跑——AI 用起来之后，需求一定会变。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "公司没有 IT，日常谁来维护？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "日常使用不需要技术团队：员工按手册操作，常见问题有一份维护手册可查，也可以随时问我们。需要定期做的事——知识库更新、模型升级、巡检——可以放进年度陪跑由我们承担；您自己有 IT 同事的话，我们会在验收时把部署文档和维护手册交接给他。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "你们只在北京服务吗？外地后续有人管吗？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "（待确认：服务半径）示例口径：北京及周边可上门，全国以远程实施为主、必要时出差。后续维护按同样的方式安排：季度复盘、知识库更新与人员培训以远程为主，需要到场的再上门。"
-      }
-    }
-  ]
-}
-</script>
-<link rel="stylesheet" href="assets/css/redesign.css">
-<link rel="stylesheet" href="assets/css/snap.css">
+<link rel="stylesheet" href="assets/css/bundle-05ec9f2ada.css">
 </head>
 <body class="has-snap">
 <a class="skip-link" href="#main">跳到主要内容</a>
@@ -182,15 +42,16 @@
         <span class="logo__en">MATATA</span>
       </span>
     </a>
-    <nav class="nav__links" aria-label="主导航">
-        <a href="pricing.html">产品与报价</a>
-      <a href="services.html">服务流程</a>
-      <a href="solutions.html">解决方案</a>
-      <a href="cases.html">客户案例</a>
-      <a href="about.html">关于我们</a>
-      <a href="faq.html" class="is-active" aria-current="page">常见问题</a>
-          <a class="nav__login" aria-disabled="true" title="会员门户即将开放，暂未对外发布">暂未开放</a>
-    </nav>
+      <nav class="nav__links" aria-label="主导航">
+    <a href="pricing.html">产品与报价</a>
+    <a href="services.html">服务流程</a>
+    <a href="solutions.html">解决方案</a>
+    <a href="enterprise.html">政企内网</a>
+    <a href="cases.html">客户案例</a>
+    <a href="news.html">行业资讯</a>
+    <a href="about.html">关于我们</a>
+    <a href="faq.html" class="is-active">常见问题</a>
+  </nav>
     <div class="navcta" data-navcta>
       <a class="navcta__main" href="contact.html?plan=免费诊断">预约免费诊断</a>
       <button class="navcta__toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navctaMenu" aria-label="更多：自测与检测" data-navcta-toggle>
@@ -458,6 +319,7 @@
           <li><a href="assessment.html">AI 适配度自测</a></li>
           <li><a href="commitment.html">服务承诺</a></li>
           <li><a href="insights.html">行业观点</a></li>
+          <li><a href="news.html">行业资讯</a></li>
           <li><a href="solutions.html#ind-logistics">物流仓储</a></li>
           <li><a href="solutions.html#ind-legal">专业服务</a></li>
           <li><a href="enterprise.html">政企内网方案</a></li>
@@ -481,10 +343,10 @@
   </div>
 </footer>
 
-<script src="assets/js/config.js"></script>
-<script src="assets/js/site.js"></script>
-<script src="assets/js/nav.js"></script>
-<script src="assets/js/motion-site.js"></script>
-<script src="assets/js/snap.js"></script>
+<script src="assets/js/config-15e81724b3.js"></script>
+<script src="assets/js/site-3c50ab21e5.js"></script>
+<script src="assets/js/nav-f398713048.js"></script>
+<script src="assets/js/motion-site-ef5ed99418.js"></script>
+<script src="assets/js/snap-899ee2a598.js"></script>
 </body>
 </html>
