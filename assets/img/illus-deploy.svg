@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="t2 d2">
+  <title id="t2">本地部署设备示意图</title>
+  <desc id="d2">机柜内放一台 AI 工作站与 NAS，旁边是办公桌上的显示器；插画示意，非实拍。</desc>
+  <defs>
+    <style>
+      .bg{fill:#F6F9FF}
+      .cab{fill:#fff;stroke:#C9D8F2;stroke-width:1.6}
+      .unit{fill:#EEF3FF;stroke:#1246C8;stroke-width:1.4}
+      .screen{fill:#fff;stroke:#1246C8;stroke-width:1.6}
+      .lbl{font:500 14px "Microsoft YaHei",sans-serif;fill:#1B2A4A}
+      .sub{font:400 12px "Microsoft YaHei",sans-serif;fill:#5A6B8C}
+      .accent{font:600 13px "Microsoft YaHei",sans-serif;fill:#1246C8}
+    </style>
+  </defs>
+  <rect class="bg" width="640" height="400" rx="16"/>
+
+  <!-- 机柜 -->
+  <rect class="cab" x="60" y="56" width="180" height="288" rx="10"/>
+  <text class="accent" x="150" y="84" text-anchor="middle">机柜 / 弱电间</text>
+  <g>
+    <rect class="unit" x="76" y="100" width="148" height="34" rx="5"/>
+    <text class="sub" x="150" y="122" text-anchor="middle">防火墙</text>
+    <rect class="unit" x="76" y="142" width="148" height="34" rx="5"/>
+    <text class="sub" x="150" y="164" text-anchor="middle">交换机</text>
+    <rect class="unit" x="76" y="184" width="148" height="56" rx="5" fill="#DCE7FF"/>
+    <text class="lbl" x="150" y="208" text-anchor="middle">AI 工作站</text>
+    <text class="sub" x="150" y="228" text-anchor="middle">GPU · 模型 · 知识库</text>
+    <rect class="unit" x="76" y="248" width="148" height="34" rx="5"/>
+    <text class="sub" x="150" y="270" text-anchor="middle">NAS 备份</text>
+    <rect class="unit" x="76" y="290" width="148" height="34" rx="5"/>
+    <text class="sub" x="150" y="312" text-anchor="middle">UPS</text>
+  </g>
+
+  <!-- 办公桌 -->
+  <rect x="300" y="270" width="280" height="10" rx="5" fill="#DCE7FF"/>
+  <rect x="330" y="280" width="12" height="62" fill="#C9D8F2"/>
+  <rect x="540" y="280" width="12" height="62" fill="#C9D8F2"/>
+
+  <!-- 显示器 -->
+  <rect class="screen" x="352" y="120" width="200" height="120" rx="8"/>
+  <rect x="368" y="136" width="168" height="10" rx="5" fill="#DCE7FF"/>
+  <rect x="368" y="156" width="120" height="8" rx="4" fill="#EEF3FF"/>
+  <rect x="368" y="172" width="150" height="8" rx="4" fill="#EEF3FF"/>
+  <rect x="368" y="188" width="96" height="8" rx="4" fill="#EEF3FF"/>
+  <rect x="448" y="240" width="24" height="30" fill="#C9D8F2"/>
+  <rect x="418" y="266" width="84" height="8" rx="4" fill="#C9D8F2"/>
+
+  <!-- 人 -->
+  <circle cx="470" cy="300" r="14" fill="#C9D8F2"/>
+  <path d="M448 360 q22 -34 44 0 z" fill="#C9D8F2"/>
+
+  <text class="sub" x="320" y="52">示意图 · 实际以现场勘测与书面方案为准</text>
+</svg>

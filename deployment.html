@@ -95,6 +95,18 @@
   </div>
 </section>
 
+<!-- ============================ 页内锚点 ============================ -->
+<nav class="anchors" aria-label="页内导航">
+  <div class="wrap anchors__inner">
+    <a href="#compare">三条路对比</a>
+    <a href="#local">本地部署</a>
+    <a href="#cloud">云端部署</a>
+    <a href="#hybrid">混合部署</a>
+    <a href="#pick">三问选型</a>
+    <a href="#faq">常见问题</a>
+  </div>
+</nav>
+
 <!-- ============================ 2. 三种方式，一句判断 ============================ -->
 <section class="section section--tight">
   <div class="wrap">
@@ -156,6 +168,19 @@
     </div>
 
     <p class="small muted mt-5">上线周期含到货与部署：试点 3–7 天、标准 3–6 周、多部门 5–8 周。合规是否达标，由贵单位按现行规定判断；我们只说明数据放在哪、谁能访问、过程怎么留痕。</p>
+  </div>
+</section>
+
+<!-- ============================ 3.5 一张图看懂 ============================ -->
+<section class="section" id="topology">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">一张图看懂</span>
+      <h2>本地部署，长什么样</h2>
+      <p class="lead">机器放在您的办公室或机房：防火墙守住边界，交换机把 AI 网段和办公网段隔开，工作站里跑模型和知识库，NAS 做离线备份。下面是示意图，不是实拍。</p>
+    </div>
+    <img src="assets/img/illus-topology.svg" alt="本地部署拓扑示意：互联网经防火墙进入内网，交换机连接 AI 工作站与办公终端，NAS 做本地备份，虚线为可选的云端备份" style="width:100%;max-width:900px;border-radius:var(--r-lg);border:1px solid var(--line-100);display:block;margin:0 auto">
+    <p class="small muted mt-4" style="text-align:center">示意图 · 实际拓扑以现场勘测与书面方案为准</p>
   </div>
 </section>
 
@@ -439,10 +464,10 @@
       <div>
         <h4>联系我们</h4>
         <ul>
-          <li>电话：<span class="tbd" data-contact="phone">待确认</span></li>
-          <li>商务微信：<span class="tbd" data-contact="wechat">待确认</span></li>
-          <li>邮箱：<span class="tbd" data-contact="email">待确认</span></li>
-          <li>地址：<span class="tbd" data-contact="address">待确认</span></li>
+          <li>电话：<span data-contact="phone">138 1062 5550</span></li>
+          <li>商务微信：<span data-contact="wechat">13810625550（同手机号）</span></li>
+          <li>邮箱：<span data-contact="email">119274334@qq.com</span></li>
+          <li>地址：<span data-contact="address">北京市海淀区北蜂窝路 22 号</span></li>
           <li>服务时间：<span data-contact="hours">周一至周五 9:00–18:00</span></li>
         </ul>
       </div>
