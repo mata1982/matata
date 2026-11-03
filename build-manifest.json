@@ -1,5 +1,5 @@
 ﻿{
-    "builtAt":  "2026-11-03 22:32:21 +08:00",
+    "builtAt":  "2026-11-03 22:46:19 +08:00",
     "esbuild":  "0.28.2",
     "site":  "D:\\桌面\\NEW  matata\\site",
     "pages":  32,
@@ -8,162 +8,162 @@
                        {
                            "Page":  "404.html",
                            "CssFiles":  4,
-                           "Bundle":  "bundle-3b77bc00e8.css"
+                           "Bundle":  "bundle-423a2862ea.css"
                        },
                        {
                            "Page":  "about.html",
                            "CssFiles":  3,
-                           "Bundle":  "bundle-05ec9f2ada.css"
+                           "Bundle":  "bundle-0bc66e1e09.css"
                        },
                        {
                            "Page":  "assessment.html",
                            "CssFiles":  3,
-                           "Bundle":  "bundle-c5208750e8.css"
+                           "Bundle":  "bundle-84472b3677.css"
                        },
                        {
                            "Page":  "cases.html",
                            "CssFiles":  3,
-                           "Bundle":  "bundle-05ec9f2ada.css"
+                           "Bundle":  "bundle-0bc66e1e09.css"
                        },
                        {
                            "Page":  "commitment.html",
                            "CssFiles":  3,
-                           "Bundle":  "bundle-5d55e2749e.css"
+                           "Bundle":  "bundle-a5b2485394.css"
                        },
                        {
                            "Page":  "contact.html",
                            "CssFiles":  3,
-                           "Bundle":  "bundle-05ec9f2ada.css"
+                           "Bundle":  "bundle-0bc66e1e09.css"
                        },
                        {
                            "Page":  "deployment.html",
                            "CssFiles":  3,
-                           "Bundle":  "bundle-05ec9f2ada.css"
+                           "Bundle":  "bundle-0bc66e1e09.css"
                        },
                        {
                            "Page":  "detect.html",
                            "CssFiles":  3,
-                           "Bundle":  "bundle-dfc0a95f96.css"
+                           "Bundle":  "bundle-55e9b99266.css"
                        },
                        {
                            "Page":  "enterprise.html",
                            "CssFiles":  3,
-                           "Bundle":  "bundle-05ec9f2ada.css"
+                           "Bundle":  "bundle-0bc66e1e09.css"
                        },
                        {
                            "Page":  "faq.html",
                            "CssFiles":  3,
-                           "Bundle":  "bundle-05ec9f2ada.css"
+                           "Bundle":  "bundle-0bc66e1e09.css"
                        },
                        {
                            "Page":  "index.html",
                            "CssFiles":  11,
-                           "Bundle":  "bundle-35dadaaf6e.css"
+                           "Bundle":  "bundle-f7b0d62e72.css"
                        },
                        {
                            "Page":  "industry-education.html",
                            "CssFiles":  5,
-                           "Bundle":  "bundle-25d667c9be.css"
+                           "Bundle":  "bundle-af17d0d8b0.css"
                        },
                        {
                            "Page":  "industry-finance.html",
                            "CssFiles":  5,
-                           "Bundle":  "bundle-25d667c9be.css"
+                           "Bundle":  "bundle-af17d0d8b0.css"
                        },
                        {
                            "Page":  "industry-health.html",
                            "CssFiles":  5,
-                           "Bundle":  "bundle-25d667c9be.css"
+                           "Bundle":  "bundle-af17d0d8b0.css"
                        },
                        {
                            "Page":  "industry-law.html",
                            "CssFiles":  5,
-                           "Bundle":  "bundle-25d667c9be.css"
+                           "Bundle":  "bundle-af17d0d8b0.css"
                        },
                        {
                            "Page":  "industry-logistics.html",
                            "CssFiles":  5,
-                           "Bundle":  "bundle-25d667c9be.css"
+                           "Bundle":  "bundle-af17d0d8b0.css"
                        },
                        {
                            "Page":  "industry-manufacturing.html",
                            "CssFiles":  5,
-                           "Bundle":  "bundle-25d667c9be.css"
+                           "Bundle":  "bundle-af17d0d8b0.css"
                        },
                        {
                            "Page":  "industry-renovation.html",
                            "CssFiles":  5,
-                           "Bundle":  "bundle-25d667c9be.css"
+                           "Bundle":  "bundle-af17d0d8b0.css"
                        },
                        {
                            "Page":  "industry-retail.html",
                            "CssFiles":  5,
-                           "Bundle":  "bundle-25d667c9be.css"
+                           "Bundle":  "bundle-af17d0d8b0.css"
                        },
                        {
                            "Page":  "industry-trade.html",
                            "CssFiles":  5,
-                           "Bundle":  "bundle-25d667c9be.css"
+                           "Bundle":  "bundle-af17d0d8b0.css"
                        },
                        {
                            "Page":  "insights.html",
                            "CssFiles":  3,
-                           "Bundle":  "bundle-5d55e2749e.css"
+                           "Bundle":  "bundle-a5b2485394.css"
                        },
                        {
                            "Page":  "insights-acceptance.html",
                            "CssFiles":  3,
-                           "Bundle":  "bundle-5d55e2749e.css"
+                           "Bundle":  "bundle-a5b2485394.css"
                        },
                        {
                            "Page":  "insights-local-vs-cloud.html",
                            "CssFiles":  3,
-                           "Bundle":  "bundle-5d55e2749e.css"
+                           "Bundle":  "bundle-a5b2485394.css"
                        },
                        {
                            "Page":  "insights-when-not-to.html",
                            "CssFiles":  3,
-                           "Bundle":  "bundle-5d55e2749e.css"
+                           "Bundle":  "bundle-a5b2485394.css"
                        },
                        {
                            "Page":  "login.html",
                            "CssFiles":  3,
-                           "Bundle":  "bundle-80d4357405.css"
+                           "Bundle":  "bundle-51f05c53f5.css"
                        },
                        {
                            "Page":  "news.html",
                            "CssFiles":  4,
-                           "Bundle":  "bundle-b56ccf464f.css"
+                           "Bundle":  "bundle-9d6e8bd7f6.css"
                        },
                        {
                            "Page":  "portal-customer.html",
                            "CssFiles":  3,
-                           "Bundle":  "bundle-80d4357405.css"
+                           "Bundle":  "bundle-51f05c53f5.css"
                        },
                        {
                            "Page":  "portal-staff.html",
                            "CssFiles":  3,
-                           "Bundle":  "bundle-80d4357405.css"
+                           "Bundle":  "bundle-51f05c53f5.css"
                        },
                        {
                            "Page":  "pricing.html",
                            "CssFiles":  4,
-                           "Bundle":  "bundle-00d635a77a.css"
+                           "Bundle":  "bundle-a878f945cd.css"
                        },
                        {
                            "Page":  "privacy.html",
                            "CssFiles":  2,
-                           "Bundle":  "bundle-5b476e4efd.css"
+                           "Bundle":  "bundle-086b0fb511.css"
                        },
                        {
                            "Page":  "services.html",
                            "CssFiles":  4,
-                           "Bundle":  "bundle-ac27d28b9f.css"
+                           "Bundle":  "bundle-e817bf0952.css"
                        },
                        {
                            "Page":  "solutions.html",
                            "CssFiles":  5,
-                           "Bundle":  "bundle-50f8c85b8c.css"
+                           "Bundle":  "bundle-643683aa28.css"
                        }
                    ]
 }
