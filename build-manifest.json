@@ -1,8 +1,8 @@
 ﻿{
-    "builtAt":  "2026-11-03 18:43:22 +08:00",
+    "builtAt":  "2026-11-03 19:32:37 +08:00",
     "esbuild":  "0.28.2",
     "site":  "D:\\桌面\\NEW  matata\\site",
-    "pages":  31,
+    "pages":  32,
     "bundles":  13,
     "pageDetail":  [
                        {
@@ -32,6 +32,11 @@
                        },
                        {
                            "Page":  "contact.html",
+                           "CssFiles":  3,
+                           "Bundle":  "bundle-05ec9f2ada.css"
+                       },
+                       {
+                           "Page":  "deployment.html",
                            "CssFiles":  3,
                            "Bundle":  "bundle-05ec9f2ada.css"
                        },
